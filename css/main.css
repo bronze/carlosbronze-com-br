@@ -300,6 +300,9 @@ body {
   align-items: center;
   justify-content: center;
 }
+body.darkmode--activated  {
+  border-top: 3px solid #a90000;
+}
 h1,
 h2 {
   font-size: 3vh;
