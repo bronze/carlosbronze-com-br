@@ -3,17 +3,80 @@
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Carlos Bronze</title>
   <meta name="description" content="Carlos Bronze">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="apple-touch-icon" href="icon.png"> -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
+  <meta name="theme-color" content="#a90000">
+  <style>
+    body {
+      border-top: 3px solid #a90000;
+      font-family: helvetica, arial, sans-serif;
+      color: #666666;
+      background: #eeeeee;
+      font-weight: normal;
+      font-style: normal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    body.darkmode--activated  {
+      border-top: 3px solid #a90000;
+    }
+    h1,
+    h2 {
+      font-size: 3vh;
+      line-height: 10vh;
+    }
+    div#wrapper {
+      border-bottom: 3px solid #a90000;
+      border-top: 3px solid #a90000;
+      bottom: 0;
+      left: 0;
+      margin: 30px;
+      padding: 30px 5px;
+      position: fixed;
+      width: 80%;
+      max-width: 390px;
+      z-index: 2;
+    }
+    h1 {
+      font-size: 20px;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1.3em;
+      margin: 0 0 30px;
+    }
+    h2 {
+      font-size: 14.7px;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1.3em;
+      margin: 5px 0 0px;
+    }
+    h3 {
+      font-size: 24px;
+      line-height: 1.3em;
+      font-weight: normal;
+      font-style: normal;
+      margin: 75px 0 12px;
+      text-align: right;
+      float: right;
+    }
+    a, a:visited, a:hover {
+      text-decoration: none;
+      color: #666666;
+      border-bottom: 1px dotted #690000;
+    }
+  </style>
 </head>
 
 <body>
-  <!--[if lte IE 9]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p> <![endif]-->
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
   <!-- Add your site or application content here -->
   <div id="wrapper">
     <h1>Designer, Planejador, Gamer</h1>
@@ -25,12 +88,9 @@
         title="Carlos Bronze - Twitter">twitter</a>
     </h2>
   </div>
-  <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
-  <script>
-    window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')
-  </script>
+  <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
   <!-- https://darkmodejs.learn.uno -->
