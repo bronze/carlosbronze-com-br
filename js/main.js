@@ -17,7 +17,7 @@ function nyancat() {
     img.style.transition = "6s all linear";
     img.style.position = "fixed";
     img.style.left = "-400px";
-    img.style.bottom = "calc(-50% + 200px)";
+    img.style.bottom = "calc(-50% + 360px)";
     img.style.zIndex = 999999;
 
     document.body.appendChild(img);
@@ -53,3 +53,4 @@ function nyancat() {
   let data = "https://www.carlosbronze.com.br/images/nyancat.gif";
   init(data);
 }
+nyancat();
