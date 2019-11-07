@@ -16,6 +16,8 @@
     --color-dark-alpha: rgba(0, 0, 0, 0.1);
     --color-light: #efefef;
     --color-light-alpha: rgba(255, 255, 255, 0.9);
+    --link-light: #7e7e7e;
+    --link-dark: #6d6d6d;
 
     /* https://twitter.com/Una/status/1129401554732277760 */
     --icon-sun: url('data:image/svg+xml,\
@@ -32,8 +34,9 @@
     </svg>');
     --icon-moon-filter: invert(0.75);
 
-    --background: #efefef;
+    --background: #eeeeee;
     --text-color: #141414;
+    --link-color: #6d6d6d;
     --button-icon: var(--icon-moon);
     --button-icon-filter: var(--icon-moon-filter);
     --button-background: var(--color-dark);
@@ -55,6 +58,7 @@
     :root:not([data-user-color-scheme]) {
       --background: var(--color-dark);
       --text-color: var(--color-light);
+      --link-color: var(--link-light);
       --button-icon: var(--icon-sun);
       --button-icon-filter: var(--icon-sun-filter);
       --button-background: var(--color-light);
@@ -66,6 +70,7 @@
   [data-user-color-scheme="dark"] {
     --background: var(--color-dark);
     --text-color: var(--color-light);
+    --link-color: var(--link-light);
     --button-icon: var(--icon-sun);
     --button-icon-filter: var(--icon-sun-filter);
     --button-background: var(--color-light-alpha);
@@ -133,10 +138,10 @@
     justify-content: center;
   }
   body {
-  padding: 2rem 1rem;
-  line-height: 1.4;
-  display: grid;
-  place-items: center;
+    padding: 2rem 1rem;
+    line-height: 1.4;
+    display: grid;
+    place-items: center;
   }
   article {
     max-width: 75ch;
@@ -161,7 +166,7 @@
 
   a, a:visited, a:hover {
     text-decoration: none;
-    color: #7e7e7e;
+    color: var(--link-color);
     border-bottom: 1px dotted #690000;
   }
   h1 {
