@@ -9,66 +9,6 @@
   <link rel="stylesheet" href="css/normalize.css">
   <meta name="theme-color" content="#a90000">
   <style>
-    body {
-      border-top: 3px solid #a90000;
-      font-family: helvetica, arial, sans-serif;
-      color: #666666;
-      background: #eeeeee;
-      font-weight: normal;
-      font-style: normal;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    body.darkmode--activated  {
-      border-top: 3px solid #a90000;
-    }
-    h1,
-    h2 {
-      font-size: 3vh;
-      line-height: 10vh;
-    }
-    div#wrapper {
-      border-bottom: 3px solid #a90000;
-      border-top: 3px solid #a90000;
-      bottom: 0;
-      left: 0;
-      margin: 30px;
-      padding: 30px 5px;
-      position: fixed;
-      width: 80%;
-      max-width: 390px;
-      z-index: 2;
-    }
-    h1 {
-      font-size: 20px;
-      font-style: normal;
-      font-weight: normal;
-      line-height: 1.3em;
-      margin: 0 0 30px;
-    }
-    h2 {
-      font-size: 14.7px;
-      font-style: normal;
-      font-weight: normal;
-      line-height: 1.3em;
-      margin: 5px 0 0px;
-    }
-    h3 {
-      font-size: 24px;
-      line-height: 1.3em;
-      font-weight: normal;
-      font-style: normal;
-      margin: 75px 0 12px;
-      text-align: right;
-      float: right;
-    }
-    a, a:visited, a:hover {
-      text-decoration: none;
-      color: #666666;
-      border-bottom: 1px dotted #690000;
-    }
-
   /* https://hankchizljaw.com/wrote/create-a-user-controlled-dark-or-light-mode/ */
   :root {
     --color-mode: 'light';
@@ -182,61 +122,88 @@
     outline-offset: 0.5rem;
   }
 
-
-
-
-
-
-
-
-
-
   /* Presentational demo styles */
-
   body {
-    font-family: sans-serif;
-    padding: 2rem 1rem;
-    line-height: 1.4;
-      display: grid;
-      place-items: center;
-    }
+    border-top: 3px solid #a90000;
+    font-family: helvetica, arial, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  body {
+  padding: 2rem 1rem;
+  line-height: 1.4;
+  display: grid;
+  place-items: center;
+  }
+  article {
+    max-width: 75ch;
+    margin: 0 auto;
+  }
 
-    article {
-      max-width: 75ch;
-      margin: 0 auto;
-    }
+  article > * + * {
+    margin-top: 1em;
+  }
+  div#wrapper {
+    border-bottom: 3px solid #a90000;
+    border-top: 3px solid #a90000;
+    bottom: 0;
+    left: 0;
+    margin: 30px;
+    padding: 30px 5px;
+    position: fixed;
+    width: 80%;
+    max-width: 390px;
+    z-index: 2;
+  }
 
-    article > * + * {
-      margin-top: 1em;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      line-height: 1.1;
-    }
-
-    p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-
-    code {
-      font-weight: 700;
-      font-size: 1.3em;
-      white-space: pre;
-    }
-
-    .visually-hidden { 
-      display: block;
-      height: 1px;
-      width: 1px;
-      overflow: hidden;
-      clip: rect(1px 1px 1px 1px);
-      clip: rect(1px, 1px, 1px, 1px);
-      clip-path: inset(1px);
-      white-space: nowrap;
-      position: absolute;
-    }
+  a, a:visited, a:hover {
+    text-decoration: none;
+    color: #666666;
+    border-bottom: 1px dotted #690000;
+  }
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    /* font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.3em; */
+    margin: 0 0 30px;
+  }
+  h2 {
+    font-size: 14.7px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.3em;
+    margin: 5px 0 0px;
+  }
+  h3 {
+    font-size: 24px;
+    line-height: 1.3em;
+    font-weight: normal;
+    font-style: normal;
+    margin: 75px 0 12px;
+    text-align: right;
+    float: right;
+  }
+  p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+  .visually-hidden { 
+    display: block;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(1px);
+    white-space: nowrap;
+    position: absolute;
+  }
   </style>
 </head>
 
