@@ -43,8 +43,8 @@ function nyancat() {
       ck = 0;
     }
     if (ck >= max) {
-      nyancat()
-      ck = 0
+      nyancat();
+      ck = 0;
     }
   };
   let init = function(data) {
@@ -54,3 +54,14 @@ function nyancat() {
   init(data);
 }
 nyancat();
+
+var user_keys = [],
+  konami = "38,38,40,40,37,39,37,39";
+document.onkeydown = function(e) {
+  user_keys.push(e.keyCode);
+
+  if (user_keys.toString().indexOf(konami) >= 0) {
+    alert("KONAMI!");
+    user_keys = [];
+  }
+};
