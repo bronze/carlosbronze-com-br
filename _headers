@@ -7,6 +7,8 @@
   # https://scotthelme.co.uk/a-new-security-header-referrer-policy/
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=2592000
+  # https://simonhearne.com/2019/http-headers-fast-and-secure/
+  Accept-CH: Downlink,RTT,Device-Memory,Save-Data,DPR,Width
   Feature-Policy: vibrate 'none'; geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'
 
 # https://medium.com/@vilcins/adding-http-response-headers-to-a-netlify-static-website-aced15a295ab
