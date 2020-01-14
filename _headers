@@ -1,12 +1,15 @@
+# https://medium.com/@brandonl.4231/how-i-increased-the-security-of-my-netlify-hosted-website-with-this-one-small-trick-731f4c56efd7
 /*
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   Content-Security-Policy: form-action https:
+  # https://scotthelme.co.uk/a-new-security-header-referrer-policy/
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=2592000
   Feature-Policy: vibrate 'none'; geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'
 
+# https://medium.com/@vilcins/adding-http-response-headers-to-a-netlify-static-website-aced15a295ab
 /*.css
   Cache-Control: public, s-max-age=604800
 
