@@ -5,12 +5,12 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     # https://report-uri.com/home/generate
-    Content-Security-Policy: default-src 'self'; script-src 'self'; form-action 'self' https:; upgrade-insecure-requests
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; form-action 'self' https:; upgrade-insecure-requests"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Accept-CH = "Downlink,RTT,Device-Memory,Save-Data,DPR,Width"
     # Permissions-Policy = "vibrate 'none'; geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'"
-    Permissions-Policy: autoplay=(), camera=(), geolocation=(), microphone=(), midi=(), usb=(), vibrate=()
+    Permissions-Policy = "autoplay=(), camera=(), geolocation=(), microphone=(), midi=(), usb=(), vibrate=()"
 
 # https://codewithhugo.com/enable-cdn-netlify/
 [[headers]]
