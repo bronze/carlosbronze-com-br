@@ -29,9 +29,5 @@ const toggleLocales = () => {
     <a class="icon-btn mx-2" rel="noreferrer" href="https://github.com/bronze" target="_blank" title="GitHub">
       <carbon-logo-github />
     </a>
-
-    <a class="icon-btn mx-2" rel="noreferrer" href="https://twitter.com/carlosbronze" target="_blank" title="GitHub">
-      <carbon-logo-twitter />
-    </a>
   </nav>
 </template>
