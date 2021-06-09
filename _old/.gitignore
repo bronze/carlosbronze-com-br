@@ -1,0 +1,4 @@
+prepros-6.config
+*.DS
+# Local Netlify folder
+.netlify

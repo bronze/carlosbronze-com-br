@@ -1,4 +1,9 @@
-prepros-6.config
-*.DS
-# Local Netlify folder
-.netlify
+.DS_Store
+.vite-ssg-dist
+.vite-ssg-temp
+*.local
+dist
+dist-ssr
+node_modules
+# intellij stuff
+.idea/
