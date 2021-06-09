@@ -41,3 +41,7 @@ html.dark {
     hover:opacity-100 hover:text-teal-600;
   font-size: 0.9em;
 }
+
+.toggle {
+  @apply absolute top-4 right-4 text-2xl;
+}
