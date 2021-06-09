@@ -5,7 +5,7 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     # https://report-uri.com/home/generate
-    Content-Security-Policy = "default-src 'self';  style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'unsafe-inline'; style-src-attr 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; script-src-elem 'self' 'unsafe-inline'; script-src-attr 'self' 'unsafe-inline'; form-action 'self' https:; upgrade-insecure-requests"
+    Content-Security-Policy = " default-src 'self' 'unsafe-inline'; form-action 'self' https:; upgrade-insecure-requests"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Accept-CH = "Downlink,RTT,Device-Memory,Save-Data,DPR,Width"
