@@ -4,42 +4,36 @@ import { isDark } from '/~/logics'
 
 <template>
   <header class="header">
-    <router-link
+    <!-- <router-link
       class="w-10 h-10 absolute lg:fixed m-6 select-none outline-none"
       to="/"
       focusable="false"
     >
       <img v-show="isDark" src="/logo-dark.svg" alt="logo">
       <img v-show="!isDark" src="/logo.svg" alt="logo">
-    </router-link>
+    </router-link> -->
     <nav class="nav">
       <div class="spacer" />
       <div class="right">
-        <router-link to="/posts">
+        <!-- <router-link to="/posts">
           <span class="<md:hidden">Blog</span>
           <ri-article-line class="md:hidden"/>
         </router-link>
         <router-link to="/talks" class="<md:hidden">
           Talks
-        </router-link>
+        </router-link> -->
         <router-link to="/projects">
           <span class="<md:hidden">Projects</span>
           <ri-lightbulb-line class="md:hidden"/>
         </router-link>
-        <router-link to="/bookmarks" title="Bookmarks" class="<md:hidden">
-          <ri-bookmark-line />
-        </router-link>
-        <router-link to="/notes" title="Notes">
-          <ri-sticky-note-line />
-        </router-link>
-        <a href="https://twitter.com/antfu7" target="_blank" title="Twitter">
+        <a href="https://twitter.com/carlosbronze" target="_blank" title="Twitter">
+          <feather-linkedin />
+        </a>
+        <a href="https://twitter.com/carlosbronze" target="_blank" title="Twitter">
           <feather-twitter />
         </a>
-        <a href="https://github.com/antfu" target="_blank" title="GitHub">
+        <a href="https://github.com/carlosbronze" target="_blank" title="GitHub">
           <uil-github-alt />
-        </a>
-        <a href="/feed.xml" target="_blank" title="RSS" class="<md:hidden">
-          <la-rss-square style="font-size:1.25rem; margin: 0 -0.125rem;" />
         </a>
         <toggle-theme />
       </div>

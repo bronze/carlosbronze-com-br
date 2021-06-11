@@ -94,8 +94,10 @@ const config: UserConfig = {
     ViteComponents({
       extensions: ['vue', 'md'],
       customLoaderMatcher: path => path.endsWith('.md'),
+      globalComponentsDeclaration: true,
       customComponentResolvers: ViteIconsResolver({
         componentPrefix: '',
+        // enabledCollections: ['carbon', 'feather']
       }),
     }),
 

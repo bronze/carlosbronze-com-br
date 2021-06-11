@@ -1,6 +1,4 @@
-**[antfu.me](https://antfu.me)**
-
-my personal website powered by [Vite](https://vitejs.dev/)
+**[antfu.me](https://antfu.me)**' personal website powered by [Vite](https://vitejs.dev/)
 
 <br>
 

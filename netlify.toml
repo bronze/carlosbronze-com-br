@@ -9,3 +9,28 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    # X-Content-Type-Options = "nosniff"
+    # https://report-uri.com/home/generate
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' https://www.google-analytics.com https://*.cloudfront.net; img-src 'self' 'unsafe-inline' https://www.google.com; media-src 'self' https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.cloudfront.net; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://*.cloudfront.net; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; frame-src 'self' https://www.youtube.com/ https://vimeo.com; form-action 'self' https:; upgrade-insecure-requests"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Accept-CH = "Downlink,RTT,Device-Memory,Save-Data,DPR,Width"
+    # Permissions-Policy = "vibrate 'none'; geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'"
+    Permissions-Policy = "autoplay=(), camera=(), geolocation=(), microphone=(), midi=(), usb=(), vibrate=()"
+
+# https://codewithhugo.com/enable-cdn-netlify/
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "max-age=604800, must-revalidate, public"
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "max-age=604800, must-revalidate, public"
