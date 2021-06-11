@@ -1,19 +1,40 @@
+import './styles/main.postcss'
+import 'windi.css'
+import './styles/markdown.postcss'
+
+import autoRoutes from 'pages-generated'
+import NProgress from 'nprogress'
 import { ViteSSG } from 'vite-ssg'
-import generatedRoutes from 'virtual:generated-pages'
-import { setupLayouts } from 'virtual:generated-layouts'
+import { RouterScrollBehavior } from 'vue-router'
+import dayjs from 'dayjs'
+import LocalizedFormat from 'dayjs/plugin/localizedFormat'
 import App from './App.vue'
-import 'virtual:windi.css'
-import 'virtual:windi-devtools'
-import './styles/main.css'
 
-const routes = setupLayouts(generatedRoutes)
+const routes = autoRoutes.map((i) => {
+  return {
+    ...i,
+    alias: i.path.endsWith('/')
+      ? `${i.path}index.html`
+      : `${i.path}.html`,
+  }
+})
 
-// https://github.com/antfu/vite-ssg
+const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
+  if (savedPosition)
+    return savedPosition
+  else
+    return { top: 0 }
+}
+
 export const createApp = ViteSSG(
   App,
-  { routes },
-  (ctx) => {
-    // install all modules under `modules/`
-    Object.values(import.meta.globEager('./modules/*.ts')).map(i => i.install?.(ctx))
+  { routes, scrollBehavior },
+  ({ router, isClient }) => {
+    dayjs.extend(LocalizedFormat)
+
+    if (isClient) {
+      router.beforeEach(() => { NProgress.start() })
+      router.afterEach(() => { NProgress.done() })
+    }
   },
 )

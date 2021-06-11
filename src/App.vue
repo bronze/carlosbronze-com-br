@@ -1,17 +1,21 @@
+<template>
+  <NavBar />
+  <main class="px-7 py-10">
+    <router-view />
+    <Footer />
+  </main>
+</template>
+
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
 
-// https://github.com/vueuse/head
-// you can use this to manipulate the document head in any components,
-// they will be rendered correctly in the html results with vite-ssg
 useHead({
-  title: 'Carlos Bronze',
   meta: [
-    { name: 'description', content: 'Carlos Bronze' },
+    { property: 'og:title', content: 'Anthony Fu' },
+    { property: 'og:image', content: 'https://antfu.me/avatar.png' },
+    { name: 'description', content: 'Anthony Fu\'s Portfolio' },
+    { name: 'twitter:card', content: 'summary' },
+    { name: 'twitter:creator', content: '@antfu7' },
   ],
 })
 </script>
-
-<template>
-  <router-view />
-</template>

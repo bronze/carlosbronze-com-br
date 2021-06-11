@@ -1,122 +1,114 @@
-import path from 'path'
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
+import { UserConfig } from 'vite'
+import fs from 'fs-extra'
 import Pages from 'vite-plugin-pages'
-import Layouts from 'vite-plugin-vue-layouts'
-import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
+import PurgeIcons from 'vite-plugin-purge-icons'
+import Icons, { ViteIconsResolver } from 'vite-plugin-icons'
 import ViteComponents from 'vite-plugin-components'
 import Markdown from 'vite-plugin-md'
-import WindiCSS from 'vite-plugin-windicss'
-import { VitePWA } from 'vite-plugin-pwa'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
+import Vue from '@vitejs/plugin-vue'
 import Prism from 'markdown-it-prism'
-import { imagetools } from "vite-imagetools"
+import matter from 'gray-matter'
+import WindiCSS from 'vite-plugin-windicss'
+import anchor from 'markdown-it-anchor'
+// @ts-expect-error
+import markdownAttr from 'markdown-it-link-attributes'
+import { slugify } from './scripts/slugify'
 
-export default defineConfig({
+import 'prismjs/components/prism-regex'
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-xml-doc'
+import 'prismjs/components/prism-yaml'
+import 'prismjs/components/prism-json'
+import 'prismjs/components/prism-markdown'
+import 'prismjs/components/prism-java'
+import 'prismjs/components/prism-javadoclike'
+import 'prismjs/components/prism-javadoc'
+import 'prismjs/components/prism-jsdoc'
+
+const config: UserConfig = {
   resolve: {
-    alias: {
-      '~/': `${path.resolve(__dirname, 'src')}/`,
-    },
+    alias: [
+      { find: '/~/', replacement: `${resolve(__dirname, 'src')}/` },
+    ],
   },
-  plugins: [
-    imagetools(),
-    Vue({
-      include: [/\.vue$/, /\.md$/],
-    }),
-
-    // https://github.com/hannoeru/vite-plugin-pages
-    Pages({
-      extensions: ['vue', 'md'],
-    }),
-
-    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
-    Layouts(),
-
-    // https://github.com/antfu/vite-plugin-md
-    Markdown({
-      wrapperClasses: 'prose prose-sm m-auto text-left',
-      headEnabled: true,
-      markdownItSetup(md) {
-        // https://prismjs.com/
-        md.use(Prism)
-      },
-    }),
-
-    // https://github.com/antfu/vite-plugin-components
-    ViteComponents({
-      // allow auto load markdown components under `./src/components/`
-      extensions: ['vue', 'md'],
-
-      // allow auto import and register components used in markdown
-      customLoaderMatcher: id => id.endsWith('.md'),
-
-      globalComponentsDeclaration: true,
-
-      // auto import icons
-      customComponentResolvers: [
-        // https://github.com/antfu/vite-plugin-icons
-        ViteIconsResolver({
-          componentPrefix: '',
-          // enabledCollections: ['carbon']
-        }),
-      ],
-    }),
-
-    // https://github.com/antfu/vite-plugin-icons
-    ViteIcons(),
-
-    // https://github.com/antfu/vite-plugin-windicss
-    WindiCSS({
-      safelist: 'prose prose-sm m-auto text-left',
-    }),
-
-    // https://github.com/antfu/vite-plugin-pwa
-    VitePWA({
-      registerType: 'autoUpdate',
-      manifest: {
-        name: 'Vitesse',
-        short_name: 'Vitesse',
-        theme_color: '#ffffff',
-        icons: [
-          {
-            src: '/pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
-          },
-        ],
-      },
-    }),
-
-    // https://github.com/intlify/vite-plugin-vue-i18n
-    VueI18n({
-      include: [path.resolve(__dirname, 'locales/**')],
-    }),
-  ],
-  // https://github.com/antfu/vite-ssg
-  ssgOptions: {
-    script: 'async',
-    formatting: 'minify',
-  },
-
   optimizeDeps: {
     include: [
       'vue',
       'vue-router',
       '@vueuse/core',
-    ],
-    exclude: [
-      'vue-demi',
+      '@iconify/iconify',
+      'dayjs',
+      'dayjs/plugin/localizedFormat',
     ],
   },
-})
+  plugins: [
+    Vue({
+      include: [/\.vue$/, /\.md$/],
+    }),
+
+    Pages({
+      extensions: ['vue', 'md'],
+      pagesDir: 'pages',
+      extendRoute(route) {
+        const path = resolve(__dirname, route.component.slice(1))
+
+        if (!path.includes('projects.md')) {
+          const md = fs.readFileSync(path, 'utf-8')
+          const { data } = matter(md)
+          route.meta = Object.assign(route.meta || {}, { frontmatter: data })
+        }
+
+        return route
+      },
+    }),
+
+    Markdown({
+      wrapperComponent: 'post',
+      wrapperClasses: 'prose m-auto',
+      headEnabled: true,
+      markdownItOptions: {
+        quotes: '""\'\'',
+      },
+      markdownItSetup(md) {
+        md.use(Prism)
+        md.use(anchor, {
+          slugify,
+          permalink: true,
+          permalinkBefore: true,
+          permalinkSymbol: '#',
+          permalinkAttrs: () => ({ 'aria-hidden': true }),
+        })
+
+        md.use(markdownAttr, {
+          pattern: /^https?:/,
+          attrs: {
+            target: '_blank',
+            rel: 'noopener',
+          },
+        })
+      },
+    }),
+
+    ViteComponents({
+      extensions: ['vue', 'md'],
+      customLoaderMatcher: path => path.endsWith('.md'),
+      customComponentResolvers: ViteIconsResolver({
+        componentPrefix: '',
+      }),
+    }),
+
+    PurgeIcons(),
+    Icons(),
+
+    WindiCSS({
+      safelist: 'prose prose-sm m-auto'.split(' '),
+      preflight: {
+        enableAll: true,
+      },
+    }),
+  ],
+}
+
+export default config

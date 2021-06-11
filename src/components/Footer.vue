@@ -1,41 +1,6 @@
-<script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { isDark, toggleDark } from '~/logic'
-
-const { t, availableLocales, locale } = useI18n()
-
-const toggleLocales = () => {
-  // change to some real logic
-  const locales = availableLocales
-  locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
-}
-</script>
-
 <template>
-  <nav class="text-xl mt-6">
-    <router-link class="icon-btn mx-2" to="/" :title="t('button.home')">
-      <carbon-home />
-    </router-link>
-
-    <!-- <a class="icon-btn mx-2" :title="t('button.toggle_dark')" @click="toggleDark">
-      <carbon-moon v-if="isDark" />
-      <carbon-sun v-else />
-    </a> -->
-
-    <router-link class="icon-btn mx-2" to="/about" :title="t('button.about')">
-      <carbon-dicom-overlay />
-    </router-link>
-
-    <a class="icon-btn mx-2" rel="noreferrer" href="https://linkedin.com/in/carlosbronze" target="_blank" title="GitHub">
-      <carbon-logo-linkedin />
-    </a>
-
-    <a class="icon-btn mx-2" rel="noreferrer" href="https://github.com/bronze" target="_blank" title="GitHub">
-      <carbon-logo-github />
-    </a>
-
-    <a class="icon-btn mx-2" rel="noreferrer" href="https://twitter.com/carlosbronze" target="_blank" title="GitHub">
-      <carbon-logo-twitter />
-    </a>
-  </nav>
+  <div class="mt-10 mb-6 prose m-auto opacity-50 flex">
+    <span class="text-sm"><a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="color:inherit">CC BY-NC-SA 4.0</a> 2021 © Anthony Fu</span>
+    <div class="flex-auto" />
+  </div>
 </template>
