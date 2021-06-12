@@ -10,9 +10,9 @@ html {
 }
 
 html.dark {
-  --c-bg: #050505;
-  --c-scrollbar: #111;
-  --c-scrollbar-hover: #222;
+  --c-bg: var(--nord0);
+  --c-scrollbar: var(--nord1);
+  --c-scrollbar-hover: var(--nord2);
   @apply text-gray-200;
 }
 
@@ -26,6 +26,7 @@ html {
 
 #nprogress .bar {
   @apply bg-teal-600 opacity-75;
+  background-color: var(--nord10);
 
   position: fixed;
   z-index: 1031;
@@ -39,8 +40,10 @@ html {
 .btn {
   @apply px-4 py-1 rounded inline-block
     bg-teal-600 text-white cursor-pointer
+    background-color: var(--nord10)
     hover:bg-teal-700
     disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50;
+    &:hover {background-color: var(--nord10);}
 }
 
 .icon-btn {
@@ -48,7 +51,7 @@ html {
     opacity-75 transition duration-200 ease-in-out
     hover:opacity-100 hover:text-teal-600;
 }
-
+/*
 * {
   scrollbar-color: var(--c-scrollbar) var(--c-bg);
 }
@@ -68,4 +71,4 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--c-scrollbar-hover);
-}
+} */

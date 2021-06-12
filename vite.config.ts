@@ -2,8 +2,7 @@ import { resolve } from 'path'
 import { UserConfig } from 'vite'
 import fs from 'fs-extra'
 import Pages from 'vite-plugin-pages'
-import PurgeIcons from 'vite-plugin-purge-icons'
-import Icons, { ViteIconsResolver } from 'vite-plugin-icons'
+import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import ViteComponents from 'vite-plugin-components'
 import Markdown from 'vite-plugin-md'
 import Vue from '@vitejs/plugin-vue'
@@ -93,16 +92,14 @@ const config: UserConfig = {
 
     ViteComponents({
       extensions: ['vue', 'md'],
-      customLoaderMatcher: path => path.endsWith('.md'),
       globalComponentsDeclaration: true,
+      customLoaderMatcher: path => path.endsWith('.md'),
       customComponentResolvers: ViteIconsResolver({
         componentPrefix: '',
-        // enabledCollections: ['carbon', 'feather']
       }),
     }),
 
-    PurgeIcons(),
-    Icons(),
+    ViteIcons(),
 
     WindiCSS({
       safelist: 'prose prose-sm m-auto'.split(' '),

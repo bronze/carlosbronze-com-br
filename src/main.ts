@@ -1,3 +1,4 @@
+import './styles/nord.css'
 import './styles/main.postcss'
 import 'windi.css'
 import './styles/markdown.postcss'

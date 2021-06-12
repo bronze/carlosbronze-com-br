@@ -22,11 +22,11 @@ import { isDark } from '/~/logics'
         <router-link to="/talks" class="<md:hidden">
           Talks
         </router-link> -->
-        <router-link to="/projects">
+        <!-- <router-link to="/projects">
           <span class="<md:hidden">Projects</span>
           <ri-lightbulb-line class="md:hidden"/>
-        </router-link>
-        <a href="https://twitter.com/carlosbronze" target="_blank" title="Linkedin">
+        </router-link> -->
+        <a href="https://twitter.com/carlosbronze" target="_blank" title="Twitter">
           <carbon-logo-linkedin />
         </a>
         <a href="https://twitter.com/carlosbronze" target="_blank" title="Twitter">

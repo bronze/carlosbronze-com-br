@@ -59,10 +59,9 @@ html.dark {
 }
 
 .prose {
-  --fg: #555;
-  --fg-deep: #222;
-  --fg-deeper: #000;
-  
+  --fg: #var(--nord2);
+  --fg-deep: var(--nord1);
+  --fg-deeper: var(--nord0);
   color: var(--fg);
 
   a {
@@ -71,7 +70,7 @@ html.dark {
     border-bottom: 1px solid rgba(125,125,125,0.1);
     transition: border .3s ease-in-out;
 
-    &:hover { 
+    &:hover {
       border-bottom: 1px solid var(--fg);
     }
   }
@@ -87,9 +86,9 @@ html.dark {
 }
 
 html.dark .prose {
-  --fg: #bbb;
-  --fg-deep: #ddd;
-  --fg-deeper: #fff;
+  --fg: var(--nord4);
+  --fg-deep: var(--nord5);
+  --fg-deeper: var(--nord6);
 }
 
 a.item {
