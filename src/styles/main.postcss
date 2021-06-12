@@ -1,7 +1,7 @@
 :root {
-  --c-bg: #fff;
-  --c-scrollbar: #eee;
-  --c-scrollbar-hover: #bbb;
+  --c-bg: var(--nord6);
+  /* --c-scrollbar: #eee;
+  --c-scrollbar-hover: #bbb; */
 }
 
 html {
@@ -11,13 +11,14 @@ html {
 
 html.dark {
   --c-bg: var(--nord0);
-  --c-scrollbar: var(--nord1);
-  --c-scrollbar-hover: var(--nord2);
+  /* --c-scrollbar: var(--nord1);
+  --c-scrollbar-hover: var(--nord2); */
   @apply text-gray-200;
+  color: var(--nord4);
 }
 
 html {
-  overflow: scroll;
+  overflow: hidden;
 }
 
 #nprogress {
@@ -36,7 +37,16 @@ html {
   width: 100%;
   height: 2px;
 }
-
+a svg {
+  color: var(--nord0);
+  &:hover, &:focus, &:active {color: var(--nord10);}
+}
+html.dark {
+  a svg {
+    color: var(--nord5);
+    &:hover, &:focus, &:active {color: var(--nord10);}
+  }
+}
 .btn {
   @apply px-4 py-1 rounded inline-block
     bg-teal-600 text-white cursor-pointer
