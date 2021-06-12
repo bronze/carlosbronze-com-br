@@ -26,14 +26,14 @@ import { isDark } from '/~/logics'
           <span class="<md:hidden">Projects</span>
           <ri-lightbulb-line class="md:hidden"/>
         </router-link>
-        <a href="https://twitter.com/carlosbronze" target="_blank" title="Twitter">
-          <feather-linkedin />
+        <a href="https://twitter.com/carlosbronze" target="_blank" title="Linkedin">
+          <carbon-logo-linkedin />
         </a>
         <a href="https://twitter.com/carlosbronze" target="_blank" title="Twitter">
-          <feather-twitter />
+          <carbon-logo-twitter />
         </a>
         <a href="https://github.com/carlosbronze" target="_blank" title="GitHub">
-          <uil-github-alt />
+          <carbon-logo-github />
         </a>
         <toggle-theme />
       </div>
