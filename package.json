@@ -47,7 +47,6 @@
     "vite-plugin-pages": "0.13.1",
     "vite-plugin-pwa": "^0.7.3",
     "vite-plugin-windicss": "1.0.3",
-    "vite-plugin-yaml": "^1.0.5",
     "vite-ssg": "0.11.2",
     "windicss": "3.1.3"
   },
