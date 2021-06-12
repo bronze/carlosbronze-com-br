@@ -32,7 +32,7 @@ import { isDark } from '/~/logics'
         <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter">
           <carbon-logo-twitter />
         </a>
-        <a href="https://github.com/carlosbronze" rel="me" title="GitHub">
+        <a href="https://github.com/bronze" rel="me" title="GitHub">
           <carbon-logo-github />
         </a>
         <toggle-theme />
