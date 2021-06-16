@@ -14,6 +14,8 @@ import anchor from 'markdown-it-anchor'
 import markdownAttr from 'markdown-it-link-attributes'
 import { slugify } from './scripts/slugify'
 import viteCompression from 'vite-plugin-compression'
+import { viteSingleFile } from 'vite-plugin-singlefile'
+import { minifyHtml } from 'vite-plugin-html'
 
 import 'prismjs/components/prism-regex'
 import 'prismjs/components/prism-javascript'
@@ -108,6 +110,8 @@ const config: UserConfig = {
         enableAll: true,
       },
     }),
+    viteSingleFile(),
+    minifyHtml(),
     // gizp
     viteCompression(),
     // br
@@ -116,6 +120,16 @@ const config: UserConfig = {
       algorithm: 'brotliCompress',
     }),
   ],
+  build: {
+    target: "esnext",
+    assetsInlineLimit: 100000000,
+    chunkSizeWarningLimit: 100000000,
+    cssCodeSplit: false,
+    brotliSize: false,
+    rollupOptions: {
+      inlineDynamicImports: true,
+    },
+  },
 }
 
 export default config
