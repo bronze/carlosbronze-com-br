@@ -13,6 +13,7 @@ import anchor from 'markdown-it-anchor'
 // @ts-expect-error
 import markdownAttr from 'markdown-it-link-attributes'
 import { slugify } from './scripts/slugify'
+import viteCompression from 'vite-plugin-compression'
 
 import 'prismjs/components/prism-regex'
 import 'prismjs/components/prism-javascript'
@@ -106,6 +107,13 @@ const config: UserConfig = {
       preflight: {
         enableAll: true,
       },
+    }),
+    // gizp
+    viteCompression(),
+    // br
+    viteCompression({
+      ext: '.br',
+      algorithm: 'brotliCompress',
     }),
   ],
 }
