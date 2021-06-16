@@ -15,17 +15,7 @@ import { isDark } from '/~/logics'
     <nav class="nav">
       <div class="spacer" />
       <div class="right">
-        <!-- <router-link to="/posts">
-          <span class="<md:hidden">Blog</span>
-          <ri-article-line class="md:hidden"/>
-        </router-link>
-        <router-link to="/talks" class="<md:hidden">
-          Talks
-        </router-link> -->
-        <!-- <router-link to="/projects">
-          <span class="<md:hidden">Projects</span>
-          <ri-lightbulb-line class="md:hidden"/>
-        </router-link> -->
+
         <a href="https://twitter.com/carlosbronze" rel="me" title="LinkedIn">
           <carbon-logo-linkedin />
         </a>
