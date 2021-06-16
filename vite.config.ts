@@ -15,7 +15,6 @@ import markdownAttr from 'markdown-it-link-attributes'
 import { slugify } from './scripts/slugify'
 import viteCompression from 'vite-plugin-compression'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import { minifyHtml } from 'vite-plugin-html'
 
 import 'prismjs/components/prism-regex'
 import 'prismjs/components/prism-javascript'
@@ -111,7 +110,6 @@ const config: UserConfig = {
       },
     }),
     viteSingleFile(),
-    minifyHtml(),
     // gizp
     viteCompression(),
     // br
