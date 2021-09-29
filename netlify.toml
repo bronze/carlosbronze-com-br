@@ -27,7 +27,7 @@
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Accept-CH = "Downlink,RTT,Device-Memory,Save-Data,DPR,Width"
     # Permissions-Policy = "vibrate 'none'; geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none'"
-    Permissions-Policy = "autoplay=(), camera=(), geolocation=(), microphone=(), midi=(), usb=(), vibrate=()"
+    Permissions-Policy = "autoplay=(), camera=(), geolocation=(), microphone=(), midi=(), usb=()"
 
 # https://codewithhugo.com/enable-cdn-netlify/
 [[headers]]
