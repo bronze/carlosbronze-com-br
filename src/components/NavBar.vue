@@ -16,7 +16,7 @@ import { isDark } from '/~/logics'
       <div class="spacer" />
       <div class="right">
 
-        <a href="https://twitter.com/carlosbronze" rel="me" title="LinkedIn">
+        <a href="https://www.linkedin.com/in/carlosbronze/" rel="me" title="LinkedIn">
           <carbon-logo-linkedin />
         </a>
         <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter">
