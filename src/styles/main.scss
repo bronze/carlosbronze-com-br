@@ -1,3 +1,14 @@
 main {
   @apply max-w-7xl mx-auto my-auto px-4 sm:px-6 lg:px-0;
+  height: 100vh;
+  h1 {
+    font-size: clamp(1.5rem, 2.73vw + 0.82rem, 3rem);
+    @apply font-bold;
+    margin-top: 20vh;
+  }
+  p {
+    font-size: clamp(1rem, 0.91vw + 0.77rem, 1.5rem);
+    @apply mt-8;
+    margin-top: 1em;
+  }
 }
