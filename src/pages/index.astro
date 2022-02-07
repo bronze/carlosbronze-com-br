@@ -1,0 +1,61 @@
+---
+import { Image } from "astro-eleventy-img";
+import { Icon } from 'astro-icon';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Carlos Bronze" />
+  <link rel="webmention" href="https://webmention.io/www.carlosbronze.com.br/webmention" />
+  <link rel="pingback" href="https://webmention.io/www.carlosbronze.com.br/xmlrpc" />
+  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="msapplication-TileColor" content="#a90000">
+  <meta name="theme-color" content="#a90000">
+
+  <!-- Optional, if we want the stylesheet to get preloaded. Note that this line causes stylesheet to get downloaded, but not applied to the page. Use strategically — while preloading will push this resource up the priority list, it may cause more important resources to be pushed down the priority list. This may not be the desired effect for non-critical CSS, depending on other resources your app needs. -->
+  <link rel="preload" href={Astro.resolve('../styles/styles.scss')} as="style" />
+
+  <!-- Media type (print) doesn't match the current environment, so browser decides it's not that important and loads the stylesheet asynchronously (without delaying page rendering). On load, we change media type so that the stylesheet gets applied to screens. -->
+  <link rel="stylesheet" href={Astro.resolve('../styles/styles.scss')}  media="print" onload="this.media='all'">
+
+  <!-- Fallback that only gets inserted when JavaScript is disabled, in which case we can't load CSS asynchronously. -->
+  <noscript><link rel="stylesheet" href={Astro.resolve('../styles/styles.scss')} ></noscript>
+
+  <link rel="icon" href="data:;base64,iVBORwOKGO=" />
+  <title>Carlos Bronze</title>
+</head>
+<body>
+    <header class="header">
+      <nav>
+        <div>
+          <a href="https://linkedin.com/in/carlosbronze" rel="me" title="LinkedIn" >
+            <Icon name="mdi:linkedin" />
+          </a>
+          <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter" >
+            <Icon name="mdi:twitter" />
+          </a>
+          <a href="https://github.com/bronze" rel="me" title="GitHub" >
+            <Icon name="mdi:github" />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <h1 class="mb-0">Carlos Bronze</h1>
+      <p>Digital Branding and Operations</p>
+    </main>
+  <script>
+    (function() {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      const setting = localStorage.getItem('color-schema') || 'auto'
+      if (setting === 'dark' || (prefersDark && setting !== 'light'))
+        document.documentElement.classList.toggle('dark', true)
+    })()
+  </script>
+</body>
+</html>

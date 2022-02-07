@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "types": ["vite/client", "node"],
+    "baseUrl": ".",
+    "paths": {
+      "$components/*": ["src/components/*"],
+      "$pages/*": ["src/pages/*"],
+      "$utils": ["src/utils/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
+}

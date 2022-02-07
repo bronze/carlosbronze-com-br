@@ -107,8 +107,6 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby
-public/
 
 # vuepress build output
 .vuepress/dist
@@ -144,7 +142,7 @@ tmp
 
 # Local Netlify folder
 .netlify
-yarn.lock
+public/assets/images/
 
 
 *.local

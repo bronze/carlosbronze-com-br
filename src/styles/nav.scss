@@ -1,0 +1,9 @@
+nav {
+  @apply max-w-7xl mx-auto px-2 sm:px-6 lg:px-0 h-8 mt-4;
+  div {
+    @apply relative flex items-center justify-end h-full gap-4;
+  }
+  a {
+    height: 100%;
+  }
+}
