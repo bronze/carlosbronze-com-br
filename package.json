@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && npm run critical",
+    "build": "astro build",
     "critical": "node critical.js",
+    "prod": "astro build && npm run critical",
     "preview": "astro preview"
   },
   "devDependencies": {
