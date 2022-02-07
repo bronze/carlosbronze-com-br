@@ -15,12 +15,9 @@ import { Icon } from 'astro-icon';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="msapplication-TileColor" content="#a90000">
   <meta name="theme-color" content="#a90000">
-
-  <!-- Optional, if we want the stylesheet to get preloaded. Note that this line causes stylesheet to get downloaded, but not applied to the page. Use strategically — while preloading will push this resource up the priority list, it may cause more important resources to be pushed down the priority list. This may not be the desired effect for non-critical CSS, depending on other resources your app needs. -->
   <link rel="preload" href={Astro.resolve('../styles/styles.scss')} as="style" />
 
-  <!-- Media type (print) doesn't match the current environment, so browser decides it's not that important and loads the stylesheet asynchronously (without delaying page rendering). On load, we change media type so that the stylesheet gets applied to screens. -->
-  <link rel="stylesheet" href={Astro.resolve('../styles/styles.scss')}  media="print" onload="this.media='all'">
+  <link rel="stylesheet" href={Astro.resolve('../styles/styles.scss')} media="print" onload="this.media='all'"/>
 
   <!-- Fallback that only gets inserted when JavaScript is disabled, in which case we can't load CSS asynchronously. -->
   <noscript><link rel="stylesheet" href={Astro.resolve('../styles/styles.scss')} ></noscript>
