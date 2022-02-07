@@ -2,8 +2,8 @@
   NODE_VERSION = "14"
 
 [build]
-  publish = ""
-  command = ""
+  publish = "dist"
+  command = "npm run build"
 
 [[redirects]]
   from = "/*"
