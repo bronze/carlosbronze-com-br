@@ -6,4 +6,7 @@ critical.generate({
   target: 'index.html',
   width: 1300,
   height: 900,
+  inline: {
+    strategy: 'swap'
+  }
 });

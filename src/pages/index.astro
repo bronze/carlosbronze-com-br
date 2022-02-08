@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro-eleventy-img";
 import { Icon } from 'astro-icon';
+let styleSheet = Astro.resolve('../styles/styles.scss');
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -15,12 +16,7 @@ import { Icon } from 'astro-icon';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="msapplication-TileColor" content="#a90000">
   <meta name="theme-color" content="#a90000">
-  <link rel="preload" href={Astro.resolve('../styles/styles.scss')} as="style" />
-  <link rel="stylesheet" href={Astro.resolve('../styles/styles.scss')} >
-  <link rel="stylesheet" href={Astro.resolve('../styles/styles.scss')} media="print" onload="this.media='all'; this.onload=null;"/>
-
-  <!-- Fallback that only gets inserted when JavaScript is disabled, in which case we can't load CSS asynchronously. -->
-  <noscript><link rel="stylesheet" href={Astro.resolve('../styles/styles.scss')} ></noscript>
+  <link rel="stylesheet" href={styleSheet} >
 
   <link rel="icon" href="data:;base64,iVBORwOKGO=" />
   <title>Carlos Bronze</title>
