@@ -5,6 +5,16 @@
   publish = "dist"
   command = "npm run prod"
 
+[dev]
+autoLaunch = true
+command = "npm run dev"
+
+[[redirects]]
+  force = true
+  from = '/api/*'
+  status = 200
+  to = '/.netlify/functions/:splat'
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

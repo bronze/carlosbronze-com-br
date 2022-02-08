@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro-eleventy-img";
 import { Icon } from 'astro-icon';
+import { Sprite } from 'astro-icon'
 let styleSheet = Astro.resolve('../styles/styles.scss');
 ---
 <!DOCTYPE html>
@@ -22,17 +23,18 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
   <title>Carlos Bronze</title>
 </head>
 <body>
+  <Sprite.Provider>
     <header class="header">
       <nav>
         <div>
           <a href="https://linkedin.com/in/carlosbronze" rel="me" title="LinkedIn" >
-            <Icon name="mdi:linkedin" />
+            <Sprite name="mdi:linkedin" />
           </a>
           <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter" >
-            <Icon name="mdi:twitter" />
+            <Sprite name="mdi:twitter" />
           </a>
           <a href="https://github.com/bronze" rel="me" title="GitHub" >
-            <Icon name="mdi:github" />
+            <Sprite name="mdi:github" />
           </a>
         </div>
       </nav>
@@ -50,5 +52,6 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
         document.documentElement.classList.toggle('dark', true)
     })()
   </script>
+  </Sprite.Provider>
 </body>
 </html>
