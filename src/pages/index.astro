@@ -1,7 +1,8 @@
 ---
 import { Image } from "astro-eleventy-img";
 import { Icon } from 'astro-icon';
-import { Sprite } from 'astro-icon'
+import { Sprite } from 'astro-icon';
+import DarkToggle from '../components/DarkToggle.astro';
 let styleSheet = Astro.resolve('../styles/styles.scss');
 ---
 <!DOCTYPE html>
@@ -22,7 +23,7 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
   <link rel="icon" href="data:;base64,iVBORwOKGO=" />
   <title>Carlos Bronze</title>
 </head>
-<body>
+<body x-data="{ dark: false }">
   <Sprite.Provider>
     <header class="header">
       <nav>
@@ -43,21 +44,17 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
     <main>
       <h1>Carlos Bronze</h1>
       <p>Digital Branding and Operations</p>
+      <DarkToggle></DarkToggle>
     </main>
-  <script>
-    (function() {
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      const setting = localStorage.getItem('color-schema') || 'auto'
-      if (setting === 'dark' || (prefersDark && setting !== 'light'))
-        document.documentElement.classList.toggle('dark', true)
-    })()
-  </script>
+
   </Sprite.Provider>
+  <script src="//unpkg.com/alpinejs" defer></script>
 </body>
 </html>
 
 <script>
   // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+  console.log(window.localStorage.theme);
   try {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
