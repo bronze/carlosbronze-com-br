@@ -1,43 +1,14 @@
 @forward "tailwind";
-@forward "nord";
 @forward "icons";
 @forward "nav";
 @forward "main";
+@forward "colors";
 /* src/styles/global.css */
 
 body * {
   line-height: calc(2px + 2ex + 2px);
 }
 
-:root {
-  --c-bg: var(--nord6);
-}
 html {
-  background-color: var(--c-bg);
-  --tw-text-opacity: 1;
-  color: rgba(55, 65, 81, var(--tw-text-opacity));
   overflow: hidden;
-}
-html.dark {
-  --c-bg: var(--nord0);
-  --tw-text-opacity: 1;
-  color: rgba(229, 231, 235, var(--tw-text-opacity));
-  color: var(--nord4);
-}
-
-a svg {
-  color: var(--nord0);
-}
-a svg:hover,
-a svg:focus,
-a svg:active {
-  color: var(--nord10);
-}
-html.dark a svg {
-  color: var(--nord5);
-}
-html.dark a svg:hover,
-html.dark a svg:focus,
-html.dark a svg:active {
-  color: var(--nord10);
 }

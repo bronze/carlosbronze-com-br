@@ -1,9 +1,6 @@
 @use "nord" as *;
 
 [astro-icon] {
-  color: $nord5;
-  /* OR */
-  fill: $nord5;
   height: 100%;
   width: 2em;
 }
