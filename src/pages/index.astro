@@ -23,34 +23,7 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
   <link rel="icon" href="data:;base64,iVBORwOKGO=" />
   <title>Carlos Bronze</title>
 </head>
-<body x-data="{
-        dark: (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)),
-        toggleTheme() {
-            if (window.localStorage.theme != 'dark') {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
-            } else {
-                document.documentElement.classList.remove('dark');
-                window.localStorage.theme = null;
-            }
-            this.dark = !this.dark;
-            console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-
-        },
-
-        init() {
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark'; // Force a dark value on first login without preset localstorage to avoid bugs on checkbox
-                this.dark = true;
-                console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-            } else {
-                document.documentElement.classList.remove('dark');
-                this.dark = false;
-                console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-            }
-            console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-        }}">
+<body x-data="darkmode">
   <Sprite.Provider>
     <header class="header">
       <nav>
@@ -87,4 +60,35 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
       document.documentElement.classList.remove('dark')
     }
   } catch (_) {}
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('darkmode', () => ({
+      dark: (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)),
+      toggleTheme() {
+        if (window.localStorage.theme != 'dark') {
+          document.documentElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        } else {
+          document.documentElement.classList.remove('dark');
+          window.localStorage.theme = null;
+        }
+        this.dark = !this.dark;
+        console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
+
+      },
+
+      init() {
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+          localStorage.theme = 'dark'; // Force a dark value on first login without preset localstorage to avoid bugs on checkbox
+          this.dark = true;
+          console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
+        } else {
+          document.documentElement.classList.remove('dark');
+          this.dark = false;
+          console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
+        }
+        console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
+      }
+    }))
+  })
 </script>
