@@ -23,7 +23,31 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
   <link rel="icon" href="data:;base64,iVBORwOKGO=" />
   <title>Carlos Bronze</title>
 </head>
-<body x-data="{ dark: false }">
+<body x-data="{
+        dark: localStorage.theme === 'dark',
+        toggleTheme() {
+            if (window.localStorage.theme != 'dark') {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            } else {
+                document.documentElement.classList.remove('dark');
+                window.localStorage.theme = null;
+            }
+
+            console.log(window.localStorage.theme);
+
+            this.dark = !this.dark;
+        },
+
+        init() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                this.dark = true;
+            } else {
+                document.documentElement.classList.remove('dark');
+                this.dark = false;
+            }
+        }}">
   <Sprite.Provider>
     <header class="header">
       <nav>
@@ -53,14 +77,11 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
 
 <script>
   // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-  console.log(window.localStorage.theme);
   try {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
-      // document.documentElement.style.backgroundColor = "var(--theme-bg-color)";
     } else {
       document.documentElement.classList.remove('dark')
-      // document.documentElement.style.backgroundColor = "#fff";
     }
   } catch (_) {}
 </script>
