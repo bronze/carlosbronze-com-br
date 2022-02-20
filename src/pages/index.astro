@@ -23,31 +23,7 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
   <link rel="icon" href="data:;base64,iVBORwOKGO=" />
   <title>Carlos Bronze</title>
 </head>
-<body x-data="{
-        dark: localStorage.theme === 'dark',
-        toggleTheme() {
-            if (window.localStorage.theme != 'dark') {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
-            } else {
-                document.documentElement.classList.remove('dark');
-                window.localStorage.theme = null;
-            }
-
-            console.log(window.localStorage.theme);
-
-            this.dark = !this.dark;
-        },
-
-        init() {
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-                this.dark = true;
-            } else {
-                document.documentElement.classList.remove('dark');
-                this.dark = false;
-            }
-        }}">
+<body x-data="{ dark: localStorage.theme === 'dark' }">
   <Sprite.Provider>
     <header class="header">
       <nav>
@@ -84,4 +60,17 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
       document.documentElement.classList.remove('dark')
     }
   } catch (_) {}
+
+  function toggleTheme() {
+    if (window.localStorage.theme != 'dark') {
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
+    } else {
+      document.documentElement.classList.remove('dark');
+      window.localStorage.theme = null;
+    }
+
+    console.log(window.localStorage.theme);
+
+  }
 </script>
