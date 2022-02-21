@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro-eleventy-img";
-import { Icon } from 'astro-icon';
+// import { Image } from "astro-eleventy-img";
+// import { Icon } from 'astro-icon';
 import { Sprite } from 'astro-icon';
 import DarkToggle from '../components/DarkToggle.astro';
 let styleSheet = Astro.resolve('../styles/styles.scss');
@@ -37,12 +37,15 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
           <a href="https://github.com/bronze" rel="me" title="GitHub" >
             <Sprite name="mdi:github" />
           </a>
+          <a title="Theme Toggle" x-on:click="toggleTheme()">
+            <Sprite name="mdi:theme-light-dark" />
+          </a>
         </div>
       </nav>
     </header>
 
     <main>
-      <h1>Carlos Bronze</h1><DarkToggle></DarkToggle>
+      <h1>Carlos Bronze</h1>
       <p>Digital Branding</p>
     </main>
 
