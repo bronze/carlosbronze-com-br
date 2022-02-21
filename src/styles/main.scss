@@ -2,12 +2,12 @@ main {
   @apply max-w-screen-lg mx-auto my-auto px-6;
   height: 100vh;
   h1 {
-    font-size: clamp(1.5rem, 2.73vw + 0.82rem, 3rem);
+    font-size: clamp(3.13rem, 3.41vw + 2.27rem, 5rem);
     @apply font-bold;
     margin-top: 20vh;
   }
   p {
-    font-size: clamp(1rem, 0.91vw + 0.77rem, 1.5rem);
+    font-size: clamp(1.88rem, 2.27vw + 1.31rem, 3.13rem);
     @apply mt-8;
     margin-top: 1em;
   }
