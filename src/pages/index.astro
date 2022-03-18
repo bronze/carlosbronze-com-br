@@ -59,9 +59,10 @@ import { Sprite } from 'astro-icon';
   // On page load or when changing themes, best to add inline in `head` to avoid FOUC
   try {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add('dark');
+      document.body.style.backgroundColor = "#2e3440";
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
     }
   } catch (_) {}
 
@@ -78,6 +79,7 @@ import { Sprite } from 'astro-icon';
           localStorage.theme = 'dark';
         } else {
           document.documentElement.classList.remove('dark');
+          document.body.style.backgroundColor = "";
           window.localStorage.theme = null;
         }
         this.dark = !this.dark;
