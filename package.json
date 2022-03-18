@@ -12,16 +12,15 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@11ty/eleventy-img": "^1.0.0",
-    "astro": "^0.22.20",
-    "astro-icon": "^0.5.3",
-    "autoprefixer": "^10.4.2",
+    "astro": "^0.24.3",
+    "astro-icon": "^0.6.0",
+    "autoprefixer": "^10.4.4",
     "critical": "^4.0.1",
-    "postcss-preset-env": "^7.3.1",
-    "sass": "^1.49.7",
-    "tailwindcss": "^3.0.18"
+    "postcss-preset-env": "^7.4.2",
+    "sass": "^1.49.9",
+    "tailwindcss": "^3.0.23"
   },
   "dependencies": {
-    "astro-eleventy-img": "^0.2.1"
+    "astro-eleventy-img": "^0.2.3"
   }
 }
