@@ -2,8 +2,6 @@
 // import { Image } from "astro-eleventy-img";
 // import { Icon } from 'astro-icon';
 import { Sprite } from 'astro-icon';
-import DarkToggle from '../components/DarkToggle.astro';
-let styleSheet = Astro.resolve('../styles/styles.scss');
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +16,11 @@ let styleSheet = Astro.resolve('../styles/styles.scss');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="msapplication-TileColor" content="#a90000">
   <meta name="theme-color" content="#a90000">
-  <link rel="stylesheet" href={styleSheet} >
-
   <link rel="icon" href="data:;base64,iVBORwOKGO=" />
   <title>Carlos Bronze</title>
+  <style global>
+    @import "../styles/styles.scss";
+  </style>
 </head>
 <body x-data="darkmode">
   <Sprite.Provider>
