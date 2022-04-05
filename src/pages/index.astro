@@ -23,75 +23,81 @@ import { Icon } from 'astro-icon';
   </style>
 </head>
 <body x-data="darkmode">
-  <script is:inline>
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    try {
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        document.body.style.backgroundColor = "#2e3440";
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    } catch (_) {}
+    <header class="header">
+      <nav>
+        <div>
+          <a href="https://linkedin.com/in/carlosbronze" rel="me" title="LinkedIn" >
+            <Icon name="mdi:linkedin" />
+          </a>
+          <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter" >
+            <Icon name="mdi:twitter" />
+          </a>
+          <a href="https://github.com/bronze" rel="me" title="GitHub" >
+            <Icon name="mdi:github" />
+          </a>
+          <a title="Theme Toggle" x-on:click="toggleTheme()">
+            <Icon name="mdi:theme-light-dark" />
+          </a>
+        </div>
+      </nav>
+    </header>
 
-    // Alpine data
-    document.addEventListener('alpine:init', () => {
-      Alpine.data('darkmode', () => ({
-        // Define darkmode
-        dark: (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)),
-
-        // Toggle function
-        toggleTheme() {
-          if (window.localStorage.theme != 'dark') {
-            document.documentElement.classList.add('dark');
-            localStorage.theme = 'dark';
-          } else {
-            document.documentElement.classList.remove('dark');
-            document.body.style.backgroundColor = "";
-            window.localStorage.theme = null;
-          }
-          this.dark = !this.dark;
-          // console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-        },
-
-        // Get values on init
-        init() {
-          if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            localStorage.theme = 'dark'; // Force a dark value on first login without preset localstorage to avoid bugs on checkbox checked
-            this.dark = true;
-            // console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-          } else {
-            document.documentElement.classList.remove('dark');
-            this.dark = false;
-            // console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-          }
-          // console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-        }
-      }))
-    })
+    <main>
+      <h1>Carlos Bronze</h1>
+      <p>Digital Branding</p>
+    </main>
+  <!-- <script src="//unpkg.com/alpinejs" defer is:inline></script> -->
+  <script>
+    import '../scripts/main.js';
   </script>
-  <header class="header">
-    <nav>
-      <div>
-        <a href="https://linkedin.com/in/carlosbronze" rel="me" title="LinkedIn" >
-          <Icon name="mdi:linkedin" />
-        </a>
-        <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter" >
-          <Icon name="mdi:twitter" />
-        </a>
-        <a href="https://github.com/bronze" rel="me" title="GitHub" >
-          <Icon name="mdi:github" />
-        </a>
-        <a title="Theme Toggle" x-on:click="toggleTheme()">
-          <Icon name="mdi:theme-light-dark" />
-        </a>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <h1>Carlos Bronze</h1>
-    <p>Digital Branding</p>
-  </main>
 </body>
 </html>
+
+<script>
+  // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+  try {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      document.body.style.backgroundColor = "#2e3440";
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (_) {}
+
+  // Alpine data
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('darkmode', () => ({
+      // Define darkmode
+      dark: (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)),
+
+      // Toggle function
+      toggleTheme() {
+        if (window.localStorage.theme != 'dark') {
+          document.documentElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.body.style.backgroundColor = "";
+          window.localStorage.theme = null;
+        }
+        this.dark = !this.dark;
+        // console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
+      },
+
+      // Get values on init
+      init() {
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+          localStorage.theme = 'dark'; // Force a dark value on first login without preset localstorage to avoid bugs on checkbox checked
+          this.dark = true;
+          // console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
+        } else {
+          document.documentElement.classList.remove('dark');
+          this.dark = false;
+          // console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
+        }
+        // console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
+      }
+    }))
+  })
+</script>
