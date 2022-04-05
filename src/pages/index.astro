@@ -23,7 +23,21 @@ import { Sprite } from 'astro-icon';
   </style>
 </head>
 <body x-data="darkmode">
-    <Sprite.Provider>
+  <script is:inline>
+    // wrapped as IIFE to use private variables and functions
+    (function () {
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      try {
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+          document.body.style.backgroundColor = "#2e3440";
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <Sprite.Provider>
     <header class="header">
       <nav>
         <div>
@@ -57,16 +71,6 @@ import { Sprite } from 'astro-icon';
 </html>
 
 <script>
-  // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-  try {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-      document.body.style.backgroundColor = "#2e3440";
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  } catch (_) {}
-
   // Alpine data
   document.addEventListener('alpine:init', () => {
     Alpine.data('darkmode', () => ({
