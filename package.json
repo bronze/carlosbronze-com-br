@@ -22,7 +22,6 @@
     "tailwindcss": "^3.0.23"
   },
   "dependencies": {
-    "alpinejs": "^3.9.5",
-    "astro-eleventy-img": "^0.2.3"
+    "alpinejs": "^3.9.5"
   }
 }
