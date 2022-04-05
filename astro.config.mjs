@@ -9,6 +9,10 @@ export default defineConfig({
       external: ["svgo"],
     },
   },
-  integrations: [tailwind(), sitemap()],
+  integrations: [tailwind({
+    config: {
+      applyBaseStyles: false,
+    },
+  }), sitemap()],
   site: 'https://www.carlosbronze.com.br/',
 });
