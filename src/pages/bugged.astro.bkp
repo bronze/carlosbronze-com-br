@@ -1,7 +1,7 @@
 ---
 // import { Image } from "astro-eleventy-img";
 // import { Icon } from 'astro-icon';
-import { Icon } from 'astro-icon';
+import { Sprite } from 'astro-icon';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -23,20 +23,21 @@ import { Icon } from 'astro-icon';
   </style>
 </head>
 <body x-data="darkmode">
+  <Sprite.Provider>
     <header class="header">
       <nav>
         <div>
           <a href="https://linkedin.com/in/carlosbronze" rel="me" title="LinkedIn" >
-            <Icon name="mdi:linkedin" />
+            <Sprite name="mdi:linkedin" />
           </a>
           <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter" >
-            <Icon name="mdi:twitter" />
+            <Sprite name="mdi:twitter" />
           </a>
           <a href="https://github.com/bronze" rel="me" title="GitHub" >
-            <Icon name="mdi:github" />
+            <Sprite name="mdi:github" />
           </a>
           <a title="Theme Toggle" x-on:click="toggleTheme()">
-            <Icon name="mdi:theme-light-dark" />
+            <Sprite name="mdi:theme-light-dark" />
           </a>
         </div>
       </nav>
@@ -46,6 +47,8 @@ import { Icon } from 'astro-icon';
       <h1>Carlos Bronze</h1>
       <p>Digital Branding</p>
     </main>
+
+  </Sprite.Provider>
   <script src="../scripts/main.js" defer>
   // Processed! Bundled! ESM imports work, even to npm packages.
   </script>

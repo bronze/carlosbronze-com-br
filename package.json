@@ -13,8 +13,8 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "astro": "^0.24.3",
-    "astro-icon": "^0.6.0",
+    "astro": "^0.26.1",
+    "astro-icon": "^0.6.1",
     "autoprefixer": "^10.4.4",
     "critical": "^4.0.1",
     "postcss-preset-env": "^7.4.3",
@@ -22,6 +22,8 @@
     "tailwindcss": "^3.0.23"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^0.1.0",
+    "@astrojs/tailwind": "^0.1.0",
     "alpinejs": "^3.9.5"
   }
 }
