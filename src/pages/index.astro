@@ -1,5 +1,4 @@
 ---
-// import { Image } from "astro-eleventy-img";
 // import { Icon } from 'astro-icon';
 import { Sprite } from 'astro-icon';
 ---
@@ -21,21 +20,22 @@ import { Sprite } from 'astro-icon';
   <style lang='scss' is:global>
     @import "../styles/styles.scss";
   </style>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+  </style>
 </head>
 <body x-data="darkmode">
   <script is:inline>
-    // wrapped as IIFE to use private variables and functions
-    (function () {
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      try {
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark');
-          document.body.style.backgroundColor = "#2e3440";
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      } catch (_) {}
-    })();
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    try {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.body.style.backgroundColor = "#2e3440";
+        document.body.style.color = "#ffffff";
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } catch (_) {}
   </script>
   <Sprite.Provider>
     <header class="header">
@@ -65,6 +65,7 @@ import { Sprite } from 'astro-icon';
   </Sprite.Provider>
   <!-- <script src="//unpkg.com/alpinejs" defer is:inline></script> -->
   <script>
+    // Alpine load
     import '../scripts/main.js';
   </script>
 </body>

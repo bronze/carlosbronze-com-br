@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "astro": "^0.26.1",
-    "astro-icon": "^0.7.0",
+    "astro-icon": "^0.7.1",
     "autoprefixer": "^10.4.4",
     "critical": "^4.0.1",
     "postcss-preset-env": "^7.4.3",
