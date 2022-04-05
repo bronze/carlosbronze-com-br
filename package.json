@@ -17,12 +17,12 @@
     "astro-icon": "^0.6.0",
     "autoprefixer": "^10.4.4",
     "critical": "^4.0.1",
-    "postcss-preset-env": "^7.4.2",
-    "sass": "^1.49.9",
+    "postcss-preset-env": "^7.4.3",
+    "sass": "^1.49.11",
     "tailwindcss": "^3.0.23"
   },
   "dependencies": {
-    "alpinejs": "^3.9.1",
+    "alpinejs": "^3.9.5",
     "astro-eleventy-img": "^0.2.3"
   }
 }
