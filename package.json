@@ -2,6 +2,7 @@
   "name": "carlosbronze-com-br",
   "version": "22.0.0",
   "private": true,
+  "NETLIFY_SITE_ID ": "72d6d96e-ae80-459e-b3b3-3e7bca65f7bd",
   "scripts": {
     "netlifydev": "netlify dev",
     "dev": "astro dev",
@@ -12,16 +13,17 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "astro": "^0.24.3",
-    "astro-icon": "^0.6.0",
+    "astro": "^0.26.1",
+    "astro-icon": "^0.7.1",
     "autoprefixer": "^10.4.4",
     "critical": "^4.0.1",
-    "postcss-preset-env": "^7.4.2",
-    "sass": "^1.49.9",
+    "postcss-preset-env": "^7.4.3",
+    "sass": "^1.49.11",
     "tailwindcss": "^3.0.23"
   },
   "dependencies": {
-    "alpinejs": "^3.9.1",
-    "astro-eleventy-img": "^0.2.3"
+    "@astrojs/sitemap": "^0.1.0",
+    "@astrojs/tailwind": "^0.1.0",
+    "alpinejs": "^3.9.5"
   }
 }

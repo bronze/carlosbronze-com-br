@@ -1,4 +1,5 @@
 ---
+// import { Image } from "astro-eleventy-img";
 // import { Icon } from 'astro-icon';
 import { Sprite } from 'astro-icon';
 ---
@@ -17,26 +18,11 @@ import { Sprite } from 'astro-icon';
   <meta name="theme-color" content="#a90000">
   <link rel="icon" href="data:;base64,iVBORwOKGO=" />
   <title>Carlos Bronze</title>
-  <style lang='scss' is:global>
+  <style lang='scss'>
     @import "../styles/styles.scss";
-  </style>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
   </style>
 </head>
 <body x-data="darkmode">
-  <script is:inline>
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    try {
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        document.body.style.backgroundColor = "#2e3440";
-        document.body.style.color = "#ffffff";
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    } catch (_) {}
-  </script>
   <Sprite.Provider>
     <header class="header">
       <nav>
@@ -63,15 +49,23 @@ import { Sprite } from 'astro-icon';
     </main>
 
   </Sprite.Provider>
-  <!-- <script src="//unpkg.com/alpinejs" defer is:inline></script> -->
-  <script>
-    // Alpine load
-    import '../scripts/main.js';
+  <script src="../scripts/main.js" defer>
+  // Processed! Bundled! ESM imports work, even to npm packages.
   </script>
 </body>
 </html>
 
 <script>
+  // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+  try {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      document.body.style.backgroundColor = "#2e3440";
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (_) {}
+
   // Alpine data
   document.addEventListener('alpine:init', () => {
     Alpine.data('darkmode', () => ({
