@@ -1,4 +1,6 @@
+// https://gist.github.com/DavidKuennen/443121e692175d6fc145e1efb0284ec9
 // https://gist.github.com/janispritzkau/c9fe29242af53fd1b10a847da78b3406
+// https://dariusz.wieckiewicz.org/en/minimal-google-analytics-4-snippet/#minimal-analytics-4---the-code
 
 // minified ES2015 (677 bytes)
 ((e, a, t) => { for (var i, o, n = a.hostname.split("."), c = e.cookie.match(/(^|; ?)_ga=GA1\.\d\.(\d+\.\d+)(;|$)/), r = c ? c[2] : ~~(2e9 * Math.random()) + "." + ~~(Date.now() / 1e3), l = n.length; l-- && (o = `_ga=GA1.${n.length - l}.${r}`, e.cookie = `${o};max-age=63115200;domain=${n.slice(l).join(".")}`, !e.cookie.split(/; ?/).includes(o));); track = ((o, n, c, l, d) => { i = { v: 1, tid: "UA-XXXX-Y", aip: 1, cid: r, t: o, dr: e.referrer, dt: e.title, dl: a.href, ul: t.language.toLowerCase(), sr: `${screen.width}x${screen.height}`, vp: `${innerWidth}x${innerHeight}` }, n && (i.ec = n), c && (i.ea = c), l && (i.el = l), d && (i.ev = d), t.sendBeacon("https://google-analytics.com/collect", new URLSearchParams(i)) }), track("pageview") })(document, location, navigator)
