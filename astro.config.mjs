@@ -11,7 +11,9 @@ export default defineConfig({
   },
   integrations: [tailwind({
     config: {
-      applyBaseStyles: false,
+      path: './tailwind.config.cjs',
+      // applyBaseStyles: false,
+      // applyAstroPreset: false,
     },
   }), sitemap()],
   site: 'https://www.carlosbronze.com.br/',

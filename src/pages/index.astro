@@ -7,8 +7,6 @@ import { Sprite } from 'astro-icon';
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Carlos Bronze" />
-  <link rel="webmention" href="https://webmention.io/www.carlosbronze.com.br/webmention" />
-  <link rel="pingback" href="https://webmention.io/www.carlosbronze.com.br/xmlrpc" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
   <meta http-equiv="X-UA-Compatible" content="chrome=1" />
   <meta name="revisit-after" content="7 days" />
@@ -17,12 +15,21 @@ import { Sprite } from 'astro-icon';
   <meta name="theme-color" content="#a90000">
   <link rel="icon" href="data:;base64,iVBORwOKGO=" />
   <title>Carlos Bronze</title>
+  <meta name="description" content="Carlos Bronze">
   <style lang='scss' is:global>
     @import "../styles/styles.scss";
   </style>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
   </style>
+  <script>
+    // UA
+    (function (e, t, o) { var n = e.history, i = document, r = navigator || {}, a = localStorage, c = encodeURIComponent, d = n.pushState, l = function () { return Math.random().toString(36) }, s = function () { return a.cid || (a.cid = l()), a.cid }, u = function (e) { var t = []; for (var o in e) e.hasOwnProperty(o) && void 0 !== e[o] && t.push(c(o) + "=" + c(e[o])); return t.join("&") }, v = function (n, a, c, d, l, v, p) { var h = "https://www.google-analytics.com/collect", g = u({ v: "1", ds: "web", aip: o.anonymizeIp ? 1 : void 0, tid: t, cid: s(), t: n || "pageview", sd: o.colorDepth && screen.colorDepth ? screen.colorDepth + "-bits" : void 0, dr: i.referrer || void 0, dt: i.title, dl: i.location.origin + i.location.pathname + i.location.search, ul: o.language ? (r.language || "").toLowerCase() : void 0, de: o.characterSet ? i.characterSet : void 0, sr: o.screenSize ? (e.screen || {}).width + "x" + (e.screen || {}).height : void 0, vp: o.screenSize && e.visualViewport ? (e.visualViewport || {}).width + "x" + (e.visualViewport || {}).height : void 0, ec: a || void 0, ea: c || void 0, el: d || void 0, ev: l || void 0, exd: v || void 0, exf: void 0 !== p && 0 == !!p ? 0 : void 0 }); if (r.sendBeacon) r.sendBeacon(h, g); else { var w = new XMLHttpRequest; w.open("POST", h, !0), w.send(g) } }; n.pushState = function (e) { return "function" == typeof n.onpushstate && n.onpushstate({ state: e }), setTimeout(v, o.delay || 10), d.apply(n, arguments) }, v(), e.ma = { trackEvent: function (e, t, o, n) { return v("event", e, t, o, n) }, trackException: function (e, t) { return v("exception", null, null, null, null, e, t) } } })(window, "UA-42531762-1", { anonymizeIp: !0, colorDepth: !0, characterSet: !0, screenSize: !0, language: !0 });
+  </script>
+  <script>
+    // GA4
+    function a(){const r="G-41KYCN9FB2";var t="XXXXXX",n,b;t=="XXXXXX"?(n=()=>{}):(n=()=>t);const s=()=>Math.floor(Math.random()*1e9)+1,o=()=>Math.floor(Date.now()/1e3),v=()=>(sessionStorage._p||(sessionStorage._p=s()),sessionStorage._p),h=()=>s()+"."+o(),d=()=>(localStorage.cid_v4||(localStorage.cid_v4=h()),localStorage.cid_v4),c=()=>(sessionStorage.sid||(sessionStorage.sid=o()),sessionStorage.sid),l=()=>{if(!sessionStorage._ss)return sessionStorage._ss="1",sessionStorage._ss;if(sessionStorage.getItem("_ss")=="1")return void 0},e="1",u=()=>{if(sessionStorage.sct){var t=+sessionStorage.getItem("sct")+ +e;sessionStorage.sct=t}else sessionStorage.sct=e;return sessionStorage.sct},a=encodeURIComponent,m=e=>{var n=[],t;for(t in e)e.hasOwnProperty(t)&&e[t]!==void 0&&n.push(a(t)+"="+a(e[t]));return n.join("&")},f=!1,p="https://www.google-analytics.com/g/collect",g=m({v:"2",tid:r,gtm:n(),_p:v(),sr:(screen.width+"x"+screen.height).toString(),ul:(navigator.language||void 0).toLowerCase(),cid:d(),_s:"1",dl:document.location.origin+document.location.pathname+document.location.search,dt:document.title||void 0,dr:document.referrer||void 0,sid:c(),sct:u(),seg:"1",en:"page_view",_ss:l(),_dbg:f?1:void 0}),i=p+"?"+g;navigator.sendBeacon?navigator.sendBeacon(i):(b=new XMLHttpRequest,b.open("POST",i,!0))}a()
+  </script>
 </head>
 <body x-data="darkmode">
   <script is:inline>
@@ -50,7 +57,7 @@ import { Sprite } from 'astro-icon';
           <a href="https://github.com/bronze" rel="me" title="GitHub" >
             <Sprite name="mdi:github" />
           </a>
-          <a title="Theme Toggle" x-on:click="toggleTheme()">
+          <a title="Theme Toggle" x-on:click="toggleTheme()" rel="nofollow" href="#">
             <Sprite name="mdi:theme-light-dark" />
           </a>
         </div>
