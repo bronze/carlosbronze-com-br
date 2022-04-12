@@ -18,6 +18,7 @@
     "autoprefixer": "^10.4.4",
     "critical": "^4.0.1",
     "postcss-preset-env": "^7.4.3",
+    "prettier-plugin-astro": "^0.0.12",
     "sass": "^1.49.11",
     "tailwindcss": "^3.0.23"
   },
