@@ -17,11 +17,9 @@ import {Sprite} from "astro-icon";
     <link rel="icon" href="data:;base64,iVBORwOKGO=" />
     <title>Carlos Bronze</title>
     <meta name="description" content="Carlos Bronze" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
     <style lang="scss" is:global>
       @import "../styles/styles.scss";
-    </style>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
     </style>
     <script>
       // UA
@@ -73,8 +71,8 @@ import {Sprite} from "astro-icon";
         <p>Digital Branding</p>
       </main>
     </Sprite.Provider>
-    <!-- Load AlpineJS on the page -->
     <script>
+      // Load AlpineJS on the page
       import Alpine from "alpinejs";
       window.Alpine = Alpine;
       Alpine.start();
