@@ -1,20 +1,15 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import WindiCSS from 'vite-plugin-windicss'
 
 // https://astro.build/config
 export default defineConfig({
   vite: {
+    plugins: [WindiCSS()],
     ssr: {
       external: ["svgo"],
     },
   },
-  integrations: [tailwind({
-    config: {
-      path: './tailwind.config.cjs',
-      // applyBaseStyles: false,
-      // applyAstroPreset: false,
-    },
-  }), sitemap()],
+  integrations: [sitemap()],
   site: 'https://www.carlosbronze.com.br/',
 });
