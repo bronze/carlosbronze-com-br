@@ -9,7 +9,7 @@
     "start": "astro dev",
     "build": "astro build",
     "critical": "node critical.js",
-    "prod": "astro build && npm run critical",
+    "prod": "astro build ",
     "preview": "astro preview"
   },
   "devDependencies": {
@@ -25,6 +25,6 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^0.1.0",
-    "alpinejs": "^3.9.5"
+    "alpinejs": "^3.10.2"
   }
 }
