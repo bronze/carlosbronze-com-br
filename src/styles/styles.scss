@@ -1,9 +1,9 @@
-@forward "tailwind";
 @forward "icons";
 @forward "nav";
 @forward "main";
 @forward "colors";
-/* src/styles/global.css */
+
+/* src/styles/styles.scss */
 
 body * {
   line-height: calc(2px + 2ex + 2px);

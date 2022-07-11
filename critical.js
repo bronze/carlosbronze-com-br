@@ -12,6 +12,6 @@ critical.generate({
 
   // ignore CSS rules
   ignore: {
-    rule: [/html/, /body/],
+    rule: [/html/, /body/, /:root/],
   },
 });
