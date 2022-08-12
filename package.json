@@ -4,27 +4,21 @@
   "private": true,
   "NETLIFY_SITE_ID ": "72d6d96e-ae80-459e-b3b3-3e7bca65f7bd",
   "scripts": {
-    "netlifydev": "netlify dev",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "critical": "node critical.js",
-    "prod": "astro build ",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "devDependencies": {
-    "astro": "^0.26.1",
-    "astro-icon": "^0.7.1",
-    "autoprefixer": "^10.4.7",
-    "critical": "^4.0.1",
-    "postcss-preset-env": "7.7.2",
-    "prettier-plugin-astro": "0.1.1",
-    "sass": "1.53.0",
-    "vite-plugin-windicss": "1.8.6",
-    "windicss": "3.5.6"
+    "astro": "^1.0.3",
+    "sass": "^1.54.4",
+    "vite-plugin-windicss": "^1.8.7",
+    "windicss": "^3.5.6"
   },
   "dependencies": {
-    "@astrojs/sitemap": "0.2.5",
-    "alpinejs": "^3.10.2"
+    "@astrojs/sitemap": "^1.0.0",
+    "alpinejs": "^3.10.3",
+    "astro-icon": "^0.7.3"
   }
 }
