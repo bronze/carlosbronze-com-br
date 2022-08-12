@@ -7,7 +7,9 @@
     "baseUrl": ".",
     "paths": {
       "$components/*": ["src/components/*"],
+      "$layouts/*": ["src/layouts/*"],
       "$pages/*": ["src/pages/*"],
+      "$scripts/*": ["src/scripts/*"],
       "$utils": ["src/utils/index.ts"]
     }
   },
