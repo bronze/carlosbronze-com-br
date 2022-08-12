@@ -48,3 +48,10 @@ const { title } = Astro.props as Props;
 <style>
 
 </style>
+
+<script>
+  // Load AlpineJS on the page
+  import Alpine from "alpinejs";
+  window.Alpine = Alpine;
+  Alpine.start();
+</script>

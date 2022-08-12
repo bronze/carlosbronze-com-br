@@ -3,11 +3,11 @@
 
 [build]
   publish = "dist"
-  command = "npm run prod"
+  command = "pnpm build || ( npm install pnpm && pnpm build )"
 
 [dev]
-autoLaunch = false
-command = "npm run dev"
+  autoLaunch = false
+  command = "pnpm run dev"
 
 [[redirects]]
   from = "/*"
