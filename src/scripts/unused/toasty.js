@@ -1,4 +1,11 @@
 
+import "./toastyjs.js";
+
+const dan = new MK.DanForden();
+
+//Let him toast it
+dan.toast();
+
 import QToasty from "./qtoasty.js";
 
 var toasty = new QToasty(params = {
