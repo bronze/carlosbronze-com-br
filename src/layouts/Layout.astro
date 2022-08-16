@@ -50,8 +50,9 @@ import '../styles/nunito.css';
   import "$scripts/alpine.js";
   import "$scripts/console.js";
 </script>
-<script src="qtoasty.js" type="text/javascript"></script>
+<script is:inline src="/qtoasty.js"></script>
 <script type="text/javascript">
+  var toasty = new QToasty(params = { 'keyCodes': [40, 65], 'volume': 0.5, 'imageSize': '' });
   var toasty = new QToasty(params = {
     'domElement': document.body, // HTMLElement to show bind events.
     'sound': true, // Play sound

@@ -20,6 +20,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^1.0.0",
     "alpinejs": "^3.10.3",
-    "astro-icon": "^0.7.3"
+    "astro-icon": "^0.7.3",
+    "konami": "^1.6.3",
+    "toasty": "^6.0.3"
   }
 }
