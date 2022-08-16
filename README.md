@@ -1,5 +1,11 @@
 # carlosbronze.com.br
 
+## Plugins used:
+
+[astro-icon](https://github.com/natemoo-re/astro-icon)
+[astro-compress](https://github.com/Playform/astro-compress)
+[@astrojs/sitemap](https://github.com/withastro/astro/tree/main/packages/integrations/sitemap/)
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
