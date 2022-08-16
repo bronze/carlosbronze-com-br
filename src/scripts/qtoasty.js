@@ -17,12 +17,13 @@
  * @exports QToasty
  * @class
  */
-function QToasty(params = {}) {
+export default function QToasty(params = {}) {
+
   var options = {
     domElement: params.domElement || document.body,
     sound: params.sound || true,
     volume: params.volume || 0.5,
-    imageSize: params.imageSize || 150, // Original 169
+    imageSize: params.imageSize || 150,
     imageSrc: params.imageSrc || this.dataImage,
     keyCodes: params.keyCodes || [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
     slideInSpeed: 360,
@@ -51,6 +52,7 @@ function QToasty(params = {}) {
   };
 
   var soundDuration = 720; // 0.719433s
+
 
   // up, up, down, down, left, right, left, right, b, a
   var konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
@@ -98,7 +100,8 @@ function QToasty(params = {}) {
     var easing = params.easing.toLowerCase() || 'linear';
     complete = complete || null;
 
-    if (!easingFunctions.hasOwnProperty(easing)) easing = 'linear';
+    if (!easingFunctions.hasOwnProperty(easing))
+      easing = 'linear';
 
     var pName = prop.name;
     var regex = /(\-|\+)?(=)?([^p]+)(px)?/g;
@@ -129,7 +132,8 @@ function QToasty(params = {}) {
 
       if (time >= duration) {
         clearInterval(interval);
-        if (complete) complete();
+        if (complete)
+          complete();
       }
     }
 
@@ -140,7 +144,8 @@ function QToasty(params = {}) {
    * Show Toasty.
    */
   this.trigger = function trigger() {
-    if (!imageEl.width || container.parentNode) return;
+    if (!imageEl.width || container.parentNode)
+      return;
 
     // var size = imageEl.width;
     var size = options.imageSize;
@@ -148,7 +153,8 @@ function QToasty(params = {}) {
     imageEl.style.right = -size + 'px';
     options.domElement.appendChild(container);
 
-    if (options.sound) soundEl.play();
+    if (options.sound)
+      soundEl.play();
 
 
     animate(imageEl, { name: 'right', value: '+=' + size + 'px' }, {

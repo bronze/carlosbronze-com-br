@@ -1,3 +1,5 @@
+// https://github.com/daniel-mf/toasty
+
 !function (V, s) { "object" == typeof exports && "undefined" != typeof module ? s(exports) : "function" == typeof define && define.amd ? define(["exports"], s) : s((V = V || self).MK = {}) }(this, (function (V) {
   "use strict";
 /*! *****************************************************************************
