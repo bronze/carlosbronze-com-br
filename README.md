@@ -5,6 +5,7 @@
 [astro-icon](https://github.com/natemoo-re/astro-icon)
 [astro-compress](https://github.com/Playform/astro-compress)
 [@astrojs/sitemap](https://github.com/withastro/astro/tree/main/packages/integrations/sitemap/)
+[GoogleFontsOptimizer](https://github.com/sebholstein/astro-google-fonts-optimizer)
 
 ## 🚀 Project Structure
 
