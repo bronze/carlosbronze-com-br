@@ -11,8 +11,8 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "astro": "^1.0.3",
-    "astro-compress": "^0.0.18",
+    "astro": "1.0.6",
+    "astro-compress": "1.0.1",
     "sass": "^1.54.4",
     "vite-plugin-windicss": "^1.8.7",
     "windicss": "^3.5.6"
