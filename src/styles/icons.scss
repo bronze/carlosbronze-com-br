@@ -1,6 +1,18 @@
 @use "nord" as *;
+@use "longshadow";
 
 [astro-icon] {
   height: 100%;
   width: 2em;
+}
+
+[astro-icon="mdi:duck"] {
+  position: absolute;
+  transform: translate(35%, 10%);
+  bottom: 0;
+  right: 0;
+  height: 20vh;
+  width: 20vw;
+
+  @include longshadow.long-shadow(text, darken(#ffffff, 5), 50, false, false, right);
 }

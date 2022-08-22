@@ -2,7 +2,12 @@
 @forward "nav";
 @forward "main";
 @forward "colors";
+// @use "longshadow";
 
+// h1 {
+//   @include longshadow.long-shadow(text, darken(#222222, 5), 50, false, false, left);
+//   overflow: hidden;
+// }
 /* src/styles/styles.scss */
 
 body * {

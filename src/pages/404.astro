@@ -1,0 +1,30 @@
+---
+// https://codepen.io/pgalor/pen/OeRWJQ
+// import { Icon } from 'astro-icon';
+import "virtual:windi.css";
+import {Sprite} from "astro-icon";
+import Layout from "$layouts/Layout.astro";
+---
+
+<Layout title="Carlos Bronze">
+  <div class="md:flex min-h-screen">
+    <div class="flex items-center justify-center w-full">
+      <div class="container max-w-screen-lg mx-auto my-auto px-6">
+        <div id="404" class="font-black w-full text-5xl">404</div>
+        <div class="bg-white rounded h-1 md:my-6 my-3 w-16"></div>
+        <p class="font-light leading-normal mb-8 md:text-3xl text-2xl">Sorry, the page you are looking for could not be found.</p>
+
+        <!-- <button class="bg-transparent border-2 border-grey-light font-bold hover:border-grey px-6 py-3 rounded-lg text-grey-darkest tracking-wide uppercase">
+            Go Home
+          </button> -->
+      </div>
+    </div>
+  </div>
+  <script>
+    window.fitText(document.getElementById("404"), 0.2);
+  </script>
+</Layout>
+
+<script>
+  import "$scripts/fittext.js";
+</script>
