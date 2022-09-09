@@ -1,27 +1,26 @@
 ---
-import 'virtual:windi.css'
 import {GoogleFontsOptimizer} from 'astro-google-fonts-optimizer'
 export interface Props {
   title: string
 }
 
-const {title} = Astro.props as Props
+import {Sprite} from 'astro-icon'
+import {Icon} from 'astro-icon'
 import '../styles/styles.scss'
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" x-data="darkmode" x-bind:class="darkMode ? 'dark' : 'light'">
   <head>
     <script is:inline>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       try {
         if (
-          localStorage.theme === 'dark' ||
-          (!('theme' in localStorage) &&
+          localStorage._x_darkMode === 'dark' ||
+          (!('_x_darkMode' in localStorage) &&
             window.matchMedia('(prefers-color-scheme: dark)').matches)
         ) {
           document.documentElement.classList.add('dark')
-          document.body.style.backgroundColor = '#2e3440'
         } else {
           document.documentElement.classList.remove('dark')
         }
@@ -29,9 +28,8 @@ import '../styles/styles.scss'
     </script>
     <meta charset="UTF-8" />
     <meta name="author" content="Carlos Bronze" />
-    <meta name="generator" content={Astro.generator} />
     <meta name="description" content="Carlos Bronze" />
-    <title>{title}</title>
+    <title>Darkmode</title>
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="revisit-after" content="7 days" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,77 +49,54 @@ import '../styles/styles.scss'
       src="https://plausible.io/js/plausible.js"
     ></script>
   </head>
-
-  <body x-data="darkmode">
-    <slot />
+  <body>
+    <Sprite.Provider>
+      <header class="header">
+        <nav>
+          <div>
+            <a
+              href="https://linkedin.com/in/carlosbronze"
+              rel="me"
+              title="LinkedIn">
+              <Sprite name="mdi:linkedin" />
+            </a>
+            <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter">
+              <Sprite name="mdi:twitter" />
+            </a>
+            <a href="https://github.com/bronze" rel="me" title="GitHub">
+              <Sprite name="mdi:github" />
+            </a>
+            <a
+              title="Theme Toggle"
+              x-on:click="darkMode = !darkMode"
+              rel="nofollow"
+              href="#">
+              <Sprite name="mdi:theme-light-dark" />
+            </a>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <h1>Carlos Bronze</h1>
+        <p>Digital Branding</p>
+      </main>
+    </Sprite.Provider>
     <script>
-      import '../scripts/alpine.js'
-      import '../scripts/console.js'
-      import '../scripts/duck.js'
-    </script>
-    <script is:inline src="/qtoasty.js"></script>
-    <script type="text/javascript">
-      var toasty = new QToasty(
-        (params = {keyCodes: [40, 65], volume: 0.5, imageSize: ''})
-      )
-      var toasty = new QToasty(
-        (params = {
-          domElement: document.body, // HTMLElement to show bind events.
-          sound: true, // Play sound
-          volume: 0.5, // Sound volume, 0 to 1
-          imageSize: 150, // Image Size. Default: 150
-          imageSrc: '', // User that if wanna change the default image, leave empty for default image.
-          keyCodes: [38, 38, 40, 40, 37, 39, 37, 39, 66, 65], // Key sequence to activate. Default: Konami Code.
-          slideInSpeed: 360, // Slide in speed.
-          slideOutSpeed: 360, // Slide out speed.
-          delayToSlideOut: 600, // Delay before slide out image.
-          easing: 'easeinout', // Easing function, linear, easein, easeout, easeinout, easeoutelastic. Default easeinout
-        })
-      )
+      import Alpine from 'alpinejs'
+      import persist from '@alpinejs/persist'
+
+      Alpine.plugin(persist)
+      window.Alpine = Alpine
+      Alpine.start()
     </script>
     <script>
       // Alpine data
       document.addEventListener('alpine:init', () => {
-        Alpine.data('darkmode', () => ({
-          // Define darkmode
-          dark:
-            localStorage.theme === 'dark' ||
-            (!('theme' in localStorage) &&
-              window.matchMedia('(prefers-color-scheme: dark)').matches),
-
-          // Toggle function
-          toggleTheme() {
-            if (window.localStorage.theme != 'dark') {
-              document.documentElement.classList.add('dark')
-              localStorage.theme = 'dark'
-            } else {
-              document.documentElement.classList.remove('dark')
-              document.body.style.backgroundColor = ''
-              window.localStorage.theme = null
-            }
-            this.dark = !this.dark
-            // console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-          },
-
-          // Get values on init
-          init() {
-            if (
-              localStorage.theme === 'dark' ||
-              (!('theme' in localStorage) &&
-                window.matchMedia('(prefers-color-scheme: dark)').matches)
-            ) {
-              document.documentElement.classList.add('dark')
-              localStorage.theme = 'dark' // Force a dark value on first login without preset localstorage to avoid bugs on checkbox checked
-              this.dark = true
-              // console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-            } else {
-              document.documentElement.classList.remove('dark')
-              this.dark = false
-              // console.log('init storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-            }
-            // console.log('storage: ' + window.localStorage.theme + ' | dark: ' + this.dark);
-          },
-        }))
+        Alpine.data('darkmode', function () {
+          return {
+            darkMode: this.$persist(false),
+          }
+        })
       })
     </script>
   </body>

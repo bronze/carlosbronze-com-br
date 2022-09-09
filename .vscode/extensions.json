@@ -1,8 +1,10 @@
 {
   "recommendations": [
-    "octref.vetur",
-    "antfu.iconify",
+    "astro-build.astro-vscode",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
-    "antfu.vite",
+    // "adrianwilczynski.alpine-js-intellisense",
+    "pcbowers.alpine-intellisense"
   ]
 }

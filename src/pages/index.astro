@@ -1,8 +1,8 @@
 ---
 // import { Icon } from 'astro-icon';
-import {Sprite} from "astro-icon";
-import { Icon } from 'astro-icon';
-import Layout from "$layouts/Layout.astro";
+import {Sprite} from 'astro-icon'
+import {Icon} from 'astro-icon'
+import Layout from '~/layouts/Layout.astro'
 // import "../styles/animista.scss";
 ---
 
@@ -11,7 +11,10 @@ import Layout from "$layouts/Layout.astro";
     <header class="header">
       <nav>
         <div>
-          <a href="https://linkedin.com/in/carlosbronze" rel="me" title="LinkedIn">
+          <a
+            href="https://linkedin.com/in/carlosbronze"
+            rel="me"
+            title="LinkedIn">
             <Sprite name="mdi:linkedin" />
           </a>
           <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter">
@@ -20,7 +23,11 @@ import Layout from "$layouts/Layout.astro";
           <a href="https://github.com/bronze" rel="me" title="GitHub">
             <Sprite name="mdi:github" />
           </a>
-          <a title="Theme Toggle" x-on:click="toggleTheme()" rel="nofollow" href="#">
+          <a
+            title="Theme Toggle"
+            x-on:click="toggleTheme()"
+            rel="nofollow"
+            href="#">
             <Sprite name="mdi:theme-light-dark" />
           </a>
         </div>
@@ -32,6 +39,10 @@ import Layout from "$layouts/Layout.astro";
     </main>
     <!-- <Sprite name="mdi:duck" /> -->
     <!-- Loads the SVG in `/src/icons/filename.svg` -->
-    <Icon name="duck-opt" id="duck" class="opacity-0 transform transition duration-600 ease-in-out  h-1/3 w-1/3 max-h-[33vw] max-w-[33vh] absolute bottom-0 right-0"/>
+    <Icon
+      name="duck-opt"
+      id="duck"
+      class="opacity-0 transform transition duration-600 ease-in-out h-1/3 w-1/3 max-h-[33vw] max-w-[33vh] absolute bottom-0 right-0"
+    />
   </Sprite.Provider>
 </Layout>
