@@ -7,7 +7,10 @@
 
 [dev]
   autoLaunch = false
-  command = "pnpm run dev"
+  # command = "pnpm run dev"
+  framework = "#custom"
+  targetPort = 3000
+  command = "astro dev"
 
 [[redirects]]
   from = "/*"

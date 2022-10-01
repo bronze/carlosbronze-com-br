@@ -1,0 +1,17 @@
+// https://eduardoboucas.com/posts/2021-03-03-shipping-nodejs-at-netlify/
+function adjustFeatureWidth() {
+  var $feature=$('.feature-title');
+  var containerWidth=$feature.parent().width();
+  $feature.children('.feature-title__part').each(function () {
+    $(this).attr('style', '').css({
+      display: 'inline-block',
+      opacity: 0
+    });
+    var fontSize=Math.floor(containerWidth/$(this).width()*100);
+    $(this).css({
+      'font-size': fontSize+'%',
+      display: 'block',
+      opacity: 1
+    })
+  })
+}

@@ -20,10 +20,9 @@
   "dependencies": {
     "@alpinejs/persist": "^3.10.3",
     "@astrojs/sitemap": "^1.0.0",
+    "@fontsource/nunito": "^4.5.10",
     "alpinejs": "^3.10.3",
-    "astro-google-fonts-optimizer": "^0.2.1",
-    "astro-icon": "^0.7.3",
-    "konami": "^1.6.3",
-    "toasty": "^6.0.3"
+    "astro-critters": "^1.0.5",
+    "astro-icon": "^0.7.3"
   }
 }
