@@ -14,4 +14,10 @@ function adjustFeatureWidth() {
       opacity: 1
     })
   })
-}
+};
+$(window).load(function () {
+  adjustFeatureWidth();
+});
+$(window).resize(function () {
+  adjustFeatureWidth()
+});
