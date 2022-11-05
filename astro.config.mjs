@@ -1,18 +1,16 @@
-import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
-import WindiCSS from 'vite-plugin-windicss';
+import {defineConfig} from 'astro/config';
+import UnoCSS from 'unocss/astro';
 import compress from "astro-compress";
-
 import critters from "astro-critters";
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
   vite: {
-    plugins: [WindiCSS()],
     ssr: {
       external: ["svgo"]
     }
   },
-  integrations: [sitemap(), compress(), critters()],
+  integrations: [UnoCSS(), sitemap(), compress(), critters()],
   site: 'https://www.carlosbronze.com.br/'
 });
