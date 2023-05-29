@@ -1,8 +1,11 @@
 import {defineConfig} from 'astro/config';
+import {loadEnv} from "vite";
 import UnoCSS from 'unocss/astro';
-import compress from "astro-compress";
-import critters from "astro-critters";
 import sitemap from '@astrojs/sitemap';
+import critters from "astro-critters";
+import compress from "astro-compress";
+
+const env=loadEnv(import.meta.env.MODE, process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,6 +14,7 @@ export default defineConfig({
       external: ["svgo"]
     }
   },
-  integrations: [UnoCSS(), sitemap(), compress(), critters()],
-  site: 'https://www.carlosbronze.com.br/'
+  // site: env.SITE_URL,
+  site: 'https://www.carlosbronze.com.br/',
+  integrations: [UnoCSS(), sitemap(), critters({preload: 'body', }), compress()],
 });

@@ -46,3 +46,36 @@ All commands are run from the root of the project, from a terminal:
 
 To update packages: `pnpm up -L -i`  
 [Explanation on pnpm](https://pnpm.io/cli/update) and [bonus video](https://www.youtube.com/watch?v=lnj7NUtgnEg)
+
+https://matthiasott.com/notes/how-i-structure-my-css
+
+```
+@charset "UTF-8";
+
+// 1. Settings
+@import
+	"1-settings/global";
+
+// 2. Design Tokens
+@import
+  "2-design-tokens/colors",
+  "2-design-tokens/fonts",
+  "2-design-tokens/media-queries",
+  "2-design-tokens/spacing",
+  "2-design-tokens/typography";
+...
+```
+
+```
+/scss/
+├── 1-settings
+├── 2-design-tokens
+├── 3-tools
+├── 4-generic
+├── 5-elements
+├── 6-skeleton
+├── 7-components
+├── 8-utilities
+├── _shame.scss
+└── main.scss
+```
