@@ -16,5 +16,5 @@ export default defineConfig({
   },
   // site: env.SITE_URL,
   site: 'https://www.carlosbronze.com.br/',
-  integrations: [UnoCSS(), sitemap(), critters({preload: 'body', }), compress()],
+  integrations: [UnoCSS(), sitemap(), critters({ critters: { preload: 'body' } }), compress()],
 });
