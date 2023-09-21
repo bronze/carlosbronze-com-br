@@ -1,3 +1,4 @@
-user-agent: *
-disallow: /downloads/
-disallow: /darkmode
+User-agent: *
+Allow: /
+
+Sitemap: https://www.carlosbronze.com.br/sitemap-index.xml

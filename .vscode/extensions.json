@@ -6,5 +6,6 @@
     "dbaeumer.vscode-eslint",
     // "adrianwilczynski.alpine-js-intellisense",
     "pcbowers.alpine-intellisense"
-  ]
+  ],
+  "unwantedRecommendations": []
 }

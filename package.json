@@ -1,6 +1,6 @@
 {
   "name": "carlosbronze-com-br",
-  "version": "22.0.0",
+  "version": "23.09.21",
   "private": true,
   "NETLIFY_SITE_ID ": "72d6d96e-ae80-459e-b3b3-3e7bca65f7bd",
   "scripts": {
@@ -12,19 +12,29 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@unocss/transformer-directives": "^0.46.5",
-    "astro": "^1.9.2",
-    "prettier-plugin-astro": "^0.7.2",
-    "sass": "1.62.1",
-    "unocss": "^0.46.5"
+    "@astrojs/mdx": "^1.1.0",
+    "@astrojs/sitemap": "^3.0.0",
+    "@astrojs/tailwind": "^5.0.0",
+    "@fontsource-variable/inter": "^5.0.8",
+    "@fontsource/nunito": "^5.0.8",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.6",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/alpinejs": "^3.13.1",
+    "astro": "^3.1.2",
+    "astro-icon": "^0.8.1",
+    "astro-navbar": "^2.1.1",
+    "astro-seo": "^0.8.0",
+    "prettier-plugin-astro": "^0.12.0",
+    "sass": "^1.68.0",
+    "schema-dts": "^1.1.2",
+    "sharp": "^0.32.6"
   },
   "dependencies": {
-    "@alpinejs/persist": "^3.12.1",
-    "@astrojs/sitemap": "^1.3.1",
-    "@fontsource/nunito": "^4.5.12",
-    "alpinejs": "^3.12.1",
-    "astro-compress": "1.0.12",
-    "astro-critters": "^1.1.35",
-    "astro-icon": "^0.8.0"
+    "@astrojs/alpinejs": "^0.3.0",
+    "alpinejs": "^3.13.0",
+    "astro-critters": "^2.0.11",
+    "tailwindcss": "^3.0.24"
   }
 }

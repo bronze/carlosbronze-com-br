@@ -1,48 +1,29 @@
 ---
-// import { Icon } from 'astro-icon';
-import {Sprite} from 'astro-icon'
-import {Icon} from 'astro-icon'
-import Layout from '~/layouts/Layout.astro'
+import Container from '@components/container.astro'
+import Cta from '@components/cta.astro'
+import Features from '@components/features.astro'
+import Hero from '@components/hero.astro'
+import Logos from '@components/logos.astro'
+import Layout from '@layouts/Layout.astro'
+import type { Frontmatter } from '~/config'
+import { SiteMetadata } from '~/config'
+import coverSVG from '../assets/hero.png'
+import socialImage from '../assets/hero.png'
 
-// import "../styles/animista.scss";
+const frontmatter: Frontmatter = {
+  title: SiteMetadata.title,
+  description: SiteMetadata.description,
+  coverSVG: coverSVG,
+  socialImage: socialImage,
+  publishDate: SiteMetadata.buildTime,
+}
 ---
 
-<Layout title="Carlos Bronze">
-  <Sprite.Provider>
-    <header class="header">
-      <nav>
-        <div>
-          <a
-            href="https://linkedin.com/in/carlosbronze"
-            rel="me"
-            title="LinkedIn">
-            <Sprite name="mdi:linkedin" />
-          </a>
-          <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter">
-            <Sprite name="mdi:twitter" />
-          </a>
-          <a href="https://github.com/bronze" rel="me" title="GitHub">
-            <Sprite name="mdi:github" />
-          </a>
-          <a
-            title="Theme Toggle"
-            x-on:click="toggleTheme()"
-            rel="nofollow"
-            href="#">
-            <Sprite name="mdi:theme-light-dark" />
-          </a>
-        </div>
-      </nav>
-    </header>
-    <main>
-      <h1>Carlos Bronze</h1>
-    </main>
-    <!-- <Sprite name="mdi:duck" /> -->
-    <!-- Loads the SVG in `/src/icons/filename.svg` -->
-    <Icon
-      name="duck-opt"
-      id="duck"
-      class="opacity-0 transform transition duration-600 ease-in-out h-1/3 w-1/3 max-h-[33vw] max-w-[33vh] absolute bottom-0 right-0"
-    />
-  </Sprite.Provider>
+<Layout frontmatter={frontmatter}>
+  <Container>
+    <Hero />
+    <Features />
+    <Logos />
+    <Cta />
+  </Container>
 </Layout>

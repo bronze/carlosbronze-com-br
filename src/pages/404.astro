@@ -1,32 +1,27 @@
 ---
-// https://codepen.io/pgalor/pen/OeRWJQ
-// import { Icon } from 'astro-icon';
+import Container from "@components/container.astro";
+import Layout from "@layouts/Layout.astro";
+import type { Frontmatter } from '~/config'
+import { SiteMetadata } from '~/config'
+import coverSVG from '../assets/hero.png'
+import socialImage from '../assets/hero.png'
 
-import {Sprite} from 'astro-icon'
-import Layout from '~/layouts/Layout.astro'
+const frontmatter: Frontmatter = {
+  title: '404 Not Found',
+  description: SiteMetadata.description,
+  coverSVG: coverSVG,
+  socialImage: socialImage,
+  publishDate: SiteMetadata.buildTime,
+}
 ---
 
-<Layout title="Carlos Bronze">
-  <div class="md:flex min-h-screen">
-    <div class="flex items-center justify-center w-full">
-      <div class="container max-w-screen-lg mx-auto my-auto px-6">
-        <div id="404" class="font-black w-full text-5xl">404</div>
-        <div class="bg-white rounded h-1 md:my-6 my-3 w-16"></div>
-        <p class="font-light leading-normal mb-8 md:text-3xl text-2xl">
-          Sorry, the page you are looking for could not be found.
-        </p>
-
-        <!-- <button class="bg-transparent border-2 border-grey-light font-bold hover:border-grey px-6 py-3 rounded-lg text-grey-darkest tracking-wide uppercase">
-            Go Home
-          </button> -->
+<Layout frontmatter={frontmatter}>
+  <Container>
+    <div class="min-h-[calc(100vh-16rem)] flex items-center justify-center">
+      <div class="mt-16 text-center">
+        <h1 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">404</h1>
+        <p class="text-lg mt-4 text-slate-600">Page not found.</p>
       </div>
     </div>
-  </div>
-  <script>
-    window.fitText(document.getElementById('404'), 0.2)
-  </script>
+  </Container>
 </Layout>
-
-<script>
-  import '~/scripts/fittext.js'
-</script>

@@ -4,7 +4,7 @@
   "semi": false,
   "singleQuote": true,
   "arrowParens": "avoid",
-  "bracketSpacing": false,
+  "bracketSpacing": true,
   "bracketSameLine": true,
   "plugins": ["prettier-plugin-astro"],
   "overrides": [
