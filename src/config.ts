@@ -3,9 +3,8 @@ import type { CollectionEntry } from 'astro:content'
 export type Frontmatter = CollectionEntry<'blog'>['data']
 
 export const SiteMetadata = {
-  title: 'Astroship - Starter Template for Astro with Tailwind CSS',
-  description:
-    'Astroship is a starter website template for Astro built with TailwindCSS.',
+  title: 'Carlos Bronze',
+  description: 'Web guy',
   author: {
     name: 'Chris Tham',
     twitter: '@chris1tham',
@@ -21,9 +20,9 @@ export const SiteMetadata = {
     summary:
       'Hello Tham is a boutique management consulting firm. We specialise in Business and IT strategies, operating models, strategic roadmaps, enterprise architecture, analytics and business process design.',
   },
-  location: 'Rivendell, Middle Earth',
+  location: 'Rio de Janeiro, Rio de Janeiro, Brasil',
   latlng: [-33.86785, 151.20732] as [number, number],
-  repository: 'https://github.com/hellotham/hello-astro',
+  repository: 'https://github.com/bronze/carlosbronze-com-br',
   buildTime: new Date(),
 }
 
@@ -44,10 +43,6 @@ export const NavigationLinks = [
 ]
 
 export const PAGE_SIZE = 6
-
-export const GITHUB_EDIT_URL = `https://github.com/hellotham/hello-astro`
-
-export const COMMUNITY_INVITE_URL = `https://astro.build/chat`
 
 export const SocialLinks = {
   linkedin: {

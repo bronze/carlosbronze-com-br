@@ -1,7 +1,7 @@
 ---
-import Container from "@components/container.astro";
-import { getFormattedDate } from "@utils/all";
-import Layout from "./Layout.astro";
+import Container from '@components/container.astro'
+import { getFormattedDate } from '@utils/all'
+import Layout from './Layout.astro'
 import type { Frontmatter } from '~/src/config'
 
 const frontmatter: Frontmatter = {
@@ -34,7 +34,7 @@ const frontmatter: Frontmatter = {
         <span class="text-gray-400 hidden md:block">•</span>
         <div class="w-full md:w-auto flex flex-wrap gap-3">
           {
-            frontmatter.tags.map((tag) => (
+            frontmatter.tags.map(tag => (
               <span class="text-sm text-gray-500">#{tag}</span>
             ))
           }
@@ -42,7 +42,7 @@ const frontmatter: Frontmatter = {
       </div>
     </div>
 
-    <div class="mx-auto prose prose-lg mt-6">
+    <div class="mx-auto prose prose-lg dark:prose-invert mt-6">
       <slot />
     </div>
     <div class="text-center mt-8">

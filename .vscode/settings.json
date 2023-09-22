@@ -21,8 +21,9 @@
   // editor.wordWrap: "wordWrapColumn" - Lines will wrap at the value of editor.wordWrapColumn.
   // editor.wordWrap: "bounded" - Lines will wrap at the minimum of viewport width and the value of editor.wordWrapColumn.
   "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "package.json": ".detoxrc, package-lock.json, pnpm-lock.yaml, .npmrc, yarn.lock, .yarnrc, .editorconfig, .prettier*, .gitignore, .eslintrc.json, jest.*.js, nx.json, tsconfig.*.json, empty.ts, .env",
-    "astro.config.mjs": "jsconfig.json, tsconfig.json, windi.config.js, netlify.toml, uno.config.ts"
+    "astro.config.mjs": "jsconfig.json, tsconfig.json, windi.config.js, uno.config.ts"
   }
 }

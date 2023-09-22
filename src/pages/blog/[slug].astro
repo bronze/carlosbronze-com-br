@@ -1,24 +1,28 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import Container from "@components/container.astro";
+import { getCollection } from 'astro:content'
+import Layout from '@layouts/Layout.astro'
+import Container from '@components/container.astro'
 
 // Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
-  return blogEntries.map((entry) => ({
+  const blogEntries = await getCollection('blog')
+  return blogEntries.map(entry => ({
     params: { slug: entry.slug },
     props: { entry },
-  }));
+  }))
 }
 
 // Get the entry directly from the prop on render
-const { entry } = Astro.props;
-const { Content } = await entry.render();
-import type { Frontmatter } from '~/src/config'
+const { entry } = Astro.props
+const { Content } = await entry.render()
+
+import type { Frontmatter } from '~/config'
+import { SiteMetadata } from '~/config'
+import coverSVG from '~/assets/hero.png'
+import socialImage from '~/assets/hero.png'
 
 const frontmatter: Frontmatter = {
-  title: SiteMetadata.title,
+  title: '404 Not Found',
   description: SiteMetadata.description,
   coverSVG: coverSVG,
   socialImage: socialImage,
@@ -27,7 +31,7 @@ const frontmatter: Frontmatter = {
 ---
 
 <Layout frontmatter={frontmatter}>
-  <Container>
+  <Container class="prose dark:prose-invert">
     <div class="mx-auto max-w-3xl mt-14">
       <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
         {entry.data.category}
@@ -49,7 +53,7 @@ const frontmatter: Frontmatter = {
         <span class="text-gray-400 hidden md:block">•</span>
         <div class="w-full md:w-auto flex flex-wrap gap-3">
           {
-            entry.data.tags.map((tag) => (
+            entry.data.tags.map(tag => (
               <span class="text-sm text-gray-500">#{tag}</span>
             ))
           }
@@ -57,13 +61,13 @@ const frontmatter: Frontmatter = {
       </div>
     </div>
 
-    <div class="mx-auto prose prose-lg mt-6 max-w-3xl">
+    <div class="mx-auto prose prose-lg dark:prose-invert mt-6 max-w-3xl">
       <Content />
     </div>
-    <div class="text-center mt-8">
+    <div class="text-center mt-8 not-prose">
       <a
         href="/blog"
-        class="bg-gray-100 px-5 py-3 rounded-md hover:bg-gray-200 transition"
+        class="bg-gray-100 text-nord0 px-5 py-3 rounded-md hover:bg-gray-200 transition"
         >← Back to Blog</a
       >
     </div>

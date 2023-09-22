@@ -1,12 +1,12 @@
 ---
-import { Dropdown as DropdownContainer, DropdownItems } from "astro-navbar";
-const { title, lastItem, children } = Astro.props;
+import { Dropdown as DropdownContainer, DropdownItems } from 'astro-navbar'
+const { title, lastItem, children } = Astro.props
 ---
 
 <li class="relative">
   <DropdownContainer class="group">
     <button
-      class="flex items-center gap-1 w-full lg:w-auto lg:px-3 py-2 text-gray-600 hover:text-gray-900">
+      class="flex items-center gap-1 w-full lg:w-auto lg:px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
       <span>{title}</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -24,18 +24,18 @@ const { title, lastItem, children } = Astro.props;
     <DropdownItems>
       <div
         class:list={[
-          "lg:absolute w-full lg:w-48 z-10",
+          'lg:absolute w-full lg:w-48 z-10',
           lastItem
-            ? "lg:right-0 origin-top-right"
-            : "lg:left-0 origin-top-left",
+            ? 'lg:right-0 origin-top-right'
+            : 'lg:left-0 origin-top-left',
         ]}>
         <div
-          class="px-3 lg:py-2 lg:bg-white lg:rounded-md lg:shadow lg:border flex flex-col">
+          class="px-3 lg:py-2 lg:bg-white dark:bg-nord1 lg:rounded-md lg:shadow lg:border flex flex-col">
           {
-            children.map((item) => (
+            children.map(item => (
               <a
                 href={item.path}
-                class="py-1 text-gray-600 hover:text-gray-900">
+                class="py-1  text-gray-600 dark:text-gray-300 dark:hover:text-gray-100 hover:text-gray-900">
                 {item.title}
               </a>
             ))
