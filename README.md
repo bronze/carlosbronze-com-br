@@ -1,3 +1,9 @@
+Power your Astro site with Local and Remote Data
+https://aalam.in/blog/astro-and-data
+
+How to work with data in Astro
+https://www.youtube.com/watch?v=aS5id2273gY
+
 # Astroship - Astro Starter Template 🛸
 
 Astroship is a starter template for startups, marketing websites, landing pages & blog. Built with Astro & TailwindCSS.
@@ -29,7 +35,6 @@ Click here to deploy on Netlify:
 ### Pagespeed Score
 
 [![pagespeed](https://user-images.githubusercontent.com/1884712/210250214-7aa98167-7993-4b90-8138-326b8fa0c223.png)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fastroship.web3templates.com%2F)
-
 
 ## Installation
 

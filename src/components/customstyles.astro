@@ -1,9 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root[data-theme~='dark'] {
+<style is:inline is:global>
+  :root[data-theme~='dark'],
+  :root .dark {
     --color-default: 128 0 29;
     --color-primary: 94 129 172;
     --color-secondary: 94 129 172;
@@ -41,10 +38,4 @@
     --color-warn: 255 187 51;
     --color-error: 254 78 78;
   }
-}
-
-body {
-  @apply bg-muted text-text;
-  padding-right: var(--scrollbarComp);
-  overflow-x: hidden;
-}
+</style>

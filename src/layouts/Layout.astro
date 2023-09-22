@@ -3,6 +3,7 @@ import Footer from '@components/footer.astro'
 import Navbar from '@components/navbar/navbar.astro'
 import type { Frontmatter } from '../config'
 import SEO from '../components/seo.astro'
+import CustomStyles from '~/components/customstyles.astro'
 import '~/css/main.scss'
 
 export interface Props {
@@ -30,8 +31,7 @@ const { frontmatter } = Astro.props
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <SEO frontmatter={frontmatter} />
-    <script>
+    <script is:inline>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       try {
         if (
@@ -49,6 +49,8 @@ const { frontmatter } = Astro.props
         }
       } catch (_) {}
     </script>
+    <CustomStyles />
+    <SEO frontmatter={frontmatter} />
     <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
     <!--
       <SEO
@@ -73,7 +75,7 @@ const { frontmatter } = Astro.props
       }}
     /> -->
   </head>
-  <body class="text-black dark:text-nord-6 bg-nord6 dark:bg-nord0">
+  <body class="text-black dark:text-nord-6 bg-background">
     <Navbar />
     <slot />
     <Footer />
