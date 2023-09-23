@@ -44,7 +44,9 @@
     --color-error: 254 78 78;
   }
 }
-
+.banner {
+  background: #000;
+}
 body {
   @apply bg-muted text-text;
   padding-right: var(--scrollbarComp);

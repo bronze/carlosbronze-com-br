@@ -2,6 +2,7 @@
 dist/
 .output/
 .astro
+.jampack
 
 # dependencies
 node_modules/

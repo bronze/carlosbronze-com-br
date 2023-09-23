@@ -13,7 +13,9 @@ import { Icon } from 'astro-icon'
   class="grid min-h-[75vh] place-items-center pb-8 pt-16 md:pb-24 md:pt-12 lg:grid-cols-2">
   <div
     class="hidden py-6 drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)] hover:drop-shadow-2xl dark:drop-shadow-[0_35px_35px_rgba(255,255,255,0.1)] dark:hover:drop-shadow-[0_35px_35px_rgba(255,255,255,0.2)] md:order-1 md:block">
-    <!-- <Image
+    {
+      /* JS comment syntax is also valid
+      <Image
       src={heroImage}
       alt="Astronaut in the air"
       widths={[200, 400, 600]}
@@ -22,7 +24,8 @@ import { Icon } from 'astro-icon'
       loading="eager"
       format="avif"
     />
-   -->
+   */
+    }
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xml:space="preserve"
@@ -71,6 +74,8 @@ import { Icon } from 'astro-icon'
       pages.<wbr /> Built with Astro.build and TailwindCSS. You can quickly
       create any website with this starter.
     </p>
+    {
+      /* JS comment syntax is also valid
     <!-- <div class="mt-6 flex flex-col sm:flex-row gap-3">
       <Link
         href="#"
@@ -92,6 +97,7 @@ import { Icon } from 'astro-icon'
         <Icon class="text-black w-4 h-4" name="bx:bxl-github" />
          GitHub Repo
       </Link>
-    </div> -->
+    </div> -->*/
+    }
   </div>
 </div>
