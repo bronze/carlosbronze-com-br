@@ -36,7 +36,7 @@ const frontmatter: Frontmatter = {
         We write about building startups and thoughts going on our mind.
       </Fragment>
     </Sectionhead>
-    <main class="mt-16">
+    <div class="mt-16">
       <ul class="grid gap-16 max-w-4xl mx-auto">
         {
           publishedBlogEntries.map((blogPostEntry, index) => (
@@ -84,6 +84,6 @@ const frontmatter: Frontmatter = {
           ))
         }
       </ul>
-    </main>
+    </div>
   </Container>
 </Layout>

@@ -1,7 +1,10 @@
 ---
-const { class: className } = Astro.props;
+const { kind, class: className } = Astro.props
+let divName, divEnd
+kind === undefined ? (divName = 'div') : (divName = kind)
+divEnd = '/' + divName
 ---
 
-<div class:list={["max-w-screen-xl mx-auto px-5", className]}>
+<div class:list={['max-w-screen-xl mx-auto px-5', className]}>
   <slot />
 </div>
