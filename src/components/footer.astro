@@ -1,19 +1,71 @@
+---
+import { Icon } from 'astro-icon'
+import Container from '@components/container.astro'
+---
+
 <footer class="my-20">
-  <p class="text-center text-sm text-slate-500">
-    Copyright © {new Date().getFullYear()} Astroship. All rights reserved.
-  </p>
-  <!--
+  <Container>
+    <!--
     Can we ask you a favor 🙏
     Please keep this backlink on your website if possible.
     or Purchase a commercial license from https://web3templates.com
   -->
-  <p class="text-center text-xs text-slate-500 mt-1">
-    Made by <a
-      href="https://web3templates.com"
-      target="_blank"
-      rel="noopener"
-      class="hover:underline">
-      Web3Templates
-    </a>
-  </p>
+
+    <div class="mx-auto flex h-5 w-auto flex-col justify-center">
+      <div class="flex justify-center text-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          width="24"
+          height="24"
+          viewBox="0 0 256 256">
+          <path
+            fill="currentColor"
+            d="M71.68 97.22L34.74 128l36.94 30.78a12 12 0 1 1-15.36 18.44l-48-40a12 12 0 0 1 0-18.44l48-40a12 12 0 0 1 15.36 18.44Zm176 21.56l-48-40a12 12 0 1 0-15.36 18.44L221.26 128l-36.94 30.78a12 12 0 1 0 15.36 18.44l48-40a12 12 0 0 0 0-18.44ZM164.1 28.72a12 12 0 0 0-15.38 7.18l-64 176a12 12 0 0 0 7.18 15.37a11.79 11.79 0 0 0 4.1.73a12 12 0 0 0 11.28-7.9l64-176a12 12 0 0 0-7.18-15.38Z">
+          </path>
+        </svg>
+      </div>
+      <div class="inline-flex justify-center space-x-4 text-center">
+        <a
+          href="https://linkedin.com/in/carlosbronze"
+          rel="me"
+          title="LinkedIn">
+          <Icon name="mdi:linkedin" />
+        </a>
+        <a href="https://twitter.com/carlosbronze" rel="me" title="Twitter">
+          <Icon name="mdi:twitter" />
+        </a>
+        <a href="https://github.com/bronze" rel="me" title="GitHub">
+          <Icon name="mdi:github" />
+        </a>
+      </div>
+      <p class="text-center text-sm text-slate-500">
+        Copyright © {new Date().getFullYear()} Astroship. All rights reserved.
+      </p>
+      <!--
+      Can we ask you a favor 🙏
+      Please keep this backlink on your website if possible.
+      or Purchase a commercial license from https://web3templates.com
+      -->
+      <p class="mt-1 text-center text-xs text-slate-500">
+        Made by <a
+          href="https://web3templates.com"
+          target="_blank"
+          rel="noopener"
+          class="hover:underline">
+          Web3Templates
+        </a>
+      </p>
+    </div>
+  </Container>
 </footer>
+<style lang="scss">
+  [astro-icon] {
+    @apply h-full w-8 cursor-pointer;
+    &:hover,
+    &:focus,
+    &:active {
+      @apply text-primary;
+    }
+  }
+</style>

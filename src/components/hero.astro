@@ -10,8 +10,9 @@ import { Icon } from 'astro-icon'
 ---
 
 <div
-  class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24 min-h-[75vh]">
-  <div class="py-6 md:order-1 hidden md:block">
+  class="grid min-h-[75vh] place-items-center pb-8 pt-16 md:pb-24 md:pt-12 lg:grid-cols-2">
+  <div
+    class="hidden py-6 drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)] hover:drop-shadow-2xl dark:drop-shadow-[0_35px_35px_rgba(255,255,255,0.1)] dark:hover:drop-shadow-[0_35px_35px_rgba(255,255,255,0.2)] md:order-1 md:block">
     <!-- <Image
       src={heroImage}
       alt="Astronaut in the air"
@@ -62,10 +63,10 @@ import { Icon } from 'astro-icon'
   </div>
   <div>
     <h1
-      class="ftext-5xl lg:ftext-6xl xl:ftext-7xl font-bold lg:tracking-tight xl:tracking-tighter">
-      Bespoke Digital Strategy and Programming
+      class="font-bold ftext-5xl lg:tracking-tight lg:ftext-6xl xl:tracking-tighter xl:ftext-7xl">
+      Marketing Digital e Programação
     </h1>
-    <p class="text-lg mt-4 text-slate-600 max-w-xl">
+    <p class="mt-4 max-w-xl text-lg text-slate-600">
       Astroship is a starter template for startups, marketing websites & landing
       pages.<wbr /> Built with Astro.build and TailwindCSS. You can quickly
       create any website with this starter.

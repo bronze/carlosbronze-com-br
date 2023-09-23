@@ -3,7 +3,7 @@
 
 [build]
   publish = "dist"
-  command = "pnpm build || ( npm install pnpm && pnpm build )"
+  command = "pnpm prod || ( npm install pnpm && pnpm prod )"
 
 [dev]
   autoLaunch = false

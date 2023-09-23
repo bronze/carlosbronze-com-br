@@ -13,6 +13,7 @@ module.exports={
         default: "rgb(var(--color-default) / <alpha-value>)",
         text: {
           light: "rgb(var(--color-text-light) / <alpha-value>)",
+          muted: "rgb(var(--color-text-muted) / <alpha-value>)",
           DEFAULT: "rgb(var(--color-text-default) / <alpha-value>)",
           dark: "rgb(var(--color-text-dark) / <alpha-value>)",
         },
@@ -110,6 +111,7 @@ module.exports={
         '7xl': [8, 1],
         '8xl': [9, 1],
         '9xl': [10, 1],
+        '12xl': [12, 1],
       },
     }),
   ],

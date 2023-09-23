@@ -49,7 +49,7 @@ const { frontmatter } = Astro.props
         }
       } catch (_) {}
     </script>
-    <CustomStyles />
+    <!-- <CustomStyles /> -->
     <SEO frontmatter={frontmatter} />
     <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
     <!--
@@ -75,7 +75,7 @@ const { frontmatter } = Astro.props
       }}
     /> -->
   </head>
-  <body class="text-black dark:text-nord-6 bg-background">
+  <body class="bg-background text-text">
     <header><Navbar /></header>
     <main>
       <slot />
