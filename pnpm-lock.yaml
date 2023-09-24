@@ -8,6 +8,9 @@ dependencies:
   '@astrojs/prefetch':
     specifier: ^0.4.0
     version: 0.4.0
+  '@fontsource-variable/nunito':
+    specifier: ^5.0.9
+    version: 5.0.9
   alpinejs:
     specifier: ^3.13.0
     version: 3.13.0
@@ -34,12 +37,6 @@ devDependencies:
   '@divriots/jampack':
     specifier: ^0.20.2
     version: 0.20.2(react-dom@16.14.0)(react@16.14.0)
-  '@fontsource-variable/inter':
-    specifier: ^5.0.8
-    version: 5.0.8
-  '@fontsource/nunito':
-    specifier: ^5.0.8
-    version: 5.0.8
   '@tailwindcss/aspect-ratio':
     specifier: ^0.4.2
     version: 0.4.2(tailwindcss@3.3.3)
@@ -914,13 +911,9 @@ packages:
     dev: true
     optional: true
 
-  /@fontsource-variable/inter@5.0.8:
-    resolution: {integrity: sha512-WkYfFNccmEIeL2fNg0mYeLWqOoB7xD8MFxFRc4IwbSP2o8ZaBt36v5aW4by4MyrgGRMNk7uNi5LbvYKq6clPjw==}
-    dev: true
-
-  /@fontsource/nunito@5.0.8:
-    resolution: {integrity: sha512-Sb5uROR+aiS6T0CshbDAkjHmLXyWkWXCkDnx4K8fbRFPfmLpw6vKCu4iwb0+RuJDX519o98H/Qouk6p1umkFEQ==}
-    dev: true
+  /@fontsource-variable/nunito@5.0.9:
+    resolution: {integrity: sha512-6SivBy9FfkcPJdc3MyMF1JZaWgWQL5BGmUst6gQbTAkHT1O4BmGxhW8/7v5NBa/Dh4K4dLOwXmz8zXbNddCQwQ==}
+    dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}

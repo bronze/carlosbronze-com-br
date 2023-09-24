@@ -5,6 +5,8 @@ import type { Frontmatter } from '../config'
 import SEO from '../components/seo.astro'
 import CustomStyles from '~/components/customstyles.astro'
 import '~/css/main.scss'
+import '~/css/fonts.scss'
+import '@fontsource-variable/nunito/index.css'
 
 export interface Props {
   frontmatter: Frontmatter
@@ -31,6 +33,7 @@ const { frontmatter } = Astro.props
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
     <script is:inline>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       try {
@@ -50,6 +53,13 @@ const { frontmatter } = Astro.props
       } catch (_) {}
     </script>
     <CustomStyles />
+    <link
+      rel="preload"
+      href="/fonts/InterVariable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <SEO frontmatter={frontmatter} />
     {
       /* JS comment syntax is also valid
@@ -58,7 +68,13 @@ const { frontmatter } = Astro.props
     Please keep this backlink on your website if possible.
     or Purchase a commercial license from https://web3templates.com
 
-
+    <link
+      rel="preload"
+      href={preFont}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
     <!--
       <SEO
