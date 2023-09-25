@@ -4,24 +4,24 @@ export type Frontmatter = CollectionEntry<'blog'>['data']
 
 export const SiteMetadata = {
   title: 'Carlos Bronze',
-  description: 'Web guy',
+  description: 'Consultor de Marketing Digital',
   author: {
-    name: 'Chris Tham',
-    twitter: '@chris1tham',
-    url: 'https://christham.net',
-    email: 'chris@christham.net',
-    summary: 'Outrageous actualiser.',
+    name: 'Carlos Bronze',
+    twitter: '@carlosbronze',
+    url: 'https://carlosbronze.com.br',
+    email: 'carlos@carlosbronze.com.br',
+    summary: 'Consultor de Marketing Digital',
   },
   org: {
-    name: 'Hello Tham',
-    twitter: '@hellothamcom',
-    url: 'https://hellotham.com',
-    email: 'info@hellotham.com',
+    name: 'Carlos Bronze',
+    twitter: '@carlosbronze',
+    url: 'https://carlosbronze.com.br',
+    email: 'carlos@carlosbronze.com.br',
     summary:
-      'Hello Tham is a boutique management consulting firm. We specialise in Business and IT strategies, operating models, strategic roadmaps, enterprise architecture, analytics and business process design.',
+      'Carlos Bronze é consultor de projetos de marketing digitais com experiência em publicidade, analytics e programação.',
   },
   location: 'Rio de Janeiro, Rio de Janeiro, Brasil',
-  latlng: [-33.86785, 151.20732] as [number, number],
+  latlng: [-22.98552, -43.19733] as [number, number],
   repository: 'https://github.com/bronze/carlosbronze-com-br',
   buildTime: new Date(),
 }
@@ -32,15 +32,42 @@ export { default as Logo } from './assets/hero.png'
 export { default as LogoImage } from './assets/hero.png'
 export { default as FeaturedSVG } from './assets/hero.png'
 export { default as DefaultSVG } from './assets/hero.png'
-export { default as DefaultImage } from './assets/hero.png'
+export { default as DefaultImage } from './assets/opengraph.jpg'
 
 export const NavigationLinks = [
-  { name: 'Home', href: '' },
-  { name: 'About', href: 'about' },
-  { name: 'Contact', href: 'contact' },
-  { name: 'Blog', href: 'blog' },
-  { name: 'Docs', href: 'doc/introduction' },
+  { title: 'Home', path: '/' },
+  { title: 'About', path: '/about' },
+  { title: 'Blog', path: '/blog' },
+  { title: 'Contact', path: '/contact' },
 ]
+// const menuitems = [
+//   {
+//     title: 'Features',
+//     path: '#',
+//     children: [
+//       { title: 'Action', path: '/' },
+//       { title: 'Another action', path: '#' },
+//       { title: 'Dropdown Submenu', path: '#' },
+//       { title: '404 Page', path: '/404' },
+//     ],
+//   },
+//   {
+//     title: 'Pricing',
+//     path: '/pricing',
+//   },
+//   {
+//     title: 'About',
+//     path: '/about',
+//   },
+//   {
+//     title: 'Blog',
+//     path: '/blog',
+//   },
+//   {
+//     title: 'Contact',
+//     path: '/contact',
+//   },
+// ]
 
 export const PAGE_SIZE = 6
 

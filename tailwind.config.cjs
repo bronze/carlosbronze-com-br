@@ -8,24 +8,37 @@ module.exports={
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
+      // https://youtu.be/1HREvonfqhY?si=7laULp0iDXKHMczk&t=46
       colors: {
-        primary: "rgb(var(--color-primary) / <alpha-value>)",
-        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
-        accent: "rgb(var(--color-accent) / <alpha-value>)",
-        muted: "rgb(var(--color-muted) / <alpha-value>)",
         default: "rgb(var(--color-default) / <alpha-value>)",
+        muted: "rgb(var(--color-muted) / <alpha-value>)",
+        primary: {
+          lighter: "rgb(var(--color-primary-lighter) / <alpha-value>)",
+          light: "rgb(var(--color-primary-light) / <alpha-value>)",
+          DEFAULT: "rgb(var(--color-primary-default) / <alpha-value>)",
+          dark: "rgb(var(--color-primary-dark) / <alpha-value>)",
+          darker: "rgb(var(--color-primary-darker) / <alpha-value>)",
+        },
+        secondary: {
+          lighter: "rgb(var(--color-secondary-lighter) / <alpha-value>)",
+          light: "rgb(var(--color-secondary-light) / <alpha-value>)",
+          DEFAULT: "rgb(var(--color-secondary-default) / <alpha-value>)",
+          dark: "rgb(var(--color-secondary-dark) / <alpha-value>)",
+          darker: "rgb(var(--color-secondary-darker) / <alpha-value>)",
+        },
         text: {
+          lighter: "rgb(var(--color-text-lighter) / <alpha-value>)",
           light: "rgb(var(--color-text-light) / <alpha-value>)",
-          muted: "rgb(var(--color-text-muted) / <alpha-value>)",
           DEFAULT: "rgb(var(--color-text-default) / <alpha-value>)",
           dark: "rgb(var(--color-text-dark) / <alpha-value>)",
+          darker: "rgb(var(--color-text-darker) / <alpha-value>)",
         },
         background: {
-          DEFAULT: "rgb(var(--color-background-default) / <alpha-value>)",
-          muted: "rgb(var(--color-background-muted) / <alpha-value>)",
-          accent: "rgb(var(--color-background-accent) / <alpha-value>)",
+          lighter: "rgb(var(--color-background-lighter) / <alpha-value>)",
           light: "rgb(var(--color-background-light) / <alpha-value>)",
+          DEFAULT: "rgb(var(--color-background-default) / <alpha-value>)",
           dark: "rgb(var(--color-background-dark) / <alpha-value>)",
+          darker: "rgb(var(--color-background-darker) / <alpha-value>)",
         },
         success: "rgb(var(--color-success) / <alpha-value>)",
         info: "rgb(var(--color-info) / <alpha-value>)",

@@ -7,13 +7,13 @@ import Logos from '@components/logos.astro'
 import Layout from '@layouts/Layout.astro'
 import type { Frontmatter } from '~/config'
 import { SiteMetadata } from '~/config'
-import coverSVG from '../assets/hero.png'
-import socialImage from '../assets/hero.png'
+import coverImage from '../assets/opengraph.jpg'
+import socialImage from '../assets/opengraph.jpg'
 
 const frontmatter: Frontmatter = {
   title: SiteMetadata.title,
   description: SiteMetadata.description,
-  coverSVG: coverSVG,
+  coverImage: coverImage,
   socialImage: socialImage,
   publishDate: SiteMetadata.buildTime,
 }

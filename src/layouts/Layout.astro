@@ -30,10 +30,10 @@ const { frontmatter } = Astro.props
 <html lang="en" x-data="darkmode">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#434c5e" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-
     <script is:inline>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       try {
@@ -77,6 +77,8 @@ const { frontmatter } = Astro.props
     />
     <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
     <!--
+      SEO from Astroship / stablo
+      SEO LD from https://github.com/hellotham/hello-astro/
       <SEO
       title={makeTitle}
       description="Astroship is a starter website template for Astro built with TailwindCSS."
@@ -102,7 +104,9 @@ const { frontmatter } = Astro.props
     }
   </head>
   <body class="bg-background text-text">
-    <header><Navbar /></header>
+    <header>
+      <Navbar />
+    </header>
     <main>
       <slot />
     </main>

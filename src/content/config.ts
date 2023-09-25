@@ -13,13 +13,15 @@ const blogCollection = defineCollection({
       coverImage: image().optional(),
       socialImage: image().optional(),
       images: z.array(image()).optional(),
-      image: z.object({
-        src: z.string(),
-        alt: z.string(),
-      }),
+      image: z
+        .object({
+          src: z.string(),
+          alt: z.string(),
+        })
+        .optional(),
       publishDate: z.string().transform(str => new Date(str)),
       author: z.string().default('Astroship').optional(),
-      category: z.string(),
+      category: z.string().optional(),
       tags: z.array(z.string()).optional(),
       minutesRead: z.string().optional(),
     }),

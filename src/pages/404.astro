@@ -3,12 +3,12 @@ import Container from '@components/container.astro'
 import Layout from '@layouts/Layout.astro'
 import type { Frontmatter } from '~/config'
 import { SiteMetadata } from '~/config'
-import coverSVG from '../assets/hero.png'
+import coverSVG from '../assets/opengraph.jpg'
 import socialImage from '../assets/hero.png'
 
 const frontmatter: Frontmatter = {
   title: '404 Not Found',
-  description: SiteMetadata.description,
+  description: "You've reached for a page that doesn't exist... :(.",
   coverSVG: coverSVG,
   socialImage: socialImage,
   publishDate: SiteMetadata.buildTime,

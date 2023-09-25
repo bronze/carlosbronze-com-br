@@ -6,11 +6,10 @@
   command = "pnpm prod || ( npm install pnpm && pnpm prod )"
 
 [dev]
-  autoLaunch = false
-  # command = "pnpm run dev"
-  framework = "#custom"
-  targetPort = 3000
-  command = "astro dev"
+  autoLaunch = true
+  framework = "astro" # #custom
+  command = "pnpm run dev"
+  targetPort = 4321
 
 [[redirects]]
   from = "/*"
