@@ -1,28 +1,30 @@
 :root[data-theme~='dark'] {
-  --color-primary-lighter: 36 41 51;
-  --color-primary-light: 59 66 82;
-  --color-primary-default: 129 161 193;
-  --color-primary-dark: 36 41 51;
-  --color-primary-darker: 36 41 51;
-  ///
+  /* https://colorbox.io/?c0=%26p%24s%24%3D5%26p%24h%24st%24%3D213%26p%24h%24e%24%3D213%26p%24h%24c%24%3Dl%26p%24sa%24st%24%3D0.2%26p%24sa%24e%24%3D0.8%26p%24sa%24r%24%3D1%26p%24sa%24c%24%3Dl%26p%24b%24st%24%3D.95%26p%24b%24e%24%3D0.2%26p%24b%24c%24%3Dl%26o%24n%24%3DNord+Blue%26o%24ro%24%3Dcw%26o%24pi%24%3Dt%26o%24ms%24%3D0%2C1%26o%24lockHex%24%3D%235e81ac&c1=%26p%24s%24%3D5%26p%24h%24st%24%3D222%26p%24h%24e%24%3D222%26p%24h%24c%24%3Dl%26p%24sa%24st%24%3D0.16%26p%24sa%24e%24%3D0.17%26p%24sa%24r%24%3D1%26p%24sa%24c%24%3Dl%26p%24b%24st%24%3D0.8%26p%24b%24e%24%3D0.5%26p%24b%24c%24%3Dl%26o%24n%24%3DNord+Base%26o%24ro%24%3Dcw%26o%24pi%24%3Dt%26o%24ms%24%3D0%2C1%26o%24lockHex%24%3D%233b4252&c2=%26p%24s%24%3D5%26p%24h%24st%24%3D354%26p%24h%24e%24%3D354%26p%24h%24c%24%3Dl%26p%24sa%24st%24%3D0.15%26p%24sa%24e%24%3D0.9%26p%24sa%24r%24%3D1%26p%24sa%24c%24%3Dl%26p%24b%24st%24%3D.99%26p%24b%24e%24%3D0.4%26p%24b%24c%24%3Dl%26o%24n%24%3DNord+Blue+Copy%26o%24ro%24%3Dcw%26o%24pi%24%3Dt%26o%24ms%24%3D0%2C1%26o%24lockHex%24%3D%23bf616a&c3=%26p%24s%24%3D5%26p%24h%24st%24%3D219%26p%24h%24e%24%3D219%26p%24h%24c%24%3Dl%26p%24sa%24st%24%3D0.07%26p%24sa%24e%24%3D0.02%26p%24sa%24r%24%3D1%26p%24sa%24c%24%3Dl%26p%24b%24st%24%3D.91%26p%24b%24e%24%3D.96%26p%24b%24c%24%3Dl%26o%24n%24%3DNord+Base+Copy%26o%24ro%24%3Dcw%26o%24pi%24%3Dt%26o%24ms%24%3D0%2C1%26o%24lockHex%24%3D%23d8dee9 */
+  /*  primary done*/
+  --color-primary-lighter: 194 216 242;
+  --color-primary-light: 126 157 194;
+  --color-primary-default: 94 129 172;
+  --color-primary-dark: 34 63 99;
+  --color-primary-darker: 10 29 51;
+
   --color-secondary-lighter: 36 41 51;
   --color-secondary-light: 59 66 82;
   --color-secondary-default: 94 129 172;
   --color-secondary-dark: 36 41 51;
   --color-secondary-darker: 36 41 51;
-  ///
-  --color-text-lighter: 36 41 51;
-  --color-text-light: 59 66 82;
+  /*  txt done */
+  --color-text-lighter: 245 246 250;
+  --color-text-light: 242 244 248;
   --color-text-default: 236 239 244;
-  --color-text-dark: 36 41 51;
-  --color-text-darker: 36 41 51;
-  ///
-  --color-background-lighter: 36 41 51;
-  --color-background-light: 59 66 82;
-  --color-background-default: 46 52 64;
-  --color-background-dark: 36 41 51;
+  --color-text-dark: 229 233 240;
+  --color-text-darker: 216 222 233;
+  /*  bg done */
+  --color-background-lighter: 155 164 185;
+  --color-background-light: 80 89 109;
+  --color-background-default: 59 66 82;
+  --color-background-dark: 46 52 64;
   --color-background-darker: 36 41 51;
-  ///
+
   --color-default: 128 0 29;
   --color-muted: 26 29 35;
   --color-success: 0 200 81;
@@ -31,30 +33,30 @@
   --color-error: 254 78 78;
 }
 :root[data-theme~='light'] {
-  --color-primary-lighter: 36 41 51;
-  --color-primary-light: 59 66 82;
+  --color-primary-lighter: 252 215 218;
+  --color-primary-light: 215 142 150;
   --color-primary-default: 191 97 106;
-  --color-primary-dark: 36 41 51;
-  --color-primary-darker: 36 41 51;
-  ///
+  --color-primary-dark: 147 45 55;
+  --color-primary-darker: 102 10 19;
+
   --color-secondary-lighter: 36 41 51;
   --color-secondary-light: 59 66 82;
   --color-secondary: 94 129 172;
   --color-secondary-dark: 36 41 51;
   --color-secondary-darker: 36 41 51;
-  ///
-  --color-text-lighter: 36 41 51;
-  --color-text-light: 59 66 82;
-  --color-text-default: 46 52 64;
-  --color-text-dark: 36 41 51;
+
+  --color-text-lighter: 76 86 106;
+  --color-text-light: 67 76 94;
+  --color-text-default: 59 66 82;
+  --color-text-dark: 46 52 64;
   --color-text-darker: 36 41 51;
-  ///
-  --color-background-lighter: 36 41 51;
-  --color-background-light: 245 246 250;
-  --color-background-default: 216 222 233;
-  --color-background-dark: 216 222 233;
-  --color-background-darker: 36 41 51;
-  ///
+
+  --color-background-lighter: 245 246 250;
+  --color-background-light: 242 244 248;
+  --color-background-default: 236 239 244;
+  --color-background-dark: 229 233 240;
+  --color-background-darker: 216 222 233;
+
   --color-default: 128 0 29;
   --color-muted: 76 86 106;
   --color-success: 0 200 81;
