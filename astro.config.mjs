@@ -5,8 +5,9 @@ import sitemap from "@astrojs/sitemap";
 import prefetch from "@astrojs/prefetch";
 import critters from "astro-critters";
 import compress from "astro-compress";
-
 import criticalCss from "astro-critical-css";
+
+import swup from "@swup/astro";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,8 +15,14 @@ export default defineConfig({
   integrations: [tailwind({
     // Example: Disable injecting a basic `base.css` import on every page.
     // Useful if you need to define and/or import your own custom `base.css`.
-    applyBaseStyles: false,
-  }), mdx(), sitemap(), prefetch(), criticalCss(), compress({CSS: false, HTML: false, Image: false, JavaScript: false, SVG: false})]
+    applyBaseStyles: false
+  }), mdx(), sitemap(), swup(), prefetch(), criticalCss(), compress({
+    CSS: false,
+    HTML: false,
+    Image: false,
+    JavaScript: false,
+    SVG: false
+  })]
 });
 
 // {penthouse: {forceInclude: [/^\:root.*/], }}
