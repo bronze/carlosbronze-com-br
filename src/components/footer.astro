@@ -7,7 +7,13 @@ import Container from '@components/container.astro'
   /* This bitch broke critical before:relative before:top-[0] before:flex before:w-full before:border-t-[1px] before:border-gray-600 before:content-[''] */
 }
 <footer class="mx-auto my-20 max-w-screen-xl" role="contentinfo">
-  <!-- /* Box shadow: horiz vertic blur spread */ -->
+  {
+    /* Box shadow: horiz vertic blur spread
+
+  0 4px 7px rgba(0, 0, 0, 0.15), 0 100px 80px rgba(255, 255, 255, 0.02), 0 42px 33px rgba(255, 255, 255, 0.024), 0 22px 18px rgba(255, 255, 255, 0.028), 0 12px 10px rgba(255, 255, 255, 0.034), 0 7px 5px rgba(255, 255, 255, 0.04), 0 3px 2px rgba(255, 255, 255, 0.07)
+
+  */
+  }
   <hr
     class="color-gray-500 h-[3px] border-t-[1px] border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700"
   />
@@ -35,7 +41,7 @@ import Container from '@components/container.astro'
           </a>
         </span>
       </div>
-      <div class="mt-4 flex justify-center space-x-5 sm:mt-0">
+      <div class="sociallinks mt-4 flex justify-center space-x-5 sm:mt-0">
         <a
           href="https://linkedin.com/in/carlosbronze"
           rel="me"
@@ -49,3 +55,9 @@ import Container from '@components/container.astro'
     </div>
   </Container>
 </footer>
+
+<style>
+  .sociallinks [astro-icon] {
+    @apply h-full w-8;
+  }
+</style>

@@ -1,6 +1,14 @@
 @use 'tailwind.scss';
 @use 'fonts.scss';
-
+@use 'colors.scss';
+html {
+  scroll-behavior: smooth;
+  // word-break: break-word;
+}
+::selection {
+  color: rgb(var(--color-primary-default));
+  background-color: rgb(var(--color-background-darker));
+}
 .banner {
   background: #000;
 }
@@ -10,10 +18,14 @@ body {
   overflow-x: hidden;
 }
 [astro-icon] {
-  @apply h-full w-8 cursor-pointer;
+  @apply h-full cursor-pointer;
   &:hover,
   &:focus,
   &:active {
     @apply text-primary;
   }
+}
+
+nav .active {
+  @apply text-primary;
 }

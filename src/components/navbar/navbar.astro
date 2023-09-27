@@ -25,7 +25,7 @@ import { NavigationLinks } from '~/config'
             title="Dark Mode Toggle"
             x-on:click="toggleTheme()"
             rel="nofollow">
-            <Icon name="mdi:theme-light-dark" />
+            <Icon name="mdi:theme-light-dark" class="h-full w-6" />
           </button>
           <MenuIcon class="h-4 w-4 text-text" />
         </div>
@@ -74,9 +74,31 @@ import { NavigationLinks } from '~/config'
           title="Dark Mode Toggle"
           x-on:click="toggleTheme()"
           rel="nofollow">
-          <Icon name="mdi:theme-light-dark" />
+          <Icon name="mdi:theme-light-dark" class="h-full w-8" />
         </button>
       </MenuItems>
     </Astronav>
   </header>
 </Container>
+
+<script>
+  // https://www.cyishere.dev/blog/astro-active-nav-item
+  // simpler: https://www.youtube.com/watch?v=UEyuqqEbgkI https://gist.github.com/leabs/11e9f20a5580982428824148f62eb2a0
+  const navLinks = document.querySelectorAll('nav a')
+
+  navLinks.forEach(link => {
+    link.classList.remove('active')
+
+    // `slice` here to remove the first `/` in pathname
+    const currentPath = window.location.pathname.slice('1')
+
+    // `link.href` returns a whole url, such as: "https://somedomain.com/posts" and we only need the last part
+    const hrefArray = link.href.split('/')
+    const thisPath = hrefArray[hrefArray.length - 1]
+
+    if (currentPath === thisPath) {
+      link.classList.add('active')
+      link.setAttribute('aria-current', 'page') // https://stackoverflow.com/questions/68241101/changing-active-class-and-aria-current-page-dynamically-based-on-active-webpa
+    }
+  })
+</script>
