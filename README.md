@@ -1,3 +1,7 @@
+https://www.mixd.co.uk/
+https://trentwalton.com/info/
+https://hofmannsven.com/
+
 Power your Astro site with Local and Remote Data
 https://aalam.in/blog/astro-and-data
 
