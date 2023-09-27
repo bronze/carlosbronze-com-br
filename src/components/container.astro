@@ -1,8 +1,8 @@
 ---
-const { kind, class: className } = Astro.props
-let divName, divEnd
-kind === undefined ? (divName = 'div') : (divName = kind)
-divEnd = '/' + divName
+const { class: className } = Astro.props
+// let divName, divEnd
+// kind === undefined ? (divName = 'div') : (divName = kind)
+// divEnd = '/' + divName
 ---
 
 <div class:list={['mx-auto max-w-screen-xl px-5', className]}>

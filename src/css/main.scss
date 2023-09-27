@@ -9,3 +9,11 @@ body {
   padding-right: var(--scrollbarComp);
   overflow-x: hidden;
 }
+[astro-icon] {
+  @apply h-full w-8 cursor-pointer;
+  &:hover,
+  &:focus,
+  &:active {
+    @apply text-primary;
+  }
+}

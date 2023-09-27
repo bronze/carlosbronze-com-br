@@ -11,14 +11,14 @@ import criticalCss from "astro-critical-css";
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.carlosbronze.com.br/",
-  integrations: [tailwind(), mdx(), sitemap(), prefetch(), criticalCss({
-    penthouse: {
-      forceInclude: [/^\:root.*/],
-    }
-  }), compress({CSS: false, HTML: true, Image: false, JavaScript: false, SVG: false})]
+  integrations: [tailwind({
+    // Example: Disable injecting a basic `base.css` import on every page.
+    // Useful if you need to define and/or import your own custom `base.css`.
+    applyBaseStyles: false,
+  }), mdx(), sitemap(), prefetch(), criticalCss(), compress({CSS: false, HTML: false, Image: false, JavaScript: false, SVG: false})]
 });
 
-
+// {penthouse: {forceInclude: [/^\:root.*/], }}
 // critters({
 //   Critters: {
 //     preload: 'body',

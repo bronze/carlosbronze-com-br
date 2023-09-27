@@ -3,9 +3,14 @@ import { Icon } from 'astro-icon'
 import Container from '@components/container.astro'
 ---
 
-<footer
-  class="mx-auto my-20 max-w-screen-xl border-t-[1px] border-gray-300 before:relative before:top-[0] before:flex before:w-full before:border-t-[1px] before:border-gray-600 before:content-[''] dark:border-gray-700"
-  role="contentinfo">
+{
+  /* This bitch broke critical before:relative before:top-[0] before:flex before:w-full before:border-t-[1px] before:border-gray-600 before:content-[''] */
+}
+<footer class="mx-auto my-20 max-w-screen-xl" role="contentinfo">
+  <!-- /* Box shadow: horiz vertic blur spread */ -->
+  <hr
+    class="color-gray-500 h-[3px] border-t-[1px] border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700"
+  />
   <Container>
     <div class="justify-center py-4 sm:flex sm:items-center sm:justify-between">
       <div class="flex items-center justify-center text-center">
@@ -43,15 +48,4 @@ import Container from '@components/container.astro'
       </div>
     </div>
   </Container>
-
-  <style lang="scss">
-    [astro-icon]:not([astro-icon='ph:code-bold']) {
-      @apply h-full w-8 cursor-pointer text-gray-500 hover:text-primary;
-      &:hover,
-      &:focus,
-      &:active {
-        @apply text-primary;
-      }
-    }
-  </style>
 </footer>
