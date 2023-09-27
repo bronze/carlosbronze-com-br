@@ -12,7 +12,7 @@ import { NavigationLinks } from '~/config'
     class="my-5 flex flex-col items-center justify-between text-text lg:flex-row">
     <Astronav>
       <div class="flex w-full items-center justify-between lg:w-auto">
-        <a href="/" class="text-lg">
+        <a href="/" class="ftext-lg">
           <span class="text-slate-500 dark:text-slate-400">Carlos</span>
           <span class="font-bold text-slate-800 dark:text-slate-200"
             >Bronze</span
@@ -31,7 +31,7 @@ import { NavigationLinks } from '~/config'
         </div>
       </div>
       <MenuItems
-        class="mt-2 hidden w-full font-semibold ftext-base lg:mt-0 lg:flex lg:w-auto">
+        class="mt-2 hidden w-full font-semibold ftext-lg lg:mt-0 lg:flex lg:w-auto">
         <ul class="flex flex-col lg:flex-row lg:gap-3">
           {
             NavigationLinks.map((item, index) => (
@@ -102,3 +102,19 @@ import { NavigationLinks } from '~/config'
     }
   })
 </script>
+
+<style lang="scss">
+  button [astro-icon] {
+    @apply cursor-pointer;
+    &:hover,
+    &:focus,
+    &:active {
+      @apply text-primary;
+    }
+  }
+  .active {
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.2rem;
+    text-underline-offset: 0.5rem;
+  }
+</style>

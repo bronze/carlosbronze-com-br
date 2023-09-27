@@ -10,7 +10,7 @@ import { Icon } from 'astro-icon'
 ---
 
 <div
-  class="grid min-h-[75vh] place-items-center pb-8 pt-16 md:pb-24 md:pt-12 lg:grid-cols-2">
+  class="grid place-items-center pt-16 md:min-h-[75vh] md:pt-12 lg:grid-cols-2">
   <div
     class="hidden py-6 drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)] hover:drop-shadow-2xl dark:drop-shadow-[0_35px_35px_rgba(255,255,255,0.1)] dark:hover:drop-shadow-[0_35px_35px_rgba(255,255,255,0.2)] md:order-1 md:block">
     {
@@ -65,11 +65,10 @@ import { Icon } from 'astro-icon'
     </svg>
   </div>
   <div>
-    <h1
-      class="font-bold ftext-5xl lg:tracking-tight lg:ftext-6xl xl:tracking-tighter xl:ftext-7xl">
-      Marketing Digital e Programação
+    <h1 class="font-bold ftext-7xl lg:tracking-tight xl:tracking-tighter">
+      Marketing Digital<wbr /> e Programação
     </h1>
-    <p class="mt-4 max-w-xl text-lg text-text/80">
+    <p class="mt-4 max-w-xl text-text/80 ftext-base">
       Estratégias digitais eficazes e soluções técnicas inovadoras.<wbr />
        Traduzindo design em experiência de marketing digital.<wbr />
     </p>
@@ -100,3 +99,9 @@ import { Icon } from 'astro-icon'
     }
   </div>
 </div>
+
+<style>
+  .title {
+    font-size: clamp(2rem, 8vw, 7rem);
+  }
+</style>

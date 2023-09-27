@@ -7,7 +7,7 @@ html {
 }
 ::selection {
   color: rgb(var(--color-primary-default));
-  background-color: rgb(var(--color-background-darker));
+  background-color: rgb(var(--color-inverted));
 }
 .banner {
   background: #000;
@@ -16,14 +16,6 @@ body {
   @apply bg-muted text-text;
   padding-right: var(--scrollbarComp);
   overflow-x: hidden;
-}
-[astro-icon] {
-  @apply h-full cursor-pointer;
-  &:hover,
-  &:focus,
-  &:active {
-    @apply text-primary;
-  }
 }
 
 nav .active {

@@ -36,9 +36,8 @@ export { default as DefaultImage } from './assets/opengraph.jpg'
 
 export const NavigationLinks = [
   { title: 'Home', path: '/' },
-  { title: 'About', path: '/about' },
-  { title: 'Blog', path: '/blog' },
-  { title: 'Contact', path: '/contact' },
+  { title: 'Sobre', path: '/sobre' },
+  { title: 'Contato', path: '/contato' },
 ]
 // const menuitems = [
 //   {

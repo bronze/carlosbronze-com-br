@@ -56,8 +56,17 @@ import Container from '@components/container.astro'
   </Container>
 </footer>
 
-<style>
+<style lang="scss">
+  [astro-icon] {
+    @apply h-full w-4;
+  }
+
   .sociallinks [astro-icon] {
-    @apply h-full w-8;
+    @apply h-full w-8  cursor-pointer;
+    &:hover,
+    &:focus,
+    &:active {
+      @apply text-primary;
+    }
   }
 </style>

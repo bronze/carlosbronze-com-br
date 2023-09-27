@@ -1,5 +1,7 @@
 :root[data-theme~='dark'] {
   /*  primary done*/
+  --color-inverted: 216 222 233;
+
   --color-primary-lighter: 194 216 242;
   --color-primary-light: 126 157 194;
   --color-primary-default: 94 129 172;
@@ -32,6 +34,8 @@
   --color-error: 254 78 78;
 }
 :root[data-theme~='light'] {
+  --color-inverted: 155 164 185;
+
   --color-primary-lighter: 252 215 218;
   --color-primary-light: 215 142 150;
   --color-primary-default: 191 97 106;

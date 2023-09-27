@@ -11,6 +11,7 @@ module.exports={
       // https://youtu.be/1HREvonfqhY?si=7laULp0iDXKHMczk&t=46
       colors: {
         default: "rgb(var(--color-default) / <alpha-value>)",
+        inverted: "rgb(var(--color-inverted) / <alpha-value>)",
         muted: "rgb(var(--color-muted) / <alpha-value>)",
         primary: {
           lighter: "rgb(var(--color-primary-lighter) / <alpha-value>)",
@@ -73,18 +74,21 @@ module.exports={
       //     },
       //   }
       // },
-      // fontSize: {
-      //   '2xl': ['1.5rem', {
-      //     lineHeight: '2rem',
-      //     letterSpacing: '-0.01em',
-      //     fontWeight: '500',
-      //   }],
-      //   '3xl': ['1.875rem', {
-      //     lineHeight: '2.25rem',
-      //     letterSpacing: '-0.02em',
-      //     fontWeight: '700',
-      //   }],
-      // },
+      fontSize: {
+        xs: ['0.75rem', {lineHeight: '1rem'}],
+        sm: ['0.875rem', {lineHeight: '1.25rem'}],
+        base: ['1rem', {lineHeight: '1.5rem'}],
+        lg: ['1.125rem', {lineHeight: '1.75rem'}],
+        xl: ['1.25rem', {lineHeight: '1.75rem'}],
+        '2xl': ['1.5rem', {lineHeight: '2rem'}],
+        '3xl': ['1.875rem', {lineHeight: '2.25rem'}],
+        '4xl': ['2.25rem', {lineHeight: '2.5rem'}],
+        '5xl': ['3rem', {lineHeight: '1'}],
+        '6xl': ['3.75rem', {lineHeight: '1'}],
+        '7xl': ['4.5rem', {lineHeight: '1'}],
+        '8xl': ['6rem', {lineHeight: '1'}],
+        '9xl': ['8rem', {lineHeight: '1'}],
+      },
       fontFamily: {
         sans: ["Inter Variable", "Inter", ...defaultTheme.fontFamily.sans],
         mono: ["Fira Code VF", ...defaultTheme.fontFamily.mono],
@@ -102,7 +106,7 @@ module.exports={
       // works only with unitless numbers
       // This numbers are the defaults settings
       settings: {
-        fontSizeMin: 1.125, // 1.125rem === 18px
+        fontSizeMin: 1, // 1.125rem === 18px
         fontSizeMax: 1.25, // 1.25rem === 20px
         ratioMin: 1.125, // Multiplicator Min
         ratioMax: 1.2, // Multiplicator Max
@@ -116,10 +120,10 @@ module.exports={
       // This are the default settings and analog to the tailwindcss defaults
       // Each `lineHeight` is set unitless and we think that's the way to go especially in context with fluid type.
       values: {
-        'xs': [-2, 1.6],
-        'sm': [-1, 1.6],
-        'base': [0, 1.6],
-        'lg': [1, 1.6],
+        'xs': [-2, 1.5],
+        'sm': [-1, 1.5],
+        'base': [0, 1.5],
+        'lg': [1, 1.5],
         'xl': [2, 1.2],
         '2xl': [3, 1.2],
         '3xl': [4, 1.2],
