@@ -12,9 +12,10 @@
   font-style: normal;
   font-named-instance: 'Regular';
   src:
-    url('/fonts/InterVariable.woff2?v=4.0') format('woff2-variations'),
-    url('/fonts/InterVariable.woff2?v=4.0') format('woff2');
-  src: url('/fonts/InterVariable.woff2?v=4.0') format('woff2')
+    local('Inter Variable'),
+    url('/fonts/Inter-roman-latin.var.woff2') format('woff2-variations'),
+    url('/fonts/Inter-roman-latin.var.woff2') format('woff2');
+  src: url('/fonts/Inter-roman-latin.var.woff2') format('woff2')
     tech('variations');
 }
 @font-face {

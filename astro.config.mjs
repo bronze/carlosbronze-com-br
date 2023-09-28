@@ -21,7 +21,7 @@ export default defineConfig({
     forms: true
   }), criticalCss(), compress({
     CSS: false,
-    HTML: false,
+    HTML: true,
     Image: false,
     JavaScript: false,
     SVG: false

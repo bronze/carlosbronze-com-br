@@ -12,7 +12,7 @@ import { Icon } from 'astro-icon'
 <div
   class="grid place-items-center pt-16 md:min-h-[75vh] md:pt-12 lg:grid-cols-2">
   <div
-    class="hidden py-6 drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)] hover:drop-shadow-2xl dark:drop-shadow-[0_35px_35px_rgba(255,255,255,0.1)] dark:hover:drop-shadow-[0_35px_35px_rgba(255,255,255,0.2)] md:order-1 md:block">
+    class="run hidden py-6 drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)] hover:drop-shadow-2xl dark:drop-shadow-[0_35px_35px_rgba(255,255,255,0.1)] dark:hover:drop-shadow-[0_35px_35px_rgba(255,255,255,0.2)] md:order-1 md:block">
     {
       /* JS comment syntax is also valid
       <Image
@@ -99,9 +99,93 @@ import { Icon } from 'astro-icon'
     }
   </div>
 </div>
-
 <style>
   .title {
     font-size: clamp(2rem, 8vw, 7rem);
   }
 </style>
+<script>
+  import confetti, { create } from 'canvas-confetti'
+  // confetti({
+  //   particleCount: 100,
+  //   startVelocity: 30,
+  //   spread: 360,
+  //   origin: {
+  //     // since they fall down, start a bit higher than random
+  //     y: 0.25,
+  //   },
+  // })
+  var count = 200
+  var defaults = {
+    origin: { y: 0.7 },
+  }
+
+  function fire(particleRatio, opts) {
+    confetti(
+      Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio),
+      }),
+    )
+  }
+  function sides() {
+    confetti({
+      particleCount: 100,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+    })
+    confetti({
+      particleCount: 100,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+    })
+  }
+  function fireall() {
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    })
+    fire(0.2, {
+      spread: 60,
+    })
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8,
+    })
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2,
+    })
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    })
+  }
+  window.onload = function () {
+    var button = document.querySelector('.run')
+    button.onclick = function (ev) {
+      // stop mobile browsers from zooming when clicking
+      // buttons repeatedly really fast
+      ev.preventDefault()
+
+      try {
+        fireall()
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
+  // // custom canvas
+  // const canvas = document.createElement('canvas')
+  // canvas.style.width = '100%'
+  // canvas.style.height = '100%'
+
+  // document.body.appendChild(canvas)
+
+  // const myConfetti = create(canvas, { resize: true })
+  // myConfetti()
+</script>
