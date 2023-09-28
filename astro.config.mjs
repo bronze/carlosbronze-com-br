@@ -15,8 +15,11 @@ export default defineConfig({
   integrations: [tailwind({
     // Example: Disable injecting a basic `base.css` import on every page.
     // Useful if you need to define and/or import your own custom `base.css`.
-    applyBaseStyles: false
-  }), mdx(), sitemap(), swup(), prefetch(), criticalCss(), compress({
+    applyBaseStyles: true
+  }), mdx(), sitemap(), swup({
+    morph: ['header'],
+    forms: true
+  }), criticalCss(), compress({
     CSS: false,
     HTML: false,
     Image: false,

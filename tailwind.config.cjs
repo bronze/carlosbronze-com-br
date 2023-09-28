@@ -90,7 +90,7 @@ module.exports={
         '9xl': ['8rem', {lineHeight: '1'}],
       },
       fontFamily: {
-        sans: ["Inter Variable", "Inter", ...defaultTheme.fontFamily.sans],
+        sans: ["Inter Variable", ...defaultTheme.fontFamily.sans],
         mono: ["Fira Code VF", ...defaultTheme.fontFamily.mono],
         source: ["Source Sans Pro", ...defaultTheme.fontFamily.sans],
         'nunito': ["Nunito Variable", ...defaultTheme.fontFamily.sans],

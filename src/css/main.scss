@@ -1,5 +1,6 @@
 @use 'tailwind.scss';
 @use 'fonts.scss';
+@use 'transitions.css';
 @use 'colors.scss';
 html {
   scroll-behavior: smooth;
@@ -17,7 +18,21 @@ body {
   padding-right: var(--scrollbarComp);
   overflow-x: hidden;
 }
-
-nav .active {
+/* https://replit.com/@swupjs/Swup-Demo-Multiple#transitions.css*/
+.swup-progress-bar {
+  height: 4px;
+  background-color: rgb(var(--color-primary-default));
+}
+nav a[aria-current='page'] {
   @apply text-primary;
+  text-decoration: underline;
+  text-decoration-thickness: 0.2rem;
+  text-underline-offset: 0.5rem;
+}
+
+nav ul li {
+  @aaply font-sans;
+  a {
+    @apply flex py-2 capitalize text-text hover:text-primary lg:px-3;
+  }
 }

@@ -5,18 +5,24 @@ import Link from '@components/ui/link.astro'
 import Dropdown from './dropdown.astro'
 import { Astronav, MenuItems, MenuIcon } from 'astro-navbar'
 import { NavigationLinks } from '~/config'
+const pathname = new URL(Astro.request.url).pathname
+const currentPath = pathname.slice(1, -1) // remove the first "/"
+const trimSlashes = str =>
+  str
+    .split('/')
+    .filter(v => v !== '')
+    .join('/')
 ---
 
 <Container>
   <header
+    id="siteheader"
     class="my-5 flex flex-col items-center justify-between text-text lg:flex-row">
     <Astronav>
       <div class="flex w-full items-center justify-between lg:w-auto">
         <a href="/" class="ftext-lg">
-          <span class="text-slate-500 dark:text-slate-400">Carlos</span>
-          <span class="font-bold text-slate-800 dark:text-slate-200"
-            >Bronze</span
-          >
+          <span class="text-text/60">Carlos</span>
+          <span class="font-bold">Bronze</span>
         </a>
         <div class="inline-flex lg:hidden">
           <button
@@ -32,7 +38,7 @@ import { NavigationLinks } from '~/config'
       </div>
       <MenuItems
         class="mt-2 hidden w-full font-semibold ftext-lg lg:mt-0 lg:flex lg:w-auto">
-        <ul class="flex flex-col lg:flex-row lg:gap-3">
+        <ul id="navlist" class="flex flex-col lg:flex-row lg:gap-3">
           {
             NavigationLinks.map((item, index) => (
               <>
@@ -49,7 +55,10 @@ import { NavigationLinks } from '~/config'
                     <a
                       rel="prefetch"
                       href={item.path}
-                      class="flex py-2 text-text hover:text-primary lg:px-3">
+                      aria-current={
+                        trimSlashes(pathname) === item.slug ? 'page' : 'false'
+                      }
+                      class="flex py-2 capitalize text-text hover:text-primary lg:px-3">
                       {item.title}
                     </a>
                   </li>
@@ -84,23 +93,7 @@ import { NavigationLinks } from '~/config'
 <script>
   // https://www.cyishere.dev/blog/astro-active-nav-item
   // simpler: https://www.youtube.com/watch?v=UEyuqqEbgkI https://gist.github.com/leabs/11e9f20a5580982428824148f62eb2a0
-  const navLinks = document.querySelectorAll('nav a')
-
-  navLinks.forEach(link => {
-    link.classList.remove('active')
-
-    // `slice` here to remove the first `/` in pathname
-    const currentPath = window.location.pathname.slice('1')
-
-    // `link.href` returns a whole url, such as: "https://somedomain.com/posts" and we only need the last part
-    const hrefArray = link.href.split('/')
-    const thisPath = hrefArray[hrefArray.length - 1]
-
-    if (currentPath === thisPath) {
-      link.classList.add('active')
-      link.setAttribute('aria-current', 'page') // https://stackoverflow.com/questions/68241101/changing-active-class-and-aria-current-page-dynamically-based-on-active-webpa
-    }
-  })
+  // const navLinks = document.querySelectorAll('nav a')
 </script>
 
 <style lang="scss">
@@ -112,9 +105,15 @@ import { NavigationLinks } from '~/config'
       @apply text-primary;
     }
   }
-  .active {
-    text-decoration-line: underline;
-    text-decoration-thickness: 0.2rem;
-    text-underline-offset: 0.5rem;
-  }
 </style>
+
+<script>
+  // LETS SAVE THIS. USED FOR MENU DEBUGGING.
+  // <div class="text-sm">
+  // <p>Received a {Astro.request.method} request to "{Astro.request.url}".</p>
+  // <p>pathname: {pathname}</p>
+  // <p>currentPath: {currentPath}</p>
+  // <p>trimSlashes: {trimSlashes(pathname)}</p>
+  // <p>{trimSlashes(pathname) === item.slug ? 'page' : 'false'}</p>
+  // </div>
+</script>
