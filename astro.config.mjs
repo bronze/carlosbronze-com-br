@@ -19,7 +19,7 @@ export default defineConfig({
   }), mdx(), sitemap(), swup({
     morph: ['header'],
     forms: true
-  }), criticalCss(), compress({
+  }), compress({
     CSS: false,
     HTML: true,
     Image: false,
