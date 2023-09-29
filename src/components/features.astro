@@ -4,45 +4,29 @@ import { Icon } from 'astro-icon'
 
 const features = [
   {
-    title: 'UX',
+    title: 'Simplicidade',
     description: 'Lorem ipsum dolor sit amet',
-    icon: 'bx:bxs-briefcase',
+    icon: 'mdi:monitor-edit',
   },
   {
-    title: 'Tecnologia',
+    title: 'Otimização',
     description: 'Lorem ipsum dolor sit amet',
-    icon: 'bx:bxs-window-alt',
+    icon: 'mdi:gauge-full',
   },
   {
     title: 'SEO',
     description: 'Lorem ipsum dolor sit amet',
-    icon: 'bx:bxs-data',
-  },
-  {
-    title: 'Broad Integration',
-    description: 'Lorem ipsum dolor sit amet',
-    icon: 'bx:bxs-bot',
-  },
-  {
-    title: 'On-Demand Components',
-    description: 'Lorem ipsum dolor sit amet',
-    icon: 'bx:bxs-file-find',
-  },
-  {
-    title: 'Community',
-    description: 'Lorem ipsum dolor sit amet',
-    icon: 'bx:bxs-user',
+    icon: 'mdi:magnify-scan',
   },
 ]
 ---
 
 <div class="mt-16 lg:mt-24">
   <h2 class="text-4xl font-bold lg:text-5xl lg:tracking-tight">
-    Everything you need to start a website
+    Cuidando de presença online
   </h2>
   <p class="mt-4 text-lg text-text/80">
-    Astro comes batteries included. It takes the best parts of state-of-the-art
-    tools and adds its own innovations.
+    Websites leves e responsivos, que facilitam a indexação e o SEO.
   </p>
 </div>
 
@@ -50,7 +34,7 @@ const features = [
   {
     features.map(item => (
       <div class="flex items-start gap-4">
-        <div class="mt-1 h-8 w-8  shrink-0 rounded-full bg-black p-2">
+        <div class="h-16 w-16  shrink-0 rounded-full  p-2 pt-0">
           <Icon class="text-light" name={item.icon} />
         </div>
         <div>

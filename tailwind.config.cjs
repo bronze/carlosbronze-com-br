@@ -94,6 +94,7 @@ module.exports={
         mono: ["Fira Code VF", ...defaultTheme.fontFamily.mono],
         source: ["Source Sans Pro", ...defaultTheme.fontFamily.sans],
         'nunito': ["Nunito Variable", ...defaultTheme.fontFamily.sans],
+        'quincy': ["Quincy CF", ...defaultTheme.fontFamily.serif],
       },
     },
   },

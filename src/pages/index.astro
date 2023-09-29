@@ -2,6 +2,7 @@
 import Container from '@components/container.astro'
 import Cta from '@components/cta.astro'
 import Features from '@components/features.astro'
+import Quote from '@components/quote.astro'
 import Hero from '@components/hero.astro'
 import Logos from '@components/logos.astro'
 import Layout from '@layouts/Layout.astro'
@@ -22,8 +23,9 @@ const frontmatter: Frontmatter = {
 <Layout frontmatter={frontmatter}>
   <Container>
     <Hero />
+    <Quote />
     <Features />
     <Logos />
-    <Cta />
+    <!-- <Cta /> -->
   </Container>
 </Layout>
