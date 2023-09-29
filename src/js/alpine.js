@@ -46,6 +46,8 @@ document.addEventListener('alpine:init', () => {
       if (event.ctrlKey||event.shiftKey) {
         // localStorage.clear();
         localStorage.removeItem('theme');
+        sessionStorage.removeItem('konami');
+        document.body.classList.remove('konami')
         console.log('localStorage theme cleared');
       }
       else {

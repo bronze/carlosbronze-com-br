@@ -121,5 +121,11 @@ const { frontmatter } = Astro.props
     </style>
 
     <script src="../js/main.js"></script>
+
+    <script>
+      import KonamiCode from '~/js/konamicode.js'
+      // In your script file
+      KonamiCode.init(undefined, 3000) // Reset after 3 seconds of inactivity
+    </script>
   </body>
 </html>
