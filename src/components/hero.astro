@@ -12,6 +12,7 @@ import { Icon } from 'astro-icon'
 <div
   class="grid place-items-center pt-16 md:min-h-[75vh] md:pt-12 lg:grid-cols-2">
   <div
+    onclick="window._foojs.yetAnotherFunction()"
     class="run hidden py-6 drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)] hover:drop-shadow-2xl dark:drop-shadow-[0_35px_35px_rgba(255,255,255,0.1)] dark:hover:drop-shadow-[0_35px_35px_rgba(255,255,255,0.2)] md:order-1 md:block">
     {
       /* JS comment syntax is also valid
@@ -99,6 +100,7 @@ import { Icon } from 'astro-icon'
     }
   </div>
 </div>
+
 <style>
   .title {
     font-size: clamp(2rem, 8vw, 7rem);
@@ -141,7 +143,7 @@ import { Icon } from 'astro-icon'
       origin: { x: 1 },
     })
   }
-  function fireall() {
+  function yetAnotherFunction() {
     fire(0.25, {
       spread: 26,
       startVelocity: 55,
@@ -165,20 +167,23 @@ import { Icon } from 'astro-icon'
       startVelocity: 45,
     })
   }
-  window.onload = function () {
-    var button = document.querySelector('.run')
-    button.onclick = function (ev) {
-      // stop mobile browsers from zooming when clicking
-      // buttons repeatedly really fast
-      ev.preventDefault()
+  // document.querySelector('.run').addEventListener('click', yetAnotherFunction)
+  window._foojs = { yetAnotherFunction }
 
-      try {
-        fireall()
-      } catch (e) {
-        console.error(e)
-      }
-    }
-  }
+  // window.onload = function () {
+  //   var button = document.querySelector('.run')
+  //   button.onclick = function (ev) {
+  //     // stop mobile browsers from zooming when clicking
+  //     // buttons repeatedly really fast
+  //     ev.preventDefault()
+
+  //     try {
+  //       fireall()
+  //     } catch (e) {
+  //       console.error(e)
+  //     }
+  //   }
+  // }
   // // custom canvas
   // const canvas = document.createElement('canvas')
   // canvas.style.width = '100%'
