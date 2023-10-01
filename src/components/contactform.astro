@@ -8,52 +8,51 @@ import Button from './ui/button.astro'
   action="https://api.web3forms.com/submit"
   method="POST"
   id="form"
-  class="needs-validation"
+  class="needs-validation text-gray-800"
   data-no-swup
   novalidate>
   <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
-  <!-- Create your free access key from https://web3forms.com/ -->
   <input type="checkbox" class="hidden" style="display:none" name="botcheck" />
-  <div class="mb-5">
+  <div class="relative mb-5">
     <input
       type="text"
-      placeholder="Full Name"
+      placeholder=" "
       required
-      class="w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-800 focus:border-gray-600 focus:ring-4"
+      class="w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-500 focus:border-gray-600 focus:ring-4"
       name="name"
     />
     <div class="empty-feedback invalid-feedback mt-1 text-sm text-red-400">
-      Please provide your full name.
+      Por favor preencha seu nome.
     </div>
   </div>
   <div class="mb-5">
-    <label for="email_address" class="sr-only">Email Address</label><input
+    <label for="email_address" class="sr-only">Email</label><input
       id="email_address"
       type="email"
-      placeholder="Email Address"
+      placeholder="Email"
       name="email"
       required
-      class="w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-800 focus:border-gray-600 focus:ring-4"
+      class="w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-500 focus:border-gray-600 focus:ring-4"
     />
     <div class="empty-feedback mt-1 text-sm text-red-400">
-      Please provide your email address.
+      Por favor preencha seu endereço de email.
     </div>
     <div class="invalid-feedback mt-1 text-sm text-red-400">
-      Please provide a valid email address.
+      Por favor preencha um endereço de email válido.
     </div>
   </div>
   <div class="mb-3">
     <textarea
       name="message"
       required
-      placeholder="Your Message"
-      class="h-36 w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-800 focus:border-gray-600 focus:ring-4"
+      placeholder="Mensagem"
+      class="h-36 w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-500 focus:border-gray-600 focus:ring-4"
     ></textarea>
     <div class="empty-feedback invalid-feedback mt-1 text-sm text-red-400">
-      Please enter your message.
+      Por favor preencha sua mensagem.
     </div>
   </div>
-  <Button type="submit" size="lg" block>Send Message</Button>
+  <Button type="submit" size="lg" block>Enviar</Button>
   <div id="result" class="mt-3 text-center"></div>
 </form>
 
