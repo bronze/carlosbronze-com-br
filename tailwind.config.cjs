@@ -109,7 +109,6 @@ module.exports={
   },
   plugins: [
     require('tailwind-nord'),
-    require("autoprefixer"),
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('tailwindcss-fluid-type')({

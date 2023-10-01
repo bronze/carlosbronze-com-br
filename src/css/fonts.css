@@ -43,7 +43,7 @@
 .font-mono {
   font-variant-ligatures: none;
 }
-// @font-face {
+/* // @font-face {
 //   font-family: 'Fira Code VF';
 //   src:
 //     url('/fonts/FiraCode-VF.woff2') format('woff2'),
@@ -51,7 +51,7 @@
 //   font-weight: normal;
 //   font-style: normal;
 //   font-display: swap;
-// }
+// } */
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;

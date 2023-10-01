@@ -1,17 +1,15 @@
-@use 'tailwind.scss';
-@use 'fonts.scss';
+@use 'tailwind.css';
+@use 'fonts.css';
 @use 'transitions.css';
-@use 'colors.scss';
+@use 'colors.css';
+
 html {
   scroll-behavior: smooth;
-  // word-break: break-word;
+  /* // word-break: break-word; */
 }
 ::selection {
   color: rgb(var(--color-primary-default));
   background-color: rgb(var(--color-inverted));
-}
-.banner {
-  background: #000;
 }
 body {
   @apply bg-muted text-text;
@@ -62,10 +60,16 @@ body.konami {
   }
 }
 
-// nice padding trick
-// padding: calc(4vw + 2em) 0;
+/* // nice padding trick
+// padding: calc(4vw + 2em) 0; */
 blockquote {
   p {
     text-wrap: balance;
   }
+}
+.example {
+  display: grid;
+  transition: all 0.5s;
+  user-select: none;
+  background: linear-gradient(to bottom, white, black);
 }
