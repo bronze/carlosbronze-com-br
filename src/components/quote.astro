@@ -1,69 +1,67 @@
 ---
+import Container from '@components/container.astro'
 // @ts-ignore
 import { Icon } from 'astro-icon'
 ---
 
-<blockquote class="my-[calc(4vmin+2em)] flex flex-col font-semibold lg:pb-24">
-  <div class="self-start">
-    <svg
-      version="1.1"
-      viewBox="0 0 225.9 171.1"
-      class="fill-text-text mb-4 h-[3ch] max-h-[175px] w-full text-left ftext-6xl"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor">
-      <path
-        d="M41.3,65.3C41.3,74.8,46.4,80,55,80c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
+<section>
+  <Container>
+    <blockquote
+      class="my-[calc(4vmin+2em)] flex flex-col font-semibold lg:pb-24">
+      <div class="self-start">
+        <svg
+          version="1.1"
+          viewBox="0 0 225.9 171.1"
+          class="fill-text-text mb-4 h-[3ch] max-h-[175px] w-full text-left ftext-6xl"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor">
+          <path
+            d="M41.3,65.3C41.3,74.8,46.4,80,55,80c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
 	C15.5,171.1,0,141,0,107.5C0,67.1,24.1,24.1,61,0l11.2,12C55,26.7,41.3,51.6,41.3,65.3 M188.1,0l11.2,12
 	c-17.2,14.6-30.9,39.5-30.9,53.3c0,9.5,5.2,14.6,13.8,14.6c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
 	c-35.2,0-50.7-30.1-50.7-63.6C127.1,67.1,151.1,24.1,188.1,0">
-      </path>
-    </svg>
-  </div>
-  <div class="group py-8">
-    <p class="font-quincy pb-4 ftext-7xl">
-      <!-- <span class="block group-hover:hidden">
+          </path>
+        </svg>
+      </div>
+      <div class="group py-8">
+        <p class="pb-4 font-quincy ftext-7xl">
+          <!-- <span class="block group-hover:hidden">
         Um bom design &eacute; o m&iacute;nimo de design poss&iacute;vel.
       </span> -->
-      <!-- <span class="hidden group-hover:block"> -->
-       Good design is as little design as possible.
-      <!-- </span> -->
-    </p>
-    <cite class="mt-4 block max-w-[70%] pb-12 not-italic">
-      <span class="mb-1 block text-3xl">Dieter Rams</span>
-      <span class="block text-2xl font-light">
-        <!-- <span class="block group-hover:hidden">
+          <!-- <span class="hidden group-hover:block"> -->
+           Good design is as little design as possible.
+          <!-- </span> -->
+        </p>
+        <footer class="mt-4 block max-w-[70%] pb-12 not-italic">
+          <span class="mb-1 block text-3xl">Dieter Rams</span>
+          <span class="block text-2xl font-light">
+            <!-- <span class="block group-hover:hidden">
           Dez Mandamentos de um Bom Design
         </span>
         <span class="hidden group-hover:block"> -->
 
-        Ten Principles of Good design
-        <!-- </span> -->
-      </span>
-    </cite>
-  </div>
-  <div class="-mt-48 rotate-180 self-end">
-    <svg
-      version="1.1"
-      viewBox="0 0 225.9 171.1"
-      class="fill-text-text mb-4 h-[3ch] max-h-[175px] w-full text-left ftext-6xl"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor">
-      <path
-        d="M41.3,65.3C41.3,74.8,46.4,80,55,80c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
+             Ten Principles of Good design
+            <!-- </span> -->
+          </span>
+        </footer>
+      </div>
+      <div class="-mt-48 rotate-180 self-end">
+        <svg
+          version="1.1"
+          viewBox="0 0 225.9 171.1"
+          class="fill-text-text mb-4 h-[3ch] max-h-[175px] w-full text-left ftext-6xl"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor">
+          <path
+            d="M41.3,65.3C41.3,74.8,46.4,80,55,80c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
 	C15.5,171.1,0,141,0,107.5C0,67.1,24.1,24.1,61,0l11.2,12C55,26.7,41.3,51.6,41.3,65.3 M188.1,0l11.2,12
 	c-17.2,14.6-30.9,39.5-30.9,53.3c0,9.5,5.2,14.6,13.8,14.6c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
 	c-35.2,0-50.7-30.1-50.7-63.6C127.1,67.1,151.1,24.1,188.1,0">
-      </path>
-    </svg>
-  </div>
-</blockquote>
-
-<style lang="scss">
-  blockquote {
-    p {
-      text-wrap: balance;
-    }
-  }
-</style>
+          </path>
+        </svg>
+      </div>
+    </blockquote>
+  </Container>
+</section>

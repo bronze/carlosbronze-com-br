@@ -1,4 +1,5 @@
 ---
+import Container from '@components/container.astro'
 import { Image, getImage } from 'astro:assets'
 import ResponsiveImage from '@components/responsiveimage.astro'
 import heroImage from 'assets/hero.png'
@@ -9,13 +10,15 @@ import { Icon } from 'astro-icon'
 // const optimizedImage = await getImage({ src: astroImage, format: "avif" });
 ---
 
-<div
-  class="grid place-items-center pt-16 md:min-h-[75vh] md:pt-12 lg:grid-cols-2">
-  <div
-    onclick="window._foojs.yetAnotherFunction()"
-    class="run hidden py-6 drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)] hover:drop-shadow-2xl dark:drop-shadow-[0_35px_35px_rgba(255,255,255,0.1)] dark:hover:drop-shadow-[0_35px_35px_rgba(255,255,255,0.2)] md:order-1 md:block">
-    {
-      /* JS comment syntax is also valid
+<section>
+  <Container>
+    <div
+      class="grid place-items-center pt-16 md:min-h-[75vh] md:pt-12 lg:grid-cols-2">
+      <div
+        onclick="window._foojs.yetAnotherFunction()"
+        class="run hidden py-6 drop-shadow-[0_35px_35px_rgba(0,0,0,0.1)] hover:drop-shadow-2xl dark:drop-shadow-[0_35px_35px_rgba(255,255,255,0.1)] dark:hover:drop-shadow-[0_35px_35px_rgba(255,255,255,0.2)] md:order-1 md:block">
+        {
+          /* JS comment syntax is also valid
       <Image
       src={heroImage}
       alt="Astronaut in the air"
@@ -26,55 +29,55 @@ import { Icon } from 'astro-icon'
       format="avif"
     />
    */
-    }
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xml:space="preserve"
-      style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
-      class="h-full w-full"
-      viewBox="0 0 600 600">
-      <path
-        d="M65.427 435.724c-6.621-17.652-10.336-36.463-10.712-55.525-.314-16.017 5.219-27.576 21.021-37.47 72.915-45.655 209.29-86.222 287.926-88.093 80.001-1.903 163.733 13.482 189.891 40.87 7.078 7.411-33.382 144.79-41.742 143.666C399.51 635.219 90.06 567.868 64.566 435.966l-.04-.204-.04-.212-.006-.036-.005-.025-.022-.118-.044-.235-.012-.066-.005-.027-.011-.063-.046-.255-.018-.099-.007-.038-.042-.241-.029-.166-.076-.445-.051-.307-.023-.139-.044-.274a7.137 7.137 0 0 1-.13-.411l-.019-.068-.016-.061-.001-.007a4.234 4.234 0 0 1-.059-.255l-.016-.081-.007-.036-.002-.01-.002-.011-.007-.04-.009-.061-.003-.017a4.776 4.776 0 0 1-.027-.226l-.001-.01-.002-.018-.003-.045-.003-.036-.001-.018v-.013l-.002-.023-.002-.063-.001-.016v-.004l-.001-.103v-.005l.001-.019.001-.054.001-.022v-.015l.002-.018.001-.03.003-.04.001-.02.001-.01.01-.096.067.472.021.146.048.33.023.15.051.339.017.105.066.42.055.152.057.151.004.009.055.136.01.025.063.148.065.145.019.042.036.078.095.199.008.017.112.222.026.049.103.195.02.037.124.224.036.062.098.17.045.076.124.208.072.115.062.101.093.147Z"
-        style="fill:#ffe25f;fill-rule:nonzero"></path>
-      <path
-        d="M381.026 502.162c1.367 5.203 63.468 99.441 80.984 108.902 16.196 8.748 43.304 6.748 48.532 5.712 18.344-3.633 27.071-23.015 34.868-35.444.553-.88 4.435 24.114 4.633 34.455.374 19.595-20.231 38.397-20.231 38.397s100.352 30.301 168.141 24.594c75.976-6.396 166.875-75.503 165.151-89.419-21.119 153.044-423.968 222.943-482.078-87.197Z"
-        style="fill:#e9d04e;fill-rule:nonzero"
-        transform="matrix(-1 0 0 1 926.857 -158.305)"></path>
-      <path
-        d="M708.196 208c90.623 0 164.197 73.574 164.197 164.196 0 40.721-4.866 77.999-29.448 106.707-16.708 19.512-30.994 39.061-57.817 49.044-21.538 8.016-54.707 8.446-76.932 8.446-90.622 0-164.196-73.574-164.196-164.197C544 281.574 617.574 208 708.196 208Z"
-        style="fill:#e9d04e"
-        transform="matrix(-1.00108 0 0 1.00108 948.54 -153.962)"></path>
-      <path
-        d="M708.196 208c90.623 0 164.197 73.574 164.197 164.196 0 40.721-4.866 77.999-29.448 106.707-16.708 19.512-30.994 39.061-57.817 49.044-21.538 8.016-54.707 8.446-76.932 8.446-90.622 0-164.196-73.574-164.196-164.197C544 281.574 617.574 208 708.196 208Z"
-        style="fill:#ffe25f"
-        transform="matrix(-1.00108 0 0 1.00108 937.54 -164.962)"></path>
-      <path
-        d="M93.898 384.904c3.782.761 7.669 1.02 11.527 1.028h.467c12.522-.04 33.648-3.632 45.712-6.761 5.942-1.542 11.669-3.82 17.454-5.873 5.638-2.002 17.639-5.012 20.704-11.943.565-1.277-1.968-3.701-2.534-4.313-2.053-2.219-4.049-4.495-6.197-6.621-4.896-4.848-9.927-9.557-14.928-14.296-19.394-18.378-40.685-42.949-66.914-52.264-5.405-1.919-22.504-9.445-28.352-3.639-7.781 7.725-11.954 15.324-16.855 25.125-13.863 28.367-8.087 59.916 21.767 73.81 5.753 2.677 11.931 4.479 18.149 5.747Z"
-        style="fill:#dd884d;fill-rule:nonzero"></path>
-      <path
-        d="M816.657 447.007c2.865-1.433 3.376 5.067 3.65 5.788 5.163 13.574 7.633 19.666 15.717 31.795 7.251 10.877 19.215 17.149 28.955 25.316 5.799 4.863 8.282 14.275.358 19.071-9.748 5.9-20.091 12.294-32.378 14.232-16.863 2.661-43.54-2.544-57.447-5.666-10.576-2.374-25.727-8.439-35.062-13.824-1.634-.942-2.464-2.397-3.356-4.059-.641-1.194 2.045-3.783 2.535-4.313 2.052-2.219 4.048-4.494 6.196-6.621 4.896-4.848 9.858-9.631 14.929-14.296 10.201-9.384 19.578-19.439 29.916-28.674 6.265-5.597 18.335-14.923 25.987-18.749Z"
-        style="fill:#f69246;fill-rule:nonzero"
-        transform="matrix(-1 0 0 1 926.857 -158.305)"></path>
-      <path
-        d="M746.621 469.619c10.573-5.443 15.808-15.703 13.609-26.381-2.722-13.61-17.378-21.985-30.15-17.169-14.238 5.234-21.461 15.18-19.577 27.114 2.304 16.018 20.938 24.393 36.118 16.436Zm107.41-70.559c4.292-10.679 5.339-28.476 2.303-38.212-.942-2.826-1.675-3.454-4.083-3.454-4.188 0-6.805 3.873-8.794 12.562-1.884 8.271-2.198 26.696-.523 31.093.628 1.57 1.884 3.768 2.722 4.815 2.512 2.722 5.548.21 8.375-6.804Z"
-        style="fill:#231f1d;fill-rule:nonzero"
-        transform="matrix(-1 0 0 1 926.857 -158.305)"></path>
-      <path
-        d="M696 437.2c-4.7-3.8-1.6-11.2 4.6-11.2 6.4 0 8.8 6.9 3.8 10.9-3.3 2.6-5.5 2.6-8.4.3Zm109.4-63.6c-.8-3.3.1-10.5 1.4-11.8.6-.6 1.6-.7 2.2-.3 1.7 1.1.7 11.2-1.3 13.2-1.5 1.5-1.6 1.4-2.3-1.1Z"
-        style="fill:#fff;fill-rule:nonzero"
-        transform="matrix(-1.04688 0 0 1.04688 921.532 -169.413)"></path>
-    </svg>
-  </div>
-  <div>
-    <h1 class="font-bold ftext-7xl lg:tracking-tight xl:tracking-tighter">
-      Marketing Digital<wbr /> e Programação
-    </h1>
-    <p class="mt-4 max-w-xl text-text/80 ftext-base">
-      Estratégias digitais eficazes e soluções técnicas inovadoras.<wbr />
-       Traduzindo design em experiência de marketing digital.<wbr />
-    </p>
-    {
-      /* JS comment syntax is also valid
+        }
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xml:space="preserve"
+          style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
+          class="h-full w-full"
+          viewBox="0 0 600 600">
+          <path
+            d="M65.427 435.724c-6.621-17.652-10.336-36.463-10.712-55.525-.314-16.017 5.219-27.576 21.021-37.47 72.915-45.655 209.29-86.222 287.926-88.093 80.001-1.903 163.733 13.482 189.891 40.87 7.078 7.411-33.382 144.79-41.742 143.666C399.51 635.219 90.06 567.868 64.566 435.966l-.04-.204-.04-.212-.006-.036-.005-.025-.022-.118-.044-.235-.012-.066-.005-.027-.011-.063-.046-.255-.018-.099-.007-.038-.042-.241-.029-.166-.076-.445-.051-.307-.023-.139-.044-.274a7.137 7.137 0 0 1-.13-.411l-.019-.068-.016-.061-.001-.007a4.234 4.234 0 0 1-.059-.255l-.016-.081-.007-.036-.002-.01-.002-.011-.007-.04-.009-.061-.003-.017a4.776 4.776 0 0 1-.027-.226l-.001-.01-.002-.018-.003-.045-.003-.036-.001-.018v-.013l-.002-.023-.002-.063-.001-.016v-.004l-.001-.103v-.005l.001-.019.001-.054.001-.022v-.015l.002-.018.001-.03.003-.04.001-.02.001-.01.01-.096.067.472.021.146.048.33.023.15.051.339.017.105.066.42.055.152.057.151.004.009.055.136.01.025.063.148.065.145.019.042.036.078.095.199.008.017.112.222.026.049.103.195.02.037.124.224.036.062.098.17.045.076.124.208.072.115.062.101.093.147Z"
+            style="fill:#ffe25f;fill-rule:nonzero"></path>
+          <path
+            d="M381.026 502.162c1.367 5.203 63.468 99.441 80.984 108.902 16.196 8.748 43.304 6.748 48.532 5.712 18.344-3.633 27.071-23.015 34.868-35.444.553-.88 4.435 24.114 4.633 34.455.374 19.595-20.231 38.397-20.231 38.397s100.352 30.301 168.141 24.594c75.976-6.396 166.875-75.503 165.151-89.419-21.119 153.044-423.968 222.943-482.078-87.197Z"
+            style="fill:#e9d04e;fill-rule:nonzero"
+            transform="matrix(-1 0 0 1 926.857 -158.305)"></path>
+          <path
+            d="M708.196 208c90.623 0 164.197 73.574 164.197 164.196 0 40.721-4.866 77.999-29.448 106.707-16.708 19.512-30.994 39.061-57.817 49.044-21.538 8.016-54.707 8.446-76.932 8.446-90.622 0-164.196-73.574-164.196-164.197C544 281.574 617.574 208 708.196 208Z"
+            style="fill:#e9d04e"
+            transform="matrix(-1.00108 0 0 1.00108 948.54 -153.962)"></path>
+          <path
+            d="M708.196 208c90.623 0 164.197 73.574 164.197 164.196 0 40.721-4.866 77.999-29.448 106.707-16.708 19.512-30.994 39.061-57.817 49.044-21.538 8.016-54.707 8.446-76.932 8.446-90.622 0-164.196-73.574-164.196-164.197C544 281.574 617.574 208 708.196 208Z"
+            style="fill:#ffe25f"
+            transform="matrix(-1.00108 0 0 1.00108 937.54 -164.962)"></path>
+          <path
+            d="M93.898 384.904c3.782.761 7.669 1.02 11.527 1.028h.467c12.522-.04 33.648-3.632 45.712-6.761 5.942-1.542 11.669-3.82 17.454-5.873 5.638-2.002 17.639-5.012 20.704-11.943.565-1.277-1.968-3.701-2.534-4.313-2.053-2.219-4.049-4.495-6.197-6.621-4.896-4.848-9.927-9.557-14.928-14.296-19.394-18.378-40.685-42.949-66.914-52.264-5.405-1.919-22.504-9.445-28.352-3.639-7.781 7.725-11.954 15.324-16.855 25.125-13.863 28.367-8.087 59.916 21.767 73.81 5.753 2.677 11.931 4.479 18.149 5.747Z"
+            style="fill:#dd884d;fill-rule:nonzero"></path>
+          <path
+            d="M816.657 447.007c2.865-1.433 3.376 5.067 3.65 5.788 5.163 13.574 7.633 19.666 15.717 31.795 7.251 10.877 19.215 17.149 28.955 25.316 5.799 4.863 8.282 14.275.358 19.071-9.748 5.9-20.091 12.294-32.378 14.232-16.863 2.661-43.54-2.544-57.447-5.666-10.576-2.374-25.727-8.439-35.062-13.824-1.634-.942-2.464-2.397-3.356-4.059-.641-1.194 2.045-3.783 2.535-4.313 2.052-2.219 4.048-4.494 6.196-6.621 4.896-4.848 9.858-9.631 14.929-14.296 10.201-9.384 19.578-19.439 29.916-28.674 6.265-5.597 18.335-14.923 25.987-18.749Z"
+            style="fill:#f69246;fill-rule:nonzero"
+            transform="matrix(-1 0 0 1 926.857 -158.305)"></path>
+          <path
+            d="M746.621 469.619c10.573-5.443 15.808-15.703 13.609-26.381-2.722-13.61-17.378-21.985-30.15-17.169-14.238 5.234-21.461 15.18-19.577 27.114 2.304 16.018 20.938 24.393 36.118 16.436Zm107.41-70.559c4.292-10.679 5.339-28.476 2.303-38.212-.942-2.826-1.675-3.454-4.083-3.454-4.188 0-6.805 3.873-8.794 12.562-1.884 8.271-2.198 26.696-.523 31.093.628 1.57 1.884 3.768 2.722 4.815 2.512 2.722 5.548.21 8.375-6.804Z"
+            style="fill:#231f1d;fill-rule:nonzero"
+            transform="matrix(-1 0 0 1 926.857 -158.305)"></path>
+          <path
+            d="M696 437.2c-4.7-3.8-1.6-11.2 4.6-11.2 6.4 0 8.8 6.9 3.8 10.9-3.3 2.6-5.5 2.6-8.4.3Zm109.4-63.6c-.8-3.3.1-10.5 1.4-11.8.6-.6 1.6-.7 2.2-.3 1.7 1.1.7 11.2-1.3 13.2-1.5 1.5-1.6 1.4-2.3-1.1Z"
+            style="fill:#fff;fill-rule:nonzero"
+            transform="matrix(-1.04688 0 0 1.04688 921.532 -169.413)"></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="font-bold ftext-7xl lg:tracking-tight xl:tracking-tighter">
+          Marketing Digital<wbr /> e Programação
+        </h1>
+        <p class="mt-4 max-w-xl text-text/80 ftext-base">
+          Estratégias digitais eficazes e soluções técnicas inovadoras.<wbr />
+           Traduzindo design em experiência de marketing digital.<wbr />
+        </p>
+        {
+          /* JS comment syntax is also valid
     <!-- <div class="mt-6 flex flex-col sm:flex-row gap-3">
       <Link
         href="#"
@@ -97,103 +100,105 @@ import { Icon } from 'astro-icon'
          GitHub Repo
       </Link>
     </div> -->*/
-    }
-  </div>
-</div>
+        }
+      </div>
+    </div>
 
-<style>
-  .title {
-    font-size: clamp(2rem, 8vw, 7rem);
-  }
-  h1 {
-    text-wrap: balance;
-  }
-</style>
-<script>
-  import confetti, { create } from 'canvas-confetti'
-  // confetti({
-  //   particleCount: 100,
-  //   startVelocity: 30,
-  //   spread: 360,
-  //   origin: {
-  //     // since they fall down, start a bit higher than random
-  //     y: 0.25,
-  //   },
-  // })
-  var count = 200
-  var defaults = {
-    origin: { y: 0.7 },
-  }
+    <style>
+      .title {
+        font-size: clamp(2rem, 8vw, 7rem);
+      }
+      h1 {
+        text-wrap: balance;
+      }
+    </style>
+    <script>
+      import confetti, { create } from 'canvas-confetti'
+      // confetti({
+      //   particleCount: 100,
+      //   startVelocity: 30,
+      //   spread: 360,
+      //   origin: {
+      //     // since they fall down, start a bit higher than random
+      //     y: 0.25,
+      //   },
+      // })
+      var count = 200
+      var defaults = {
+        origin: { y: 0.7 },
+      }
 
-  function fire(particleRatio, opts) {
-    confetti(
-      Object.assign({}, defaults, opts, {
-        particleCount: Math.floor(count * particleRatio),
-      }),
-    )
-  }
-  function sides() {
-    confetti({
-      particleCount: 100,
-      angle: 60,
-      spread: 55,
-      origin: { x: 0 },
-    })
-    confetti({
-      particleCount: 100,
-      angle: 120,
-      spread: 55,
-      origin: { x: 1 },
-    })
-  }
-  function yetAnotherFunction() {
-    fire(0.25, {
-      spread: 26,
-      startVelocity: 55,
-    })
-    fire(0.2, {
-      spread: 60,
-    })
-    fire(0.35, {
-      spread: 100,
-      decay: 0.91,
-      scalar: 0.8,
-    })
-    fire(0.1, {
-      spread: 120,
-      startVelocity: 25,
-      decay: 0.92,
-      scalar: 1.2,
-    })
-    fire(0.1, {
-      spread: 120,
-      startVelocity: 45,
-    })
-  }
-  // document.querySelector('.run').addEventListener('click', yetAnotherFunction)
-  window._foojs = { yetAnotherFunction }
+      function fire(particleRatio, opts) {
+        confetti(
+          Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio),
+          }),
+        )
+      }
+      function sides() {
+        confetti({
+          particleCount: 100,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+        })
+        confetti({
+          particleCount: 100,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+        })
+      }
+      function yetAnotherFunction() {
+        fire(0.25, {
+          spread: 26,
+          startVelocity: 55,
+        })
+        fire(0.2, {
+          spread: 60,
+        })
+        fire(0.35, {
+          spread: 100,
+          decay: 0.91,
+          scalar: 0.8,
+        })
+        fire(0.1, {
+          spread: 120,
+          startVelocity: 25,
+          decay: 0.92,
+          scalar: 1.2,
+        })
+        fire(0.1, {
+          spread: 120,
+          startVelocity: 45,
+        })
+      }
+      // document.querySelector('.run').addEventListener('click', yetAnotherFunction)
+      window._foojs = { yetAnotherFunction }
 
-  // window.onload = function () {
-  //   var button = document.querySelector('.run')
-  //   button.onclick = function (ev) {
-  //     // stop mobile browsers from zooming when clicking
-  //     // buttons repeatedly really fast
-  //     ev.preventDefault()
+      // window.onload = function () {
+      //   var button = document.querySelector('.run')
+      //   button.onclick = function (ev) {
+      //     // stop mobile browsers from zooming when clicking
+      //     // buttons repeatedly really fast
+      //     ev.preventDefault()
 
-  //     try {
-  //       fireall()
-  //     } catch (e) {
-  //       console.error(e)
-  //     }
-  //   }
-  // }
-  // // custom canvas
-  // const canvas = document.createElement('canvas')
-  // canvas.style.width = '100%'
-  // canvas.style.height = '100%'
+      //     try {
+      //       fireall()
+      //     } catch (e) {
+      //       console.error(e)
+      //     }
+      //   }
+      // }
+      // // custom canvas
+      // const canvas = document.createElement('canvas')
+      // canvas.style.width = '100%'
+      // canvas.style.height = '100%'
 
-  // document.body.appendChild(canvas)
+      // document.body.appendChild(canvas)
 
-  // const myConfetti = create(canvas, { resize: true })
-  // myConfetti()
-</script>
+      // const myConfetti = create(canvas, { resize: true })
+      // myConfetti()
+    </script>
+  </Container>
+</section>

@@ -12,6 +12,8 @@ const trimSlashes = str =>
     .split('/')
     .filter(v => v !== '')
     .join('/')
+const className =
+  pathname === '/' ? 'ftext-lg' : 'ftext-lg text-text/70 hover:text-text/100'
 ---
 
 <Container>
@@ -20,10 +22,14 @@ const trimSlashes = str =>
     class="my-5 flex flex-col items-center justify-between text-text lg:flex-row">
     <Astronav>
       <div class="flex w-full items-center justify-between lg:w-auto">
-        <a href="/" class="ftext-lg">
+        <a href="/" class:list={className}>
           <span class="text-text/60">Carlos</span>
           <span class="font-bold">Bronze</span>
         </a>
+        <span class="ml-2 font-semibold capitalize ftext-lg"
+          >{trimSlashes(pathname)}</span
+        >
+
         <div class="inline-flex lg:hidden">
           <button
             x-data="{ shiftPressed: false }"

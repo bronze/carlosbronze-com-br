@@ -1,0 +1,90 @@
+---
+import Container from '@components/container.astro'
+// @ts-ignore
+import { Icon } from 'astro-icon'
+---
+
+<section>
+  <Container>
+    <blockquote
+      class="my-[calc(4vmin+2em)] flex flex-col font-semibold lg:pb-24">
+      <div class="self-start">
+        <svg
+          version="1.1"
+          viewBox="0 0 225.9 171.1"
+          class="fill-text-text mb-4 h-[1ch] max-h-[175px] w-full text-left ftext-6xl"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor">
+          <path
+            d="M41.3,65.3C41.3,74.8,46.4,80,55,80c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
+	C15.5,171.1,0,141,0,107.5C0,67.1,24.1,24.1,61,0l11.2,12C55,26.7,41.3,51.6,41.3,65.3 M188.1,0l11.2,12
+	c-17.2,14.6-30.9,39.5-30.9,53.3c0,9.5,5.2,14.6,13.8,14.6c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
+	c-35.2,0-50.7-30.1-50.7-63.6C127.1,67.1,151.1,24.1,188.1,0">
+          </path>
+        </svg>
+      </div>
+      <div class="group py-8">
+        <p class="pb-4 ftext-4xl" id="quote-text">
+          A goal without a plan is just a wish
+        </p>
+        <footer class="mt-4 block max-w-[70%] pb-12 not-italic">
+          <span class="mb-1 block text-2xl" id="quote-author">
+            Antoine de Saint-Exupéry
+          </span>
+        </footer>
+      </div>
+      <div class="-mt-36 rotate-180 self-end">
+        <svg
+          version="1.1"
+          viewBox="0 0 225.9 171.1"
+          class="fill-text-text mb-4 h-[1ch] max-h-[175px] w-full text-left ftext-6xl"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor">
+          <path
+            d="M41.3,65.3C41.3,74.8,46.4,80,55,80c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
+	C15.5,171.1,0,141,0,107.5C0,67.1,24.1,24.1,61,0l11.2,12C55,26.7,41.3,51.6,41.3,65.3 M188.1,0l11.2,12
+	c-17.2,14.6-30.9,39.5-30.9,53.3c0,9.5,5.2,14.6,13.8,14.6c24.9,0,43.8,18.9,43.8,44.7c0,28.4-22.4,46.4-48.1,46.4
+	c-35.2,0-50.7-30.1-50.7-63.6C127.1,67.1,151.1,24.1,188.1,0">
+          </path>
+        </svg>
+      </div>
+    </blockquote>
+  </Container>
+</section>
+<script>
+  // import quotesData from '../pages/quotes.json' assert { type: 'json' }
+  // console.log(quotesData)
+  function loadQuotes() {
+    fetch('/quotes.json')
+      .then(response => response.json())
+      .then(data => {
+        const randomIndex = Math.floor(Math.random() * data.length)
+        const quote = data[randomIndex].quote
+        const author = data[randomIndex].author
+
+        const quoteTextElement = document.getElementById('quote-text')
+        const quoteAuthorElement = document.getElementById('quote-author')
+
+        quoteTextElement.textContent = quote
+        quoteAuthorElement.textContent = `— ${author}`
+      })
+      .catch(error => console.error('Error loading quotes:', error))
+  }
+  // Function to load a random quote and author
+  // function loadRandomQuote() {
+  //   const randomIndex = Math.floor(Math.random() * quotesData.length)
+  //   const quote = quotesData[randomIndex].quote
+  //   const author = quotesData[randomIndex].author
+
+  //   const quoteTextElement = document.getElementById('quote-text')
+  //   const quoteAuthorElement = document.getElementById('quote-author')
+
+  //   quoteTextElement.textContent = quote
+  //   quoteAuthorElement.textContent = `— ${author}`
+  // }
+
+  // Load a random quote on page load
+  window.addEventListener('load', loadQuotes)
+</script>

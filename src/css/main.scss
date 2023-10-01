@@ -64,3 +64,8 @@ body.konami {
 
 // nice padding trick
 // padding: calc(4vw + 2em) 0;
+blockquote {
+  p {
+    text-wrap: balance;
+  }
+}
