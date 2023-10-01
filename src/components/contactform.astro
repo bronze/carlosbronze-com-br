@@ -12,13 +12,14 @@ import Button from './ui/button.astro'
   data-no-swup
   novalidate>
   <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+  <!-- Create your free access key from https://web3forms.com/ -->
   <input type="checkbox" class="hidden" style="display:none" name="botcheck" />
-  <div class="relative mb-5">
+  <div class="mb-5">
     <input
       type="text"
-      placeholder=" "
+      placeholder="Nome"
       required
-      class="w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-500 focus:border-gray-600 focus:ring-4"
+      class="w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-800 focus:border-gray-600 focus:ring-4"
       name="name"
     />
     <div class="empty-feedback invalid-feedback mt-1 text-sm text-red-400">
@@ -32,7 +33,7 @@ import Button from './ui/button.astro'
       placeholder="Email"
       name="email"
       required
-      class="w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-500 focus:border-gray-600 focus:ring-4"
+      class="w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-800 focus:border-gray-600 focus:ring-4"
     />
     <div class="empty-feedback mt-1 text-sm text-red-400">
       Por favor preencha seu endereço de email.
@@ -46,7 +47,7 @@ import Button from './ui/button.astro'
       name="message"
       required
       placeholder="Mensagem"
-      class="h-36 w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-500 focus:border-gray-600 focus:ring-4"
+      class="h-36 w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-800 focus:border-gray-600 focus:ring-4"
     ></textarea>
     <div class="empty-feedback invalid-feedback mt-1 text-sm text-red-400">
       Por favor preencha sua mensagem.

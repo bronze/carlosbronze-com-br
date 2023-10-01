@@ -14,6 +14,7 @@ import type { Frontmatter } from '~/config'
 import { SiteMetadata } from '~/config'
 import coverSVG from '../assets/hero.png'
 import socialImage from '../assets/hero.png'
+import Quotes from '@components/quotes.astro'
 
 const frontmatter: Frontmatter = {
   title: 'About' + ' | ' + SiteMetadata.title,
@@ -26,10 +27,10 @@ const frontmatter: Frontmatter = {
 
 <Layout frontmatter={frontmatter}>
   <Container>
-    <Sectionhead>
+    <!-- <Sectionhead>
       <Fragment slot="title">Sobre</Fragment>
       <Fragment slot="desc">We are a small passionate team.</Fragment>
-    </Sectionhead>
+    </Sectionhead> -->
     <div class="mx-auto mt-16 flex max-w-4xl flex-col gap-3">
       <h2 class="text-3xl font-bold">Empowering the world with Astro.</h2>
       <p class="text-lg leading-relaxed text-text-lighter">
@@ -38,7 +39,8 @@ const frontmatter: Frontmatter = {
         the job. This is what makes our team so special.
       </p>
     </div>
-    <div class="mx-auto mt-12 grid max-w-4xl gap-10 md:grid-cols-3">
+    <Quotes />
+    <!-- <div class="mx-auto mt-12 grid max-w-4xl gap-10 md:grid-cols-3">
       {
         publishedTeamMembers.map(teamMemberEntry => (
           <div class="group">
@@ -66,6 +68,6 @@ const frontmatter: Frontmatter = {
           </div>
         ))
       }
-    </div>
+    </div> -->
   </Container>
 </Layout>

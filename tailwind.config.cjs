@@ -96,6 +96,15 @@ module.exports={
         'nunito': ["Nunito Variable", ...defaultTheme.fontFamily.sans],
         'quincy': ["Quincy CF", ...defaultTheme.fontFamily.serif],
       },
+      variants: {
+        borderColor: ['responsive', 'hover', 'focus', 'focus-within'],
+      },
+      zIndex: {
+        "-1": "-1",
+      },
+      transformOrigin: {
+        "0": "0%",
+      },
     },
   },
   plugins: [
