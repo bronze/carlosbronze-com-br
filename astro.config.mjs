@@ -18,10 +18,10 @@ export default defineConfig({
     applyBaseStyles: true
   }), mdx(), sitemap(), swup({
     morph: ['header'],
-    forms: true
+    forms: false
   }), compress({
     CSS: false,
-    HTML: true,
+    HTML: false,
     Image: false,
     JavaScript: false,
     SVG: false
