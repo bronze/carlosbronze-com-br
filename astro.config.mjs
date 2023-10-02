@@ -18,7 +18,7 @@ export default defineConfig({
     applyBaseStyles: true
   }), mdx(), sitemap(), swup({
     morph: ['header'],
-    forms: false
+    forms: true
   }), compress({
     CSS: false,
     HTML: false,

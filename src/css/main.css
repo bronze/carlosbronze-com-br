@@ -67,9 +67,13 @@ blockquote {
     text-wrap: balance;
   }
 }
-.example {
-  display: grid;
-  transition: all 0.5s;
-  user-select: none;
-  background: linear-gradient(to bottom, white, black);
+
+button [astro-icon],
+button svg {
+  @apply cursor-pointer;
+  &:hover,
+  &:focus,
+  &:active {
+    @apply text-primary;
+  }
 }
