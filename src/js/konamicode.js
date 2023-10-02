@@ -54,6 +54,7 @@ const KonamiCode={
 function cheatCodeActivated() {
   sessionStorage.setItem('konami', 'true');
   document.body.classList.add('konami')
+  document.getElementById('duck_cape').classList.remove('hidden')
   // alert("Cheat code activated!");
 }
 

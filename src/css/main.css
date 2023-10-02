@@ -29,7 +29,7 @@ nav a[aria-current='page'] {
 }
 
 nav ul li {
-  @aaply font-sans;
+  /* @apply font-sans; */
   a {
     @apply flex py-2 capitalize text-text hover:text-primary lg:px-3;
   }

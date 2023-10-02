@@ -24,7 +24,7 @@ export default defineConfig({
     HTML: false,
     Image: false,
     JavaScript: false,
-    SVG: false
+    SVG: true
   })]
 });
 

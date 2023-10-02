@@ -48,6 +48,7 @@ document.addEventListener('alpine:init', () => {
         localStorage.removeItem('theme');
         sessionStorage.removeItem('konami');
         document.body.classList.remove('konami')
+        document.getElementById('duck_cape').classList.add('hidden')
         console.log('localStorage theme cleared');
       }
       else {
