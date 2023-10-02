@@ -12,8 +12,7 @@ const trimSlashes = str =>
     .split('/')
     .filter(v => v !== '')
     .join('/')
-const className =
-  pathname === '/' ? 'ftext-lg' : 'ftext-lg text-text/70 hover:text-text/100'
+const className = pathname === '/' ? '' : 'text-text/70 hover:text-text/100'
 ---
 
 <Container>
@@ -22,28 +21,28 @@ const className =
     class="my-5 flex flex-col items-center justify-between text-text lg:flex-row">
     <Astronav>
       <div class="flex w-full items-center justify-between lg:w-auto">
-        <a href="/" class:list={className}>
+        <a href="/" class="ftext-2xl lg:ftext-lg" class:list={className}>
           <span class="text-text/60">Carlos</span>
           <span class="font-bold">Bronze</span>
         </a>
-        <span class="ml-2 font-semibold capitalize ftext-lg"
+        <span class="ml-2 font-semibold capitalize ftext-2xl lg:ftext-lg"
           >{trimSlashes(pathname)}</span
         >
 
         <div class="inline-flex lg:hidden">
           <button
             x-data="{ shiftPressed: false }"
-            class="inline-flex cursor-pointer pr-4 lg:hidden"
+            class="mr-2 inline-flex cursor-pointer px-2 lg:hidden"
             title="Dark Mode Toggle"
             x-on:click="toggleTheme()"
             rel="nofollow">
-            <Icon name="mdi:theme-light-dark" class="h-full w-6" />
+            <Icon name="mdi:theme-light-dark" class="h-full w-12" />
           </button>
-          <MenuIcon class="h-4 w-4 text-text" />
+          <MenuIcon class="h-full w-12 fill-current text-text" />
         </div>
       </div>
       <MenuItems
-        class="mt-2 hidden w-full font-semibold ftext-lg lg:mt-0 lg:flex lg:w-auto">
+        class="mt-2 hidden w-full font-semibold ftext-xl lg:mt-0 lg:flex lg:w-auto lg:ftext-lg">
         <ul id="navlist" class="flex flex-col lg:flex-row lg:gap-3">
           {
             NavigationLinks.map((item, index) => (
