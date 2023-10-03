@@ -1,8 +1,11 @@
 console.log("Alpine Loaded")
 
-
 import Alpine from 'alpinejs';
 import persist from '@alpinejs/persist';
+import tippy from 'tippy.js';
+import {createPopper} from '@popperjs/core';
+import 'tippy.js/dist/tippy.css'; // optional for styling
+
 
 window.Alpine=Alpine;
 
@@ -70,7 +73,23 @@ document.addEventListener('alpine:init', () => {
       console.log('storage: '+window.localStorage.theme+' | dark: '+this.dark);
     },
   }))
+  Alpine.magic('tooltip', el => message => {
+    let instance=tippy(el, {theme: 'tomato', content: message, trigger: 'manual'})
+
+    instance.show()
+
+    setTimeout(() => {
+      instance.hide()
+
+      setTimeout(() => instance.destroy(), 150)
+    }, 2000)
+  })
+
+  // Directive: x-tooltip
+  Alpine.directive('tooltip', (el, {expression}) => {
+    tippy(el, {theme: 'tomato', content: expression})
+  })
 });
 
-
+// debug: hideOnClick: false, trigger: 'click',
 Alpine.start();

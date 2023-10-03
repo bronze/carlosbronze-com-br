@@ -30,11 +30,29 @@ import { Icon } from 'astro-icon'
     />
    */
         }
+        <script>
+          function getLabel() {
+            if (a < 2) {
+              ;('É festa! Uh!')
+            }
+          }
+        </script>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xml:space="preserve"
           style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
           class="group h-full w-full"
+          data-tippy-size="large"
+          x-data="{
+            festa: 0,
+            sexy: 0,
+            chiclete(){
+                (this.festa<=2) ? $tooltip('É festa! Uh!') : $tooltip('Chiclete com banana! Uh! Uh!');
+                (this.festa==4)? this.festa=0 : '';
+                console.log(this.festa)
+            },
+           }"
+          @click="festa=festa+1;chiclete()"
           viewBox="0 0 600 600">
           <path
             fill="#ffe25f"
@@ -83,6 +101,7 @@ import { Icon } from 'astro-icon'
           ></path>
           <g
             class="invisible group-hover:visible"
+            x-tooltip="I'm too sexy for my shirt"
             transform="matrix(2.10534 .50232 -.55238 2.31513 -13.51 -63.059)">
             <path
               id="Layer1"
@@ -127,102 +146,145 @@ import { Icon } from 'astro-icon'
         }
       </div>
     </div>
-
-    <style>
-      .title {
-        font-size: clamp(2rem, 8vw, 7rem);
-      }
-      h1 {
-        text-wrap: balance;
-      }
-    </style>
-    <script>
-      import confetti, { create } from 'canvas-confetti'
-      // confetti({
-      //   particleCount: 100,
-      //   startVelocity: 30,
-      //   spread: 360,
-      //   origin: {
-      //     // since they fall down, start a bit higher than random
-      //     y: 0.25,
-      //   },
-      // })
-      var count = 200
-      var defaults = {
-        origin: { y: 0.7 },
-      }
-
-      function fire(particleRatio, opts) {
-        confetti(
-          Object.assign({}, defaults, opts, {
-            particleCount: Math.floor(count * particleRatio),
-          }),
-        )
-      }
-      function sides() {
-        confetti({
-          particleCount: 100,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 },
-        })
-        confetti({
-          particleCount: 100,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 },
-        })
-      }
-      function yetAnotherFunction() {
-        fire(0.25, {
-          spread: 26,
-          startVelocity: 55,
-        })
-        fire(0.2, {
-          spread: 60,
-        })
-        fire(0.35, {
-          spread: 100,
-          decay: 0.91,
-          scalar: 0.8,
-        })
-        fire(0.1, {
-          spread: 120,
-          startVelocity: 25,
-          decay: 0.92,
-          scalar: 1.2,
-        })
-        fire(0.1, {
-          spread: 120,
-          startVelocity: 45,
-        })
-      }
-      // document.querySelector('.run').addEventListener('click', yetAnotherFunction)
-      window._foojs = { yetAnotherFunction }
-
-      // window.onload = function () {
-      //   var button = document.querySelector('.run')
-      //   button.onclick = function (ev) {
-      //     // stop mobile browsers from zooming when clicking
-      //     // buttons repeatedly really fast
-      //     ev.preventDefault()
-
-      //     try {
-      //       fireall()
-      //     } catch (e) {
-      //       console.error(e)
-      //     }
-      //   }
-      // }
-      // // custom canvas
-      // const canvas = document.createElement('canvas')
-      // canvas.style.width = '100%'
-      // canvas.style.height = '100%'
-
-      // document.body.appendChild(canvas)
-
-      // const myConfetti = create(canvas, { resize: true })
-      // myConfetti()
-    </script>
   </Container>
 </section>
+<style is:global>
+  .tippy-box[data-theme~='tomato'] {
+    background-color: tomato;
+    color: yellow;
+    .tippy-content {
+      @apply p-2 ftext-xl;
+    }
+  }
+  .tippy-box[data-theme~='tomato'][data-placement^='top']
+    > .tippy-arrow::before {
+    border-top-color: tomato;
+  }
+  .tippy-box[data-theme~='tomato'][data-placement^='bottom']
+    > .tippy-arrow::before {
+    border-bottom-color: tomato;
+  }
+  .tippy-box[data-theme~='tomato'][data-placement^='left']
+    > .tippy-arrow::before {
+    border-left-color: tomato;
+  }
+  .tippy-box[data-theme~='tomato'][data-placement^='right']
+    > .tippy-arrow::before {
+    border-right-color: tomato;
+  }
+  .tippy-box[data-theme~='tomato'] > .tippy-svg-arrow {
+    fill: tomato;
+  }
+  .tippy-box[data-theme~='tomato'] > .tippy-arrow::before {
+    transform: scale(1.5);
+  }
+  .tippy-box[data-theme~='tomato'] {
+    background: tomato;
+    border: 1px solid yellow;
+  }
+  /* The border */
+  .tippy-box[data-theme~='tomato'] > .tippy-svg-arrow > svg:first-child {
+    fill: yellow;
+  }
+
+  /* The fill */
+  .tippy-box[data-theme~='tomato'] > .tippy-svg-arrow > svg:last-child {
+    fill: tomato;
+  }
+</style>
+<style>
+  .title {
+    font-size: clamp(2rem, 8vw, 7rem);
+  }
+  h1 {
+    text-wrap: balance;
+  }
+</style>
+<script>
+  import confetti, { create } from 'canvas-confetti'
+  // confetti({
+  //   particleCount: 100,
+  //   startVelocity: 30,
+  //   spread: 360,
+  //   origin: {
+  //     // since they fall down, start a bit higher than random
+  //     y: 0.25,
+  //   },
+  // })
+  var count = 200
+  var defaults = {
+    origin: { y: 0.7 },
+  }
+
+  function fire(particleRatio, opts) {
+    confetti(
+      Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio),
+      }),
+    )
+  }
+  function sides() {
+    confetti({
+      particleCount: 100,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+    })
+    confetti({
+      particleCount: 100,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+    })
+  }
+  function yetAnotherFunction() {
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    })
+    fire(0.2, {
+      spread: 60,
+    })
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8,
+    })
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2,
+    })
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    })
+  }
+  // document.querySelector('.run').addEventListener('click', yetAnotherFunction)
+  window._foojs = { yetAnotherFunction }
+
+  // window.onload = function () {
+  //   var button = document.querySelector('.run')
+  //   button.onclick = function (ev) {
+  //     // stop mobile browsers from zooming when clicking
+  //     // buttons repeatedly really fast
+  //     ev.preventDefault()
+
+  //     try {
+  //       fireall()
+  //     } catch (e) {
+  //       console.error(e)
+  //     }
+  //   }
+  // }
+  // // custom canvas
+  // const canvas = document.createElement('canvas')
+  // canvas.style.width = '100%'
+  // canvas.style.height = '100%'
+
+  // document.body.appendChild(canvas)
+
+  // const myConfetti = create(canvas, { resize: true })
+  // myConfetti()
+</script>
