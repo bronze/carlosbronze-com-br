@@ -4,7 +4,7 @@
 @use 'colors.css';
 
 html {
-  scroll-behavior: smooth;
+  @apply scroll-smooth;
   /* // word-break: break-word; */
 }
 ::selection {
@@ -76,4 +76,30 @@ button svg {
   &:active {
     @apply text-primary;
   }
+}
+
+body.keyboard-navigation a:focus {
+  outline: 2px solid;
+  @apply outline-primary;
+  text-decoration: underline;
+}
+
+.skip-link {
+  background: #000;
+  color: #fff;
+  left: 0;
+  padding: 0.75em;
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  transform: translateY(-10em);
+  transition:
+    transform 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  opacity: 1;
+  transform: translateY(0em);
+  z-index: 999;
 }

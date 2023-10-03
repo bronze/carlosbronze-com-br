@@ -104,7 +104,26 @@ const { frontmatter } = Astro.props
     */
     }
   </head>
-  <body class="bg-background text-text">
+  <body
+    class="bg-background text-text"
+    x-data="window.blog"
+    :class="{ 'keyboard-navigation' : keyboardNavigation }"
+    @mouseup="keyboardNavigation = false"
+    @keydown.tab="keyboardNavigation = true">
+    <nav aria-label="Skip Links">
+      <ul class="off-screen">
+        <li>
+          <a href="#primary_nav" class="skip-link">
+            Skip to Primary Navigation
+          </a>
+        </li>
+        <li>
+          <a href="#primary_content" class="skip-link">
+            Skip to Primary Content
+          </a>
+        </li>
+      </ul>
+    </nav>
     <div
       class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
       aria-hidden="true">
@@ -115,10 +134,10 @@ const { frontmatter } = Astro.props
       </div>
     </div>
 
-    <header>
+    <header id="primary_nav">
       <Navbar />
     </header>
-    <main class="transition-fade">
+    <main class="transition-fade scroll-mt-24" id="primary_content">
       <slot />
     </main>
     <Footer />
@@ -136,6 +155,9 @@ const { frontmatter } = Astro.props
       import KonamiCode from '~/js/konamicode.js'
       // In your script file
       KonamiCode.init(undefined, 3000) // Reset after 3 seconds of inactivity
+      window.blog = {
+        keyboardNavigation: false,
+      }
     </script>
   </body>
 </html>
