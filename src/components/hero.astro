@@ -45,7 +45,6 @@ import { Icon } from 'astro-icon'
           data-tippy-size="large"
           x-data="{
             festa: 0,
-            sexy: 0,
             chiclete(){
                 (this.festa<=2) ? $tooltip('É festa! Uh!') : $tooltip('Chiclete com banana! Uh! Uh!');
                 (this.festa==4)? this.festa=0 : '';
@@ -101,7 +100,6 @@ import { Icon } from 'astro-icon'
           ></path>
           <g
             class="invisible group-hover:visible"
-            x-tooltip="I'm too sexy for my shirt"
             transform="matrix(2.10534 .50232 -.55238 2.31513 -13.51 -63.059)">
             <path
               id="Layer1"
