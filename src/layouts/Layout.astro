@@ -13,6 +13,7 @@ export interface Props {
 }
 const preFont = '/fonts/Inter-roman-latin.var.woff2'
 const { frontmatter } = Astro.props
+const consoleDate = frontmatter.publishDate
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString()
 
 // const resolvedImageWithDomain = new URL('/opengraph.jpg', Astro.site).toString()
@@ -27,7 +28,6 @@ const { frontmatter } = Astro.props
 //   : 'Astroship - Starter Template for Astro with Tailwind CSS'
 ---
 
-<!doctype html>
 <html lang="en" x-data="darkmode">
   <head>
     <meta charset="UTF-8" />
@@ -110,6 +110,7 @@ const { frontmatter } = Astro.props
     :class="{ 'keyboard-navigation' : keyboardNavigation }"
     @mouseup="keyboardNavigation = false"
     @keydown.tab="keyboardNavigation = true">
+    <!--  {}  -->
     <nav aria-label="Skip Links">
       <ul class="off-screen">
         <li>
@@ -157,6 +158,24 @@ const { frontmatter } = Astro.props
       KonamiCode.init(undefined, 3000) // Reset after 3 seconds of inactivity
       window.blog = {
         keyboardNavigation: false,
+      }
+    </script>
+    <script define:vars={{ consoleDate }}>
+      visited = window.sessionStorage.visited
+      if (!visited) {
+        sessionStorage.setItem('visited', 'true')
+        const t = 'font-size: 1.25em; font-weight: bold; padding: 5px;'
+        console.group('%cThanks for coming by! Wanna talk?', t),
+          console.log('%c🐦Twitter - https://twitter.com/carlosbronze', t),
+          console.log('%c🖥️ Github - https://github.com/bronze', t),
+          console.log(
+            '%c📝 LinkedIn - https://www.linkedin.com/in/carlosbronze/',
+            t,
+          ),
+          console.log('%c✉️ Email - carlosbronze@gmail.com', t),
+          console.log('%c Last update: ' + consoleDate, t),
+          // console.log(window.sessionStorage.visited),
+          console.groupEnd()
       }
     </script>
   </body>

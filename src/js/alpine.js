@@ -1,4 +1,4 @@
-console.log("Alpine Loaded")
+// console.log("Alpine Loaded")
 
 import Alpine from 'alpinejs';
 import persist from '@alpinejs/persist';

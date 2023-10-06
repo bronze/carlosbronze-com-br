@@ -42,16 +42,6 @@ import { Icon } from 'astro-icon'
           xml:space="preserve"
           style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
           class="group h-full w-full"
-          data-tippy-size="large"
-          x-data="{
-            festa: 0,
-            chiclete(){
-                (this.festa<=2) ? $tooltip('É festa! Uh!') : $tooltip('Chiclete com banana! Uh! Uh!');
-                (this.festa==4)? this.festa=0 : '';
-                console.log(this.festa)
-            },
-           }"
-          @click="festa=festa+1;chiclete()"
           viewBox="0 0 600 600">
           <path
             fill="#ffe25f"
