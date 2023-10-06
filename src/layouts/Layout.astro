@@ -14,6 +14,10 @@ export interface Props {
 const preFont = '/fonts/Inter-roman-latin.var.woff2'
 const { frontmatter } = Astro.props
 const consoleDate = frontmatter.publishDate
+  .toISOString()
+  .slice(0, 19)
+  .replace('T', ' ')
+
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString()
 
 // const resolvedImageWithDomain = new URL('/opengraph.jpg', Astro.site).toString()
@@ -110,7 +114,6 @@ const consoleDate = frontmatter.publishDate
     :class="{ 'keyboard-navigation' : keyboardNavigation }"
     @mouseup="keyboardNavigation = false"
     @keydown.tab="keyboardNavigation = true">
-    <!--  {}  -->
     <nav aria-label="Skip Links">
       <ul class="off-screen">
         <li>
