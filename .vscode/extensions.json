@@ -4,8 +4,8 @@
     "esbenp.prettier-vscode",
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
-    // "adrianwilczynski.alpine-js-intellisense",
-    "pcbowers.alpine-intellisense"
+    "pcbowers.alpine-intellisense",
+    "simonsiefke.svg-preview"
   ],
   "unwantedRecommendations": []
 }
