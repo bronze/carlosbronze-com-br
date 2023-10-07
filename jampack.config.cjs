@@ -8,7 +8,7 @@ module.exports={
     inline_critical_css: false,
     critters: {
       preload: "body",
-      includeSelectors: [/^\:root*/, /[:]\s*root/],
+      allowRules: [/^\:root*/, /[:]\s*root/],
     },
   },
 };
