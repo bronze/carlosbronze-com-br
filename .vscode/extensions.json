@@ -5,7 +5,8 @@
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
     "pcbowers.alpine-intellisense",
-    "simonsiefke.svg-preview"
+    "simonsiefke.svg-preview",
+    "stivo.tailwind-fold"
   ],
   "unwantedRecommendations": []
 }
