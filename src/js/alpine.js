@@ -16,7 +16,6 @@ document.addEventListener('alpine:init', () => {
     return {
       show: this.$persist(false),
       dismissed: this.$persist(false),
-
       dismiss() {
         this.show=false;
         this.dismissed=true;
@@ -38,6 +37,17 @@ document.addEventListener('alpine:init', () => {
       (!('theme' in localStorage)&&
         window.matchMedia('(prefers-color-scheme: dark)').matches)||
       document.documentElement.getAttribute('data-theme')==='dark',
+    // theme:
+    //   (localStorage.theme==='dark'||
+    //     (!('theme' in localStorage)&&
+    //       window.matchMedia('(prefers-color-scheme: dark)').matches)||
+    //     document.documentElement.getAttribute('data-theme')==='dark')==true? 'dark':'light',
+    init() {
+      // This code will be executed before Alpine
+      // initializes the rest of the component.
+      this.theme=this.dark==true? 'dark':'light'
+      // this.$watch(this.theme, () => {this.dark==true? 'dark':'light'})
+    },
 
     // Toggle function
     toggleTheme() {
@@ -68,10 +78,11 @@ document.addEventListener('alpine:init', () => {
         //   window.localStorage.theme='light'
         // }
       }
-
       this.dark=!this.dark
+      this.theme=this.dark==true? 'dark':'light'
       console.log('storage: '+window.localStorage.theme+' | dark: '+this.dark);
     },
+
   }))
   Alpine.magic('tooltip', el => message => {
     let instance=tippy(el, {theme: 'tomato', content: message, trigger: 'manual'})
