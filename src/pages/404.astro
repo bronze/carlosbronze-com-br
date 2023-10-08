@@ -1,6 +1,7 @@
 ---
 import Container from '@components/container.astro'
 import Layout from '@layouts/Layout.astro'
+import { Icon } from 'astro-icon'
 import type { Frontmatter } from '~/config'
 import { SiteMetadata } from '~/config'
 import coverSVG from '../assets/opengraph.jpg'
@@ -17,10 +18,15 @@ const frontmatter: Frontmatter = {
 
 <Layout frontmatter={frontmatter}>
   <Container>
-    <div class="flex min-h-[calc(100vh-16rem)] items-center justify-center">
+    <div
+      class="relative flex min-h-[calc(100vh-16rem)] items-center justify-center">
+      <Icon
+        name="duck_outline-r"
+        class="absolute right-0 top-1/4 -z-1 max-w-md scale-150 fill-text opacity-[3.3%] dark:opacity-[1.3%]"
+      />
       <div class="text-center">
         <h1 class="text-[30vmin] font-bold lg:tracking-tight">404</h1>
-        <p class="mt-4 text-lg text-slate-600">Page not found.</p>
+        <p class="mt-4 text-lg text-text/60">Page not found.</p>
       </div>
     </div>
   </Container>
