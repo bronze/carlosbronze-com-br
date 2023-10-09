@@ -37,11 +37,11 @@ document.addEventListener('alpine:init', () => {
       (!('theme' in localStorage)&&
         window.matchMedia('(prefers-color-scheme: dark)').matches)||
       document.documentElement.getAttribute('data-theme')==='dark',
-    // theme:
-    //   (localStorage.theme==='dark'||
-    //     (!('theme' in localStorage)&&
-    //       window.matchMedia('(prefers-color-scheme: dark)').matches)||
-    //     document.documentElement.getAttribute('data-theme')==='dark')==true? 'dark':'light',
+    theme:
+      (localStorage.theme==='dark'||
+        (!('theme' in localStorage)&&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)||
+        document.documentElement.getAttribute('data-theme')==='dark')==true? 'dark':'light',
     init() {
       // This code will be executed before Alpine
       // initializes the rest of the component.

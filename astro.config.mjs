@@ -16,10 +16,7 @@ export default defineConfig({
     // Example: Disable injecting a basic `base.css` import on every page.
     // Useful if you need to define and/or import your own custom `base.css`.
     applyBaseStyles: true
-  }), mdx(), sitemap(), swup({
-    morph: ['header'],
-    forms: true
-  }), compress({
+  }), mdx(), sitemap(), prefetch(), compress({
     CSS: false,
     HTML: false,
     Image: false,

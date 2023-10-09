@@ -46,7 +46,22 @@ const handleSubmit=event => {
     });
 }
 
-document.querySelector('form').addEventListener('submit', handleSubmit)
+
+function contatoForm() {
+  document.querySelector('form').addEventListener('submit', handleSubmit)
+
+}
+
+
+// Run once when page loads
+if (document.readyState==='complete') {
+  contatoForm();
+} else {
+  document.addEventListener('DOMContentLoaded', () => contatoForm());
+}
+
+// Run after every additional navigation by swup
+// swup.hooks.on('page:view', () => contatoForm());
 
 
 // const form=document.getElementById('form')

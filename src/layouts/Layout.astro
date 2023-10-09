@@ -17,7 +17,9 @@ const consoleDate = frontmatter.publishDate
   .toISOString()
   .slice(0, 19)
   .replace('T', ' ')
+const isDev = import.meta.env.DEV
 
+const analyticsShow = isDev ? '' : '/js/analytics.js'
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString()
 
 // const resolvedImageWithDomain = new URL('/opengraph.jpg', Astro.site).toString()
@@ -107,11 +109,12 @@ const consoleDate = frontmatter.publishDate
     /> -->
     */
     }
+
     <script
       defer
       data-domain="carlosbronze.com.br"
       x-bind:event-theme="theme"
-      src="/js/analytics.js"></script>
+      src={analyticsShow}></script>
   </head>
   <body
     class="bg-background text-text"

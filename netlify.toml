@@ -11,6 +11,9 @@
   command = "pnpm run dev"
   targetPort = 4321
 
+[[plugins]]
+  package = "netlify-plugin-debug-cache"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
