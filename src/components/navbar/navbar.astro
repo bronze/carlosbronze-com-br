@@ -12,21 +12,25 @@ const trimSlashes = str =>
     .split('/')
     .filter(v => v !== '')
     .join('/')
-const className = pathname === '/' ? '' : 'text-text/70 hover:text-text/100'
+// const className = pathname === '/' ? '' : 'text-text/70 hover:text-text/100'
+// <a href="/" class="ftext-2xl lg:ftext-lg" class:list={className}>
 ---
 
 <Container
   class="my-5 flex flex-col items-center justify-between text-text lg:flex-row">
   <Astronav>
     <div class="flex w-full items-center justify-between lg:w-auto">
-      <a href="/" class="ftext-2xl lg:ftext-lg" class:list={className}>
+      <a href="/" class="ftext-2xl lg:ftext-lg">
         <span class="text-text/60">Carlos</span>
         <span class="font-bold">Bronze</span>
       </a>
+      {
+        /*
       <span class="ml-2 font-semibold capitalize ftext-2xl lg:ftext-lg"
         >{trimSlashes(pathname)}</span
       >
-
+      */
+      }
       <div class="inline-flex lg:hidden">
         <button
           x-data="{ shiftPressed: false }"
