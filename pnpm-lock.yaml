@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 overrides:
   jsdom: 22.1.0
 
@@ -26,6 +22,9 @@ dependencies:
   astro-compress:
     specifier: ^2.0.15
     version: 2.0.15
+  astro-compressor:
+    specifier: ^0.4.1
+    version: 0.4.1
   astro-critical-css:
     specifier: ^0.0.4
     version: 0.0.4(sharp@0.32.6)
@@ -3667,6 +3666,10 @@ packages:
       sharp: 0.32.5
       svgo: 3.0.2
       terser: 5.19.3
+    dev: false
+
+  /astro-compressor@0.4.1:
+    resolution: {integrity: sha512-IAgYAlxYRMolaptsFB9quH7RxX4eUeC4UfULCPhT+ILcg7m1kbaxuyUKqGg9Hh+KZ+FNPPDAz7DqUfl+HDWhQg==}
     dev: false
 
   /astro-critical-css@0.0.4(sharp@0.32.6):
@@ -11260,3 +11263,7 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

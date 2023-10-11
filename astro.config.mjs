@@ -3,11 +3,13 @@ import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import prefetch from "@astrojs/prefetch";
-import critters from "astro-critters";
 import compress from "astro-compress";
+import compressor from "astro-compressor";
+import critters from "astro-critters";
 import criticalCss from "astro-critical-css";
-
 import swup from "@swup/astro";
+
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,7 +24,7 @@ export default defineConfig({
     Image: false,
     JavaScript: false,
     SVG: true
-  })]
+  }), compressor()]
 });
 
 // {penthouse: {forceInclude: [/^\:root.*/], }}
