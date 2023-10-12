@@ -19,11 +19,11 @@ export default defineConfig({
     // Useful if you need to define and/or import your own custom `base.css`.
     applyBaseStyles: true
   }), mdx(), sitemap(), prefetch(), compress({
-    CSS: false,
-    HTML: false,
-    Image: false,
-    JavaScript: false,
-    SVG: true
+    // CSS: true,
+    // HTML: true,
+    // Image: false,
+    // JavaScript: false,
+    // SVG: true
   }), compressor()]
 });
 

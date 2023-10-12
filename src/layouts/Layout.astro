@@ -1,6 +1,7 @@
 ---
 import Footer from '@components/footer.astro'
 import Navbar from '@components/navbar/navbar.astro'
+import BodyBg from '@components/bodybg.astro'
 import type { Frontmatter } from '../config'
 import SEO from '../components/seo.astro'
 import CustomStyles from '~/components/customstyles.astro'
@@ -18,8 +19,7 @@ const consoleDate = frontmatter.publishDate
   .slice(0, 19)
   .replace('T', ' ')
 const isDev = import.meta.env.DEV
-
-const analyticsShow = isDev ? '' : '/js/analytics.js'
+const analyticsShow = isDev ? '' : ''
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString()
 
 // const resolvedImageWithDomain = new URL('/opengraph.jpg', Astro.site).toString()
@@ -114,7 +114,7 @@ const analyticsShow = isDev ? '' : '/js/analytics.js'
       defer
       data-domain="carlosbronze.com.br"
       x-bind:event-theme="theme"
-      src={analyticsShow}></script>
+      src="/js/analytics.js"></script>
   </head>
   <body
     class="bg-background text-text"
@@ -136,16 +136,7 @@ const analyticsShow = isDev ? '' : '/js/analytics.js'
         </li>
       </ul>
     </nav>
-    <div
-      class="absolute inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
-      aria-hidden="true">
-      {/* from-[#ff80b5] to-[#9089fc] */}
-      <div
-        class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary to-[#9089fc] opacity-50 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem] sm:opacity-30"
-        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
-      </div>
-    </div>
-
+    <BodyBg />
     <header id="primary_nav">
       <Navbar />
     </header>
