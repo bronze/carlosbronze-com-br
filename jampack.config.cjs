@@ -5,10 +5,13 @@ module.exports={
     compress: true,
   },
   css: {
-    inline_critical_css: false,
+    inline_critical_css: true,
     critters: {
       preload: "body",
       allowRules: [/^\:root*/, /[:]\s*root/],
     },
+  },
+  misc: {
+    // prefetch_links: 'in-viewport',
   },
 };

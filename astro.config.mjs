@@ -19,13 +19,15 @@ export default defineConfig({
     // Useful if you need to define and/or import your own custom `base.css`.
     applyBaseStyles: true
   }), mdx(), sitemap(), prefetch(), compress({
-    // CSS: true,
-    // HTML: true,
+    // CSS: false,
+    HTML: true,
     // Image: false,
     // JavaScript: false,
     // SVG: true
-  }), compressor()]
+  }),]
 });
+
+// critters(), compressor()
 
 // {penthouse: {forceInclude: [/^\:root.*/], }}
 // critters({
