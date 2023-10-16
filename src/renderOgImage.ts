@@ -6,7 +6,7 @@ const interRegFile = fs.readFile('./public/fonts/Inter-Regular.woff')
 const interMedFile = fs.readFile('./public/fonts/Inter-Medium.woff')
 const interSBdFile = fs.readFile('./public/fonts/Inter-SemiBold.woff')
 const interBldFile = fs.readFile('./public/fonts/Inter-Bold.woff')
-const rubberDuckFile = fs.readFile('./public/duck_outline-r.svg')
+// const rubberDuckFile = fs.readFile('./public/duck_outline-r.svg')
 
 export default async function renderOgImage(
   title: string,
@@ -17,7 +17,7 @@ export default async function renderOgImage(
   const interSBd = await interSBdFile
   const interBld = await interBldFile
   // const rubberDuck = await rubberDuckFile
-  const base64Pattern = (await rubberDuckFile).toString('base64')
+  // const base64Pattern = (await rubberDuckFile).toString('base64')
 
   const svg = await satori(
     {
@@ -30,7 +30,7 @@ export default async function renderOgImage(
               children: title,
               style: {
                 fontFamily: 'Inter',
-                fontSize: '80px',
+                fontSize: '120px',
                 fontWeight: 'bold',
                 lineHeight: 1,
                 color: '#eceff4',
@@ -57,7 +57,7 @@ export default async function renderOgImage(
           flexDirection: 'column',
           justifyContent: 'center',
           borderBottom: '20px solid #5e81ac',
-          backgroundImage: `url('data:image/png;base64,${base64Pattern}')`,
+          backgroundImage: `url('data:image/svg+xml,%3Csvg width='116' height='100' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M57.5 0L115 100H0L57.5 0z' /%3E%3C/svg%3E')`,
           backgroundColor: '#3b4252',
           padding: '80px',
         },

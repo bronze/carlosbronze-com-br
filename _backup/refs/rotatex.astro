@@ -1,0 +1,144 @@
+<div class="video-preview">
+  <div class="page-intro__image-wrapper">
+    <img
+      class="page-intro__image"
+      src="https://a.storyblok.com/f/88751/1980x926/4162344585/visual-editor-hero.png/m/1280x0/"
+      alt=""
+      style="opacity: 0.979967; transform: rotateX(0.300501deg);"
+    />
+    <a
+      href="https://www.youtube-nocookie.com/embed/UHTC0J0Za7E"
+      class="hero__play-wrapper"
+      style="aspect-ratio: 1980 / 926;"
+      title="Click to load and start video">
+      <div class="video-preview__play">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 150 150">
+          <g fill="none" fill-rule="evenodd">
+            <circle cx="75" cy="75" r="75" fill="#00BAB7" fill-opacity=".08"
+            ></circle>
+            <circle cx="75" cy="75" r="65" fill="#00BAB7" fill-opacity=".08"
+            ></circle>
+            <circle cx="75" cy="75" r="55" fill="#0DBAB6"></circle>
+            <path
+              fill="#FFF"
+              d="M81.5013048,63.8333756 L94.745766,85.7552424 C95.3169561,86.7006606 95.0135844,87.9301146 94.0681662,88.5013048 C93.7561297,88.6898268 93.3984994,88.7894737 93.0339349,88.7894737 L66.5450125,88.7894737 C65.440443,88.7894737 64.5450125,87.8940432 64.5450125,86.7894737 C64.5450125,86.4249092 64.6446594,86.0672788 64.8331814,85.7552424 L78.0776426,63.8333756 C78.6488328,62.8879574 79.8782868,62.5845856 80.823705,63.1557758 C81.1011442,63.3233953 81.3336853,63.5559364 81.5013048,63.8333756 Z"
+              transform="rotate(90 79.79 74.895)"></path>
+          </g>
+        </svg>
+        <span class="screen-reader-only">Click to load and start video</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<script>
+  init: function () {
+    var e = this;
+    this.init3rdPartyTools(),
+    this.initNav(),
+    this.initMobileNav(),
+    this.initLogoLink(),
+    this.initTopCta(),
+    this.initAnchorJS(),
+    this.initGlobalClose(),
+    this.initYoutubeLinkOverlay(),
+    this.initContactForm(),
+    this.initNewsletterForm(),
+    this.initGatedContentFromLocalStorage(),
+    this.initPartnerDetail(),
+    this.initNewForms(),
+    this.getClickSource(),
+    this.getUtmData(),
+    this.initCodeBlocks(),
+    this.initArticlesListing(),
+    this.initEventsListing(),
+    this.initVideoTranscript(),
+    this.initLightboxes(),
+    this.smallQuotes(),
+    this.initAnimations(),
+    this.initCaseStudiesListing(),
+    this.initPreviewModeWarning(),
+    this.linkedinTracking(),
+    this.initVideoSection(),
+    this.initMapLogos(),
+    this.initPricing(),
+    this.initEventsDates(),
+    this.initPersonalizedThankYou(),
+    this.initPersonalizedCaseStudiesReferences(),
+    this.initTechnologyPartnerPreview(),
+    this.initHero(),
+    this.initCombobox(),
+    this.initSingleSelect(),
+    this.initHighlightCurrentLink(),
+    this.initCaseStudyPaperCTAModal(),
+    this.initModalClose(),
+    this.initHighlightCurrentLink(),
+    this.initEventsTracking(),
+    this.initCustomersLogos(),
+    this.initCliButton(),
+    this.initGuestArticleForm(),
+    this.initTabs(),
+    this.initCaseStudiesRecap(),
+    this.initPageFoldAnimation(),
+    window.location.href.toString().match(/pricing/g) &&
+    this.initCurrencyCheck();
+    var t = !1; //false
+    window.addEventListener(
+      'scroll',
+      (
+        function n() {
+          t ||
+          (
+            window.scrollY ||
+            window.pageYOffset ||
+            document.documentElement.scrollTop
+          ) > 200 &&
+          window.requestAnimationFrame(
+            (
+              function () {
+                t = !0, // true
+                window.removeEventListener('scroll', n),
+                e.initCrisp(),
+                e.initQuoteReferenceSlider(),
+                e.initArticleSidebar(),
+                e.initCtaExpandableContent(),
+                e.initFaqs(),
+                e.initScrollableTabs(),
+                e.initBoxesSlider(),
+                e.initCareersListing()
+              }
+            )
+          )
+        }
+      )
+    )
+  },
+ initPageFoldAnimation: function () {
+  document.querySelectorAll('.page-intro--animated-image').forEach(function () {
+    var e = document.querySelector('.page-intro__image'),
+      t = function () {
+        var t = window.getComputedStyle(e).height.split('px')[0],
+          n = 1 - (t - document.documentElement.scrollTop) / t,
+          o = ((t - document.documentElement.scrollTop) / t) * 15
+        n >= 0.1 && (e.style.opacity = n),
+          o > 0 && (e.style.transform = 'rotateX('.concat(o, 'deg)'))
+      },
+      n = function () {
+        window.matchMedia('(min-width: 768px)').matches
+          ? window.addEventListener('scroll', t)
+          : (window.removeEventListener('scroll', t),
+            (function (e) {
+              ;(e.style.opacity = 1), (e.style.transform = 'rotateX(0deg)')
+            })(e))
+      }
+    n(),
+      window.addEventListener('resize', function () {
+        n()
+      })
+  })
+}
+</script>

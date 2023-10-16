@@ -20,3 +20,8 @@ https://github.com/postcss/postcss-color-rgba-fallback PostCSS plugin to transfo
 ## Opt out and exclude your visits from the analytics by setting a localStorage flag in your browser
 
 https://plausible.io/docs/excluding-localstorage `localStorage.plausible_ignore=true`
+
+## og-image
+
+https://github.com/kevinzunigacuellar/web/blob/main/src/pages/image/%5Bslug%5D.png.ts
+https://github.com/bahlo/arne.me/blob/main/src/pages/work/og-image.png.ts

@@ -24,7 +24,12 @@ export default defineConfig({
     // Image: false,
     // JavaScript: false,
     // SVG: true
-  }),]
+  }),],
+  vite: {
+    optimizeDeps: {
+      exclude: ["@resvg/resvg-js"]
+    }
+  }
 });
 
 // critters(), compressor()
