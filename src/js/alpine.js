@@ -12,24 +12,24 @@ window.Alpine=Alpine;
 Alpine.plugin(persist);
 
 document.addEventListener('alpine:init', () => {
-  Alpine.data('banner', function () {
-    return {
-      show: this.$persist(false),
-      dismissed: this.$persist(false),
-      dismiss() {
-        this.show=false;
-        this.dismissed=true;
-      },
+  // Alpine.data('banner', function () {
+  //   return {
+  //     show: this.$persist(false),
+  //     dismissed: this.$persist(false),
+  //     dismiss() {
+  //       this.show=false;
+  //       this.dismissed=true;
+  //     },
 
-      init() {
-        if (!this.dismissed) {
-          setTimeout(() => {
-            this.show=true;
-          }, 1500);
-        }
-      },
-    };
-  });
+  //     init() {
+  //       if (!this.dismissed) {
+  //         setTimeout(() => {
+  //           this.show=true;
+  //         }, 1500);
+  //       }
+  //     },
+  //   };
+  // });
   Alpine.data('darkmode', () => ({
     // Define darkmode
     dark:
@@ -37,15 +37,11 @@ document.addEventListener('alpine:init', () => {
       (!('theme' in localStorage)&&
         window.matchMedia('(prefers-color-scheme: dark)').matches)||
       document.documentElement.getAttribute('data-theme')==='dark',
-    theme:
-      (localStorage.theme==='dark'||
-        (!('theme' in localStorage)&&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)||
-        document.documentElement.getAttribute('data-theme')==='dark')==true? 'dark':'light',
+
     init() {
       // This code will be executed before Alpine
       // initializes the rest of the component.
-      this.theme=this.dark==true? 'dark':'light'
+      // this.theme=this.dark==true? 'dark':'light'
       // this.$watch(this.theme, () => {this.dark==true? 'dark':'light'})
     },
 
@@ -84,22 +80,22 @@ document.addEventListener('alpine:init', () => {
     },
 
   }))
-  Alpine.magic('tooltip', el => message => {
-    let instance=tippy(el, {theme: 'tomato', content: message, trigger: 'manual'})
+  // Alpine.magic('tooltip', el => message => {
+  //   let instance=tippy(el, {theme: 'tomato', content: message, trigger: 'manual'})
 
-    instance.show()
+  //   instance.show()
 
-    setTimeout(() => {
-      instance.hide()
+  //   setTimeout(() => {
+  //     instance.hide()
 
-      setTimeout(() => instance.destroy(), 150)
-    }, 2000)
-  })
+  //     setTimeout(() => instance.destroy(), 150)
+  //   }, 2000)
+  // })
 
   // Directive: x-tooltip
-  Alpine.directive('tooltip', (el, {expression}) => {
-    tippy(el, {theme: 'tomato', content: expression})
-  })
+  // Alpine.directive('tooltip', (el, {expression}) => {
+  //   tippy(el, {theme: 'tomato', content: expression})
+  // })
 });
 
 // debug: hideOnClick: false, trigger: 'click',

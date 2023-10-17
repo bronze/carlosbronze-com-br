@@ -25,3 +25,10 @@ https://plausible.io/docs/excluding-localstorage `localStorage.plausible_ignore=
 
 https://github.com/kevinzunigacuellar/web/blob/main/src/pages/image/%5Bslug%5D.png.ts
 https://github.com/bahlo/arne.me/blob/main/src/pages/work/og-image.png.ts
+
+## remake of SEO
+
+https://github.com/jonasmerlin/astro-seo
+https://github.com/codiume/orbit/tree/main/packages/astro-seo-schema
+
+https://github.com/zankhq/astros/blob/main/src/layouts/Layout.astro
