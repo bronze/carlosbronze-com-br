@@ -30,27 +30,17 @@ document.addEventListener('alpine:init', () => {
   //     },
   //   };
   // });
-  Alpine.data('darkmode', () => ({
-    // Define darkmode
-    dark:
-      localStorage.theme==='dark'||
-      (!('theme' in localStorage)&&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)||
-      document.documentElement.getAttribute('data-theme')==='dark',
-
+  Alpine.store('darkMode', {
     init() {
-      // This code will be executed before Alpine
-      // initializes the rest of the component.
-      // this.theme=this.dark==true? 'dark':'light'
-      // this.$watch(this.theme, () => {this.dark==true? 'dark':'light'})
+      this.on=localStorage.theme==='dark'||
+        (!('theme' in localStorage)&&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)||
+        document.documentElement.getAttribute('data-theme')==='dark'
+      document.documentElement.setAttribute('data-theme', this.on? 'dark':'light')
+      this.dark=this.on? true:false
+      this.theme=this.on? 'dark':'light'
     },
-
-    // Toggle function
-    toggleTheme() {
-      // https://stackoverflow.com/questions/65942968/storing-and-retrieving-a-theme-in-javascript-from-a-data-attribute
-      var targetTheme=document.documentElement.getAttribute('data-theme')==='dark'? 'light':'dark';
-      // console.log(targetTheme);
-      // https://stackoverflow.com/questions/62913465/how-to-stop-the-window-scrolling-to-the-top-of-the-page-on-my-navbar-toggle
+    toggle() {
       event.preventDefault();
       if (event.ctrlKey||event.shiftKey) {
         // localStorage.clear();
@@ -59,26 +49,24 @@ document.addEventListener('alpine:init', () => {
         document.body.classList.remove('konami')
         document.getElementById('duck_cape').classList.add('hidden')
         console.log('localStorage theme cleared');
+        return
       }
-      else {
-        document.documentElement.setAttribute('data-theme', targetTheme)
-        localStorage.theme=targetTheme
-        // if (window.localStorage.theme!='dark') {
-        // if (targetTheme=='dark') {
-        //   // document.documentElement.classList.add('dark')
-        //   document.documentElement.setAttribute('data-theme', 'dark')
-        //   localStorage.theme='dark'
-        // } else {
-        //   // document.documentElement.classList.remove('dark')
-        //   document.documentElement.setAttribute('data-theme', 'light')
-        //   window.localStorage.theme='light'
-        // }
-      }
+      this.on=!this.on
+      // https://stackoverflow.com/questions/65942968/storing-and-retrieving-a-theme-in-javascript-from-a-data-attribute
+      var targetTheme=this.on? 'dark':'light';
+      // console.log(targetTheme);
+      // https://stackoverflow.com/questions/62913465/how-to-stop-the-window-scrolling-to-the-top-of-the-page-on-my-navbar-toggle
+      document.documentElement.setAttribute('data-theme', targetTheme)
+      localStorage.theme=targetTheme
       this.dark=!this.dark
-      this.theme=this.dark==true? 'dark':'light'
-      console.log('storage: '+window.localStorage.theme+' | dark: '+this.dark);
-    },
-
+      this.theme=this.on? 'dark':'light'
+      // console.log('storage: '+window.localStorage.theme+' | dark: '+this.dark);
+    }
+  })
+  Alpine.bind('PlausibleAnalytics', () => ({
+    'data-domain': 'carlosbronze.com.br',
+    'event-theme': Alpine.store('darkMode').on? 'Dark':'Light',
+    src: '/js/analytics.js',
   }))
   // Alpine.magic('tooltip', el => message => {
   //   let instance=tippy(el, {theme: 'tomato', content: message, trigger: 'manual'})

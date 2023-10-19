@@ -34,7 +34,7 @@ const analyticsShow = isDev ? '' : ''
 //   : 'Astroship - Starter Template for Astro with Tailwind CSS'
 ---
 
-<html lang="en" x-data="darkmode">
+<html lang="en" x-data="$store.darkMode">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -56,6 +56,7 @@ const analyticsShow = isDev ? '' : ''
         } else {
           document.documentElement.classList.remove('dark')
           document.documentElement.setAttribute('data-theme', 'light')
+          localStorage.theme = 'light'
         }
       } catch (_) {}
     </script>
@@ -109,12 +110,8 @@ const analyticsShow = isDev ? '' : ''
     /> -->
     */
     }
-
-    <script
-      defer
-      data-domain="carlosbronze.com.br"
-      x-bind:event-theme="dark ? 'dark' : 'light'"
-      src="/js/analytics.js"></script>
+    <script x-bind="PlausibleAnalytics"></script>
+    <script></script>
   </head>
   <body
     class="bg-background text-text"
