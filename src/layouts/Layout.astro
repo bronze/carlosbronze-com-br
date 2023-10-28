@@ -122,6 +122,9 @@ const analyticsShow = isDev ? '' : ''
     <nav aria-label="Skip Links">
       <ul class="off-screen">
         <li>
+          <h2 class="a11y_heading">Accessibility links</h2>
+        </li>
+        <li>
           <a href="#primary_nav" class="skip-link">
             Skip to Primary Navigation
           </a>
@@ -179,3 +182,16 @@ const analyticsShow = isDev ? '' : ''
     </script>
   </body>
 </html>
+
+<style>
+  .a11y_heading {
+    width: 1px;
+    height: 1px;
+    z-index: -1000;
+    overflow: hidden;
+    user-select: none;
+    position: absolute;
+    white-space: nowrap;
+    clip: rect(1px, 1px, 1px, 1px);
+  }
+</style>

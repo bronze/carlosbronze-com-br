@@ -11,18 +11,15 @@
   command = "pnpm run dev"
   targetPort = 4321
 
-[[plugins]]
-  package = "netlify-plugin-debug-cache"
-
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
 [[headers]]
-  for = "/assets/fonts/*"
+  for = "/fonts/*" # https://www.tempertemper.net/blog/caching-fonts-on-netlify
     [headers.values]
-    Cache-Control = "public, max-age=31536000"
+    Cache-Control = "public, max-age=2592000"
 
 [[headers]]
   for = "/manifest.webmanifest"

@@ -30,6 +30,11 @@ const frontmatter: Frontmatter = {
       <Fragment slot="title">About</Fragment>
       <Fragment slot="desc">We are a small passionate team.</Fragment>
     </Sectionhead>
+    <ul>
+      <template x-for="i in 10">
+        <li x-text="i"></li>
+      </template>
+    </ul>
     <div class="colors my-24 grid gap-8 md:grid-cols-2">
       <div class="flex flex-col place-content-center">
         <span class="w-full text-center">Primary</span>
