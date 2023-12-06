@@ -32,3 +32,7 @@ https://github.com/jonasmerlin/astro-seo
 https://github.com/codiume/orbit/tree/main/packages/astro-seo-schema
 
 https://github.com/zankhq/astros/blob/main/src/layouts/Layout.astro
+
+```
+grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_180px),_1fr))]
+```
