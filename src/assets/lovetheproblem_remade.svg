@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 352 348" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Heart" transform="matrix(1,0,0,1,-95.81,-58.2726)">
+        <path d="M271.75,110.67L354.52,58.34C354.678,58.243 354.88,58.251 355.03,58.36L446.98,122.64C447.105,122.726 447.18,122.868 447.18,123.02L447.18,252.13C447.18,252.264 447.122,252.392 447.02,252.48L271.8,406.06C271.628,406.208 271.372,406.208 271.2,406.06L95.97,252.48C95.868,252.392 95.81,252.264 95.81,252.13L95.81,123.02C95.81,122.868 95.885,122.726 96.01,122.64L187.96,58.36C188.11,58.251 188.312,58.243 188.47,58.34L271.25,110.67C271.402,110.768 271.598,110.768 271.75,110.67Z" style="fill:rgb(57,47,44);fill-rule:nonzero;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,0.508801,0)">
+        <g transform="matrix(4.82506,0,0,4.82506,-510.856,-265.38)">
+            <text x="117.023px" y="92.876px" style="font-family:'SharpSansDispNo2-ExtBold', 'Sharp Sans Display No2';font-weight:800;font-size:12px;fill:white;">PROBLEM</text>
+        </g>
+        <g transform="matrix(2.27913,0,0,2.27913,-212.159,6.32088)">
+            <text x="117.023px" y="92.876px" style="font-family:'SharpSansDispNo2-ExtBold', 'Sharp Sans Display No2';font-weight:800;font-size:12px;fill:white;">NOT THE SOLUTION</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-57.81,-43.0509)">
+            <g transform="matrix(4.66667,0,0,4.66667,-434.462,-265.431)">
+                <text x="117.023px" y="92.876px" style="font-family:'SharpSansDispNo2-ExtBold', 'Sharp Sans Display No2';font-weight:800;font-size:12px;fill:white;">LOVE</text>
+            </g>
+            <g transform="matrix(4.79592,0,0,4.79592,-302.343,-276.869)">
+                <text x="117.023px" y="92.876px" style="font-family:'SharpSansDispNo2-ExtBold', 'Sharp Sans Display No2';font-weight:800;font-size:12px;fill:white;">THE</text>
+            </g>
+        </g>
+    </g>
+</svg>
