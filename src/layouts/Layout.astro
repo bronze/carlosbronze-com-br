@@ -168,7 +168,6 @@ const analyticsShow = isDev ? '' : ''
         sessionStorage.setItem('visited', 'true')
         const t = 'font-size: 1.25em; font-weight: bold; padding: 5px;'
         console.group('%cThanks for coming by! Wanna talk?', t),
-          console.log('%c🐦Twitter - https://twitter.com/carlosbronze', t),
           console.log('%c🖥️ Github - https://github.com/bronze', t),
           console.log(
             '%c📝 LinkedIn - https://www.linkedin.com/in/carlosbronze/',
@@ -180,18 +179,16 @@ const analyticsShow = isDev ? '' : ''
           console.groupEnd()
       }
     </script>
-  </body>
+  </body><style>
+    .a11y_heading {
+      width: 1px;
+      height: 1px;
+      z-index: -1000;
+      overflow: hidden;
+      user-select: none;
+      position: absolute;
+      white-space: nowrap;
+      clip: rect(1px, 1px, 1px, 1px);
+    }
+  </style>
 </html>
-
-<style>
-  .a11y_heading {
-    width: 1px;
-    height: 1px;
-    z-index: -1000;
-    overflow: hidden;
-    user-select: none;
-    position: absolute;
-    white-space: nowrap;
-    clip: rect(1px, 1px, 1px, 1px);
-  }
-</style>
