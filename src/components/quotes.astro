@@ -7,7 +7,10 @@ import { Icon } from 'astro-icon'
 <section>
   <Container class="relative">
     <blockquote
-      class="flex cursor-auto flex-col py-[calc(4vmin+2em)] font-semibold">
+      class="flex cursor-auto flex-col py-[calc(4vmin+2em)] font-semibold"
+      x-data="quotes"
+      x-init="fetchQuotes()"
+      x-show="randomQuote.quote">
       <div
         class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
         aria-hidden="true">
@@ -16,54 +19,64 @@ import { Icon } from 'astro-icon'
           style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
         </div>
       </div>
-      <p class="relative pb-4 ftext-4xl" id="quote-text">
+      <p class="relative pb-4 ftext-4xl" x-text="randomQuote.quote">
         A goal without a plan is just a wish
       </p>
-      <footer class="mt-4 block max-w-[70%] pb-12 not-italic">
-        <span class="mb-1 block text-2xl" id="quote-author">
+      <footer class="mb-1 mt-4 block max-w-[70%] pb-12 text-2xl not-italic">
+        &mdash; <span x-text="randomQuote.author">
           Antoine de Saint-Exupéry
         </span>
       </footer>
+
+      <!-- <button
+        @click="getRandomQuote()"
+        class="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none">
+        Generate Random Quote
+      </button> -->
     </blockquote>
   </Container>
 </section>
-<script>
-  // import quotesData from '../pages/quotes.json' assert { type: 'json' }
-  // console.log(quotesData)
-  function loadQuotes() {
-    fetch('/quotes.json')
-      .then(response => response.json())
-      .then(data => {
-        const randomIndex = Math.floor(Math.random() * data.length)
-        const quote = data[randomIndex].quote
-        const author = data[randomIndex].author
-
-        const quoteTextElement = document.getElementById('quote-text')
-        const quoteAuthorElement = document.getElementById('quote-author')
-
-        quoteTextElement.textContent = quote
-        quoteAuthorElement.textContent = `— ${author}`
-      })
-      .catch(error => console.error('Error loading quotes:', error))
-  }
-  // Function to load a random quote and author
-  // function loadRandomQuote() {
-  //   const randomIndex = Math.floor(Math.random() * quotesData.length)
-  //   const quote = quotesData[randomIndex].quote
-  //   const author = quotesData[randomIndex].author
-
-  //   const quoteTextElement = document.getElementById('quote-text')
-  //   const quoteAuthorElement = document.getElementById('quote-author')
-
-  //   quoteTextElement.textContent = quote
-  //   quoteAuthorElement.textContent = `— ${author}`
-  // }
-
-  // Load a random quote on page load
-  window.addEventListener('load', loadQuotes)
-</script>
 
 <style>
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+  blockquote {
+    border: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 30px;
+    quotes: '\201C' '\201D' '\2018' '\2019';
+    position: relative;
+    /* width: fit-content;
+    margin: auto;
+    & p {
+      width: fit-content;
+      margin: auto;
+    } */
+  }
+  /* blockquote p:before,
+  blockquote p:after {
+    font-size: 4em;
+    position: absolute;
+  }
+  blockquote p:before {
+    content: open-quote;
+    font-weight: bold;
+    color: #ffffff;
+    top: -6.5rem;
+    left: -3rem;
+  }
+  blockquote p:after {
+    content: close-quote;
+    font-weight: bold;
+    color: #ffffff;
+    transform: translate(0.1em, 0.1em);
+  } */
   blockquote {
     --calc: clamp(2.125rem, 1.538rem + 2.9348vw, 3.8125rem);
     margin-top: calc(var(--calc) * 3);

@@ -84,6 +84,26 @@ document.addEventListener('alpine:init', () => {
   // Alpine.directive('tooltip', (el, {expression}) => {
   //   tippy(el, {theme: 'tomato', content: expression})
   // })
+  Alpine.data('quotes', () => ({
+    quotes: [],
+    randomQuote: {quote: '', author: ''},
+    fetchQuotes() {
+      fetch('quotes.json')
+        .then(response => response.json())
+        .then(data => {
+          this.quotes=data;
+          this.getRandomQuote();
+        });
+    },
+    getRandomQuote() {
+      const randomIndex=Math.floor(Math.random()*this.quotes.length);
+      this.randomQuote=this.quotes[randomIndex];
+      // Add a class to trigger animation
+      this.$refs.blockquote.classList.remove('fade-enter');
+      void this.$refs.blockquote.offsetWidth; // Trigger reflow
+      this.$refs.blockquote.classList.add('fade-enter');
+    }
+  }))
 });
 
 // debug: hideOnClick: false, trigger: 'click',
