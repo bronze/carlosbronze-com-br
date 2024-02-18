@@ -46,8 +46,9 @@ document.addEventListener('alpine:init', () => {
         // localStorage.clear();
         localStorage.removeItem('theme');
         sessionStorage.removeItem('konami');
+        sessionStorage.removeItem('visited');
         document.body.classList.remove('konami')
-        document.getElementById('duck_cape').classList.add('hidden')
+        // document.getElementById('duck_cape').classList.add('hidden')
         console.log('localStorage theme cleared');
         return
       }
@@ -98,10 +99,6 @@ document.addEventListener('alpine:init', () => {
     getRandomQuote() {
       const randomIndex=Math.floor(Math.random()*this.quotes.length);
       this.randomQuote=this.quotes[randomIndex];
-      // Add a class to trigger animation
-      this.$refs.blockquote.classList.remove('fade-enter');
-      void this.$refs.blockquote.offsetWidth; // Trigger reflow
-      this.$refs.blockquote.classList.add('fade-enter');
     }
   }))
 });
