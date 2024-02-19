@@ -85,22 +85,22 @@ document.addEventListener('alpine:init', () => {
   // Alpine.directive('tooltip', (el, {expression}) => {
   //   tippy(el, {theme: 'tomato', content: expression})
   // })
-  Alpine.data('quotes', () => ({
-    quotes: [],
-    randomQuote: {quote: '', author: ''},
-    fetchQuotes() {
-      fetch('quotes.json')
-        .then(response => response.json())
-        .then(data => {
-          this.quotes=data;
-          this.getRandomQuote();
-        });
-    },
-    getRandomQuote() {
-      const randomIndex=Math.floor(Math.random()*this.quotes.length);
-      this.randomQuote=this.quotes[randomIndex];
-    }
-  }))
+  // Alpine.data('quotes', () => ({
+  //   quotes: [],
+  //   randomQuote: {quote: '', author: ''},
+  //   fetchQuotes() {
+  //     fetch('quotes.json')
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         this.quotes=data;
+  //         this.getRandomQuote();
+  //       });
+  //   },
+  //   getRandomQuote() {
+  //     const randomIndex=Math.floor(Math.random()*this.quotes.length);
+  //     this.randomQuote=this.quotes[randomIndex];
+  //   }
+  // }))
 });
 
 // debug: hideOnClick: false, trigger: 'click',
