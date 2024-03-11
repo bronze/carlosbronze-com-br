@@ -69,6 +69,11 @@ document.addEventListener('alpine:init', () => {
     'event-theme': Alpine.store('darkMode').on? 'Dark':'Light',
     src: '/js/analytics.js',
   }))
+  Alpine.bind('isDev', () => ({
+    'data-domain': 'carlosbronze.dev',
+    'event-theme': Alpine.store('darkMode').on? 'Dark':'Light',
+    src: '/js/analytics.js',
+  }))
   // Alpine.magic('tooltip', el => message => {
   //   let instance=tippy(el, {theme: 'tomato', content: message, trigger: 'manual'})
 

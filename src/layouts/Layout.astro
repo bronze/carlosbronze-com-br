@@ -19,7 +19,7 @@ const consoleDate = frontmatter.publishDate
   .slice(0, 19)
   .replace('T', ' ')
 const isDev = import.meta.env.DEV
-const analyticsShow = isDev ? '' : ''
+const analyticsShow = isDev ? 'isDev' : "x-bind='PlausibleAnalytics'" // PlausibleAnalytics
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString()
 
 // const resolvedImageWithDomain = new URL('/opengraph.jpg', Astro.site).toString()
@@ -110,7 +110,7 @@ const analyticsShow = isDev ? '' : ''
     /> -->
     */
     }
-    <script x-bind="PlausibleAnalytics"></script>
+    <script x-bind={analyticsShow}></script>
     <script></script>
   </head>
   <body
@@ -179,16 +179,17 @@ const analyticsShow = isDev ? '' : ''
           console.groupEnd()
       }
     </script>
-  </body><style>
-    .a11y_heading {
-      width: 1px;
-      height: 1px;
-      z-index: -1000;
-      overflow: hidden;
-      user-select: none;
-      position: absolute;
-      white-space: nowrap;
-      clip: rect(1px, 1px, 1px, 1px);
-    }
-  </style>
+    <style>
+      .a11y_heading {
+        width: 1px;
+        height: 1px;
+        z-index: -1000;
+        overflow: hidden;
+        user-select: none;
+        position: absolute;
+        white-space: nowrap;
+        clip: rect(1px, 1px, 1px, 1px);
+      }
+    </style>
+  </body>
 </html>
