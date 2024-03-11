@@ -1,8 +1,12 @@
 {
   "recommendations": [
-    "octref.vetur",
-    "antfu.iconify",
+    "astro-build.astro-vscode",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
-    "antfu.vite",
-  ]
+    "pcbowers.alpine-intellisense",
+    "simonsiefke.svg-preview",
+    "stivo.tailwind-fold"
+  ],
+  "unwantedRecommendations": []
 }

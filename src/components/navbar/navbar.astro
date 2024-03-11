@@ -1,0 +1,113 @@
+---
+import { Icon } from 'astro-icon'
+import Container from '@components/container.astro'
+import Link from '@components/ui/link.astro'
+import Dropdown from './dropdown.astro'
+import { Astronav, MenuItems, MenuIcon } from 'astro-navbar'
+import { NavigationLinks } from '~/config'
+const pathname = new URL(Astro.request.url).pathname
+const currentPath = pathname.slice(1, -1) // remove the first "/"
+const trimSlashes = str =>
+  str
+    .split('/')
+    .filter(v => v !== '')
+    .join('/')
+// const className = pathname === '/' ? '' : 'text-text/70 hover:text-text/100'
+// <a href="/" class="ftext-2xl lg:ftext-lg" class:list={className}>
+---
+
+<Container
+  class="my-5 flex flex-col items-center justify-between text-text lg:flex-row">
+  <Astronav>
+    <div class="flex w-full items-center justify-between lg:w-auto">
+      <a href="/" class="ftext-2xl lg:ftext-lg">
+        <span class="text-text/60">Carlos</span>
+        <span class="font-bold">Bronze</span>
+      </a>
+      {
+        /*
+      <span class="ml-2 font-semibold capitalize ftext-2xl lg:ftext-lg"
+        >{trimSlashes(pathname)}</span
+      >
+      */
+      }
+      <div class="inline-flex lg:hidden">
+        <button
+          x-data="{ shiftPressed: false }"
+          class="mr-2 inline-flex cursor-pointer px-2 lg:hidden"
+          title="Dark Mode Toggle"
+          x-on:click="$store.darkMode.toggle()"
+          rel="nofollow">
+          <Icon name="mdi:theme-light-dark" class="h-full w-12" />
+        </button>
+        <MenuIcon class="h-full w-12" />
+      </div>
+    </div>
+    <MenuItems
+      class="mt-2 hidden w-full font-semibold ftext-xl lg:mt-0 lg:flex lg:w-auto lg:ftext-lg">
+      <ul id="navlist" class="flex flex-col lg:flex-row lg:gap-3">
+        {
+          NavigationLinks.map((item, index) => (
+            <>
+              {item.children && (
+                <Dropdown
+                  title={item.title}
+                  children={item.children}
+                  lastItem={index === menuitems.length - 1}
+                />
+              )}
+
+              {!item.children && (
+                <li>
+                  <a
+                    rel="prefetch"
+                    href={item.path}
+                    aria-current={
+                      trimSlashes(pathname) === item.slug ? 'page' : 'false'
+                    }
+                    class="flex py-2 capitalize text-text hover:text-primary lg:px-3">
+                    {item.title}
+                  </a>
+                </li>
+              )}
+            </>
+          ))
+        }
+      </ul>
+      <div class="mt-3 flex items-center gap-4"></div>
+      <div class="mt-3 flex items-center gap-4 lg:hidden">
+        {
+          /* JS comment syntax is also valid
+          <!-- <Link href="#" style="muted" block size="md">Log in</Link>
+          <Link href="#" size="md" block>Sign up</Link> -->
+           */
+        }
+      </div>
+      <button
+        x-data="{ shiftPressed: false }"
+        class="ml-4 hidden cursor-pointer lg:block"
+        title="Dark Mode Toggle"
+        x-on:click="$store.darkMode.toggle()"
+        rel="nofollow">
+        <Icon name="mdi:theme-light-dark" class="h-full w-8" />
+      </button>
+    </MenuItems>
+  </Astronav>
+</Container>
+
+<script>
+  // https://www.cyishere.dev/blog/astro-active-nav-item
+  // simpler: https://www.youtube.com/watch?v=UEyuqqEbgkI https://gist.github.com/leabs/11e9f20a5580982428824148f62eb2a0
+  // const navLinks = document.querySelectorAll('nav a')
+</script>
+
+<script>
+  // LETS SAVE THIS. USED FOR MENU DEBUGGING.
+  // <div class="text-sm">
+  // <p>Received a {Astro.request.method} request to "{Astro.request.url}".</p>
+  // <p>pathname: {pathname}</p>
+  // <p>currentPath: {currentPath}</p>
+  // <p>trimSlashes: {trimSlashes(pathname)}</p>
+  // <p>{trimSlashes(pathname) === item.slug ? 'page' : 'false'}</p>
+  // </div>
+</script>

@@ -1,0 +1,69 @@
+:root[data-theme~='dark'] {
+  /*  primary done*/
+  --color-inverted: 216 222 233;
+
+  --color-primary-lighter: 194 216 242;
+  --color-primary-light: 126 157 194;
+  --color-primary-default: 94 129 172;
+  --color-primary-dark: 34 63 99;
+  --color-primary-darker: 10 29 51;
+
+  --color-secondary-lighter: 36 41 51;
+  --color-secondary-light: 59 66 82;
+  --color-secondary-default: 94 129 172;
+  --color-secondary-dark: 36 41 51;
+  --color-secondary-darker: 36 41 51;
+  /*  txt done */
+  --color-text-lighter: 245 246 250;
+  --color-text-light: 242 244 248;
+  --color-text-default: 236 239 244;
+  --color-text-dark: 229 233 240;
+  --color-text-darker: 216 222 233;
+  /*  bg done */
+  --color-background-lighter: 155 164 185;
+  --color-background-light: 80 89 109;
+  --color-background-default: 59 66 82;
+  --color-background-dark: 46 52 64;
+  --color-background-darker: 36 41 51;
+
+  --color-default: 128 0 29;
+  --color-muted: 26 29 35;
+  --color-success: 0 200 81;
+  --color-info: 51 181 229;
+  --color-warn: 255 187 51;
+  --color-error: 254 78 78;
+}
+:root[data-theme~='light'] {
+  --color-inverted: 155 164 185;
+
+  --color-primary-lighter: 252 215 218;
+  --color-primary-light: 215 142 150;
+  --color-primary-default: 191 97 106;
+  --color-primary-dark: 147 45 55;
+  --color-primary-darker: 102 10 19;
+
+  --color-secondary-lighter: 36 41 51;
+  --color-secondary-light: 59 66 82;
+  --color-secondary: 94 129 172;
+  --color-secondary-dark: 36 41 51;
+  --color-secondary-darker: 36 41 51;
+
+  --color-text-lighter: 76 86 106;
+  --color-text-light: 67 76 94;
+  --color-text-default: 59 66 82;
+  --color-text-dark: 46 52 64;
+  --color-text-darker: 36 41 51;
+
+  --color-background-lighter: 245 246 250;
+  --color-background-light: 242 244 248;
+  --color-background-default: 236 239 244;
+  --color-background-dark: 229 233 240;
+  --color-background-darker: 216 222 233;
+
+  --color-default: 128 0 29;
+  --color-muted: 76 86 106;
+  --color-success: 0 200 81;
+  --color-info: 51 181 229;
+  --color-warn: 255 187 51;
+  --color-error: 254 78 78;
+}

@@ -1,36 +1,38 @@
-# carlosbronze.com.br
+## references
 
-## 🚀 Project Structure
+https://www.mixd.co.uk/
+https://trentwalton.com/info/
+https://hofmannsven.com/
 
-Inside of your Astro project, you'll see the following folders and files:
+Power your Astro site with Local and Remote Data
+https://aalam.in/blog/astro-and-data
+
+How to work with data in Astro
+https://www.youtube.com/watch?v=aS5id2273gY
+
+## color and lch
+
+https://github.com/tailwindlabs/tailwindcss/discussions/10701 tailwind oxide?
+https://1902.studio/en/journal/using-oklch-colors-in-tailwind-css postcss-oklab-function
+https://discourse.gohugo.io/t/convert-lch-colors-in-my-css-to-rgb-using-postcss/38627 postcss-lab-function
+https://github.com/postcss/postcss-color-rgba-fallback PostCSS plugin to transform rgba() to hexadecimal.
+
+## Opt out and exclude your visits from the analytics by setting a localStorage flag in your browser
+
+https://plausible.io/docs/excluding-localstorage `localStorage.plausible_ignore=true`
+
+## og-image
+
+https://github.com/kevinzunigacuellar/web/blob/main/src/pages/image/%5Bslug%5D.png.ts
+https://github.com/bahlo/arne.me/blob/main/src/pages/work/og-image.png.ts
+
+## remake of SEO
+
+https://github.com/jonasmerlin/astro-seo
+https://github.com/codiume/orbit/tree/main/packages/astro-seo-schema
+
+https://github.com/zankhq/astros/blob/main/src/layouts/Layout.astro
 
 ```
-/
-├── public/
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+grid grid-cols-[repeat(auto-fit,_minmax(min(100%,_180px),_1fr))]
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components or layouts.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                             |
-| :--------------------- | :------------------------------------------------- |
-| `npm install`          | Installs dependencies                              |
-| `npm run dev`          | Starts local dev server at `localhost:3000`        |
-| `npm run build`        | Build your production site to `./dist/`            |
-| `npm run preview`      | Preview your build locally, before deploying       |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help` | Get help using the Astro CLI                       |

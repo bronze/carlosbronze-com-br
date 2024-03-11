@@ -1,0 +1,40 @@
+---
+import Container from '@components/container.astro'
+import Layout from '@layouts/Layout.astro'
+import { Icon } from 'astro-icon'
+import type { Frontmatter } from '~/config'
+import { SiteMetadata } from '~/config'
+import coverSVG from '~/assets/opengraph.jpg'
+import socialImage from '~/assets/hero.png'
+
+const frontmatter: Frontmatter = {
+  title: '404 Not Found',
+  description: "You've reached for a page that doesn't exist... :(.",
+  coverSVG: coverSVG,
+  socialImage: socialImage,
+  publishDate: SiteMetadata.buildTime,
+}
+---
+
+<Layout frontmatter={frontmatter}>
+  <Container>
+    <div
+      class="relative flex min-h-[calc(100vh-16rem)] items-center justify-center">
+      <Icon
+        name="duck_outline-r"
+        class="absolute right-0 top-1/4 -z-1 max-w-md scale-150 fill-text opacity-[3.3%] dark:opacity-[1.3%]"
+      />
+      <div class="text-center">
+        <h1 class="text-[30vmin] font-bold lg:tracking-tight">404</h1>
+        {
+          /* <h1
+          class="bg-gradient-to-b from-text from-10% to-slate-950
+        bg-clip-text text-[30vmin] font-bold text-transparent lg:tracking-tight">
+          404
+        </h1>*/
+        }
+        <p class="mt-4 text-lg text-text/60">Página não encontrada.</p>
+      </div>
+    </div>
+  </Container>
+</Layout>

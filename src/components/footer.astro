@@ -1,0 +1,74 @@
+---
+import { Icon } from 'astro-icon'
+import Container from '@components/container.astro'
+---
+
+{
+  /* This bitch broke critical before:relative before:top-[0] before:flex before:w-full before:border-t-[1px] before:border-gray-600 before:content-[''] */
+}
+<footer class="mx-auto my-20 max-w-screen-xl">
+  {
+    /* Box shadow: horiz vertic blur spread
+
+  0 4px 7px rgba(0, 0, 0, 0.15), 0 100px 80px rgba(255, 255, 255, 0.02), 0 42px 33px rgba(255, 255, 255, 0.024), 0 22px 18px rgba(255, 255, 255, 0.028), 0 12px 10px rgba(255, 255, 255, 0.034), 0 7px 5px rgba(255, 255, 255, 0.04), 0 3px 2px rgba(255, 255, 255, 0.07)
+
+  */
+  }
+  <hr
+    class="color-gray-500 h-[3px] border-t-[1px] border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700"
+  />
+
+  <div class="justify-center py-4 sm:flex sm:items-center sm:justify-between">
+    <div class="flex items-center justify-center text-center">
+      <span class="inline-flex items-center text-sm text-text">
+        <Icon name="ph:code-bold" class="mr-1 inline-flex h-4 w-4" />
+         Carlos Bronze {new Date().getFullYear()}
+      </span>
+      <!--
+        <span
+          class="ml-2 hidden text-center text-xs text-slate-500/30 lg:block">
+          based on <a
+            href="https://astro.build/themes/details/astroship/"
+            target="_blank"
+            rel="noopener"
+            class="hover:underline">Astroship</a
+          >
+           by
+          <a
+            href="https://web3templates.com"
+            target="_blank"
+            rel="noopener"
+            class="hover:underline">
+            Web3Templates
+          </a>
+        </span>
+         -->
+    </div>
+    <div class="footerlinks mt-4 flex justify-center space-x-5 sm:mt-0">
+      <a href="https://linkedin.com/in/carlosbronze" rel="me" title="LinkedIn">
+        <Icon name="mdi:linkedin" />
+      </a>
+      <a href="https://github.com/bronze" rel="me" title="GitHub">
+        <Icon name="mdi:github" />
+      </a>
+      <a href="https://github.com/bronze" rel="me" title="Resume">
+        <Icon name="mdi:document" />
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  [astro-icon] {
+    @apply h-full w-4;
+  }
+
+  .footerlinks [astro-icon] {
+    @apply h-full w-8  cursor-pointer;
+    &:hover,
+    &:focus,
+    &:active {
+      @apply text-primary;
+    }
+  }
+</style>

@@ -1,0 +1,101 @@
+---
+import Container from '@components/container.astro'
+import Layout from '@layouts/Layout.astro'
+import { Icon } from 'astro-icon'
+import type { Frontmatter } from '~/config'
+import { SiteMetadata } from '~/config'
+import coverSVG from '~/assets/opengraph.jpg'
+import socialImage from '~/assets/hero.png'
+
+const frontmatter: Frontmatter = {
+  title: 'Intersection Observer',
+  description: "You've reached for a page that doesn't exist... :(.",
+  coverSVG: coverSVG,
+  socialImage: socialImage,
+  publishDate: SiteMetadata.buildTime,
+}
+---
+
+<Layout frontmatter={frontmatter}>
+  <Container>
+    <p>
+      Inspired by <a href="https://www.squarespace.com/"
+        >https://www.squarespace.com/</a
+      >
+    </p>
+    <section data-scrolled-into-view class="box min-h-[100vh] bg-slate-50">
+    </section>
+    <section data-scrolled-into-view class="box min-h-[90vh] bg-teal-50">
+    </section>
+    <section data-scrolled-into-view class="box min-h-[120vh] bg-sky-50">
+    </section>
+    <section data-scrolled-into-view class="box min-h-[120vh] bg-red-50">
+    </section>
+    <section data-scrolled-into-view class="box min-h-[120vh] bg-orange-50">
+    </section>
+    <section data-scrolled-into-view class="box min-h-[120vh] bg-stone-50">
+    </section>
+    <section data-scrolled-into-view class="box min-h-[120vh] bg-amber-50">
+    </section>
+    <section data-scrolled-into-view class="box min-h-[120vh] bg-lime-50">
+    </section>
+    <section data-scrolled-into-view class="box min-h-[120vh] bg-purple-50">
+    </section>
+  </Container>
+</Layout>
+<!-- <script>
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        var target = entry.target
+        var isIntersecting = entry.isIntersecting
+        var intersectionRatio = entry.intersectionRatio
+        var direction = entry.boundingClientRect.y < 0 ? 'true' : 'false'
+
+        if (!target.getAttribute('data-has-intersected')) {
+          target.setAttribute('data-has-intersected', 'false')
+        }
+
+        if (!target.getAttribute('data-scrolled-past-view')) {
+          target.setAttribute('data-scrolled-past-view', 'false')
+        }
+        target.setAttribute('data-scrolled-past-view', direction)
+        if (isIntersecting) {
+          target.setAttribute('data-has-intersected', 'true')
+          target.setAttribute('data-scrolled-into-view', 'true')
+          // target.setAttribute('data-scrolled-past-view', 'false')
+        } else {
+          target.setAttribute('data-scrolled-into-view', 'false')
+          // target.setAttribute('data-scrolled-past-view', 'true') // Set to true when scrolling past
+        }
+      })
+    },
+    {
+      root: null,
+      threshold: 0,
+      rootMargin: '0px',
+    },
+  )
+
+  document
+    .querySelectorAll('[data-scrolled-into-view]')
+    .forEach(function (element) {
+      observer.observe(element)
+    })
+</script> -->
+<script>
+  import ScrollWatcher from './scroll-watcher.js'
+
+  // Configuration for ScrollWatcher
+  const config = {
+    region: document.body,
+    selector: '.box',
+    threshold: 0.2, // Adjust this value as needed
+    triggerRatio: 0.2, // Adjust this value as needed
+    rootMargin: '0px',
+    root: null,
+  }
+
+  // Create a ScrollWatcher instance
+  const scrollWatcher = new ScrollWatcher(config)
+</script>

@@ -1,16 +1,17 @@
 {
+  "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "module": "esnext",
-    "moduleResolution": "node",
-    "target": "ESNext",
-    "types": ["vite/client", "node"],
-    "baseUrl": ".",
+    "types": ["astro/client"],
+    "strictNullChecks": true,
+    "baseUrl": "src",
     "paths": {
-      "$components/*": ["src/components/*"],
-      "$layouts/*": ["src/layouts/*"],
-      "$pages/*": ["src/pages/*"],
-      "$scripts/*": ["src/scripts/*"],
-      "$utils": ["src/utils/index.ts"]
+      "@lib/*": ["lib/*"],
+      "@utils/*": ["utils/*"],
+      "@components/*": ["components/*"],
+      "@layouts/*": ["layouts/*"],
+      "@assets/*": ["assets/*"],
+      "@pages/*": ["pages/*"],
+      "~/*": ["*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]

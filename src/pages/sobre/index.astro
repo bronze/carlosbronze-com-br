@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content'
+import { Image, getImage } from 'astro:assets'
+import Layout from '@layouts/Layout.astro'
+import Container from '@components/container.astro'
+import Sectionhead from '@components/sectionhead.astro'
+
+// Filter team entries with 'draft: false' & date before current date
+const publishedTeamMembers = await getCollection('team', ({ data }) => {
+  return !data.draft && data.publishDate < new Date()
+})
+
+import type { Frontmatter } from '~/config'
+import { SiteMetadata } from '~/config'
+import coverSVG from '~/assets/hero.png'
+import socialImage from '~/assets/hero.png'
+import Quotes from '@components/quotes.astro'
+
+const frontmatter: Frontmatter = {
+  title: 'About' + ' | ' + SiteMetadata.title,
+  description: SiteMetadata.description,
+  coverSVG: coverSVG,
+  socialImage: socialImage,
+  publishDate: SiteMetadata.buildTime,
+}
+---
+
+<Layout frontmatter={frontmatter}>
+  <Container>
+    <!-- <Sectionhead>
+      <Fragment slot="title">Sobre</Fragment>
+      <Fragment slot="desc">We are a small passionate team.</Fragment>
+    </Sectionhead> -->
+    <!-- <div class="mx-auto mt-16 flex max-w-4xl flex-col gap-3">
+      <h2 class="text-3xl font-bold">Empowering the world with Astro.</h2>
+      <p class="text-lg leading-relaxed text-text-lighter">
+        We're a multi-cultural team from around the world! We come from diverse
+        backgrounds, bringing different personalities, experiences and skills to
+        the job. This is what makes our team so special.
+      </p>
+    </div> -->
+    <Quotes />
+    <!-- <div class="mx-auto mt-12 grid max-w-4xl gap-10 md:grid-cols-3">
+      {
+        publishedTeamMembers.map(teamMemberEntry => (
+          <div class="group">
+            <div class="aspect-square w-full">
+              <Image
+                src={teamMemberEntry.data.avatar.src}
+                alt={teamMemberEntry.data.avatar.alt}
+                sizes="(max-width: 800px) 100vw, 400px"
+                width={[280]}
+                height="280"
+                aspectRatio="1/1"
+                background="#ffffff"
+                fit="cover"
+                position="center"
+                class="aspect-square w-full rounded-md object-cover transition group-hover:-translate-y-1 group-hover:shadow-xl"
+              />
+            </div>
+
+            <div class="mt-4 text-center">
+              <h2 class="text-lg text-gray-800">{teamMemberEntry.data.name}</h2>
+              <h3 class="text-sm text-slate-500">
+                {teamMemberEntry.data.title}
+              </h3>
+            </div>
+          </div>
+        ))
+      }
+    </div> -->
+  </Container>
+</Layout>

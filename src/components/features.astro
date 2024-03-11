@@ -1,0 +1,54 @@
+---
+import Container from '@components/container.astro'
+// @ts-ignore
+import { Icon } from 'astro-icon'
+
+const features = [
+  {
+    title: 'Simplicidade',
+    description: 'Lorem ipsum dolor sit amet',
+    icon: 'mdi:monitor-edit',
+  },
+  {
+    title: 'Otimização',
+    description: 'Lorem ipsum dolor sit amet',
+    icon: 'mdi:gauge-full',
+  },
+  {
+    title: 'SEO',
+    description: 'Lorem ipsum dolor sit amet',
+    icon: 'mdi:magnify-scan',
+  },
+]
+---
+
+<section>
+  <Container>
+    <div class="mt-16 lg:mt-24">
+      <h2 class="text-4xl font-bold lg:text-5xl lg:tracking-tight">
+        Cuidando de presença online
+      </h2>
+      <p class="mt-4 text-lg text-text/80">
+        Websites leves e responsivos, que facilitam a indexação e o SEO.
+      </p>
+    </div>
+
+    <!-- <div class="mt-16 grid gap-16 sm:grid-cols-2 md:grid-cols-3">
+      {
+        features.map(item => (
+          <div class="flex items-start gap-4">
+            <div class="h-16 w-16  shrink-0 rounded-full  p-2 pt-0">
+              <Icon class="text-light" name={item.icon} />
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold">{item.title}</h3>{' '}
+              <p class="mt-2 leading-relaxed text-text/80">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div> -->
+  </Container>
+</section>
