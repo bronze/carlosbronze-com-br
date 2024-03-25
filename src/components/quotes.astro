@@ -5,7 +5,7 @@ import { Icon } from 'astro-icon'
 ---
 
 <section>
-  <Container class="relative">
+  <Container class="relative !px-12">
     <blockquote
       class="flex cursor-auto flex-col py-[calc(4vmin+2em)] font-semibold"
       id="quote-block">
@@ -86,8 +86,10 @@ import { Icon } from 'astro-icon'
         top: calc(var(--calc) * -1);
         aspect-ratio: 200/150;
         mask: url('../icons/quotes.svg') no-repeat;
+        display: inline-block;
         position: absolute;
         left: -2rem;
+        top: -3rem;
         @apply bg-text;
       }
       &::after {
@@ -102,10 +104,10 @@ import { Icon } from 'astro-icon'
         mask: url('../icons/quotes.svg') no-repeat;
         transform: rotate(180deg);
         mask-size: cover;
-        position: relative;
-        left: 1rem;
-        top: 3rem;
         display: inline-block;
+        position: relative;
+        left: -1rem;
+        top: 3rem;
         @apply bg-text;
       }
     }
