@@ -77,7 +77,6 @@ import { Icon } from 'astro-icon'
     margin-bottom: calc(var(--calc) * 1);
     & p {
       &::before {
-        position: absolute;
         content: '';
         /* background-image: url('../assets/quotes.svg'); */
         background-size: 100% auto;
@@ -87,11 +86,11 @@ import { Icon } from 'astro-icon'
         top: calc(var(--calc) * -1);
         aspect-ratio: 200/150;
         mask: url('../icons/quotes.svg') no-repeat;
-        left: 0;
+        position: absolute;
+        left: -2rem;
         @apply bg-text;
       }
       &::after {
-        position: absolute;
         content: '';
         /* background-image: url('../assets/quotes.svg'); */
         background-size: 100% auto;
@@ -100,10 +99,13 @@ import { Icon } from 'astro-icon'
         height: calc(var(--calc) * 0.75741);
         bottom: calc(var(--calc) * -1);
         aspect-ratio: 200/150;
-        right: 0;
         mask: url('../icons/quotes.svg') no-repeat;
         transform: rotate(180deg);
         mask-size: cover;
+        position: relative;
+        left: 1rem;
+        top: 3rem;
+        display: inline-block;
         @apply bg-text;
       }
     }
