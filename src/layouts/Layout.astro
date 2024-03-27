@@ -8,6 +8,7 @@ import CustomStyles from '~/components/customstyles.astro'
 import '~/css/main.css'
 import '~/css/fonts.css'
 import '@fontsource-variable/nunito/index.css'
+import SpeedInsights from '@vercel/speed-insights/astro'
 
 export interface Props {
   frontmatter: Frontmatter
@@ -112,6 +113,7 @@ const analyticsShow = isDev ? 'isDev' : "x-bind='PlausibleAnalytics'" // Plausib
     }
     <script x-bind={analyticsShow}></script>
     <script></script>
+    <SpeedInsights />
   </head>
   <body
     class="bg-background text-text"

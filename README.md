@@ -4,7 +4,9 @@ netlify deploy --build --prod
 
 ## vercel command
 
-
+vercel --prod
+vercel build  
+vercel deploy --prebuilt
 
 ## references
 
