@@ -27,7 +27,9 @@ export default defineConfig({
     // SVG: true
   })],
   output: "server",
-  adapter: vercel()
+  adapter: vercel({
+    webAnalytics: {enabled: true}
+  }),
 });
 
 // critters(), compressor()
