@@ -10,6 +10,8 @@ import critters from "astro-critters";
 import criticalCss from "astro-critical-css";
 import swup from "@swup/astro";
 
+import vercel from "@astrojs/vercel/serverless";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.carlosbronze.com.br/",
@@ -19,11 +21,13 @@ export default defineConfig({
     applyBaseStyles: true
   }), mdx(), sitemap(), prefetch(), compress({
     // CSS: false,
-    HTML: true,
+    HTML: true
     // Image: false,
     // JavaScript: false,
     // SVG: true
-  }),],
+  })],
+  output: "server",
+  adapter: vercel()
 });
 
 // critters(), compressor()
