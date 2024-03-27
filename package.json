@@ -1,6 +1,6 @@
 {
   "name": "carlosbronze-com-br",
-  "version": "23.09.21",
+  "version": "27.03.2024",
   "private": true,
   "NETLIFY_SITE_ID ": "72d6d96e-ae80-459e-b3b3-3e7bca65f7bd",
   "pnpm": {
@@ -65,6 +65,7 @@
   },
   "dependencies": {
     "@astrojs/prefetch": "^0.4.1",
+    "@astrojs/vercel": "^7.4.0",
     "@fontsource-variable/nunito": "^5.0.14",
     "@popperjs/core": "^2.11.8",
     "@swup/astro": "^1.3.2",

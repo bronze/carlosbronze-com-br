@@ -8,15 +8,10 @@ import compressor from "astro-compressor";
 import critters from "astro-critters";
 import criticalCss from "astro-critical-css";
 import swup from "@swup/astro";
-import vercel from '@astrojs/vercel/serverless';
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.carlosbronze.com.br/",
-  output: 'server',
-  adapter: vercel({
-    webAnalytics: {enabled: true}
-  }),
   integrations: [tailwind({
     // Example: Disable injecting a basic `base.css` import on every page.
     // Useful if you need to define and/or import your own custom `base.css`.
@@ -32,7 +27,7 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"]
     }
-  }
+  },
 });
 
 // critters(), compressor()
