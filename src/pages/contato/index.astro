@@ -3,7 +3,7 @@ import Contactform from '@components/contactform.astro'
 import Container from '@components/container.astro'
 import Sectionhead from '@components/sectionhead.astro'
 import Layout from '@layouts/Layout.astro'
-import { Icon } from 'astro-icon'
+import { Icon } from 'astro-icon/components'
 import type { Frontmatter } from '~/config'
 import { SiteMetadata } from '~/config'
 import coverSVG from '~/assets/hero.png'
@@ -42,7 +42,7 @@ const frontmatter: Frontmatter = {
             <span>1734 Sanfransico, CA 93063</span>
           </div> -->
           <div class="mt-2 flex items-center space-x-2">
-            <Icon class="h-4 w-4" name="uil:envelope" />
+            <Icon class="h-4 w-4" name="mdi:email-outline" />
             <a href="mailto:oi@carlosbronze.com.br">oi@carlosbronze.com.br</a>
           </div>
           <!-- <div class="mt-2 flex items-center space-x-2">

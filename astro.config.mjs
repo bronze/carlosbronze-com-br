@@ -1,4 +1,5 @@
 import {defineConfig} from "astro/config";
+import icon from "astro-icon";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -12,7 +13,7 @@ import swup from "@swup/astro";
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.carlosbronze.com.br/",
-  integrations: [tailwind({
+  integrations: [icon(), tailwind({
     // Example: Disable injecting a basic `base.css` import on every page.
     // Useful if you need to define and/or import your own custom `base.css`.
     applyBaseStyles: true
@@ -23,11 +24,6 @@ export default defineConfig({
     // JavaScript: false,
     // SVG: true
   }),],
-  vite: {
-    optimizeDeps: {
-      exclude: ["@resvg/resvg-js"]
-    }
-  },
 });
 
 // critters(), compressor()
