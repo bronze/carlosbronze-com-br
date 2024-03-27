@@ -1,3 +1,11 @@
+## netlify command
+
+netlify deploy --build --prod
+
+## vercel command
+
+
+
 ## references
 
 https://www.mixd.co.uk/
