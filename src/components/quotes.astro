@@ -71,6 +71,19 @@ import { Icon } from 'astro-icon'
 </script>
 
 <style>
+  @media (max-width: 480px) {
+    blockquote p::after {
+      position: absolute;
+      right: 0rem;
+    }
+  }
+  @media (min-width: 481px) {
+    blockquote p::after {
+      position: relative;
+      left: -1rem;
+      top: 3.5rem;
+    }
+  }
   blockquote {
     --calc: clamp(2.125rem, 1.538rem + 2.9348vw, 3.8125rem);
     margin-top: calc(var(--calc) * 3);
@@ -105,9 +118,6 @@ import { Icon } from 'astro-icon'
         transform: rotate(180deg);
         mask-size: cover;
         display: inline-block;
-        position: relative;
-        left: -1rem;
-        top: 3.5rem;
         @apply bg-text;
       }
     }
