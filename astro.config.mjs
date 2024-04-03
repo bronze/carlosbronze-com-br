@@ -26,10 +26,10 @@ export default defineConfig({
     // JavaScript: false,
     // SVG: true
   })],
-  output: "server",
-  adapter: vercel({
-    webAnalytics: {enabled: true}
-  }),
+  // output: "server",
+  // adapter: vercel({
+  //   webAnalytics: {enabled: true}
+  // }),
 });
 
 // critters(), compressor()
