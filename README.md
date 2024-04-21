@@ -1,3 +1,10 @@
+## Easter Egg Ideas
+
+https://www.articulatemarketing.com/ ISO 3103:1980 https://www.iso.org/standard/73224.html ISO 3103:2019 Tea Preparation of liquor for use in sensory tests
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418
+https://theoatmeal.com/ pterodactyl in source code
+GNU PTerry
+
 ## netlify command
 
 netlify deploy --build --prod
