@@ -21,10 +21,10 @@ export default defineConfig({
     applyBaseStyles: true
   }), mdx(), sitemap(), prefetch(), compress({
     // CSS: false,
-    HTML: true
+    HTML: true,
     // Image: false,
     // JavaScript: false,
-    // SVG: true
+    // SVG: false,
   })],
   // output: "server",
   // adapter: vercel({

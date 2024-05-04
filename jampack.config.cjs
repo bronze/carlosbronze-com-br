@@ -3,6 +3,9 @@
 module.exports={
   image: {
     compress: true,
+    svg: {
+      optimization: false,
+    },
   },
   css: {
     inline_critical_css: true,
