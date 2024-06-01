@@ -1,4 +1,4 @@
-import {defineConfig} from "astro/config";
+import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
@@ -9,8 +9,9 @@ import compressor from "astro-compressor";
 import critters from "astro-critters";
 import criticalCss from "astro-critical-css";
 import swup from "@swup/astro";
-
 import vercel from "@astrojs/vercel/serverless";
+
+import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,15 +22,18 @@ export default defineConfig({
     applyBaseStyles: true
   }), mdx(), sitemap(), prefetch(), compress({
     // CSS: false,
-    HTML: true,
+    HTML: true
     // Image: false,
     // JavaScript: false,
     // SVG: false,
-  })],
+  })]
   // output: "server",
   // adapter: vercel({
   //   webAnalytics: {enabled: true}
   // }),
+  ,
+  output: "server",
+  adapter: netlify()
 });
 
 // critters(), compressor()

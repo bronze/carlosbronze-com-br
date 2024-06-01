@@ -1,0 +1,61 @@
+---
+export async function get() {
+  const response = await fetch('/.netlify/functions/random-quote')
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`)
+  }
+
+  let quoteData = null
+  if (response.ok) {
+    quoteData = await response.json()
+  }
+
+  return {
+    props: {
+      quote: quoteData.quote,
+      author: quoteData.author,
+    },
+  }
+}
+
+const { quote, author } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quote</title>
+  </head>
+  <body>
+    <h1>1 {quote}</h1>
+    <p>2- {author}</p>
+    <section><p id="response-output">Loading...</p></section>
+    <script>
+      ;(async () => {
+        // let res = await fetch('/.netlify/functions/random-quote')
+        // if (res.ok) {
+        //   document.getElementById('response-output').innerHTML =
+        //     await res.text()
+        // }
+      })()
+    </script>
+    <script>
+      ;(async () => {
+        const response = await fetch('/.netlify/functions/random-quote')
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+        if (response.ok) {
+          const quoteData = await response.json()
+          document.getElementById('response-output').innerHTML = JSON.stringify(
+            quoteData,
+            null,
+            2,
+          )
+        }
+      })()
+    </script>
+  </body>
+</html>

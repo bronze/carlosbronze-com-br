@@ -1,3 +1,20 @@
 {
-	"siteId": "72d6d96e-ae80-459e-b3b3-3e7bca65f7bd"
+	"siteId": "72d6d96e-ae80-459e-b3b3-3e7bca65f7bd",
+	"geolocation": {
+		"data": {
+			"city": "Rio de Janeiro",
+			"country": {
+				"code": "BR",
+				"name": "Brazil"
+			},
+			"subdivision": {
+				"code": "RJ",
+				"name": "Rio de Janeiro"
+			},
+			"timezone": "America/Sao_Paulo",
+			"latitude": -22.9072,
+			"longitude": -43.1883
+		},
+		"timestamp": 1717208227580
+	}
 }
