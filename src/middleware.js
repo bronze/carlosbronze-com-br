@@ -5,7 +5,7 @@ export async function onRequest(context, next) {
   context.locals.title="New title";
   context.locals.property="New title";
   try {
-    const response=await fetch('/.netlify/functions/random-quote'); // Ensure this URL is correct
+    const response=await fetch('https://www.carlosbronze.com.br/.netlify/functions/random-quote'); // Ensure this URL is correct
     if (response.ok) {
       const quoteData=await response.json();
       context.locals.quote=quoteData.quote;
