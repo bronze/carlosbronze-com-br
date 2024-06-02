@@ -30,6 +30,10 @@ document.addEventListener('alpine:init', () => {
   //     },
   //   };
   // });
+  Alpine.data('windowLayout', () => ({
+    // https://www.henriksommerfeld.se/alpinejs-benefits-and-limitations/
+    keyboardNavigation: false,
+  }))
   Alpine.store('darkMode', {
     init() {
       this.on=localStorage.theme==='dark'||

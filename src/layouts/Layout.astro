@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions'
 import Footer from '@components/footer.astro'
 import Navbar from '@components/navbar/navbar.astro'
 import BodyBg from '@components/bodybg.astro'
@@ -42,7 +43,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     <meta name="theme-color" content="#434c5e" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <script is:inline>
+    <script is:inline data-astro-rerun>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       try {
         if (
@@ -114,10 +115,11 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     <script x-bind={analyticsShow}></script>
     <script></script>
     <!-- <SpeedInsights /> -->
+    <ViewTransitions />
   </head>
   <body
     class="bg-background text-text"
-    x-data="window.blog"
+    x-data="windowLayout"
     :class="{ 'keyboard-navigation' : keyboardNavigation }"
     @mouseup="keyboardNavigation = false"
     @keydown.tab="keyboardNavigation = true">
@@ -145,7 +147,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     <main class="transition-fade scroll-mt-24" id="primary_content">
       <slot />
     </main>
-    <Footer />
+    <Footer transition:persist />
     <style is:global>
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
@@ -156,15 +158,12 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
 
     <script src="../js/main.js"></script>
 
-    <script>
+    <script data-astro-rerun>
       import KonamiCode from '~/js/konamicode.js'
       // In your script file
       KonamiCode.init(undefined, 3000) // Reset after 3 seconds of inactivity
-      window.blog = {
-        keyboardNavigation: false,
-      }
     </script>
-    <script define:vars={{ consoleDate }}>
+    <script define:vars={{ consoleDate }} data-astro-rerun>
       visited = window.sessionStorage.visited
       if (!visited) {
         sessionStorage.setItem('visited', 'true')
