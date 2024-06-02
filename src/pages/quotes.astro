@@ -1,24 +1,41 @@
 ---
-export async function get() {
-  const response = await fetch('/.netlify/functions/random-quote')
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`)
-  }
+// console.log('ok')
+import { Debug } from 'astro:components'
 
-  let quoteData = null
-  if (response.ok) {
-    quoteData = await response.json()
-  }
+export async function load() {
+  console.log('load function called') // Log to check if the function is called
+  try {
+    const response = await fetch('/.netlify/functions/random-quote') // Ensure this URL is correct
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+    if (response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+    const quoteData = await response.json()
+    console.log('Fetched quote data:', quoteData)
 
-  return {
-    props: {
-      quote: quoteData.quote,
-      author: quoteData.author,
-    },
+    console.log('Fetched quote data:', quoteData)
+
+    return {
+      props: {
+        quote: quoteData.quote,
+        author: quoteData.author,
+      },
+    }
+  } catch (error) {
+    console.error('Error fetching quote:', error)
+    return {
+      props: {
+        quote: 'Failed to load quote.',
+        author: 'Unknown',
+      },
+    }
   }
 }
 
-const { quote, author } = Astro.props
+console.log('Astro.props:', Astro.props)
+const { quote, author } = Astro.props || {} // Added fallback for destructuring
 ---
 
 <!doctype html>
@@ -29,33 +46,11 @@ const { quote, author } = Astro.props
     <title>Random Quote</title>
   </head>
   <body>
-    <h1>1 {quote}</h1>
-    <p>2- {author}</p>
-    <section><p id="response-output">Loading...</p></section>
-    <script>
-      ;(async () => {
-        // let res = await fetch('/.netlify/functions/random-quote')
-        // if (res.ok) {
-        //   document.getElementById('response-output').innerHTML =
-        //     await res.text()
-        // }
-      })()
-    </script>
-    <script>
-      ;(async () => {
-        const response = await fetch('/.netlify/functions/random-quote')
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`)
-        }
-        if (response.ok) {
-          const quoteData = await response.json()
-          document.getElementById('response-output').innerHTML = JSON.stringify(
-            quoteData,
-            null,
-            2,
-          )
-        }
-      })()
-    </script>
+    <Debug test="1" quote={quote} author={author} />
+    <h1>{quote}</h1>
+    <p>&mdash;{author}</p>
+    <a href="http://localhost:8888/.netlify/functions/random-quote">
+      http://localhost:8888/.netlify/functions/random-quote
+    </a>
   </body>
 </html>
