@@ -33,7 +33,7 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true
   },
-  output: "hybrid",
+  output: "server",
   adapter: netlify()
 });
 
