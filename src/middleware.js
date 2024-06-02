@@ -1,10 +1,11 @@
+
 export async function onRequest(context, next) {
   // intercept data from a context
   // optionally, modify the properties in `locals`
   context.locals.title="New title";
   context.locals.property="New title";
   try {
-    const response=await fetch('http://localhost:8888/.netlify/functions/random-quote'); // Ensure this URL is correct
+    const response=await fetch('/.netlify/functions/random-quote'); // Ensure this URL is correct
     if (response.ok) {
       const quoteData=await response.json();
       context.locals.quote=quoteData.quote;
