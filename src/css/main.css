@@ -15,6 +15,7 @@ body {
   @apply bg-muted text-text;
   padding-right: var(--scrollbarComp);
   overflow-x: hidden;
+  overflow-y: scroll; /* Show scrollbars */
 }
 .color-primary-default {
   color: rgb(var(--color-primary-default));
