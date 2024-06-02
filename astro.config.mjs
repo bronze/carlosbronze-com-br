@@ -11,7 +11,6 @@ import criticalCss from "astro-critical-css";
 import swup from "@swup/astro";
 import vercel from "@astrojs/vercel/serverless";
 import netlify from "@astrojs/netlify";
-import quoteMiddleware from './src/middleware/quoteMiddleware';
 
 // https://astro.build/config
 export default defineConfig({
