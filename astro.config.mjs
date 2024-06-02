@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import {defineConfig} from "astro/config";
 import icon from "astro-icon";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
@@ -10,8 +10,8 @@ import critters from "astro-critters";
 import criticalCss from "astro-critical-css";
 import swup from "@swup/astro";
 import vercel from "@astrojs/vercel/serverless";
-
 import netlify from "@astrojs/netlify";
+import quoteMiddleware from './src/middleware/quoteMiddleware';
 
 // https://astro.build/config
 export default defineConfig({

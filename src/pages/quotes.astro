@@ -5,7 +5,9 @@ import { Debug } from 'astro:components'
 export async function load() {
   console.log('load function called') // Log to check if the function is called
   try {
-    const response = await fetch('/.netlify/functions/random-quote') // Ensure this URL is correct
+    const response = await fetch(
+      'http://localhost:8888/.netlify/functions/random-quote',
+    ) // Ensure this URL is correct
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }

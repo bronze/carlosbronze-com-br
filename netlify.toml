@@ -1,5 +1,5 @@
 [build.environment]
-  NODE_VERSION = "18.15"
+  NODE_VERSION = "18.17.1"
 
 [build]
   publish = "dist"
