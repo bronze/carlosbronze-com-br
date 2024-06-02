@@ -1,12 +1,13 @@
 ---
-import { Icon } from 'astro-icon'
+import { Icon } from 'astro-icon/components'
 import Container from '@components/container.astro'
+import PhCodeBold from '@assets/PhCodeBold.astro'
 ---
 
 {
   /* This bitch broke critical before:relative before:top-[0] before:flex before:w-full before:border-t-[1px] before:border-gray-600 before:content-[''] */
 }
-<footer class="mx-auto my-20 max-w-screen-xl">
+<footer class="mx-auto my-20 max-w-screen-xl px-5">
   {
     /* Box shadow: horiz vertic blur spread
 
@@ -21,7 +22,9 @@ import Container from '@components/container.astro'
   <div class="justify-center py-4 sm:flex sm:items-center sm:justify-between">
     <div class="flex items-center justify-center text-center">
       <span class="inline-flex items-center text-sm text-text">
-        <Icon name="ph:code-bold" class="mr-1 inline-flex h-4 w-4" />
+        <!-- Embed the contents of the `/src/icons/logo.svg` file -->
+        <Icon name="phcodebold" class="mr-1 inline-flex h-4 w-4" />
+        <!-- <PhCodeBold class="mr-1 inline-flex h-4 w-4" /> -->
          Carlos Bronze {new Date().getFullYear()}
       </span>
       <!--
@@ -51,7 +54,10 @@ import Container from '@components/container.astro'
       <a href="https://github.com/bronze" rel="me" title="GitHub">
         <Icon name="mdi:github" />
       </a>
-      <a href="https://github.com/bronze" rel="me" title="Resume">
+      <a
+        href="https://docs.google.com/document/d/1QjJRMyWnHIhv6_bAtlz2mGRNnZZw81rjCOGd4ZlmZpY/edit?usp=sharing"
+        rel="me"
+        title="Resume">
         <Icon name="mdi:document" />
       </a>
     </div>
@@ -59,11 +65,11 @@ import Container from '@components/container.astro'
 </footer>
 
 <style>
-  [astro-icon] {
+  [data-icon] {
     @apply h-full w-4;
   }
 
-  .footerlinks [astro-icon] {
+  .footerlinks [data-icon] {
     @apply h-full w-8  cursor-pointer;
     &:hover,
     &:focus,

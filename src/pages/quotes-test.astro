@@ -1,0 +1,29 @@
+---
+export const prerender = false
+
+export async function load() {
+  console.log('load function called') // Log to check if the function is called
+
+  return {
+    props: {
+      quote: 'Test quote',
+      author: 'Test author',
+    },
+  }
+}
+
+const { quote, author } = Astro.props || {} // Fallback to an empty object to avoid undefined errors
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quote</title>
+  </head>
+  <body>
+    <h1>{quote}</h1>
+    <p>&mdash; {author}</p>
+  </body>
+</html>

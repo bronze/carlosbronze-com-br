@@ -1,8 +1,9 @@
 [build.environment]
-  NODE_VERSION = "18.15"
+  NODE_VERSION = "18.17.1"
 
 [build]
   publish = "dist"
+  functions = ".netlify/functions" # netlify dev uses this directory to scaffold and serve your functions
   command = "pnpm prod || ( npm install pnpm && pnpm prod )"
 
 [dev]
@@ -10,6 +11,7 @@
   framework = "astro" # #custom
   command = "pnpm run dev"
   targetPort = 4321
+  functions = ".netlify/functions" # netlify dev uses this directory to scaffold and serve your functions
 
 [[redirects]]
   from = "/*"

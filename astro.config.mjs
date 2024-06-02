@@ -1,4 +1,5 @@
 import {defineConfig} from "astro/config";
+import icon from "astro-icon";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -8,28 +9,31 @@ import compressor from "astro-compressor";
 import critters from "astro-critters";
 import criticalCss from "astro-critical-css";
 import swup from "@swup/astro";
-
-
+import vercel from "@astrojs/vercel/serverless";
+import netlify from "@astrojs/netlify";
+import quoteMiddleware from './src/middleware/quoteMiddleware';
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.carlosbronze.com.br/",
-  integrations: [tailwind({
+  integrations: [icon(), tailwind({
     // Example: Disable injecting a basic `base.css` import on every page.
     // Useful if you need to define and/or import your own custom `base.css`.
     applyBaseStyles: true
   }), mdx(), sitemap(), prefetch(), compress({
     // CSS: false,
-    HTML: true,
+    HTML: true
     // Image: false,
     // JavaScript: false,
-    // SVG: true
-  }),],
-  vite: {
-    optimizeDeps: {
-      exclude: ["@resvg/resvg-js"]
-    }
-  }
+    // SVG: false,
+  })]
+  // output: "server",
+  // adapter: vercel({
+  //   webAnalytics: {enabled: true}
+  // }),
+  ,
+  output: "server",
+  adapter: netlify()
 });
 
 // critters(), compressor()
