@@ -1,7 +1,7 @@
 // console.log("Alpine Loaded")
 
 import Alpine from 'alpinejs';
-import persist from '@alpinejs/persist';
+// import persist from '@alpinejs/persist';
 import tippy from 'tippy.js';
 import {createPopper} from '@popperjs/core';
 import 'tippy.js/dist/tippy.css'; // optional for styling
@@ -9,27 +9,9 @@ import 'tippy.js/dist/tippy.css'; // optional for styling
 
 window.Alpine=Alpine;
 
-Alpine.plugin(persist);
+// Alpine.plugin(persist);
 
 document.addEventListener('alpine:init', () => {
-  // Alpine.data('banner', function () {
-  //   return {
-  //     show: this.$persist(false),
-  //     dismissed: this.$persist(false),
-  //     dismiss() {
-  //       this.show=false;
-  //       this.dismissed=true;
-  //     },
-
-  //     init() {
-  //       if (!this.dismissed) {
-  //         setTimeout(() => {
-  //           this.show=true;
-  //         }, 1500);
-  //       }
-  //     },
-  //   };
-  // });
   Alpine.data('windowLayout', () => ({
     // https://www.henriksommerfeld.se/alpinejs-benefits-and-limitations/
     keyboardNavigation: false,
@@ -47,7 +29,7 @@ document.addEventListener('alpine:init', () => {
     toggle() {
       event.preventDefault();
       if (event.ctrlKey||event.shiftKey) {
-        // localStorage.clear();
+        localStorage.clear();
         localStorage.removeItem('theme');
         sessionStorage.removeItem('konami');
         sessionStorage.removeItem('visited');
@@ -78,38 +60,6 @@ document.addEventListener('alpine:init', () => {
     'event-theme': Alpine.store('darkMode').on? 'Dark':'Light',
     src: '/js/analytics.js',
   }))
-  // Alpine.magic('tooltip', el => message => {
-  //   let instance=tippy(el, {theme: 'tomato', content: message, trigger: 'manual'})
-
-  //   instance.show()
-
-  //   setTimeout(() => {
-  //     instance.hide()
-
-  //     setTimeout(() => instance.destroy(), 150)
-  //   }, 2000)
-  // })
-
-  // Directive: x-tooltip
-  // Alpine.directive('tooltip', (el, {expression}) => {
-  //   tippy(el, {theme: 'tomato', content: expression})
-  // })
-  // Alpine.data('quotes', () => ({
-  //   quotes: [],
-  //   randomQuote: {quote: '', author: ''},
-  //   fetchQuotes() {
-  //     fetch('quotes.json')
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         this.quotes=data;
-  //         this.getRandomQuote();
-  //       });
-  //   },
-  //   getRandomQuote() {
-  //     const randomIndex=Math.floor(Math.random()*this.quotes.length);
-  //     this.randomQuote=this.quotes[randomIndex];
-  //   }
-  // }))
 });
 
 // debug: hideOnClick: false, trigger: 'click',

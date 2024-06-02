@@ -16,6 +16,9 @@ body {
   padding-right: var(--scrollbarComp);
   overflow-x: hidden;
 }
+.color-primary-default {
+  color: rgb(var(--color-primary-default));
+}
 /* https://replit.com/@swupjs/Swup-Demo-Multiple#transitions.css*/
 .swup-progress-bar {
   height: 4px;

@@ -47,6 +47,9 @@ dependencies:
   astro-critical-css:
     specifier: ^0.0.4
     version: 0.0.4(sharp@0.33.4)
+  astro-loading-indicator:
+    specifier: ^0.5.0
+    version: 0.5.0(astro@4.9.2)
   axios:
     specifier: ^1.7.2
     version: 1.7.2
@@ -5217,6 +5220,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /astro-loading-indicator@0.5.0(astro@4.9.2):
+    resolution: {integrity: sha512-NU06AzJEzvlzXLac8ODFgHjzTDyaF/GV+nQQ7Rq21rCeSifhmLQu219lJukIUS0ySs4ySO4PAwcaHGClOSEufA==}
+    peerDependencies:
+      astro: ^4.0.0
+    dependencies:
+      astro: 4.9.2(lightningcss@1.25.1)(terser@5.31.0)(typescript@5.4.5)
+    dev: false
 
   /astro-navbar@2.3.2:
     resolution: {integrity: sha512-cb+mYvtlCHMJbJpLsyE6lyNxLWHUqfKaOTBCSHe+xHDYGFquV8cubF/78TzHLlrNJZY3/ofCyPpr8KCLuR7ogg==}

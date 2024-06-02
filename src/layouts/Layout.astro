@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions'
+import LoadingIndicator from 'astro-loading-indicator/component'
 import Footer from '@components/footer.astro'
 import Navbar from '@components/navbar/navbar.astro'
 import BodyBg from '@components/bodybg.astro'
@@ -36,14 +37,14 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
 //   : 'Astroship - Starter Template for Astro with Tailwind CSS'
 ---
 
-<html lang="en" x-data="$store.darkMode">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#434c5e" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <script is:inline data-astro-rerun>
+    <script is:inline>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       try {
         if (
@@ -116,6 +117,12 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     <script></script>
     <!-- <SpeedInsights /> -->
     <ViewTransitions />
+    <LoadingIndicator
+      color="bg-primary"
+      animationDuration={10}
+      height="10px"
+      threshold={false}
+    />
   </head>
   <body
     class="bg-background text-text"
@@ -157,12 +164,36 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     </style>
 
     <script src="../js/main.js"></script>
+    <script is:inline>
+      // Event listener for 'astro:load' to set the body data-theme attribute
+      document.addEventListener('astro:load', () => {
+        let theme = localStorage.theme
+        document.documentElement.dataset.theme = theme
+        // document.body.setAttribute('data-theme', 'dark')
+      })
 
-    <script data-astro-rerun>
-      import KonamiCode from '~/js/konamicode.js'
-      // In your script file
-      KonamiCode.init(undefined, 3000) // Reset after 3 seconds of inactivity
+      // Function to set the theme based on localStorage
+      function setDarkMode(document) {
+        // let theme = localStorage.theme ? 'light' : 'dark'
+        let theme = localStorage.theme
+        document.documentElement.dataset.theme = theme
+        // console.log(theme)
+      }
+
+      // Initial theme setting
+      setDarkMode(document)
+
+      // Event listener for 'astro:before-swap' to set the theme on the incoming document
+      document.addEventListener('astro:before-swap', ev => {
+        setDarkMode(ev.newDocument)
+      })
     </script>
+    <style is:global>
+      :root .astro-loading-indicator {
+        @apply bg-primary !important;
+        z-index: 2000;
+      }
+    </style>
     <script define:vars={{ consoleDate }} data-astro-rerun>
       visited = window.sessionStorage.visited
       if (!visited) {
@@ -192,5 +223,9 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
         clip: rect(1px, 1px, 1px, 1px);
       }
     </style>
+    <!-- remember this for debugging alpine store -->
+    <!-- https://github.com/alpinejs/alpine/discussions/2107 -->
+    <!-- https://stackoverflow.com/questions/69290431/how-to-reuse-alpinejs-data -->
+    <!-- <span x-data="$store.darkMode"></span> -->
   </body>
 </html>
