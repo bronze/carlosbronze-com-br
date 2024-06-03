@@ -120,7 +120,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     <LoadingIndicator
       color="bg-primary"
       animationDuration={150}
-      height="10px"
+      height="6px"
       threshold={false}
     />
   </head>
@@ -190,7 +190,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     </script>
     <style is:global>
       :root .astro-loading-indicator {
-        @apply bg-primary !important;
+        @apply bg-primary shadow;
         z-index: 2000;
       }
     </style>
