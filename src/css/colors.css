@@ -38,9 +38,9 @@
 
   --color-primary-lighter: 252 215 218;
   --color-primary-light: 215 142 150;
-  --color-primary-default: 191 97 106;
-  --color-primary-dark: 147 45 55;
-  --color-primary-darker: 102 10 19;
+  --color-primary-default: 147 45 55;
+  --color-primary-dark: 102 10 19;
+  --color-primary-darker: 75 0 0;
 
   --color-secondary-lighter: 36 41 51;
   --color-secondary-light: 59 66 82;
