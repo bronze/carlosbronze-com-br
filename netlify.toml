@@ -19,11 +19,6 @@
   status = 200
 
 [[headers]]
-  for = "/fonts/*" # https://www.tempertemper.net/blog/caching-fonts-on-netlify
-    [headers.values]
-    Cache-Control = "public, max-age=2592000"
-
-[[headers]]
   for = "/manifest.webmanifest"
   [headers.values]
     Content-Type = "application/manifest+json"
@@ -49,7 +44,25 @@
   for = "*.css"
   [headers.values]
     Cache-Control = "max-age=604800, must-revalidate, public"
+
 [[headers]]
   for = "*.js"
   [headers.values]
-    Cache-Control = "max-age=604800, must-revalidate, public"
+    Cache-Control = "max-age=604800, must-revalidate, public" # 1 week
+
+# https://www.tempertemper.net/blog/caching-fonts-on-netlify
+# 604800 for a week
+# 2592000 for a month
+# 15768000 for six months
+# 31536000 for 1 year
+
+[[headers]]
+  for = "/fonts/*"
+    [headers.values]
+    # Cache-Control = "public, max-age=2592000" # 1 month
+    Cache-Control = "max-age=15768000, immutable, public"
+
+# [[headers]]
+#   for = "/*.(ttf|ttc|otf|eot|woff|woff2)"
+#   [headers.values]
+#     Cache-Control = "max-age=31536000, immutable, public" # 1 year

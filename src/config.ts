@@ -4,13 +4,13 @@ export type Frontmatter = CollectionEntry<'blog'>['data']
 
 export const SiteMetadata = {
   title: 'Carlos Bronze',
-  description: 'Consultor de Marketing Digital',
+  description: 'Product Manager',
   author: {
     name: 'Carlos Bronze',
     twitter: '@carlosbronze',
     url: 'https://carlosbronze.com.br',
     email: 'carlos@carlosbronze.com.br',
-    summary: 'Consultor de Marketing Digital',
+    summary: 'Product Manager',
   },
   org: {
     name: 'Carlos Bronze',
@@ -18,7 +18,7 @@ export const SiteMetadata = {
     url: 'https://carlosbronze.com.br',
     email: 'carlos@carlosbronze.com.br',
     summary:
-      'Carlos Bronze é consultor de projetos de marketing digitais com experiência em publicidade, analytics e programação.',
+      'Carlos Bronze é Gerente de Produtos digitais com experiência em Design, Produto e Analytics.',
   },
   location: 'Rio de Janeiro, Rio de Janeiro, Brasil',
   latlng: [-22.98552, -43.19733] as [number, number],

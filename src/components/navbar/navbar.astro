@@ -21,7 +21,9 @@ const trimSlashes = str =>
   <Astronav>
     <div class="flex w-full items-center justify-between lg:w-auto">
       <a href="/" class="ftext-2xl lg:ftext-lg">
-        <span class="text-text/60">Carlos</span><span class="font-bold">Bronze</span>
+        <span class="text-text/60">Carlos</span><span class="font-bold"
+          >Bronze</span
+        >
       </a>
       {
         /*
@@ -32,7 +34,6 @@ const trimSlashes = str =>
       }
       <div class="inline-flex lg:hidden">
         <button
-          x-data="{ shiftPressed: false }"
           class="mr-2 inline-flex cursor-pointer px-2 lg:hidden"
           title="Dark Mode Toggle"
           x-on:click="$store.darkMode.toggle()"
@@ -83,7 +84,6 @@ const trimSlashes = str =>
         }
       </div>
       <button
-        x-data="{ shiftPressed: false }"
         class="ml-4 hidden cursor-pointer lg:block"
         title="Dark Mode Toggle"
         x-on:click="$store.darkMode.toggle()"
