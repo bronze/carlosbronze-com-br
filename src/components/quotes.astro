@@ -48,38 +48,49 @@ const { quote, author } = Astro.locals // Ensure Astro.locals is used
     --calc: clamp(2.125rem, 1.538rem + 2.9348vw, 3.8125rem);
     margin-top: calc(var(--calc) * 3);
     margin-bottom: calc(var(--calc) * 1);
-    & p {
-      &::before {
-        content: '';
-        /* background-image: url('../assets/quotes.svg'); */
-        background-size: 100% auto;
-        background-repeat: no-repeat;
-        width: var(--calc);
-        height: calc(var(--calc) * 0.75741);
-        top: calc(var(--calc) * -1);
-        aspect-ratio: 200/150;
-        mask: url('../icons/quotes.svg') no-repeat;
-        display: inline-block;
-        position: absolute;
-        left: -2rem;
-        top: -3rem;
-        @apply bg-text;
-      }
-      &::after {
-        content: '';
-        /* background-image: url('../assets/quotes.svg'); */
-        background-size: 100% auto;
-        background-repeat: no-repeat;
-        width: calc(var(--calc));
-        height: calc(var(--calc) * 0.75741);
-        bottom: calc(var(--calc) * -1);
-        aspect-ratio: 200/150;
-        mask: url('../icons/quotes.svg') no-repeat;
-        transform: rotate(180deg);
-        mask-size: cover;
-        display: inline-block;
-        @apply bg-text;
-      }
+  }
+
+  blockquote p {
+    position: relative;
+  }
+
+  blockquote p::before,
+  blockquote p::after {
+    content: '';
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    width: var(--calc);
+    height: calc(var(--calc) * 0.75741);
+    aspect-ratio: 200/150;
+    mask-image: url('../icons/quotes.svg'); /* Correct use of mask-image */
+    mask-size: cover;
+    display: inline-block;
+    position: absolute;
+    background-color: currentColor; /* Use current text color for masking */
+  }
+
+  blockquote p::before {
+    top: calc(var(--calc) * -1);
+    left: -2rem;
+  }
+
+  blockquote p::after {
+    bottom: calc(var(--calc) * -1);
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 480px) {
+    blockquote p::after {
+      position: absolute;
+      right: 0rem;
+    }
+  }
+
+  @media (min-width: 481px) {
+    blockquote p::after {
+      position: relative;
+      left: -1rem;
+      top: 3.5rem;
     }
   }
 </style>
