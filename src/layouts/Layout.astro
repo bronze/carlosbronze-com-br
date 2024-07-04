@@ -9,6 +9,8 @@ import '~/css/main.css'
 import '~/css/fonts.css'
 import '@fontsource-variable/nunito/index.css'
 import SpeedInsights from '@vercel/speed-insights/astro'
+import { ViewTransitions } from 'astro:transitions'
+import LoadingIndicator from 'astro-loading-indicator/component'
 
 export interface Props {
   frontmatter: Frontmatter
@@ -35,7 +37,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
 //   : 'Astroship - Starter Template for Astro with Tailwind CSS'
 ---
 
-<html lang="en" x-data="$store.darkMode">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -114,6 +116,13 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     <script x-bind={analyticsShow}></script>
     <script></script>
     <!-- <SpeedInsights /> -->
+    <ViewTransitions />
+    <LoadingIndicator
+      color="bg-primary"
+      animationDuration={150}
+      height="1rem"
+      threshold={false}
+    />
   </head>
   <body
     class="bg-background text-text"
@@ -155,6 +164,26 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     </style>
 
     <script src="../js/main.js"></script>
+    <script is:inline>
+      // Function to set the theme based on localStorage
+      function setDarkMode(document) {
+        let theme = localStorage.theme ? 'dark' : 'light'
+        document.documentElement.dataset.theme = theme
+      }
+
+      // Initial theme setting
+      setDarkMode(document)
+
+      // Event listener for 'astro:before-swap' to set the theme on the incoming document
+      document.addEventListener('astro:before-swap', ev => {
+        setDarkMode(ev.newDocument)
+      })
+
+      // Event listener for 'astro:load' to set the body data-theme attribute
+      document.addEventListener('astro:load', () => {
+        document.body.setAttribute('data-theme', 'dark')
+      })
+    </script>
 
     <script>
       import KonamiCode from '~/js/konamicode.js'
@@ -191,6 +220,12 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
         position: absolute;
         white-space: nowrap;
         clip: rect(1px, 1px, 1px, 1px);
+      }
+    </style>
+    <style is:global>
+      :root .astro-loading-indicator {
+        top: 45px;
+        z-index: 2000;
       }
     </style>
   </body>

@@ -32,7 +32,7 @@ export default defineConfig({
   //   webAnalytics: {enabled: true}
   // }),
   ,
-  output: "hybrid",
+  output: "server",
   adapter: netlify()
 });
 

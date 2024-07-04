@@ -50,6 +50,9 @@ dependencies:
   astro-critical-css:
     specifier: ^0.0.4
     version: 0.0.4(sharp@0.33.4)
+  astro-loading-indicator:
+    specifier: ^0.5.0
+    version: 0.5.0(astro@4.11.5)
   tailwindcss:
     specifier: ^3.4.4
     version: 3.4.4
@@ -5783,6 +5786,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /astro-loading-indicator@0.5.0(astro@4.11.5):
+    resolution: {integrity: sha512-NU06AzJEzvlzXLac8ODFgHjzTDyaF/GV+nQQ7Rq21rCeSifhmLQu219lJukIUS0ySs4ySO4PAwcaHGClOSEufA==}
+    peerDependencies:
+      astro: ^4.0.0
+    dependencies:
+      astro: 4.11.5(lightningcss@1.25.1)(terser@5.31.1)(typescript@5.4.5)
+    dev: false
 
   /astro-navbar@2.3.3:
     resolution: {integrity: sha512-WAiQUVh3fS+bUw1oDcWpddFj30z3VgmMDmSjpU78idCXiV5t4KtlBvKV0mE/+hpcGLK0ji1evvCbk2wQ7wphyQ==}
