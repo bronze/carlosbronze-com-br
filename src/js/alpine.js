@@ -1,7 +1,7 @@
 // console.log("Alpine Loaded")
 
 import Alpine from 'alpinejs';
-import persist from '@alpinejs/persist';
+// import persist from '@alpinejs/persist';
 import tippy from 'tippy.js';
 import {createPopper} from '@popperjs/core';
 import 'tippy.js/dist/tippy.css'; // optional for styling
@@ -9,10 +9,11 @@ import 'tippy.js/dist/tippy.css'; // optional for styling
 
 window.Alpine=Alpine;
 
-Alpine.plugin(persist);
+// Alpine.plugin(persist);
 
 document.addEventListener('alpine:init', () => {
   Alpine.data('windowLayout', () => ({
+    // https://www.henriksommerfeld.se/alpinejs-benefits-and-limitations/
     keyboardNavigation: false,
   }))
   Alpine.store('darkMode', {
@@ -28,7 +29,7 @@ document.addEventListener('alpine:init', () => {
     toggle() {
       event.preventDefault();
       if (event.ctrlKey||event.shiftKey) {
-        // localStorage.clear();
+        localStorage.clear();
         localStorage.removeItem('theme');
         sessionStorage.removeItem('konami');
         sessionStorage.removeItem('visited');

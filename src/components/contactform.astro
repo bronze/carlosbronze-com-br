@@ -2,32 +2,50 @@
 import Button from './ui/button.astro'
 ---
 
+<!-- To make this contact form work, create your free access key from https://web3forms.com/
+     Then you will get all form submissions in your email inbox. -->
 <div id="emailenviado" class="transform transition-all duration-300 ease-out">
   <form
+    action="https://api.web3forms.com/submit"
     method="POST"
     id="form"
-    name="Contato"
     class="needs-validation text-gray-800"
-    data-no-swup
-    data-netlify="true"
-    data-netlify-recaptcha="true"
-    netlify-honeypot="hpfield"
-    novalidate>
-    <input class="hidden" name="hpfield" />
+    novalidate
+    x-data="{ firstName: '' }"
+    @submit="subject = firstName + ' sent a message'">
+    <input
+      type="hidden"
+      name="access_key"
+      value="89749f5b-45f0-47e4-a36b-60ff15990616"
+    />
+    <!-- YOUR_ACCESS_KEY_HERE -->
+    <!-- Create your free access key from https://web3forms.com/ -->
+    <input
+      type="checkbox"
+      class="hidden"
+      style="display:none"
+      name="botcheck"
+    />
+    <input
+      type="hidden"
+      name="subject"
+      :value="firstName + ' sent a message'"
+    />
     <div class="mb-5">
       <input
         type="text"
+        x-model="firstName"
         placeholder="Nome"
         required
         class="w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-800 focus:border-gray-600 focus:ring-4"
-        name="name"
+        name="nome"
       />
       <div class="empty-feedback invalid-feedback mt-1 text-sm text-red-400">
         Por favor preencha seu nome.
       </div>
     </div>
     <div class="mb-5">
-      <label for="email_address" class="sr-only">Email</label><input
+      <label for="email_address" class="sr-only">Email Address</label><input
         id="email_address"
         type="email"
         placeholder="Email"
@@ -46,29 +64,28 @@ import Button from './ui/button.astro'
       <textarea
         name="message"
         required
-        placeholder="Mensagem"
+        placeholder="Your Message"
         class="h-36 w-full rounded-md border-2 border-gray-300 px-4 py-3 outline-none ring-gray-100 placeholder:text-gray-800 focus:border-gray-600 focus:ring-4"
       ></textarea>
       <div class="empty-feedback invalid-feedback mt-1 text-sm text-red-400">
         Por favor preencha sua mensagem.
       </div>
     </div>
-    <div id="recaptcha_invalid" class="mt-1 hidden text-sm text-red-400">
-      Por favor complete o reCaptcha abaixo.
+    <Button id="buttonSubmit" type="submit" size="lg" block>Enviar</Button>
+    <div
+      id="result"
+      class="mt-6 transform space-y-4 rounded-lg bg-yellow-100 px-4 py-3 leading-normal text-yellow-700 opacity-0">
     </div>
-    <div data-netlify-recaptcha="true" class="p-4"></div>
-
-    <Button type="submit" size="lg" block>Enviar</Button>
-    <div id="result" class="mt-3 text-center"></div>
   </form>
 </div>
 <div
   id="emailsucesso"
-  class="scale-0 transform space-y-4 rounded-lg bg-green-100 px-4 py-3 leading-normal text-green-700 opacity-0 transition-all duration-150 ease-out"
+  class="my-4 scale-0 transform rounded-lg bg-green-100 px-4 py-3 leading-normal text-green-700 opacity-0 transition-all duration-150 ease-out"
   role="alert">
   <p class="font-bold">Obrigado por entrar em contato!</p>
   <p>Seu email já está a caminho!</p>
 </div>
+
 <style>
   .invalid-feedback,
   .empty-feedback {
@@ -88,6 +105,99 @@ import Button from './ui/button.astro'
     border-color: #dc3545;
   }
 </style>
-<script>
-  import '../js/contato.js'
+<script is:inline data-astro-rerun>
+  function initializeForm() {
+    console.log('initialized')
+    const form = document.getElementById('form')
+    const result = document.getElementById('result')
+
+    if (!form || !result) return
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault()
+      form.classList.add('was-validated')
+      if (!form.checkValidity()) {
+        form.querySelectorAll(':invalid')[0].focus()
+        return
+      }
+      const formData = new FormData(form)
+      const object = Object.fromEntries(formData)
+      const json = JSON.stringify(object)
+
+      result.innerHTML = 'Enviando...'
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: json,
+      })
+        .then(() =>
+          document.getElementById('result').classList.remove('opacity-0'),
+        )
+        .then(async response => {
+          let json = await response.json()
+          if (response.status == 200) {
+            result.classList.add('text-green-700 bg-green-100')
+            result.innerHTML = json.message
+          } else {
+            console.log(response)
+            result.classList.add('text-red-700 bg-red-100')
+            result.innerHTML = json.message
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          result.innerHTML = 'Something went wrong!'
+        })
+        .then(() => console.log('Sucesso'))
+        .then(() =>
+          document.getElementById('emailenviado').classList.add('opacity-0'),
+        )
+        .then(() =>
+          document.getElementById('emailsucesso').classList.remove('opacity-0'),
+        )
+        .then(() =>
+          document.getElementById('emailsucesso').classList.add('opacity-100'),
+        )
+        .then(() =>
+          document.getElementById('emailsucesso').classList.remove('scale-0'),
+        )
+        .then(() =>
+          document.getElementById('emailsucesso').classList.add('scale-100'),
+        )
+        .then(() =>
+          document.getElementById('emailenviado').classList.add('hidden'),
+        )
+        .then(() =>
+          document.getElementById('emailenviado').classList.add('h-0'),
+        )
+        .then(function () {
+          form.reset()
+          form.classList.remove('was-validated')
+          setTimeout(() => {
+            result.style.display = 'none'
+          }, 5000)
+        })
+    })
+  }
+
+  function initializeIfContactPage() {
+    if (window.location.pathname === '/contato/') {
+      initializeForm()
+    }
+  }
+
+  // Initialize on initial load
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   setTimeout(initializeIfContactPage, 0) // Ensure DOM is fully loaded
+  // })
+
+  // Initialize on Astro load event
+  document.addEventListener('astro:page-load', initializeIfContactPage)
+
+  // Initialize on Astro after-swap event
+  //document.addEventListener('astro:after-swap', initializeIfContactPage)
 </script>

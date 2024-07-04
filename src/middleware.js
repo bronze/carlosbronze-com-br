@@ -1,8 +1,11 @@
+
 export async function onRequest(context, next) {
   // intercept data from a context
   // optionally, modify the properties in `locals`
   context.locals.title="New title";
   context.locals.property="New title";
+
+  // Quotes array
   const quotes=[
     {"quote": "The only way to do great work is to love what you do.", "author": "Steve Jobs"},
     {"quote": "In three words I can sum up everything I've learned about life: it goes on.", "author": "Robert Frost"},
@@ -27,5 +30,6 @@ export async function onRequest(context, next) {
   context.locals.quote=randomQuote.quote;
   context.locals.author=randomQuote.author;
 
+  // Call the next function in the middleware chain
   return next();
 }

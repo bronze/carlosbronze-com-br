@@ -1,4 +1,6 @@
 ---
+import { ViewTransitions } from 'astro:transitions'
+import LoadingIndicator from 'astro-loading-indicator/component'
 import Footer from '@components/footer.astro'
 import Navbar from '@components/navbar/navbar.astro'
 import BodyBg from '@components/bodybg.astro'
@@ -9,8 +11,6 @@ import '~/css/main.css'
 import '~/css/fonts.css'
 import '@fontsource-variable/nunito/index.css'
 import SpeedInsights from '@vercel/speed-insights/astro'
-import { ViewTransitions } from 'astro:transitions'
-import LoadingIndicator from 'astro-loading-indicator/component'
 
 export interface Props {
   frontmatter: Frontmatter
@@ -114,12 +114,13 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     */
     }
     <script x-bind={analyticsShow}></script>
+    <script></script>
     <!-- <SpeedInsights /> -->
     <ViewTransitions />
     <LoadingIndicator
       color="bg-primary"
       animationDuration={150}
-      height="1rem"
+      height="6px"
       threshold={false}
     />
   </head>
@@ -153,7 +154,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     <main class="transition-fade scroll-mt-24" id="primary_content">
       <slot />
     </main>
-    <Footer />
+    <Footer transition:persist />
     <style is:global>
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
@@ -164,10 +165,19 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
 
     <script src="../js/main.js"></script>
     <script is:inline>
+      // Event listener for 'astro:load' to set the body data-theme attribute
+      document.addEventListener('astro:load', () => {
+        let theme = localStorage.theme
+        document.documentElement.dataset.theme = theme
+        // document.body.setAttribute('data-theme', 'dark')
+      })
+
       // Function to set the theme based on localStorage
       function setDarkMode(document) {
-        let theme = localStorage.theme ? 'dark' : 'light'
+        // let theme = localStorage.theme ? 'light' : 'dark'
+        let theme = localStorage.theme
         document.documentElement.dataset.theme = theme
+        // console.log(theme)
       }
 
       // Initial theme setting
@@ -177,19 +187,14 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
       document.addEventListener('astro:before-swap', ev => {
         setDarkMode(ev.newDocument)
       })
-
-      // Event listener for 'astro:load' to set the body data-theme attribute
-      document.addEventListener('astro:load', () => {
-        document.body.setAttribute('data-theme', 'dark')
-      })
     </script>
-
-    <script>
-      import KonamiCode from '~/js/konamicode.js'
-      // In your script file
-      KonamiCode.init(undefined, 3000) // Reset after 3 seconds of inactivity
-    </script>
-    <script define:vars={{ consoleDate }}>
+    <style is:global>
+      :root .astro-loading-indicator {
+        @apply bg-primary shadow;
+        z-index: 2000;
+      }
+    </style>
+    <script define:vars={{ consoleDate }} data-astro-rerun>
       visited = window.sessionStorage.visited
       if (!visited) {
         sessionStorage.setItem('visited', 'true')
@@ -218,11 +223,9 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
         clip: rect(1px, 1px, 1px, 1px);
       }
     </style>
-    <style is:global>
-      :root .astro-loading-indicator {
-        top: 45px;
-        z-index: 2000;
-      }
-    </style>
+    <!-- remember this for debugging alpine store -->
+    <!-- https://github.com/alpinejs/alpine/discussions/2107 -->
+    <!-- https://stackoverflow.com/questions/69290431/how-to-reuse-alpinejs-data -->
+    <!-- <span x-data="$store.darkMode"></span> -->
   </body>
 </html>

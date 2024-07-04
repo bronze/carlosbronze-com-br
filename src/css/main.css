@@ -15,7 +15,10 @@ body {
   @apply bg-muted text-text;
   padding-right: var(--scrollbarComp);
   overflow-x: hidden;
-  overflow-y: scroll; /* Show vertical scrollbar */
+  overflow-y: scroll; /* Show scrollbars */
+}
+.color-primary-default {
+  color: rgb(var(--color-primary-default));
 }
 /* https://replit.com/@swupjs/Swup-Demo-Multiple#transitions.css*/
 .swup-progress-bar {
@@ -31,9 +34,9 @@ nav a[aria-current='page'] {
 
 nav ul li {
   /* @apply font-sans; */
-  a {
+  /* a {
     @apply flex py-2 capitalize text-text hover:text-primary lg:px-3;
-  }
+  } */
 }
 body.konami {
   background: linear-gradient(
