@@ -12,24 +12,9 @@ window.Alpine=Alpine;
 Alpine.plugin(persist);
 
 document.addEventListener('alpine:init', () => {
-  // Alpine.data('banner', function () {
-  //   return {
-  //     show: this.$persist(false),
-  //     dismissed: this.$persist(false),
-  //     dismiss() {
-  //       this.show=false;
-  //       this.dismissed=true;
-  //     },
-
-  //     init() {
-  //       if (!this.dismissed) {
-  //         setTimeout(() => {
-  //           this.show=true;
-  //         }, 1500);
-  //       }
-  //     },
-  //   };
-  // });
+  Alpine.data('windowLayout', () => ({
+    keyboardNavigation: false,
+  }))
   Alpine.store('darkMode', {
     init() {
       this.on=localStorage.theme==='dark'||
@@ -74,38 +59,6 @@ document.addEventListener('alpine:init', () => {
     'event-theme': Alpine.store('darkMode').on? 'Dark':'Light',
     src: '/js/analytics.js',
   }))
-  // Alpine.magic('tooltip', el => message => {
-  //   let instance=tippy(el, {theme: 'tomato', content: message, trigger: 'manual'})
-
-  //   instance.show()
-
-  //   setTimeout(() => {
-  //     instance.hide()
-
-  //     setTimeout(() => instance.destroy(), 150)
-  //   }, 2000)
-  // })
-
-  // Directive: x-tooltip
-  // Alpine.directive('tooltip', (el, {expression}) => {
-  //   tippy(el, {theme: 'tomato', content: expression})
-  // })
-  // Alpine.data('quotes', () => ({
-  //   quotes: [],
-  //   randomQuote: {quote: '', author: ''},
-  //   fetchQuotes() {
-  //     fetch('quotes.json')
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         this.quotes=data;
-  //         this.getRandomQuote();
-  //       });
-  //   },
-  //   getRandomQuote() {
-  //     const randomIndex=Math.floor(Math.random()*this.quotes.length);
-  //     this.randomQuote=this.quotes[randomIndex];
-  //   }
-  // }))
 });
 
 // debug: hideOnClick: false, trigger: 'click',

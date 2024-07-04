@@ -114,7 +114,6 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     */
     }
     <script x-bind={analyticsShow}></script>
-    <script></script>
     <!-- <SpeedInsights /> -->
     <ViewTransitions />
     <LoadingIndicator
@@ -126,7 +125,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
   </head>
   <body
     class="bg-background text-text"
-    x-data="window.blog"
+    x-data="windowLayout"
     :class="{ 'keyboard-navigation' : keyboardNavigation }"
     @mouseup="keyboardNavigation = false"
     @keydown.tab="keyboardNavigation = true">
@@ -189,9 +188,6 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
       import KonamiCode from '~/js/konamicode.js'
       // In your script file
       KonamiCode.init(undefined, 3000) // Reset after 3 seconds of inactivity
-      window.blog = {
-        keyboardNavigation: false,
-      }
     </script>
     <script define:vars={{ consoleDate }}>
       visited = window.sessionStorage.visited
