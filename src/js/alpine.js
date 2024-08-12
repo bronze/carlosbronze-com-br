@@ -16,15 +16,19 @@ document.addEventListener('alpine:init', () => {
     // https://www.henriksommerfeld.se/alpinejs-benefits-and-limitations/
     keyboardNavigation: false,
   }))
+
   Alpine.store('darkMode', {
+    on: false,
     init() {
-      this.on=localStorage.theme==='dark'||
-        (!('theme' in localStorage)&&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)||
-        document.documentElement.getAttribute('data-theme')==='dark'
-      document.documentElement.setAttribute('data-theme', this.on? 'dark':'light')
-      this.dark=this.on? true:false
-      this.theme=this.on? 'dark':'light'
+      // Determine the initial theme preference
+      const localTheme=localStorage.getItem('theme');
+      const systemPrefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const documentTheme=document.documentElement.getAttribute('data-theme')==='dark';
+
+      this.on=localTheme==='dark'||(!localTheme&&(systemPrefersDark||documentTheme));
+
+      // Set the initial theme
+      this.updateTheme();
     },
     toggle() {
       event.preventDefault();
@@ -33,34 +37,38 @@ document.addEventListener('alpine:init', () => {
         localStorage.removeItem('theme');
         sessionStorage.removeItem('konami');
         sessionStorage.removeItem('visited');
-        document.body.classList.remove('konami')
+        document.body.classList.remove('konami');
         // document.getElementById('duck_cape').classList.add('hidden')
         console.log('localStorage theme cleared');
-        return
+        return;
       }
-      this.on=!this.on
+
+      // Toggle the theme
+      this.on=!this.on;
       // https://stackoverflow.com/questions/65942968/storing-and-retrieving-a-theme-in-javascript-from-a-data-attribute
-      var targetTheme=this.on? 'dark':'light';
-      // console.log(targetTheme);
-      // https://stackoverflow.com/questions/62913465/how-to-stop-the-window-scrolling-to-the-top-of-the-page-on-my-navbar-toggle
-      document.documentElement.setAttribute('data-theme', targetTheme)
-      localStorage.theme=targetTheme
-      this.dark=!this.dark
-      this.theme=this.on? 'dark':'light'
-      // console.log('storage: '+window.localStorage.theme+' | dark: '+this.dark);
+      this.updateTheme();
+    },
+    updateTheme() {
+      const targetTheme=this.on? 'dark':'light';
+      document.documentElement.setAttribute('data-theme', targetTheme);
+      localStorage.setItem('theme', targetTheme);
+      this.theme=targetTheme;
     }
   })
+
   Alpine.bind('PlausibleAnalytics', () => ({
     'data-domain': 'carlosbronze.com.br',
     'event-theme': Alpine.store('darkMode').on? 'Dark':'Light',
     src: '/js/analytics.js',
   }))
+
   Alpine.bind('isDev', () => ({
     'data-domain': 'carlosbronze.dev',
     'event-theme': Alpine.store('darkMode').on? 'Dark':'Light',
     src: '/js/analytics.js',
   }))
 });
+
 
 // debug: hideOnClick: false, trigger: 'click',
 Alpine.start();

@@ -76,6 +76,9 @@ devDependencies:
   '@divriots/jampack':
     specifier: ^0.24.4
     version: 0.24.4(react-dom@16.14.0)(react@16.14.0)
+  '@iconify-json/simple-icons':
+    specifier: ^1.1.109
+    version: 1.1.109
   '@resvg/resvg-js':
     specifier: ^2.6.2
     version: 2.6.2
@@ -3552,6 +3555,12 @@ packages:
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
+
+  /@iconify-json/simple-icons@1.1.109:
+    resolution: {integrity: sha512-vIhIJQDdbS5R6kSyIHVBRCaR2jiFjVlbVtB4PAoLjQL45vJRHMTwkrFa536XcX7yW69HbQkoanydcyDjknI6pw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
 
   /@iconify-json/uil@1.1.8:
     resolution: {integrity: sha512-zkWB8XImzb1gfi5kN9xAfDXF5OqzxbKvtZq9xRUplEWEJYOoDB1RpbbQpCwJQ41j8Nf0ag0LFJr++qhYmvxftQ==}
