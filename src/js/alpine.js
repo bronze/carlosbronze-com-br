@@ -15,7 +15,23 @@ document.addEventListener('alpine:init', () => {
   Alpine.data('windowLayout', () => ({
     // https://www.henriksommerfeld.se/alpinejs-benefits-and-limitations/
     keyboardNavigation: false,
-  }))
+    init() {
+      // Enable keyboard navigation
+      this.enableKeyboardNavigation();
+    },
+    enableKeyboardNavigation() {
+      document.addEventListener('keydown', (event) => {
+        // Check if the key pressed is a number from 1 to 9
+        if (event.key>='1'&&event.key<='9') {
+          const link=document.querySelector(`[data-key='${event.key}']`);
+          if (link) {
+            window.location.href=link.href;
+          }
+        }
+      });
+    }
+  }));
+
 
   Alpine.store('darkMode', {
     on: false,

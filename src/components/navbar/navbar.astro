@@ -37,7 +37,9 @@ const trimSlashes = str =>
           x-data="{ shiftPressed: false }"
           class="mr-2 inline-flex cursor-pointer px-2 lg:hidden"
           title="Dark Mode Toggle"
+          data-key="d"
           x-on:click="$store.darkMode.toggle()"
+          @keydown.window="if ($event.key.toLowerCase() === 'd') $store.darkMode.toggle()"
           rel="nofollow">
           <Icon name="mdi:theme-light-dark" class="h-full w-12" />
         </button>
@@ -52,6 +54,7 @@ const trimSlashes = str =>
             <>
               {item.children && (
                 <Dropdown
+                  data-key={item.key}
                   title={item.title}
                   children={item.children}
                   lastItem={index === menuitems.length - 1}
@@ -63,6 +66,7 @@ const trimSlashes = str =>
                   <a
                     rel="prefetch"
                     href={item.path}
+                    data-key={item.key}
                     aria-current={
                       trimSlashes(pathname) === item.slug ? 'page' : 'false'
                     }

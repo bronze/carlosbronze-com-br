@@ -35,9 +35,9 @@ export { default as DefaultSVG } from './assets/hero.png'
 export { default as DefaultImage } from './assets/opengraph.jpg'
 
 export const NavigationLinks = [
-  { title: 'Home', path: '/', slug: '' },
+  { title: 'Home', path: '/', slug: '', key: '1' },
   // { title: 'Sobre', path: '/sobre', slug: 'sobre' },
-  { title: 'Contato', path: '/contato/', slug: 'contato' },
+  { title: 'Contato', path: '/contato/', slug: 'contato', key: '2' },
 ]
 // const menuitems = [
 //   {
