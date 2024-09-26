@@ -62,7 +62,7 @@ const trimSlashes = str =>
               )}
 
               {!item.children && (
-                <li>
+                <li class="group relative">
                   <a
                     rel="prefetch"
                     href={item.path}
@@ -73,6 +73,9 @@ const trimSlashes = str =>
                     class="flex py-2 capitalize text-text hover:text-primary lg:px-3">
                     {item.title}
                   </a>
+                  <span class="absolute -bottom-2 -right-3 rounded border-dashed border-primary bg-gray-800/30 p-1 text-xs text-primary shadow-lg">
+                    [{item.key}]
+                  </span>
                 </li>
               )}
             </>
@@ -91,7 +94,7 @@ const trimSlashes = str =>
       <button
         x-data="{ shiftPressed: false }"
         class="ml-4 hidden cursor-pointer lg:block"
-        title="Dark Mode Toggle"
+        title="Dark Mode Toggle [d]"
         x-on:click="$store.darkMode.toggle()"
         rel="nofollow">
         <Icon name="mdi:theme-light-dark" class="h-full w-8" />

@@ -24,12 +24,14 @@ document.addEventListener('alpine:init', () => {
         // Check if the key pressed is a number from 1 to 9
         if (event.key>='1'&&event.key<='9') {
           const link=document.querySelector(`[data-key='${event.key}']`);
-          if (link) {
+          if (link&&link.href!==window.location.href) {
+            // Navigate only if the link's href is different from the current URL
             window.location.href=link.href;
           }
         }
       });
     }
+
   }));
 
 
