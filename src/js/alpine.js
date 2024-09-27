@@ -6,6 +6,7 @@ import tippy from 'tippy.js';
 import {createPopper} from '@popperjs/core';
 import 'tippy.js/dist/tippy.css'; // optional for styling
 
+import {navigate} from 'astro:transitions/client';
 
 window.Alpine=Alpine;
 
@@ -26,7 +27,9 @@ document.addEventListener('alpine:init', () => {
           const link=document.querySelector(`[data-key='${event.key}']`);
           if (link&&link.href!==window.location.href) {
             // Navigate only if the link's href is different from the current URL
-            window.location.href=link.href;
+            // window.location.href=link.href;
+            let href=link.href;
+            navigate(href);
           }
         }
       });
