@@ -222,30 +222,34 @@ document.addEventListener('alpine:init', () => {
     enableKeyboardNavigation() {
       document.addEventListener('keydown', (event) => {
         const activeElement=document.activeElement;
-        const isInputField=activeElement.tagName==='INPUT'||activeElement.tagName==='TEXTAREA'||activeElement.tagName==='SELECT'||activeElement.isContentEditable;
+        const isInputField=activeElement.tagName==='INPUT'||
+          activeElement.tagName==='TEXTAREA'||
+          activeElement.tagName==='SELECT'||
+          activeElement.isContentEditable;
 
-        // Só executa o trigger se não estiver em um campo de formulário
-        if (!isInputField) {
-          // Check if the key pressed is a number from 1 to 9
-          if (event.key>='1'&&event.key<='9') {
-            const link=document.querySelector(`[data-key='${event.key}']`);
-            if (link&&link.href!==window.location.href) {
-              let href=link.href;
-              navigate(href);
-            }
-          }
+        // Disable keyboard interaction if the user is in an input field
+        if (isInputField) {
+          return;
+        }
 
-          // Check if 'D' or 'Ctrl+D' is pressed for dark mode toggle
-          if (event.key.toLowerCase()==='d') {
-            $store.darkMode.toggle();
+        // Check if the key pressed is a number from 1 to 9
+        if (event.key>='1'&&event.key<='9') {
+          const link=document.querySelector(`[data-key='${event.key}']`);
+          if (link&&link.href!==window.location.href) {
+            let href=link.href;
+            navigate(href);
           }
-
-          if (event.ctrlKey&&event.key.toLowerCase()==='d') {
-            $store.darkMode.toggle();
-          }
+        }
+        // Check if 'D' or 'Ctrl+D' is pressed for dark mode toggle
+        if (event.key.toLowerCase()==='d') {
+          Alpine.store.darkMode.toggle();
+        }
+        if (event.ctrlKey&&event.key.toLowerCase()==='d') {
+          Alpine.store.darkMode.toggle();
         }
       });
     }
+
 
 
   }));

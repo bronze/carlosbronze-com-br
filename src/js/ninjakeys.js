@@ -19,7 +19,6 @@ function initializeNinjaMenu() {
     {
       id: 'Toggle Theme',
       title: 'Toggle Dark Mode',
-      hotkey: 'ctrl+D',
       handler: () => {
         Alpine.store('darkMode').toggle() // Chama o store do Alpine diretamente
         return {keepOpen: true};
