@@ -151,6 +151,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     <header id="primary_nav">
       <Navbar />
     </header>
+
     <main class="transition-fade scroll-mt-24" id="primary_content">
       <slot />
     </main>
@@ -166,14 +167,13 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
 
       ninja.data = [
         {
-          id: 'Projects',
-          title: 'Open Projects',
-          hotkey: 'ctrl+N',
+          id: 'Home',
+          title: 'Home',
           icon: 'apps',
-          section: 'Projects',
+          section: 'Home',
           handler: () => {
             // it's auto register above hotkey with this handler
-            alert('Your logic to handle')
+            window.location.href = '/' // Redireciona para a URL raiz
           },
         },
         {
@@ -201,7 +201,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
         {
           id: 'Light Theme',
           title: 'Change theme to Light',
-          icon: 'light_mode',
+          mdIcon: 'light_mode ',
           parent: 'Theme',
           handler: () => {
             // simple handler

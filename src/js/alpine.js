@@ -2,15 +2,20 @@
 
 import Alpine from 'alpinejs';
 // import persist from '@alpinejs/persist';
+import focus from '@alpinejs/focus'
+
 import tippy from 'tippy.js';
 import {createPopper} from '@popperjs/core';
 import 'tippy.js/dist/tippy.css'; // optional for styling
 
 import {navigate} from 'astro:transitions/client';
+Alpine.plugin(focus)
+
 
 window.Alpine=Alpine;
 
 // Alpine.plugin(persist);
+
 
 document.addEventListener('alpine:init', () => {
   Alpine.data('windowLayout', () => ({
@@ -24,22 +29,32 @@ document.addEventListener('alpine:init', () => {
 
     enableKeyboardNavigation() {
       document.addEventListener('keydown', (event) => {
-        // Check if the key pressed is a number from 1 to 9
-        if (event.key>='1'&&event.key<='9') {
-          const link=document.querySelector(`[data-key='${event.key}']`);
-          if (link&&link.href!==window.location.href) {
-            // Navigate only if the link's href is different from the current URL
-            // window.location.href=link.href;
-            let href=link.href;
-            navigate(href);
+        const activeElement=document.activeElement;
+        const isInputField=activeElement.tagName==='INPUT'||activeElement.tagName==='TEXTAREA'||activeElement.tagName==='SELECT'||activeElement.isContentEditable;
+
+        // Só executa o trigger se não estiver em um campo de formulário
+        if (!isInputField) {
+          // Check if the key pressed is a number from 1 to 9
+          if (event.key>='1'&&event.key<='9') {
+            const link=document.querySelector(`[data-key='${event.key}']`);
+            if (link&&link.href!==window.location.href) {
+              let href=link.href;
+              navigate(href);
+            }
+          }
+
+          // Check if 'D' or 'Ctrl+D' is pressed for dark mode toggle
+          if (event.key.toLowerCase()==='d') {
+            $store.darkMode.toggle();
+          }
+
+          if (event.ctrlKey&&event.key.toLowerCase()==='d') {
+            $store.darkMode.toggle();
           }
         }
-        // // Insert this block to handle Ctrl + D for toggling dark mode
-        // if (event.ctrlKey&&event.key==='d') {
-        //   Alpine.store('darkMode').toggle();
-        // }
       });
     }
+
 
   }));
 

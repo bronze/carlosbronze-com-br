@@ -39,8 +39,6 @@ const trimSlashes = str =>
           title="Dark Mode Toggle"
           data-key="d"
           x-on:click="$store.darkMode.toggle()"
-          @keydown.window="if ($event.key.toLowerCase() === 'd') $store.darkMode.toggle()"
-          @keydown.window="if ($event.ctrlKey&&event.key.toLowerCase() === 'd') $store.darkMode.toggle()"
           rel="nofollow">
           <Icon name="mdi:theme-light-dark" class="h-full w-12" />
         </button>
