@@ -123,6 +123,10 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
       height="6px"
       threshold={false}
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons&display=block"
+      rel="stylesheet"
+    />
   </head>
   <body
     class="bg-background text-text"
@@ -156,72 +160,9 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
       <slot />
     </main>
     <Footer transition:persist />
+
     <ninja-keys :class="{'dark': $store.darkMode.on}"></ninja-keys>
-    <script>
-      const ninja = document.querySelector('ninja-keys')
-
-      function setTheme(theme) {
-        localStorage.setItem('theme', theme)
-        document.documentElement.setAttribute('data-theme', theme)
-      }
-
-      ninja.data = [
-        {
-          id: 'Home',
-          title: 'Home',
-          icon: 'apps',
-          section: 'Home',
-          handler: () => {
-            // it's auto register above hotkey with this handler
-            window.location.href = '/' // Redireciona para a URL raiz
-          },
-        },
-        {
-          id: 'Toggle Theme',
-          title: 'Toggle Dark Mode',
-          icon: 'brightness_4',
-          hotkey: 'ctrl+D',
-          handler: () => {
-            Alpine.store('darkMode').toggle() // Chama o store do Alpine diretamente
-            return { keepOpen: true }
-          },
-        },
-        {
-          id: 'Theme',
-          title: 'Change theme...',
-          icon: 'desktop_windows',
-          children: ['Light Theme', 'Dark Theme', 'System Theme'],
-          handler: () => {
-            // open menu if closed. Because you can open directly that menu from it's hotkey
-            ninja.open({ parent: 'Theme' })
-            // if menu opened that prevent it from closing on select that action, no need if you don't have child actions
-            return { keepOpen: true }
-          },
-        },
-        {
-          id: 'Light Theme',
-          title: 'Change theme to Light',
-          mdIcon: 'light_mode ',
-          parent: 'Theme',
-          handler: () => {
-            // simple handler
-            setTheme('light')
-            return { keepOpen: true }
-          },
-        },
-        {
-          id: 'Dark Theme',
-          title: 'Change theme to Dark',
-          icon: 'dark_mode',
-          parent: 'Theme',
-          handler: () => {
-            // simple handler
-            setTheme('dark')
-            return { keepOpen: true }
-          },
-        },
-      ]
-    </script>
+    <script src="../js/ninjakeys.js"></script>
     <style is:global>
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
