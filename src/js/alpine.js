@@ -18,6 +18,198 @@ window.Alpine=Alpine;
 
 
 document.addEventListener('alpine:init', () => {
+  Alpine.data('CommandPalette', () => ({
+
+    // Customize Command Palette
+    open: false,
+    resetOnOpen: true,
+    closeOnSelection: true,
+
+    // Add your custom functionality or navigation when an option is selected
+    optionSelected() {
+      // console.log(this.highlightedOption);
+    },
+
+    // Available options (id and label are required)
+    options: [
+      {
+        id: 1,
+        label: 'New file',
+        command: 'new-file',
+        icon: '',
+        shortcut: 'N',
+      },
+      {
+        id: 2,
+        label: 'New folder',
+        command: 'new-folder',
+        icon: '',
+        shortcut: 'F',
+      },
+      {
+        id: 3,
+        label: 'New project',
+        command: 'new-project',
+        icon: '',
+        shortcut: 'P',
+      },
+      {
+        id: 4,
+        label: 'Archive project',
+        command: 'archive-project',
+        icon: '',
+        shortcut: 'A',
+      },
+      {
+        id: 5,
+        label: 'Format code',
+        command: 'format-code',
+        icon: '',
+        shortcut: 'Y',
+      },
+    ],
+
+    // Helper variables
+    modifierKey: '',
+    filterTerm: '',
+    filterResults: [],
+    highlightedOption: null,
+    highlightedIndex: -1,
+    enableMouseHighlighting: true,
+
+    // Initialization
+    init() {
+      if (this.open) {
+        this.openCommandPalette();
+      }
+
+      // Initialize filter results array
+      this.filterResults=this.options;
+
+      // Set the modifier key based on platform
+      this.modifierKey=/mac/i.test(navigator.userAgentData? navigator.userAgentData.platform:navigator.platform)? '⌘':'Ctrl';
+    },
+
+    // Open Command Palette
+    openCommandPalette() {
+      if (this.resetOnOpen) {
+        this.filterTerm='';
+        this.highlightedOption=null;
+        this.highlightedIndex=-1;
+        this.filterResults=this.options;
+      }
+
+      this.open=true;
+
+      $nextTick(() => {
+        // Focus filter input
+        $focus.focus($refs.elFilter);
+      });
+    },
+
+    // Close Command Palette
+    closeCommandPalette() {
+      this.open=false;
+
+      $nextTick(() => {
+        // Focus toggle button
+        $focus.focus($refs.elToggleButton);
+      });
+    },
+
+    // Enable mouse interaction
+    enableMouseInteraction() {
+      this.enableMouseHighlighting=true;
+    },
+
+    // Filter functionality
+    filter() {
+      if (this.filterTerm==='') {
+        this.filterResults=this.options;
+      } else {
+        this.filterResults=this.options.filter((option) => {
+          return option.label.toLowerCase().includes(this.filterTerm.toLowerCase());
+        });
+      }
+
+      // Refresh highlighted array index (the results have been updated)
+      if (this.filterResults.length>0&&this.highlightedOption) {
+        this.highlightedIndex=this.filterResults.findIndex((option) => {
+          return option.id===this.highlightedOption.id;
+        });
+      }
+    },
+
+    // Set an option as highlighted
+    setHighlighted(id, mode) {
+      if (id===null) {
+        this.highlightedOption=null;
+        this.highlightedIndex=-1;
+      } else if (this.highlightedOption?.id!=id&&(mode==='keyboard'||(mode==='mouse'&&this.enableMouseHighlighting))) {
+        this.highlightedOption=this.options.find(options => options.id===id)||null;
+
+        // Set highlighted index of filter results
+        if (mode==='mouse'&&this.enableMouseHighlighting) {
+          this.highlightedIndex=this.filterResults.findIndex((option) => {
+            return option.id===id;
+          });
+        } else {
+          // We are in keyboard mode, disable mouse navigation
+          this.enableMouseHighlighting=false;
+
+          // Scroll listbox to make the highlighted element visible
+          $refs.elListbox.querySelector('li[data-id=\''+id+'\']').scrollIntoView({block: 'nearest'});
+        }
+      }
+    },
+
+    // Check if the given id is the highlighted one
+    isHighlighted(id) {
+      return id===this.highlightedOption?.id||false;
+    },
+
+    // Navigate results functionality
+    navigateResults(mode) {
+      if (this.filterResults.length>0) {
+        const maxIndex=this.filterResults.length-1;
+
+        if (mode==='first') {
+          this.highlightedIndex=0;
+        } else if (mode==='last') {
+          this.highlightedIndex=maxIndex;
+        } else if (mode==='previous') {
+          if (this.highlightedIndex>0&&this.highlightedIndex<=maxIndex) {
+            this.highlightedIndex--;
+          } else if (this.highlightedIndex===-1) {
+            this.highlightedIndex=0;
+          }
+        } else if (mode==='next') {
+          if (this.highlightedIndex>=0&&this.highlightedIndex<maxIndex) {
+            this.highlightedIndex++;
+          } else if (this.highlightedIndex===-1) {
+            this.highlightedIndex=0;
+          }
+        }
+
+        if (!this.filterResults[this.highlightedIndex]?.id) {
+          this.highlightedIndex=0;
+        }
+
+        this.setHighlighted(this.filterResults[this.highlightedIndex].id, 'keyboard');
+      }
+    },
+
+    // On option selected
+    onOptionSelected() {
+      if (this.highlightedOption!=null) {
+        this.optionSelected();
+
+        if (this.closeOnSelection) {
+          this.closeCommandPalette();
+        }
+      }
+    },
+  }));
   Alpine.data('windowLayout', () => ({
     // https://www.henriksommerfeld.se/alpinejs-benefits-and-limitations/
     keyboardNavigation: false,

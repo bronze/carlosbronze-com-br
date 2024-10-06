@@ -7,6 +7,11 @@ html {
   @apply scroll-smooth;
   /* // word-break: break-word; */
 }
+
+[x-cloak] {
+  display: none !important;
+}
+
 ::selection {
   color: rgb(var(--color-primary-default));
   background-color: rgb(var(--color-inverted));

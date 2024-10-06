@@ -3,6 +3,13 @@ const defaultTheme=require("tailwindcss/defaultTheme");
 const svgToDataUri=require('mini-svg-data-uri')
 const {default: flattenColorPalette}=require('tailwindcss/lib/util/flattenColorPalette')
 
+import plugin from "tailwindcss/plugin";
+import defaultTheme from "tailwindcss/defaultTheme";
+
+import aspectRatio from "@tailwindcss/aspect-ratio";
+import forms from "@tailwindcss/forms";
+import typography from "@tailwindcss/typography";
+
 module.exports={
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   darkMode: ['class', '[data-theme="dark"]'],
@@ -108,6 +115,7 @@ module.exports={
     },
   },
   plugins: [
+    aspectRatio, forms, typography,
     require('tailwind-nord'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),

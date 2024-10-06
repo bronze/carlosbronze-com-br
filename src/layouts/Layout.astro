@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions'
 import LoadingIndicator from 'astro-loading-indicator/component'
+import AlpineCommandPalette from '@components/alpine_commandpalette.astro'
 import Footer from '@components/footer.astro'
 import Navbar from '@components/navbar/navbar.astro'
 import BodyBg from '@components/bodybg.astro'
@@ -155,12 +156,11 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
     <header id="primary_nav">
       <Navbar />
     </header>
-
+    <!-- <AlpineCommandPalette /> -->
     <main class="transition-fade scroll-mt-24" id="primary_content">
       <slot />
     </main>
     <Footer transition:persist />
-
     <ninja-keys :class="{'dark': $store.darkMode.on}"></ninja-keys>
     <script src="../js/ninjakeys.js"></script>
     <style is:global>
