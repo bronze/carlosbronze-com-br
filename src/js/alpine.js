@@ -20,6 +20,8 @@ document.addEventListener('alpine:init', () => {
       // Enable keyboard navigation
       this.enableKeyboardNavigation();
     },
+
+
     enableKeyboardNavigation() {
       document.addEventListener('keydown', (event) => {
         // Check if the key pressed is a number from 1 to 9
@@ -32,11 +34,14 @@ document.addEventListener('alpine:init', () => {
             navigate(href);
           }
         }
+        // // Insert this block to handle Ctrl + D for toggling dark mode
+        // if (event.ctrlKey&&event.key==='d') {
+        //   Alpine.store('darkMode').toggle();
+        // }
       });
     }
 
   }));
-
 
   Alpine.store('darkMode', {
     on: false,
@@ -53,7 +58,7 @@ document.addEventListener('alpine:init', () => {
     },
     toggle() {
       event.preventDefault();
-      if (event.ctrlKey||event.shiftKey) {
+      if (event.shiftKey) {
         localStorage.clear();
         localStorage.removeItem('theme');
         sessionStorage.removeItem('konami');

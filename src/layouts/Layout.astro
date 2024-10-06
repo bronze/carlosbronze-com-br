@@ -155,6 +155,73 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
       <slot />
     </main>
     <Footer transition:persist />
+    <ninja-keys> </ninja-keys>
+    <script>
+      const ninja = document.querySelector('ninja-keys')
+
+      function setTheme(theme) {
+        localStorage.setItem('theme', theme)
+        document.documentElement.setAttribute('data-theme', theme)
+      }
+
+      ninja.data = [
+        {
+          id: 'Projects',
+          title: 'Open Projects',
+          hotkey: 'ctrl+N',
+          icon: 'apps',
+          section: 'Projects',
+          handler: () => {
+            // it's auto register above hotkey with this handler
+            alert('Your logic to handle')
+          },
+        },
+        {
+          id: 'Toggle Theme',
+          title: 'Toggle Dark Mode',
+          icon: 'brightness_4',
+          hotkey: 'ctrl+D',
+          handler: () => {
+            Alpine.store('darkMode').toggle() // Chama o store do Alpine diretamente
+            return { keepOpen: true }
+          },
+        },
+        {
+          id: 'Theme',
+          title: 'Change theme...',
+          icon: 'desktop_windows',
+          children: ['Light Theme', 'Dark Theme', 'System Theme'],
+          handler: () => {
+            // open menu if closed. Because you can open directly that menu from it's hotkey
+            ninja.open({ parent: 'Theme' })
+            // if menu opened that prevent it from closing on select that action, no need if you don't have child actions
+            return { keepOpen: true }
+          },
+        },
+        {
+          id: 'Light Theme',
+          title: 'Change theme to Light',
+          icon: 'light_mode',
+          parent: 'Theme',
+          handler: () => {
+            // simple handler
+            setTheme('light')
+            return { keepOpen: true }
+          },
+        },
+        {
+          id: 'Dark Theme',
+          title: 'Change theme to Dark',
+          icon: 'dark_mode',
+          parent: 'Theme',
+          handler: () => {
+            // simple handler
+            setTheme('dark')
+            return { keepOpen: true }
+          },
+        },
+      ]
+    </script>
     <style is:global>
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */

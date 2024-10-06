@@ -40,6 +40,7 @@ const trimSlashes = str =>
           data-key="d"
           x-on:click="$store.darkMode.toggle()"
           @keydown.window="if ($event.key.toLowerCase() === 'd') $store.darkMode.toggle()"
+          @keydown.window="if ($event.ctrlKey&&event.key.toLowerCase() === 'd') $store.darkMode.toggle()"
           rel="nofollow">
           <Icon name="mdi:theme-light-dark" class="h-full w-12" />
         </button>
@@ -94,7 +95,7 @@ const trimSlashes = str =>
       <button
         x-data="{ shiftPressed: false }"
         class="ml-4 hidden cursor-pointer lg:block"
-        title="Dark Mode Toggle [d]"
+        title="Dark Mode Toggle"
         x-on:click="$store.darkMode.toggle()"
         rel="nofollow">
         <Icon name="mdi:theme-light-dark" class="h-full w-8" />

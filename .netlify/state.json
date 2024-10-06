@@ -13,8 +13,9 @@
 			},
 			"timezone": "America/Sao_Paulo",
 			"latitude": -22.9072,
-			"longitude": -43.1883
+			"longitude": -43.1883,
+			"postalCode": "22790"
 		},
-		"timestamp": 1723483185017
+		"timestamp": 1728227305409
 	}
 }

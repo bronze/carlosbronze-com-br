@@ -15,3 +15,5 @@ if (window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches
 } else {
   console.log('User does not prefer dark mode');
 }
+
+import 'ninja-keys';
