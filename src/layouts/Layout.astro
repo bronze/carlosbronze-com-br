@@ -156,7 +156,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
       <slot />
     </main>
     <Footer transition:persist />
-    <ninja-keys> </ninja-keys>
+    <ninja-keys :class="{'dark': $store.darkMode.on}"></ninja-keys>
     <script>
       const ninja = document.querySelector('ninja-keys')
 
