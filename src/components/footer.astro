@@ -25,7 +25,7 @@ import PhCodeBold from '@assets/PhCodeBold.astro'
         <!-- Embed the contents of the `/src/icons/logo.svg` file -->
         <Icon name="phcodebold" class="mr-1 inline-flex h-4 w-4" />
         <!-- <PhCodeBold class="mr-1 inline-flex h-4 w-4" /> -->
-         Carlos Bronze {new Date().getFullYear()}
+        Carlos Bronze {new Date().getFullYear()}
       </span>
       <!--
         <span
@@ -55,6 +55,12 @@ import PhCodeBold from '@assets/PhCodeBold.astro'
         <Icon name="mdi:github" />
       </a>
       <a
+        href="https://bsky.app/profile/carlosbronze.bsky.social"
+        rel="me"
+        title="BlueSky">
+        <Icon name="simple-icons:bluesky" />
+      </a>
+      <a
         href="https://docs.google.com/document/d/1QjJRMyWnHIhv6_bAtlz2mGRNnZZw81rjCOGd4ZlmZpY/edit?usp=sharing"
         rel="me"
         title="Resume">
@@ -70,7 +76,7 @@ import PhCodeBold from '@assets/PhCodeBold.astro'
   }
 
   .footerlinks [data-icon] {
-    @apply h-full w-8  cursor-pointer;
+    @apply h-full w-8 cursor-pointer;
     &:hover,
     &:focus,
     &:active {
