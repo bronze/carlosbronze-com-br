@@ -44,6 +44,9 @@ dependencies:
   alpinejs:
     specifier: ^3.14.1
     version: 3.14.1
+  astro-analytics:
+    specifier: ^2.7.0
+    version: 2.7.0
   astro-compress:
     specifier: ^2.2.28
     version: 2.2.28(typescript@5.4.5)
@@ -5752,6 +5755,10 @@ packages:
     resolution: {integrity: sha512-ISvCdHdlTDlH5IpxQJIex7BWBywFWgjJSVdwst+/iQCoEYnyOaQ95+X1JGshuBjGp6nxKUy1jMgE3zPqN7fQdg==}
     hasBin: true
     dev: true
+
+  /astro-analytics@2.7.0:
+    resolution: {integrity: sha512-/qctBn7LF9DS3ff2YYFrYtCkLLw2fboPDJUgg3HErygGbEBvebW/eGRftZH4ykDJhlCvwTsSEKz/vff7WllyAw==}
+    dev: false
 
   /astro-compress@2.2.28(typescript@5.4.5):
     resolution: {integrity: sha512-6vfP34YQzuRu+3S8ufmG4924NXZ8D095ii+BLNbkroDgAxlL5C6T6L47BSWdkSXofHvNMIa8nIVAGW+AUjubiw==}

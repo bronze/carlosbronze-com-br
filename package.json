@@ -78,6 +78,7 @@
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "alpinejs": "^3.14.1",
+    "astro-analytics": "^2.7.0",
     "astro-compress": "^2.2.28",
     "astro-compressor": "^0.4.1",
     "astro-critical-css": "^0.0.4",
