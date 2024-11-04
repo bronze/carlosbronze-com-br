@@ -32,7 +32,7 @@ const frontmatter: Frontmatter = {
           class="hidden font-bold text-green-600 dark:text-green-400"
           id="plausible_yes">are</span
         >
-         excluding your visits.
+        excluding your visits.
       </div>
       <a
         class="w-full rounded-lg bg-indigo-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-indigo-200"
@@ -87,5 +87,47 @@ const frontmatter: Frontmatter = {
     document.addEventListener('DOMContentLoaded', () => registerToggle())
   } else {
     document.addEventListener('DOMContentLoaded', () => registerToggle())
+  }
+</script>
+<script is:inline>
+  function localstorageToggle() {
+    return {
+      exclusionState: localStorage.getItem('visitor_identifier') === 'true',
+      get buttonLabel() {
+        return this.exclusionState
+          ? 'Stop excluding my visits'
+          : 'Exclude my visits'
+      },
+      toggleExclusion() {
+        this.exclusionState = !this.exclusionState
+        if (this.exclusionState) {
+          localStorage.removeItem('user_id')
+          localStorage.removeItem('visitor_identifier')
+        } else {
+          localStorage.setItem('user_id', '1337')
+          localStorage.setItem('visitor_identifier', 'true')
+        }
+        this.sendVisitorId()
+      },
+      sendVisitorId() {
+        const personalId = localStorage.getItem('user_id')
+        if (personalId) {
+          console.log('Sending personal ID:', personalId)
+
+          // Send to Amplitude
+          if (window.amplitude) {
+            amplitude.setUserId("bronze1337")
+            //amplitude.identify(new amplitude.Identify().set('user_id', 'bronze' + personalId));
+          } else {
+            console.warn('Amplitude is not loaded.')
+          }
+        } else {
+          console.log('No Personal ID found in localStorage.')
+        }
+      },
+      init() {
+        this.sendVisitorId() // Send visitor ID on initialization if it exists
+      },
+    }
   }
 </script>
