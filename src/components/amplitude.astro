@@ -1,0 +1,15 @@
+---
+export interface Props {
+  apiKey: string
+}
+
+const { apiKey } = Astro.props
+---
+
+<script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.7-min.js.gz"
+></script>
+<script>
+  window.amplitude.init('${apiKey}', {
+    autocapture: { elementInteractions: true },
+  })
+</script>
