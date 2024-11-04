@@ -6,10 +6,28 @@ export interface Props {
 const { apiKey } = Astro.props
 ---
 
-<script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.7-min.js.gz"
-></script>
 <script>
-  window.amplitude.init('${apiKey}', {
-    autocapture: { elementInteractions: true },
-  })
+  // Atribua o valor de apiKey diretamente ao script JavaScript
+  const apiKey = '57753e064d7d9de9c287b8e76328b6a3'
+
+  function loadAmplitude() {
+    const script = document.createElement('script')
+    script.src =
+      'https://cdn.amplitude.com/libs/analytics-browser-2.11.7-min.js.gz'
+    script.async = true
+    script.onload = function () {
+      if (window.amplitude) {
+        window.amplitude.init(apiKey, {
+          // <- usa a variável apiKey definida
+          autocapture: { elementInteractions: true },
+        })
+      } else {
+        console.error('Amplitude script not loaded')
+      }
+    }
+    document.head.appendChild(script)
+  }
+
+  // Carrega o Amplitude ao iniciar o componente
+  loadAmplitude()
 </script>
