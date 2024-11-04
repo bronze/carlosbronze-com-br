@@ -11,6 +11,9 @@ dependencies:
   '@alpinejs/focus':
     specifier: ^3.14.1
     version: 3.14.1
+  '@amplitude/analytics-browser':
+    specifier: ^2.11.8
+    version: 2.11.8
   '@astrojs/netlify':
     specifier: ^5.3.5
     version: 5.3.5(@opentelemetry/api@1.8.0)(astro@4.11.5)
@@ -192,6 +195,76 @@ packages:
   /@alpinejs/persist@3.14.1:
     resolution: {integrity: sha512-odlZ6RZRcysaIdbhcbvuxRmq1wXlKWytjsfgz4U45vZbozU/WcTDkWbyyHjnrbMWgFIsS/jRiohtJuXN0js7PA==}
     dev: true
+
+  /@amplitude/analytics-browser@2.11.8:
+    resolution: {integrity: sha512-lFv8deROLwBfSlg92+r1NitWJ6BN45IKwpPLoixA0fZytScXEJqc0Gl5O+BY4qScbFECYt9PFKblhB+jC+IvPg==}
+    dependencies:
+      '@amplitude/analytics-client-common': 2.3.4
+      '@amplitude/analytics-core': 2.5.3
+      '@amplitude/analytics-remote-config': 0.4.1
+      '@amplitude/analytics-types': 2.8.3
+      '@amplitude/plugin-autocapture-browser': 1.0.3
+      '@amplitude/plugin-page-view-tracking-browser': 2.3.4
+      tslib: 2.6.2
+    dev: false
+
+  /@amplitude/analytics-client-common@2.3.4:
+    resolution: {integrity: sha512-3oqdvca5W4BPblTaxf60YRtlh2uC+N3rA99wowDAhTBJoMJJaauOBoXu5BbiQO1u8Zw/c8ymyr8E20+glyptUg==}
+    dependencies:
+      '@amplitude/analytics-connector': 1.6.1
+      '@amplitude/analytics-core': 2.5.3
+      '@amplitude/analytics-types': 2.8.3
+      tslib: 2.6.2
+    dev: false
+
+  /@amplitude/analytics-connector@1.6.1:
+    resolution: {integrity: sha512-QAGeOfBQc3tamwcECu6YqAPD4mFI1TLBoWi+n0iViYWUZma2FeDLPMihwIquxI8CVvqpn4gswFZsIPRit3q9tQ==}
+    dependencies:
+      '@amplitude/experiment-core': 0.10.0
+    dev: false
+
+  /@amplitude/analytics-core@2.5.3:
+    resolution: {integrity: sha512-dvx3PS0adnHRS22VbuP9YtWg//bQGF2c61Pj5IYXVsemtRRHqiS7XJ860brk3WeQgOkqf3Gyc023DoYcsWGoNQ==}
+    dependencies:
+      '@amplitude/analytics-types': 2.8.3
+      tslib: 2.6.2
+    dev: false
+
+  /@amplitude/analytics-remote-config@0.4.1:
+    resolution: {integrity: sha512-BYl6kQ9qjztrCACsugpxO+foLaQIC0aSEzoXEAb/gwOzInmqkyyI+Ub+aWTBih4xgB/lhWlOcidWHAmNiTJTNw==}
+    dependencies:
+      '@amplitude/analytics-client-common': 2.3.4
+      '@amplitude/analytics-core': 2.5.3
+      '@amplitude/analytics-types': 2.8.3
+      tslib: 2.6.2
+    dev: false
+
+  /@amplitude/analytics-types@2.8.3:
+    resolution: {integrity: sha512-HNmKVd0ACoi3xTi86xi+is7WgqKT78JA4fYLcM25/ckFkZ1zVCqD1AubaADEh26m34nJ3qDLK5Pob4QptQNPAg==}
+    dev: false
+
+  /@amplitude/experiment-core@0.10.0:
+    resolution: {integrity: sha512-FBfM6a4aHp+7OYLYiHO3kni3vCThInT6o4ucuNIB+EIvQ141gQDSjMPOET3ik82fMuJPQITex9sdpZ6cO30ALw==}
+    dependencies:
+      js-base64: 3.7.7
+    dev: false
+
+  /@amplitude/plugin-autocapture-browser@1.0.3:
+    resolution: {integrity: sha512-XUQWUAw9VqtJPlmOyWjnhsEspyVakd9LuSjVNtLjhwlWv+f/yZM1AAQVUdq/Os1+b5OptSgJQ2pPfRJJHZDXTw==}
+    dependencies:
+      '@amplitude/analytics-client-common': 2.3.4
+      '@amplitude/analytics-types': 2.8.3
+      rxjs: 7.8.1
+      tslib: 2.6.2
+    dev: false
+
+  /@amplitude/plugin-page-view-tracking-browser@2.3.4:
+    resolution: {integrity: sha512-l7RS5gssG0BPYlgirV0NQ94EPzTOdDkp0z2jqU45D3DQAJXkoloUyw5lw/cbUXYwNulHZTG/BExcERfdvVWkLA==}
+    dependencies:
+      '@amplitude/analytics-client-common': 2.3.4
+      '@amplitude/analytics-types': 2.8.3
+      tslib: 2.6.2
+    dev: false
 
   /@ampproject/remapping@2.2.1:
     resolution: {integrity: sha512-lFMjJTrFL3j7L9yBxwYfCq2k6qqwHyzuUl/XBnif78PWTJYyL/dfowQHWE3sp6U6ZzqWiiIZnpTMO96zhkjwtg==}
@@ -9085,6 +9158,10 @@ packages:
       '@sideway/pinpoint': 2.0.0
     dev: false
 
+  /js-base64@3.7.7:
+    resolution: {integrity: sha512-7rCnleh0z2CkXhH67J8K1Ytz0b2Y+yxTPL+/KOJoa20hfnVQ/3/T6W/KflYI4bRHRagNeXeU2bkNGI3v1oS/lw==}
+    dev: false
+
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -13080,6 +13157,12 @@ packages:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
       queue-microtask: 1.2.3
+
+  /rxjs@7.8.1:
+    resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
 
   /s.color@0.0.15:
     resolution: {integrity: sha512-AUNrbEUHeKY8XsYr/DYpl+qk5+aM+DChopnWOPEzn8YKzOhv4l2zH6LzZms3tOZP3wwdOyc0RmTciyi46HLIuA==}
