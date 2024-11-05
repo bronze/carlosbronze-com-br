@@ -115,6 +115,7 @@ const frontmatter: Frontmatter = {
           console.log('Sending personal ID:', personalId)
           // Send to PostHog
           if (window.posthog) {
+            console.log('identification: Posthog')
             window.posthog.identify('bronze1337', {
               // Add other user properties here if needed
             })
@@ -123,6 +124,7 @@ const frontmatter: Frontmatter = {
           }
           // Send to Amplitude
           if (window.amplitude) {
+            console.log('identification: Amplitude')
             amplitude.setUserId('bronze1337')
             //amplitude.identify(new amplitude.Identify().set('user_id', 'bronze' + personalId));
           } else {
