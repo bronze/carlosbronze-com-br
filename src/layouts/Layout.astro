@@ -12,7 +12,8 @@ import '~/css/main.css'
 import '~/css/fonts.css'
 import '@fontsource-variable/nunito/index.css'
 import SpeedInsights from '@vercel/speed-insights/astro'
-import Amplitude from '@components/amplitude.astro'
+import Amplitude from '@components/analytics/amplitude.astro'
+import PostHog from '@components/analytics/posthog.astro'
 
 export interface Props {
   frontmatter: Frontmatter
@@ -130,6 +131,7 @@ const analyticsShow = isDev ? 'isDev' : 'PlausibleAnalytics' // PlausibleAnalyti
       rel="stylesheet"
     />
     <Amplitude apiKey="57753e064d7d9de9c287b8e76328b6a3" />
+    <PostHog />
   </head>
   <body
     class="bg-background text-text"
