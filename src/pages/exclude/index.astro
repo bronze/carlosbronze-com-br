@@ -104,7 +104,7 @@ const frontmatter: Frontmatter = {
           localStorage.removeItem('user_id')
           localStorage.removeItem('visitor_identifier')
         } else {
-          localStorage.setItem('user_id', '1337')
+          localStorage.setItem('user_id', 'bronze1337')
           localStorage.setItem('visitor_identifier', 'true')
         }
         this.sendVisitorId()
@@ -113,10 +113,17 @@ const frontmatter: Frontmatter = {
         const personalId = localStorage.getItem('user_id')
         if (personalId) {
           console.log('Sending personal ID:', personalId)
-
+          // Send to PostHog
+          if (window.posthog) {
+            window.posthog.identify('bronze1337', {
+              // Add other user properties here if needed
+            })
+          } else {
+            console.warn('PostHog is not loaded.')
+          }
           // Send to Amplitude
           if (window.amplitude) {
-            amplitude.setUserId("bronze1337")
+            amplitude.setUserId('bronze1337')
             //amplitude.identify(new amplitude.Identify().set('user_id', 'bronze' + personalId));
           } else {
             console.warn('Amplitude is not loaded.')
