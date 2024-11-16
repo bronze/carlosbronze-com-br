@@ -24,9 +24,10 @@ import PostHog from '@components/analytics/posthog.astro'
     script.onload = function () {
       if (window.amplitude) {
         window.amplitude.init(apiKey, {
+          sessionReplay: { enabled: true },
           autocapture: { elementInteractions: true },
         })
-        console.log('Amplitude initialized')
+        console.log('Amplitude initialized with Session Replay enabled')
       } else {
         console.error('Amplitude script not loaded')
       }
