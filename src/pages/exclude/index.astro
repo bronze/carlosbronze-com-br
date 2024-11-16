@@ -94,13 +94,6 @@ const frontmatter: Frontmatter = {
       updateUI()
     }
 
-    // Function to set the default user ID
-    function setDefaultUserId() {
-      localStorage.setItem('user_id', 'bronze1337')
-      updateUI()
-      sendVisitorId() // Optional: Send to analytics immediately
-    }
-
     // Function to set a custom user ID
     function setCustomUserId() {
       const customId = prompt('Enter your custom user ID:', '')
@@ -147,9 +140,6 @@ const frontmatter: Frontmatter = {
       document
         .getElementById('plausible_exclude_button')
         .addEventListener('click', toggleExclusion)
-      document
-        .getElementById('set_default_id_button')
-        .addEventListener('click', setDefaultUserId)
       document
         .getElementById('set_custom_id_button')
         .addEventListener('click', setCustomUserId)
