@@ -8,7 +8,6 @@ import PostHog from '@components/analytics/posthog.astro'
   function isExcluded() {
     const excluded = localStorage.getItem('visitor_identifier') === 'true'
     console.log('Exclusion check:', excluded ? 'Excluded' : 'Not Excluded')
-
     return excluded
   }
 
@@ -99,6 +98,22 @@ import PostHog from '@components/analytics/posthog.astro'
     console.log('PostHog initialized')
   }
 
+  // Function to load Umami
+  function loadUmami() {
+    console.log('Loading Umami...')
+    const script = document.createElement('script')
+    script.src = 'https://cloud.umami.is/script.js'
+    script.defer = true
+    script.dataset.websiteId = 'b01a5d15-0458-4258-81f5-705de4b35142'
+    script.onload = function () {
+      console.log('Umami script loaded')
+    }
+    script.onerror = function () {
+      console.error('Failed to load Umami script')
+    }
+    document.head.appendChild(script)
+  }
+
   // Initialize analytics based on exclusion state
   document.addEventListener('DOMContentLoaded', function () {
     console.log('DOMContentLoaded triggered')
@@ -106,6 +121,7 @@ import PostHog from '@components/analytics/posthog.astro'
       // If not excluded, load analytics
       loadAmplitude()
       loadPostHog()
+      loadUmami()
     } else {
       console.log('Analytics excluded for this user.')
     }
