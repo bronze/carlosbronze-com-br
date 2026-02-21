@@ -1,69 +1,90 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { tv } from "tailwind-variants";
+import type { HTMLAttributes } from 'astro/types'
+import { tv } from 'tailwind-variants'
 
-import { Button } from "@/components/starwind/button";
+import { Button } from '@/components/starwind/button'
+import Mail from '@tabler/icons/outline/mail.svg'
+import BrandLinkedin from '@tabler/icons/outline/brand-linkedin.svg'
 
-interface Props extends HTMLAttributes<"section"> {
+interface Props extends HTMLAttributes<'section'> {
   /** Main heading text */
-  heading?: string;
+  heading?: string
   /** Description text */
-  description?: string;
+  description?: string
   /** Primary button text */
-  primaryButtonText?: string;
+  primaryButtonText?: string
   /** Primary button href */
-  primaryButtonHref?: string;
+  primaryButtonHref?: string
   /** Secondary button text */
-  secondaryButtonText?: string;
+  secondaryButtonText?: string
   /** Secondary button href */
-  secondaryButtonHref?: string;
+  secondaryButtonHref?: string
 }
 
 const hero2Styles = tv({
-  base: "relative flex min-h-screen w-full items-center px-4",
-});
+  base: 'relative flex min-h-screen w-full items-center px-4',
+})
 
 const {
-  heading = "Ship Faster with Modern Components",
-  description = "Build production-ready websites with our comprehensive component library. Everything you need to create beautiful, responsive interfaces that users love.",
-  primaryButtonText = "Start Building",
-  primaryButtonHref = "#",
-  secondaryButtonText,
-  secondaryButtonHref = "#",
+  heading = 'Ship Faster with Modern Components',
+  description = 'Build production-ready websites with our comprehensive component library. Everything you need to create beautiful, responsive interfaces that users love.',
+  primaryButtonText = 'Get in touch',
+  primaryButtonHref = '#contact',
+  secondaryButtonText = 'LinkedIn',
+  secondaryButtonHref = 'https://linkedin.com/in/carlosbronze',
   class: className,
   ...rest
-} = Astro.props;
+} = Astro.props
 ---
 
 <section class={hero2Styles({ class: className })} {...rest}>
   <div class="@container mx-auto w-full max-w-7xl">
     <div class="flex max-w-3xl flex-col">
-      <h1 class="font-heading text-4xl font-medium tracking-tight @xl:text-5xl @3xl:text-6xl">
+      <h1
+        class="font-heading text-4xl font-medium tracking-tight @xl:text-5xl @3xl:text-6xl">
         {heading}
       </h1>
-      <p class="text-muted-foreground mt-6 @xl:text-lg">
+      <p
+        class="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed text-pretty">
         {description}
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <Button variant="primary" href={primaryButtonHref}>{primaryButtonText}</Button>
-        {
-          secondaryButtonText && (
-            <Button variant="outline" href={secondaryButtonHref}>
-              {secondaryButtonText}
-            </Button>
-          )
-        }
+        <Button
+          asChild
+          class="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-6">
+          <a href={primaryButtonHref} class="inline-flex items-center">
+            <Mail class="mr-4 size-4" />
+            {primaryButtonText}
+          </a>
+        </Button>
+        <Button variant="outline" class="rounded-full" asChild>
+          <a
+            href={secondaryButtonHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center">
+            <BrandLinkedin class="mr-4 size-4" />
+            {secondaryButtonText}
+          </a>
+        </Button>
       </div>
     </div>
   </div>
 
   <a
     href="#about"
-    class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-muted-foreground transition-colors hover:text-foreground"
-    aria-label="Scroll to about section"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
+    class="text-muted-foreground hover:text-foreground absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce transition-colors"
+    aria-label="Scroll to about section">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="size-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"></path>
     </svg>
   </a>
 </section>
