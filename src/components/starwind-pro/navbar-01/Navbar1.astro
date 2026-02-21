@@ -1,0 +1,135 @@
+---
+import IconMenu2 from "@tabler/icons/outline/menu-2.svg";
+import IconX from "@tabler/icons/outline/x.svg";
+import type { HTMLAttributes } from "astro/types";
+import { tv } from "tailwind-variants";
+
+import { Button } from "@/components/starwind/button";
+import { Separator } from "@/components/starwind/separator";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/starwind/sheet";
+
+/** Navigation link structure */
+export interface NavLink {
+  /** Display text for the link */
+  label: string;
+  /** URL the link points to */
+  href: string;
+}
+
+interface Props extends HTMLAttributes<"nav"> {
+  /** Site name displayed when no logo slot is provided */
+  siteName?: string;
+  /** Array of navigation links */
+  links?: NavLink[];
+  /** Primary CTA button text */
+  ctaText?: string;
+  /** Primary CTA button href */
+  ctaHref?: string;
+}
+
+// you could also swap "sticky" for "fixed"
+const navStyles = tv({
+  base: "bg-background/60 sticky @container inset-x-0 top-0 z-50 border-b backdrop-blur",
+});
+
+const {
+  siteName = "Starwind Pro",
+  links = [],
+  ctaText = "Get Started",
+  ctaHref = "#",
+  class: className,
+  ...rest
+} = Astro.props;
+
+const hasLogoSlot = Astro.slots.has("logo");
+---
+
+<nav class={navStyles({ class: className })} {...rest}>
+  <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+    <!-- Logo / Site Name -->
+    <div class="flex shrink-0 items-center">
+      {
+        hasLogoSlot ? (
+          <slot name="logo" />
+        ) : (
+          <a href="/" class="text-lg font-semibold">
+            {siteName}
+          </a>
+        )
+      }
+    </div>
+
+    <!-- Desktop Navigation Links -->
+    <div class="hidden items-center gap-1 @2xl:flex">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="text-muted-foreground hover:text-foreground rounded-md px-3 py-2 text-sm font-medium transition-colors"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Desktop CTA Button -->
+    <div class="hidden @2xl:block">
+      <Button href={ctaHref}>{ctaText}</Button>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="@2xl:hidden">
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="ghost" size="icon" class="[&_svg]:size-8" aria-label="Open menu">
+            <IconMenu2 />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="right" class="max-w-[280px] sm:max-w-[300px]">
+          <SheetHeader>
+            <SheetTitle>
+              {
+                hasLogoSlot ? (
+                  <slot name="logo" />
+                ) : (
+                  <span class="text-xl font-semibold">{siteName}</span>
+                )
+              }
+            </SheetTitle>
+            <Separator class="mt-2" />
+          </SheetHeader>
+
+          <div class="-mt-5 flex flex-col px-4">
+            {
+              links.map((link) => (
+                <SheetClose asChild>
+                  <a
+                    href={link.href}
+                    class="text-muted-foreground hover:text-foreground -mx-3 rounded-md px-3 py-2 text-lg font-medium transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </SheetClose>
+              ))
+            }
+          </div>
+          <SheetFooter>
+            <SheetClose asChild>
+              <Button href={ctaHref} class="w-full">{ctaText}</Button>
+            </SheetClose>
+          </SheetFooter>
+          <IconX class="size-7" slot="icon" />
+        </SheetContent>
+      </Sheet>
+    </div>
+  </div>
+</nav>
