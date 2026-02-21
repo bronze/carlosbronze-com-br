@@ -5,6 +5,7 @@ import type { HTMLAttributes } from "astro/types";
 import { tv } from "tailwind-variants";
 
 import { Button } from "@/components/starwind/button";
+import ThemeSwitcher2 from "@/components/starwind-pro/theme-switcher-02/ThemeSwitcher2.astro";
 import { Separator } from "@/components/starwind/separator";
 import {
   Sheet,
@@ -81,8 +82,9 @@ const hasLogoSlot = Astro.slots.has("logo");
       }
     </div>
 
-    <!-- Desktop CTA Button -->
-    <div class="hidden @2xl:block">
+    <!-- Desktop CTA Button + Theme Switcher -->
+    <div class="hidden items-center gap-2 @2xl:flex">
+      <ThemeSwitcher2 />
       <Button href={ctaHref}>{ctaText}</Button>
     </div>
 
@@ -122,10 +124,11 @@ const hasLogoSlot = Astro.slots.has("logo");
               ))
             }
           </div>
-          <SheetFooter>
+          <SheetFooter class="flex-col gap-2">
             <SheetClose asChild>
               <Button href={ctaHref} class="w-full">{ctaText}</Button>
             </SheetClose>
+            <ThemeSwitcher2 class="self-center" />
           </SheetFooter>
           <IconX class="size-7" slot="icon" />
         </SheetContent>
