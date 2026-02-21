@@ -1,12 +1,12 @@
 ---
-import IconMenu2 from "@tabler/icons/outline/menu-2.svg";
-import IconX from "@tabler/icons/outline/x.svg";
-import type { HTMLAttributes } from "astro/types";
-import { tv } from "tailwind-variants";
+import IconMenu2 from '@tabler/icons/outline/menu-2.svg'
+import IconX from '@tabler/icons/outline/x.svg'
+import type { HTMLAttributes } from 'astro/types'
+import { tv } from 'tailwind-variants'
 
-import { Button } from "@/components/starwind/button";
-import ThemeSwitcher2 from "@/components/starwind-pro/theme-switcher-02/ThemeSwitcher2.astro";
-import { Separator } from "@/components/starwind/separator";
+import { Button } from '@/components/starwind/button'
+import ThemeSwitcher2 from '@/components/starwind-pro/theme-switcher-02/ThemeSwitcher2.astro'
+import { Separator } from '@/components/starwind/separator'
 import {
   Sheet,
   SheetClose,
@@ -15,42 +15,42 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/starwind/sheet";
+} from '@/components/starwind/sheet'
 
 /** Navigation link structure */
 export interface NavLink {
   /** Display text for the link */
-  label: string;
+  label: string
   /** URL the link points to */
-  href: string;
+  href: string
 }
 
-interface Props extends HTMLAttributes<"nav"> {
+interface Props extends HTMLAttributes<'nav'> {
   /** Site name displayed when no logo slot is provided */
-  siteName?: string;
+  siteName?: string
   /** Array of navigation links */
-  links?: NavLink[];
+  links?: NavLink[]
   /** Primary CTA button text */
-  ctaText?: string;
+  ctaText?: string
   /** Primary CTA button href */
-  ctaHref?: string;
+  ctaHref?: string
 }
 
 // you could also swap "sticky" for "fixed"
 const navStyles = tv({
-  base: "bg-background/60 sticky @container inset-x-0 top-0 z-50 border-b backdrop-blur",
-});
+  base: 'bg-background/60 sticky @container inset-x-0 top-0 z-50 border-b backdrop-blur',
+})
 
 const {
-  siteName = "Starwind Pro",
+  siteName = 'Starwind Pro',
   links = [],
   ctaText,
-  ctaHref = "#",
+  ctaHref = '#',
   class: className,
   ...rest
-} = Astro.props;
+} = Astro.props
 
-const hasLogoSlot = Astro.slots.has("logo");
+const hasLogoSlot = Astro.slots.has('logo')
 ---
 
 <nav class={navStyles({ class: className })} {...rest}>
@@ -71,11 +71,10 @@ const hasLogoSlot = Astro.slots.has("logo");
     <!-- Desktop Navigation Links -->
     <div class="hidden items-center gap-1 @2xl:flex">
       {
-        links.map((link) => (
+        links.map(link => (
           <a
             href={link.href}
-            class="text-muted-foreground hover:text-foreground rounded-md px-3 py-2 text-sm font-medium transition-colors"
-          >
+            class="text-muted-foreground hover:text-foreground rounded-md px-3 py-2 text-sm font-medium transition-colors">
             {link.label}
           </a>
         ))
@@ -92,7 +91,11 @@ const hasLogoSlot = Astro.slots.has("logo");
     <div class="@2xl:hidden">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" class="[&_svg]:size-8" aria-label="Open menu">
+          <Button
+            variant="ghost"
+            size="icon"
+            class="[&_svg]:size-8"
+            aria-label="Open menu">
             <IconMenu2 />
           </Button>
         </SheetTrigger>
@@ -112,12 +115,11 @@ const hasLogoSlot = Astro.slots.has("logo");
 
           <div class="-mt-5 flex flex-col px-4">
             {
-              links.map((link) => (
+              links.map(link => (
                 <SheetClose asChild>
                   <a
                     href={link.href}
-                    class="text-muted-foreground hover:text-foreground -mx-3 rounded-md px-3 py-2 text-lg font-medium transition-colors"
-                  >
+                    class="text-muted-foreground hover:text-foreground -mx-3 rounded-md px-3 py-2 text-lg font-medium transition-colors">
                     {link.label}
                   </a>
                 </SheetClose>
@@ -125,11 +127,15 @@ const hasLogoSlot = Astro.slots.has("logo");
             }
           </div>
           <SheetFooter class="flex-col gap-2">
-            {ctaText && (
-              <SheetClose asChild>
-                <Button href={ctaHref} class="w-full">{ctaText}</Button>
-              </SheetClose>
-            )}
+            {
+              ctaText && (
+                <SheetClose asChild>
+                  <Button href={ctaHref} class="w-full">
+                    {ctaText}
+                  </Button>
+                </SheetClose>
+              )
+            }
             <ThemeSwitcher2 class="self-center" />
           </SheetFooter>
           <IconX class="size-7" slot="icon" />

@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import Welcome from '../components/Welcome.astro'
 import Navbar1, {
   type NavLink,
-} from '../components/starwind-pro/navbar-01/Navbar1.astro'
-import Hero2 from '../components/starwind-pro/hero-02/Hero2.astro'
+} from '../components/starwind-pro/navbar/Navbar1.astro'
+import Hero2 from '../components/starwind-pro/hero/Hero2.astro'
 
 const links: NavLink[] = [
   { label: 'About', href: '#about' },
@@ -16,11 +17,12 @@ const links: NavLink[] = [
 <Layout>
   <Navbar1 siteName="Carlos Bronze" links={links} ctaText="" ctaHref="" />
   <Hero2
-    heading="Hi, I'm Carlos Bronze"
-    description="I'm a software developer passionate about building great web experiences. I love clean code, thoughtful design, and shipping things that matter."
-    primaryButtonText="View Projects"
+    heading="Carlos Bronze"
+    description="Strategic product leader driving growth through user-centered innovation, cross-functional alignment, and data-driven decision making."
+    primaryButtonText="Get in Touch"
     primaryButtonHref="#projects"
-    secondaryButtonText="Contact Me"
+    secondaryButtonText="LinkedIn"
     secondaryButtonHref="#contact"
   />
+  <Welcome />
 </Layout>
