@@ -4,6 +4,10 @@
       "command": "npx",
       "args": ["-y", "@starwind-ui/mcp"],
       "env": {}
+    },
+    "astro-docs": {
+      "type": "http",
+      "url": "https://mcp.docs.astro.build/mcp"
     }
   }
 }
