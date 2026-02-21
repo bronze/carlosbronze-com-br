@@ -1,28 +1,26 @@
 ---
-import Welcome from '../components/Welcome.astro'
 import Layout from '../layouts/Layout.astro'
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
-
 import Navbar1, {
   type NavLink,
 } from '../components/starwind-pro/navbar-01/Navbar1.astro'
+import Hero2 from '../components/starwind-pro/hero-02/Hero2.astro'
 
 const links: NavLink[] = [
-  { label: 'About', href: '#features' },
-  { label: 'Experience', href: '#pricing' },
-  { label: 'Projects', href: '#about' },
-  { label: 'Contact', href: '#blog' },
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
 ]
 ---
 
 <Layout>
-  <Navbar1
-    siteName="Starwind Pro"
-    links={links}
-    ctaText="Get Started"
-    ctaHref="#get-started"
+  <Navbar1 siteName="Carlos Bronze" links={links} ctaText="" ctaHref="" />
+  <Hero2
+    heading="Hi, I'm Carlos Bronze"
+    description="I'm a software developer passionate about building great web experiences. I love clean code, thoughtful design, and shipping things that matter."
+    primaryButtonText="View Projects"
+    primaryButtonHref="#projects"
+    secondaryButtonText="Contact Me"
+    secondaryButtonHref="#contact"
   />
-  <Welcome />
 </Layout>

@@ -44,7 +44,7 @@ const navStyles = tv({
 const {
   siteName = "Starwind Pro",
   links = [],
-  ctaText = "Get Started",
+  ctaText,
   ctaHref = "#",
   class: className,
   ...rest
@@ -85,7 +85,7 @@ const hasLogoSlot = Astro.slots.has("logo");
     <!-- Desktop CTA Button + Theme Switcher -->
     <div class="hidden items-center gap-2 @2xl:flex">
       <ThemeSwitcher2 />
-      <Button href={ctaHref}>{ctaText}</Button>
+      {ctaText && <Button href={ctaHref}>{ctaText}</Button>}
     </div>
 
     <!-- Mobile Menu Button -->
@@ -125,9 +125,11 @@ const hasLogoSlot = Astro.slots.has("logo");
             }
           </div>
           <SheetFooter class="flex-col gap-2">
-            <SheetClose asChild>
-              <Button href={ctaHref} class="w-full">{ctaText}</Button>
-            </SheetClose>
+            {ctaText && (
+              <SheetClose asChild>
+                <Button href={ctaHref} class="w-full">{ctaText}</Button>
+              </SheetClose>
+            )}
             <ThemeSwitcher2 class="self-center" />
           </SheetFooter>
           <IconX class="size-7" slot="icon" />
