@@ -1,12 +1,4 @@
 {
-  "recommendations": [
-    "astro-build.astro-vscode",
-    "esbenp.prettier-vscode",
-    "editorconfig.editorconfig",
-    "dbaeumer.vscode-eslint",
-    "pcbowers.alpine-intellisense",
-    "simonsiefke.svg-preview",
-    "stivo.tailwind-fold"
-  ],
+  "recommendations": ["astro-build.astro-vscode"],
   "unwantedRecommendations": []
 }

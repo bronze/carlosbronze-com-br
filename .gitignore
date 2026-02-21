@@ -1,8 +1,8 @@
 # build output
 dist/
-.output/
-.astro
-.jampack
+
+# generated types
+.astro/
 
 # dependencies
 node_modules/
@@ -13,7 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 # environment variables
 .env
 .env.production
@@ -21,6 +20,7 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# Local Netlify folder
-.netlify
+# jetbrains setting folder
+.idea/
+
 .vercel

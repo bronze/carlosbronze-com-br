@@ -1,18 +1,18 @@
 {
-  "extends": "astro/tsconfigs/base",
+  "extends": "astro/tsconfigs/strict",
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ],
   "compilerOptions": {
-    "types": ["astro/client"],
-    "strictNullChecks": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@lib/*": ["lib/*"],
-      "@utils/*": ["utils/*"],
-      "@components/*": ["components/*"],
-      "@layouts/*": ["layouts/*"],
-      "@assets/*": ["assets/*"],
-      "@pages/*": ["pages/*"],
-      "~/*": ["*"]
+      "@/*": [
+        "src/*"
+      ]
     }
-  },
-  "exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
+  }
 }
