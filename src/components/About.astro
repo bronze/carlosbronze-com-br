@@ -1,82 +1,184 @@
 ---
+import type { HTMLAttributes } from 'astro/types'
+import { tv } from 'tailwind-variants'
+import Separator from './starwind/separator'
+import Badge from './starwind/badge'
+
+export interface FaqItem {
+  title: string
+  content: string
+}
+
 const skills = [
-  "Product Strategy",
-  "User Research",
-  "Agile / Scrum",
-  "Data Analysis",
-  "Roadmapping",
-  "Stakeholder Management",
-  "A/B Testing",
-  "Design Thinking",
+  'Product Strategy',
+  'Roadmap Planning',
+  'OKR Frameworks',
+  'User Research',
+  'Data Analytics',
+  'A/B Testing',
+  'Go-to-Market',
+  'Stakeholder Management',
+  'Cross-functional Leadership',
+  'Agile / Scrum',
+  'Growth Loops',
+  'Platform Thinking',
 ]
 
 const stats = [
-  { value: "8+", label: "Years Experience" },
-  { value: "30+", label: "Products Shipped" },
-  { value: "5", label: "Industries" },
+  { value: '8+', label: 'Years Experience' },
+  { value: '30+', label: 'Products Shipped' },
+  { value: '5', label: 'Industries' },
 ]
+const faq2Styles = tv({
+  base: '@container mx-auto w-full max-w-5xl px-6 py-24',
+})
+const {
+  heading = 'About',
+  description = '',
+  class: className,
+  ...rest
+} = Astro.props
 ---
 
-<section id="about" class="w-full px-4 py-24">
-  <div class="mx-auto max-w-7xl">
+<section id="about" class={faq2Styles({ class: className })} {...rest}>
+  <div class="grid gap-12 @lg:grid-cols-5 @lg:items-start">
+    <!-- Left: Label -->
+    <div
+      class="flex flex-col items-center justify-between lg:col-span-2 @lg:items-start">
+      <h2
+        class="font-heading text-center font-semibold uppercase @lg:text-left">
+        {heading}
+      </h2>
+      <p class="text-muted-foreground mt-2 text-center @lg:text-left">
+        {description}
+      </p>
+    </div>
+    <!-- Right: bio + skills -->
+    <div class="flex flex-col justify-center gap-6 lg:col-span-3">
+      <div class="lg:col-span-3">
+        <p class="text-foreground text-lg leading-relaxed text-pretty">
+          I am a product leader with over a decade of experience building and
+          scaling digital products across fintech, SaaS, and marketplace
+          verticals. I specialize in translating complex business challenges
+          into clear product strategies that drive measurable outcomes.
+        </p>
 
+        <p class="text-muted-foreground mt-6 leading-relaxed text-pretty">
+          My approach combines deep user empathy with rigorous data analysis to
+          create products that users love and businesses depend on. I have led
+          cross-functional teams of engineers, designers, and analysts to
+          deliver products used by millions.
+        </p>
+
+        <p class="text-muted-foreground mt-6 leading-relaxed text-pretty">
+          I believe the best product leaders operate at the intersection of
+          business, technology, and design, acting as the connective tissue
+          between vision and execution.
+        </p>
+
+        <Separator class="my-8" />
+
+        <!-- Skills -->
+        <div>
+          <p
+            class="text-muted-foreground mb-4 text-sm font-medium tracking-widest uppercase">
+            Core Skills
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {
+              skills.map(skill => (
+                <Badge
+                  key={skill}
+                  variant="secondary"
+                  className="rounded-full px-3 py-1 text-xs font-normal">
+                  {skill}
+                </Badge>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="w-full px-4 py-24">
+  <div class="mx-auto max-w-7xl">
     <!-- Section label -->
-    <p class="text-primary mb-4 text-sm font-medium uppercase tracking-widest">About Me</p>
+    <p class="text-primary mb-4 text-sm font-medium tracking-widest uppercase">
+      About Me
+    </p>
 
     <div class="grid gap-16 lg:grid-cols-2 lg:gap-24">
-
       <!-- Left: photo + stats -->
       <div class="flex flex-col gap-8">
-        <div class="bg-muted relative aspect-square w-full max-w-sm overflow-hidden rounded-2xl">
+        <div
+          class="bg-muted relative aspect-square w-full max-w-sm overflow-hidden rounded-2xl">
           <!-- Replace src with your actual photo -->
-          <div class="from-muted to-muted-foreground/20 flex h-full w-full items-center justify-center bg-gradient-to-br">
-            <svg xmlns="http://www.w3.org/2000/svg" class="text-muted-foreground/40 size-24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+          <div
+            class="from-muted to-muted-foreground/20 flex h-full w-full items-center justify-center bg-gradient-to-br">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="text-muted-foreground/40 size-24"
+              viewBox="0 0 24 24"
+              fill="currentColor">
+              <path
+                d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+              ></path>
             </svg>
           </div>
         </div>
 
         <!-- Stats row -->
         <div class="grid grid-cols-3 gap-4">
-          {stats.map(({ value, label }) => (
-            <div class="bg-card border-border rounded-xl border p-4 text-center">
-              <p class="text-foreground text-2xl font-bold">{value}</p>
-              <p class="text-muted-foreground mt-1 text-xs">{label}</p>
-            </div>
-          ))}
+          {
+            stats.map(({ value, label }) => (
+              <div class="bg-card border-border rounded-xl border p-4 text-center">
+                <p class="text-foreground text-2xl font-bold">{value}</p>
+                <p class="text-muted-foreground mt-1 text-xs">{label}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
 
       <!-- Right: bio + skills -->
       <div class="flex flex-col justify-center gap-6">
-        <h2 class="font-heading text-3xl font-medium tracking-tight lg:text-4xl">
+        <h2
+          class="font-heading text-3xl font-medium tracking-tight lg:text-4xl">
           Turning ideas into products people love
         </h2>
 
         <p class="text-muted-foreground leading-relaxed">
-          I'm a strategic product leader with over 8 years of experience building digital products
-          from zero to scale. I bridge the gap between business goals and user needs — defining
-          vision, aligning teams, and shipping work that drives measurable impact.
+          I'm a strategic product leader with over 8 years of experience
+          building digital products from zero to scale. I bridge the gap between
+          business goals and user needs — defining vision, aligning teams, and
+          shipping work that drives measurable impact.
         </p>
 
         <p class="text-muted-foreground leading-relaxed">
-          I've worked across fintech, healthtech, and SaaS, partnering with engineering, design,
-          and data teams to build products that are both useful and delightful.
+          I've worked across fintech, healthtech, and SaaS, partnering with
+          engineering, design, and data teams to build products that are both
+          useful and delightful.
         </p>
 
         <!-- Skills -->
         <div>
-          <p class="text-foreground mb-3 text-sm font-medium">Core Skills</p>
+          <p
+            class="text-muted-foreground mb-4 text-sm font-medium tracking-widest uppercase">
+            Core Skills
+          </p>
           <div class="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <span class="bg-secondary text-secondary-foreground rounded-full px-3 py-1 text-sm">
-                {skill}
-              </span>
-            ))}
+            {
+              skills.map(skill => (
+                <span class="bg-secondary text-secondary-foreground rounded-full px-3 py-1 text-sm">
+                  {skill}
+                </span>
+              ))
+            }
           </div>
         </div>
       </div>
-
     </div>
   </div>
-</section>
+</div>

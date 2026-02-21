@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import Welcome from '../components/Welcome.astro'
+
 import Navbar1, {
   type NavLink,
 } from '../components/starwind-pro/navbar/Navbar1.astro'
@@ -25,4 +27,5 @@ const links: NavLink[] = [
     secondaryButtonHref="#contact"
   />
   <About />
+  <Welcome />
 </Layout>
