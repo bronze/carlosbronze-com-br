@@ -26,6 +26,10 @@
     {
       "name": "toggle",
       "version": "1.0.1"
+    },
+    {
+      "name": "accordion",
+      "version": "1.3.3"
     }
   ]
 }

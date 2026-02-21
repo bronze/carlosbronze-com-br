@@ -5,7 +5,7 @@ import type { HTMLAttributes } from 'astro/types'
 import { tv } from 'tailwind-variants'
 
 import { Button } from '@/components/starwind/button'
-import ThemeSwitcher2 from '@/components/starwind-pro/theme-switcher-02/ThemeSwitcher2.astro'
+import ThemeSwitcher from '@/components/starwind-pro/theme-switcher/ThemeSwitcher.astro'
 import { Separator } from '@/components/starwind/separator'
 import {
   Sheet,
@@ -38,7 +38,7 @@ interface Props extends HTMLAttributes<'nav'> {
 
 // you could also swap "sticky" for "fixed"
 const navStyles = tv({
-  base: 'bg-background/60 sticky @container inset-x-0 top-0 z-50 border-b backdrop-blur',
+  base: 'bg-background/60 fixed @container inset-x-0 top-0 z-50 border-b backdrop-blur',
 })
 
 const {
@@ -83,7 +83,7 @@ const hasLogoSlot = Astro.slots.has('logo')
 
     <!-- Desktop CTA Button + Theme Switcher -->
     <div class="hidden items-center gap-2 @2xl:flex">
-      <ThemeSwitcher2 />
+      <ThemeSwitcher />
       {ctaText && <Button href={ctaHref}>{ctaText}</Button>}
     </div>
 
@@ -136,7 +136,7 @@ const hasLogoSlot = Astro.slots.has('logo')
                 </SheetClose>
               )
             }
-            <ThemeSwitcher2 class="self-center" />
+            <ThemeSwitcher class="self-center" />
           </SheetFooter>
           <IconX class="size-7" slot="icon" />
         </SheetContent>
