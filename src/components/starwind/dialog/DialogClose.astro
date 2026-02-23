@@ -1,19 +1,19 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from 'astro/types'
 
-type Props = HTMLAttributes<"button"> & {
+type Props = HTMLAttributes<'button'> & {
   /**
    * When true, the component will render its child element instead of a button
    */
-  asChild?: boolean;
-};
+  asChild?: boolean
+}
 
-const { class: className, asChild = false, ...rest } = Astro.props;
+const { class: className, asChild = false, ...rest } = Astro.props
 
 // Get the first child element if asChild is true
-let hasChildren = false;
-if (Astro.slots.has("default")) {
-  hasChildren = true;
+let hasChildren = false
+if (Astro.slots.has('default')) {
+  hasChildren = true
 }
 ---
 
@@ -25,10 +25,9 @@ if (Astro.slots.has("default")) {
   ) : (
     <button
       type="button"
-      class:list={["starwind-dialog-close", className]}
+      class:list={['starwind-dialog-close', className]}
       data-slot="dialog-close"
-      {...rest}
-    >
+      {...rest}>
       <slot>Demo close button</slot>
     </button>
   )

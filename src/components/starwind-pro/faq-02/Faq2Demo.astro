@@ -1,40 +1,43 @@
 ---
-import Faq2, { type FaqItem } from "./Faq2.astro";
+import Faq2, { type FaqItem } from './Faq2.astro'
 
 const faqItems: FaqItem[] = [
   {
-    title: "What is Astro?",
-    content: "Astro is a web framework for building fast, scalable, and secure websites.",
-  },
-  {
-    title: "Why should I use Astro?",
+    title: 'What is Astro?',
     content:
-      "Astro provides a set of features that make it an ideal choice for building fast, scalable, and secure websites.",
+      'Astro is a web framework for building fast, scalable, and secure websites.',
   },
   {
-    title: "How do I get started with Astro?",
-    content: "To get started with Astro, follow the instructions in the documentation.",
-  },
-  {
-    title: "Does Astro support Markdown and MDX?",
-    content: "Yes. Astro has first-class support for Markdown and MDX for content-driven sites.",
-  },
-  {
-    title: "Can I use React, Vue, or Svelte with Astro?",
+    title: 'Why should I use Astro?',
     content:
-      "Yes. Astro supports multiple UI frameworks so you can bring your own components as islands.",
+      'Astro provides a set of features that make it an ideal choice for building fast, scalable, and secure websites.',
+  },
+  {
+    title: 'How do I get started with Astro?',
+    content:
+      'To get started with Astro, follow the instructions in the documentation.',
+  },
+  {
+    title: 'Does Astro support Markdown and MDX?',
+    content:
+      'Yes. Astro has first-class support for Markdown and MDX for content-driven sites.',
+  },
+  {
+    title: 'Can I use React, Vue, or Svelte with Astro?',
+    content:
+      'Yes. Astro supports multiple UI frameworks so you can bring your own components as islands.',
   },
   {
     title: "What is Astro's Islands architecture?",
     content:
-      "Astro ships zero JS by default and hydrates individual interactive components on the page as needed.",
+      'Astro ships zero JS by default and hydrates individual interactive components on the page as needed.',
   },
   {
-    title: "How do I deploy an Astro site?",
+    title: 'How do I deploy an Astro site?',
     content:
-      "Export static files or use adapters for platforms like Vercel, Netlify, and Cloudflare to deploy easily.",
+      'Export static files or use adapters for platforms like Vercel, Netlify, and Cloudflare to deploy easily.',
   },
-];
+]
 ---
 
 <Faq2

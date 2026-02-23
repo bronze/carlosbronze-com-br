@@ -30,36 +30,37 @@ const socials = [
 <footer class="border-border border-t">
   <div class="mx-auto max-w-7xl px-4 py-12">
     <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-
       <!-- Name / brand -->
       <p class="text-foreground font-medium">Carlos Bronze</p>
 
       <!-- Nav links -->
       <nav class="flex flex-wrap justify-center gap-6">
-        {links.map(({ label, href }) => (
-          <a
-            href={href}
-            class="text-muted-foreground hover:text-foreground text-sm transition-colors"
-          >
-            {label}
-          </a>
-        ))}
+        {
+          links.map(({ label, href }) => (
+            <a
+              href={href}
+              class="text-muted-foreground hover:text-foreground text-sm transition-colors">
+              {label}
+            </a>
+          ))
+        }
       </nav>
 
       <!-- Socials -->
       <div class="flex items-center gap-4">
-        {socials.map(({ label, href, icon }) => (
-          <a
-            href={href}
-            aria-label={label}
-            target={href.startsWith('http') ? '_blank' : undefined}
-            rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            class="text-muted-foreground hover:text-foreground transition-colors"
-            set:html={icon}
-          />
-        ))}
+        {
+          socials.map(({ label, href, icon }) => (
+            <a
+              href={href}
+              aria-label={label}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              class="text-muted-foreground hover:text-foreground transition-colors"
+              set:html={icon}
+            />
+          ))
+        }
       </div>
-
     </div>
 
     <!-- Copyright -->

@@ -1,21 +1,21 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { tv } from "tailwind-variants";
+import type { HTMLAttributes } from 'astro/types'
+import { tv } from 'tailwind-variants'
 
-type Props = HTMLAttributes<"div"> & {
+type Props = HTMLAttributes<'div'> & {
   /**
    * The type of accordion.  If "single", only one item can be open at a time.
    */
-  type?: "single" | "multiple";
+  type?: 'single' | 'multiple'
   /**
    * The value of the item that should be open by default
    */
-  defaultValue?: string;
-};
+  defaultValue?: string
+}
 
-export const accordion = tv({ base: "starwind-accordion" });
+export const accordion = tv({ base: 'starwind-accordion' })
 
-const { type = "single", defaultValue, class: className, ...rest } = Astro.props;
+const { type = 'single', defaultValue, class: className, ...rest } = Astro.props
 ---
 
 <div
@@ -23,21 +23,20 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
   data-type={type}
   data-value={defaultValue}
   data-slot="accordion"
-  {...rest}
->
+  {...rest}>
   <slot />
 </div>
 
 <script>
-  type AccordionType = "single" | "multiple";
-  type AccordionState = "open" | "closed";
+  type AccordionType = 'single' | 'multiple'
+  type AccordionState = 'open' | 'closed'
 
   /** Represents a single accordion item with its associated elements */
   interface AccordionItem {
-    element: HTMLElement;
-    trigger: HTMLElement;
-    content: HTMLElement;
-    value: string;
+    element: HTMLElement
+    trigger: HTMLElement
+    content: HTMLElement
+    value: string
   }
 
   /**
@@ -46,12 +45,12 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
    * and maintains ARIA accessibility standards.
    */
   class AccordionHandler {
-    private accordion: HTMLElement;
-    private type: AccordionType;
-    private items: AccordionItem[];
-    private itemsByValue: Map<string, AccordionItem>;
-    private accordionId: string;
-    private isInitialized: boolean = false;
+    private accordion: HTMLElement
+    private type: AccordionType
+    private items: AccordionItem[]
+    private itemsByValue: Map<string, AccordionItem>
+    private accordionId: string
+    private isInitialized: boolean = false
 
     /**
      * Creates a new AccordionHandler instance
@@ -59,17 +58,17 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @param idx - Unique index for this accordion instance
      */
     constructor(accordion: HTMLElement, idx: number) {
-      this.accordion = accordion;
-      this.type = (accordion.dataset.type || "single") as AccordionType;
-      this.accordionId = `starwind-accordion${idx}`;
+      this.accordion = accordion
+      this.type = (accordion.dataset.type || 'single') as AccordionType
+      this.accordionId = `starwind-accordion${idx}`
 
       // Cache all items and create lookup maps
-      this.items = this.initializeItems();
-      this.itemsByValue = new Map(this.items.map((item) => [item.value, item]));
+      this.items = this.initializeItems()
+      this.itemsByValue = new Map(this.items.map(item => [item.value, item]))
 
-      this.setupItems();
-      this.setInitialState();
-      this.isInitialized = true;
+      this.setupItems()
+      this.setInitialState()
+      this.isInitialized = true
     }
 
     /**
@@ -77,17 +76,25 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @returns Array of AccordionItem objects
      */
     private initializeItems(): AccordionItem[] {
-      return Array.from(this.accordion.querySelectorAll<HTMLElement>(".starwind-accordion-item"))
+      return Array.from(
+        this.accordion.querySelectorAll<HTMLElement>(
+          '.starwind-accordion-item',
+        ),
+      )
         .map((element, idx) => {
-          const trigger = element.querySelector<HTMLElement>(".starwind-accordion-trigger");
-          const content = element.querySelector<HTMLElement>(".starwind-accordion-content");
-          const value = element.getAttribute("data-value") || String(idx);
+          const trigger = element.querySelector<HTMLElement>(
+            '.starwind-accordion-trigger',
+          )
+          const content = element.querySelector<HTMLElement>(
+            '.starwind-accordion-content',
+          )
+          const value = element.getAttribute('data-value') || String(idx)
 
-          if (!trigger || !content) return null;
+          if (!trigger || !content) return null
 
-          return { element, trigger, content, value };
+          return { element, trigger, content, value }
         })
-        .filter((item): item is AccordionItem => item !== null);
+        .filter((item): item is AccordionItem => item !== null)
     }
 
     /**
@@ -95,10 +102,10 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      */
     private setupItems(): void {
       this.items.forEach((item, idx) => {
-        this.setupAccessibility(item, idx);
-        this.setContentHeight(item.content);
-        this.setupEventListeners(item);
-      });
+        this.setupAccessibility(item, idx)
+        this.setContentHeight(item.content)
+        this.setupEventListeners(item)
+      })
     }
 
     /**
@@ -107,16 +114,16 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @param idx - Index of the item
      */
     private setupAccessibility(item: AccordionItem, idx: number): void {
-      const triggerId = `${this.accordionId}-t${idx}`;
-      const contentId = `${this.accordionId}-c${idx}`;
+      const triggerId = `${this.accordionId}-t${idx}`
+      const contentId = `${this.accordionId}-c${idx}`
 
-      item.trigger.id = triggerId;
-      item.trigger.setAttribute("aria-controls", contentId);
-      item.trigger.setAttribute("aria-expanded", "false");
+      item.trigger.id = triggerId
+      item.trigger.setAttribute('aria-controls', contentId)
+      item.trigger.setAttribute('aria-expanded', 'false')
 
-      item.content.id = contentId;
-      item.content.setAttribute("aria-labelledby", triggerId);
-      item.content.setAttribute("role", "region");
+      item.content.id = contentId
+      item.content.setAttribute('aria-labelledby', triggerId)
+      item.content.setAttribute('role', 'region')
     }
 
     /**
@@ -124,10 +131,13 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @param content - The content element to measure
      */
     private setContentHeight(content: HTMLElement): void {
-      const contentInner = content.firstElementChild as HTMLElement;
+      const contentInner = content.firstElementChild as HTMLElement
       if (contentInner) {
-        const height = contentInner.getBoundingClientRect().height;
-        content.style.setProperty("--starwind-accordion-content-height", `${height}px`);
+        const height = contentInner.getBoundingClientRect().height
+        content.style.setProperty(
+          '--starwind-accordion-content-height',
+          `${height}px`,
+        )
       }
     }
 
@@ -135,11 +145,11 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * Sets the initial state based on the default value attribute
      */
     private setInitialState(): void {
-      const defaultValue = this.accordion.dataset.value;
+      const defaultValue = this.accordion.dataset.value
       if (defaultValue) {
-        const item = this.itemsByValue.get(defaultValue);
+        const item = this.itemsByValue.get(defaultValue)
         if (item) {
-          this.setItemState(item, true);
+          this.setItemState(item, true)
         }
       }
     }
@@ -149,8 +159,8 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @param item - The accordion item to setup listeners for
      */
     private setupEventListeners(item: AccordionItem): void {
-      item.trigger.addEventListener("click", () => this.handleClick(item));
-      item.trigger.addEventListener("keydown", (e) => this.handleKeyDown(e, item));
+      item.trigger.addEventListener('click', () => this.handleClick(item))
+      item.trigger.addEventListener('keydown', e => this.handleKeyDown(e, item))
     }
 
     /**
@@ -158,8 +168,8 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @param item - The clicked accordion item
      */
     private handleClick(item: AccordionItem): void {
-      const isOpen = item.element.getAttribute("data-state") === "open";
-      this.toggleItem(item, !isOpen);
+      const isOpen = item.element.getAttribute('data-state') === 'open'
+      this.toggleItem(item, !isOpen)
     }
 
     /**
@@ -168,19 +178,19 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @param item - The current accordion item
      */
     private handleKeyDown(event: KeyboardEvent, item: AccordionItem): void {
-      const index = this.items.indexOf(item);
+      const index = this.items.indexOf(item)
 
       const keyActions: Record<string, () => void> = {
         ArrowDown: () => this.focusItem(index + 1),
         ArrowUp: () => this.focusItem(index - 1),
         Home: () => this.focusItem(0),
         End: () => this.focusItem(this.items.length - 1),
-      };
+      }
 
-      const action = keyActions[event.key];
+      const action = keyActions[event.key]
       if (action) {
-        event.preventDefault();
-        action();
+        event.preventDefault()
+        action()
       }
     }
 
@@ -189,8 +199,8 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @param index - The target index to focus
      */
     private focusItem(index: number): void {
-      const targetIndex = (index + this.items.length) % this.items.length;
-      this.items[targetIndex].trigger.focus();
+      const targetIndex = (index + this.items.length) % this.items.length
+      this.items[targetIndex].trigger.focus()
     }
 
     /**
@@ -199,16 +209,19 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @param shouldOpen - Whether the item should be opened
      */
     private toggleItem(item: AccordionItem, shouldOpen: boolean): void {
-      if (this.type === "single" && shouldOpen) {
+      if (this.type === 'single' && shouldOpen) {
         // Close other items if in single mode
-        this.items.forEach((otherItem) => {
-          if (otherItem !== item && otherItem.element.getAttribute("data-state") === "open") {
-            this.setItemState(otherItem, false);
+        this.items.forEach(otherItem => {
+          if (
+            otherItem !== item &&
+            otherItem.element.getAttribute('data-state') === 'open'
+          ) {
+            this.setItemState(otherItem, false)
           }
-        });
+        })
       }
 
-      this.setItemState(item, shouldOpen);
+      this.setItemState(item, shouldOpen)
     }
 
     /**
@@ -217,38 +230,43 @@ const { type = "single", defaultValue, class: className, ...rest } = Astro.props
      * @param isOpen - Whether the item should be open
      */
     private setItemState(item: AccordionItem, isOpen: boolean): void {
-      const state: AccordionState = isOpen ? "open" : "closed";
+      const state: AccordionState = isOpen ? 'open' : 'closed'
 
       // Skip animation during initial setup, enable for subsequent toggles
       if (!this.isInitialized) {
-        item.content.style.setProperty("animation", "none");
+        item.content.style.setProperty('animation', 'none')
       } else {
-        item.content.style.removeProperty("animation");
+        item.content.style.removeProperty('animation')
       }
 
       // Set content height variable for animations
-      this.setContentHeight(item.content);
+      this.setContentHeight(item.content)
 
-      item.element.setAttribute("data-state", state);
-      item.content.setAttribute("data-state", state);
-      item.trigger.setAttribute("data-state", state);
-      item.trigger.setAttribute("aria-expanded", isOpen.toString());
+      item.element.setAttribute('data-state', state)
+      item.content.setAttribute('data-state', state)
+      item.trigger.setAttribute('data-state', state)
+      item.trigger.setAttribute('aria-expanded', isOpen.toString())
     }
   }
 
   // Store instances in a WeakMap to avoid memory leaks
-  const accordionInstances = new WeakMap<HTMLElement, AccordionHandler>();
-  let accordionCounter = 0;
+  const accordionInstances = new WeakMap<HTMLElement, AccordionHandler>()
+  let accordionCounter = 0
 
   const setupAccordions = () => {
-    document.querySelectorAll<HTMLElement>(".starwind-accordion").forEach((accordion) => {
-      if (!accordionInstances.has(accordion)) {
-        accordionInstances.set(accordion, new AccordionHandler(accordion, accordionCounter++));
-      }
-    });
-  };
+    document
+      .querySelectorAll<HTMLElement>('.starwind-accordion')
+      .forEach(accordion => {
+        if (!accordionInstances.has(accordion)) {
+          accordionInstances.set(
+            accordion,
+            new AccordionHandler(accordion, accordionCounter++),
+          )
+        }
+      })
+  }
 
-  setupAccordions();
-  document.addEventListener("astro:after-swap", setupAccordions);
-  document.addEventListener("starwind:init", setupAccordions);
+  setupAccordions()
+  document.addEventListener('astro:after-swap', setupAccordions)
+  document.addEventListener('starwind:init', setupAccordions)
 </script>

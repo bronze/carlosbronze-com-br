@@ -1,16 +1,19 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { tv } from "tailwind-variants";
+import type { HTMLAttributes } from 'astro/types'
+import { tv } from 'tailwind-variants'
 
-type Props = HTMLAttributes<"div">;
+type Props = HTMLAttributes<'div'>
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, ...rest } = Astro.props
 
 export const sheetHeader = tv({
-  base: ["flex flex-col gap-1.5 p-4"],
-});
+  base: ['flex flex-col gap-1.5 p-4'],
+})
 ---
 
-<div class={sheetHeader({ class: className })} data-slot="sheet-header" {...rest}>
+<div
+  class={sheetHeader({ class: className })}
+  data-slot="sheet-header"
+  {...rest}>
   <slot />
 </div>

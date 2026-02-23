@@ -1,7 +1,7 @@
-import Separator, { separator } from "./Separator.astro";
+import Separator, { separator } from './Separator.astro'
 
-const SeparatorVariants = { separator };
+const SeparatorVariants = { separator }
 
-export { Separator, SeparatorVariants };
+export { Separator, SeparatorVariants }
 
-export default Separator;
+export default Separator

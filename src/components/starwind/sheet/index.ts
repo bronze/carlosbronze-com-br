@@ -1,11 +1,15 @@
-import Sheet from "./Sheet.astro";
-import SheetClose from "./SheetClose.astro";
-import SheetContent, { dialogBackdrop, sheetCloseButton, sheetContent } from "./SheetContent.astro";
-import SheetDescription, { sheetDescription } from "./SheetDescription.astro";
-import SheetFooter, { sheetFooter } from "./SheetFooter.astro";
-import SheetHeader, { sheetHeader } from "./SheetHeader.astro";
-import SheetTitle, { sheetTitle } from "./SheetTitle.astro";
-import SheetTrigger from "./SheetTrigger.astro";
+import Sheet from './Sheet.astro'
+import SheetClose from './SheetClose.astro'
+import SheetContent, {
+  dialogBackdrop,
+  sheetCloseButton,
+  sheetContent,
+} from './SheetContent.astro'
+import SheetDescription, { sheetDescription } from './SheetDescription.astro'
+import SheetFooter, { sheetFooter } from './SheetFooter.astro'
+import SheetHeader, { sheetHeader } from './SheetHeader.astro'
+import SheetTitle, { sheetTitle } from './SheetTitle.astro'
+import SheetTrigger from './SheetTrigger.astro'
 
 const SheetVariants = {
   sheetCloseButton,
@@ -15,7 +19,7 @@ const SheetVariants = {
   sheetTitle,
   dialogBackdrop,
   sheetContent,
-};
+}
 
 export {
   Sheet,
@@ -27,7 +31,7 @@ export {
   SheetTitle,
   SheetTrigger,
   SheetVariants,
-};
+}
 
 export default {
   Root: Sheet,
@@ -38,4 +42,4 @@ export default {
   Title: SheetTitle,
   Description: SheetDescription,
   Close: SheetClose,
-};
+}

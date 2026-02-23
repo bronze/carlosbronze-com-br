@@ -1,8 +1,8 @@
-import Toggle, { toggle } from "./Toggle.astro";
-import type { ToggleChangeEvent, ToggleSyncEvent } from "./ToggleTypes";
+import Toggle, { toggle } from './Toggle.astro'
+import type { ToggleChangeEvent, ToggleSyncEvent } from './ToggleTypes'
 
-const ToggleVariants = { toggle };
+const ToggleVariants = { toggle }
 
-export { Toggle, type ToggleChangeEvent, type ToggleSyncEvent, ToggleVariants };
+export { Toggle, type ToggleChangeEvent, type ToggleSyncEvent, ToggleVariants }
 
-export default Toggle;
+export default Toggle
