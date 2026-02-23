@@ -14,35 +14,30 @@ import { Font } from 'astro:assets'
     <Font cssVariable="--font-geist" preload />
     <Font cssVariable="--font-geist-mono" />
     <title>Astro Basics</title>
+
     <script is:inline>
       function initTheme() {
-        const colorTheme = localStorage.getItem('colorTheme')
-        if (!colorTheme) {
-          if (
-            window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-          ) {
-            document.documentElement.classList.add('dark')
-            localStorage.setItem('colorTheme', 'dark')
-          } else {
-            document.documentElement.classList.remove('dark')
-            localStorage.setItem('colorTheme', 'light')
-          }
-        } else {
-          if (colorTheme === 'dark') {
-            document.documentElement.classList.add('dark')
-          } else if (colorTheme === 'light') {
-            document.documentElement.classList.remove('dark')
-          } else if (colorTheme === 'system') {
-            const prefersDark = window.matchMedia(
-              '(prefers-color-scheme: dark)',
-            ).matches
-            document.documentElement.classList.toggle('dark', prefersDark)
-          }
-        }
+        const stored =
+          typeof localStorage !== 'undefined' &&
+          localStorage.getItem('colorTheme')
+        const isDark = stored
+          ? stored === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches
+        document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
       }
       initTheme()
       document.addEventListener('astro:after-swap', initTheme)
+
+      if (typeof localStorage !== 'undefined') {
+        const observer = new MutationObserver(() => {
+          const isDark = document.documentElement.classList.contains('dark')
+          localStorage.setItem('colorTheme', isDark ? 'dark' : 'light')
+        })
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['class'],
+        })
+      }
     </script>
   </head>
   <body>

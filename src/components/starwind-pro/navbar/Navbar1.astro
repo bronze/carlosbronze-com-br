@@ -3,6 +3,7 @@ import IconMenu2 from '@tabler/icons/outline/menu-2.svg'
 import IconX from '@tabler/icons/outline/x.svg'
 import type { HTMLAttributes } from 'astro/types'
 import { tv } from 'tailwind-variants'
+import { ModeToggle } from '@/components/ModeToggle'
 
 import { Button } from '@/components/starwind/button'
 import ThemeSwitcher from '@/components/starwind-pro/theme-switcher/ThemeSwitcher.astro'
@@ -84,6 +85,8 @@ const hasLogoSlot = Astro.slots.has('logo')
     <!-- Desktop CTA Button + Theme Switcher -->
     <div class="hidden items-center gap-2 @2xl:flex">
       <ThemeSwitcher />
+      <ModeToggle client:load />
+
       {ctaText && <Button href={ctaHref}>{ctaText}</Button>}
     </div>
 
