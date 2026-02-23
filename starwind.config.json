@@ -6,6 +6,7 @@
     "cssVariables": true
   },
   "componentDir": "src/components",
+  "utilsDir": "src/lib/utils",
   "components": [
     {
       "name": "dialog",
@@ -34,6 +35,10 @@
     {
       "name": "badge",
       "version": "1.4.0"
+    },
+    {
+      "name": "tooltip",
+      "version": "1.5.0"
     }
   ]
 }
