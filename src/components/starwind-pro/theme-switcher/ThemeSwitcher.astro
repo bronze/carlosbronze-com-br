@@ -41,6 +41,7 @@ import Moon from '@tabler/icons/outline/moon.svg'
 import Sun from '@tabler/icons/outline/sun.svg'
 
 import { Toggle } from '@/components/starwind/toggle'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/starwind/tooltip'
 
 interface Props {
   class?: string
@@ -49,25 +50,35 @@ interface Props {
 const { class: className } = Astro.props as Props
 ---
 
-<Toggle
-  class:list={[
-    'group text-muted-foreground hover:text-foreground rounded-full hover:bg-transparent',
-    'data-[state=on]:text-muted-foreground data-[state=on]:hover:text-foreground data-[state=on]:bg-transparent',
-    className,
-  ]}
-  aria-label="Toggle theme"
-  data-theme-toggle-02>
-  <span class="size-5" data-theme-icon-wrapper>
-    <Sun
-      class="hidden size-5 group-data-[state=off]:data-ready:block"
-      data-theme-icon
-    />
-    <Moon
-      class="hidden size-5 group-data-[state=on]:data-ready:block"
-      data-theme-icon
-    />
-  </span>
-</Toggle>
+<Tooltip>
+  <TooltipTrigger>
+    <span class="inline-flex">
+    <Toggle
+      class:list={[
+        'group text-muted-foreground hover:text-foreground rounded-full hover:bg-transparent',
+        'data-[state=on]:text-muted-foreground data-[state=on]:hover:text-foreground data-[state=on]:bg-transparent',
+        className,
+      ]}
+      aria-label="Toggle theme"
+      data-theme-toggle-02>
+      <span class="size-5" data-theme-icon-wrapper>
+        <Sun
+          class="hidden size-5 group-data-[state=off]:data-ready:block"
+          data-theme-icon
+        />
+        <Moon
+          class="hidden size-5 group-data-[state=on]:data-ready:block"
+          data-theme-icon
+        />
+      </span>
+    </Toggle>
+    </span>
+  </TooltipTrigger>
+  <TooltipContent side="bottom">
+    Toggle Mode
+    <kbd class="bg-background/20 ml-1 rounded px-1 py-0.5 font-mono text-[10px] font-medium">D</kbd>
+  </TooltipContent>
+</Tooltip>
 
 <script>
   import type { ToggleChangeEvent } from '@/components/starwind/toggle'
@@ -186,4 +197,21 @@ const { class: className } = Astro.props as Props
   setupThemeToggles()
   document.addEventListener('astro:after-swap', () => setupThemeToggles(true))
   document.addEventListener('starwind:init', () => setupThemeToggles())
+
+  // Keyboard shortcut: press D to toggle theme
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if ((e.key === 'd' || e.key === 'D') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      if (
+        (e.target instanceof HTMLElement && e.target.isContentEditable) ||
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        e.target instanceof HTMLSelectElement
+      ) {
+        return
+      }
+      e.preventDefault()
+      const firstToggle = activeToggles.values().next().value
+      firstToggle?.click()
+    }
+  })
 </script>
