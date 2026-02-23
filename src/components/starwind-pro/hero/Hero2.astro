@@ -1,4 +1,12 @@
 ---
+const BASE = 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block'
+
+const integrationRows = [
+  ['block-1', 'block-2', 'block-3', 'block-4', 'block-5'],
+  ['block-6', 'block-1', 'block-2', 'block-3', 'block-4'],
+  ['block-5', 'block-6', 'block-1', 'block-2', 'block-3'],
+]
+
 import type { HTMLAttributes } from 'astro/types'
 import { tv } from 'tailwind-variants'
 
@@ -87,4 +95,68 @@ const {
       <path d="M12 5v14M5 12l7 7 7-7"></path>
     </svg>
   </a>
+</section>
+
+<section class="relative flex min-h-screen w-full items-center px-4">
+  <!-- Background grid pattern -->
+  <div
+    class="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
+    <img
+      alt=""
+      class="[mask-image:radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
+      src={`${BASE}/patterns/square-alt-grid.svg`}
+    />
+  </div>
+
+  <div class="relative">
+    <div
+      class="relative container flex flex-col items-start md:flex-row md:items-center md:-space-x-26">
+      <!-- Left: text content -->
+      <div
+        class="bg-background z-20 w-full shrink-0 pt-32 md:-mx-4 md:w-1/2 md:bg-transparent md:px-4 md:pb-32">
+        <div class="flex flex-col items-start text-left">
+          <div class="max-w-sm">
+            <h1 class="my-6 text-4xl font-bold text-pretty lg:text-6xl">
+              Blocks Built With Shadcn &amp; Tailwind
+            </h1>
+            <p class="text-muted-foreground">
+              Fully decomposable components, all the images and background
+              patterns are individual images or svgs that can be replaced.
+            </p>
+            <Button
+              href="https://www.shadcnblocks.com"
+              size="lg"
+              variant="primary"
+              class="mt-10">
+              Discover all components
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: integration icon grid -->
+      <div>
+        <div
+          class="flex -translate-x-10 flex-col gap-8 pt-12 pb-8 sm:-translate-x-0 md:gap-16 md:py-32">
+          {
+            integrationRows.map(row => (
+              <div class="flex gap-x-22 even:translate-x-22">
+                {row.map(icon => (
+                  <div class="border-background bg-background size-22 rounded-xl border shadow-xl">
+                    <div class="bg-muted/20 h-full w-full p-4">
+                      <img
+                        alt="Integration"
+                        class="size-full dark:invert"
+                        src={`${BASE}/${icon}.svg`}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
