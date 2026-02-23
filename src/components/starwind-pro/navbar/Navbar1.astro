@@ -84,8 +84,8 @@ const hasLogoSlot = Astro.slots.has('logo')
 
     <!-- Desktop CTA Button + Theme Switcher -->
     <div class="hidden items-center gap-2 @2xl:flex">
-      <ThemeSwitcher />
-      <ModeToggle client:load />
+      <ThemeSwitcher client:load />
+      <!-- <ModeToggle client:load /> -->
 
       {ctaText && <Button href={ctaHref}>{ctaText}</Button>}
     </div>
