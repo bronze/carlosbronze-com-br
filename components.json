@@ -1,5 +1,24 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/starwind.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "rtl": false,
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
   "registries": {
     "@starwind-pro": {
       "url": "https://pro.starwind.dev/r/{name}",
@@ -7,17 +26,5 @@
         "Authorization": "Bearer ${STARWIND_LICENSE_KEY}"
       }
     }
-  },
-  "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils"
-  },
-  "tailwind": {
-    "config": "",
-    "css": "src/styles/starwind.css",
-    "baseColor": "neutral",
-    "cssVariables": true
-  },
-  "style": "default",
-  "rsc": true
+  }
 }
