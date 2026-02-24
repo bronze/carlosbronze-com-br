@@ -45,7 +45,7 @@ interface Props extends HTMLAttributes<'section'> {
 }
 
 const hero2Styles = tv({
-  base: 'relative flex min-h-screen w-full overflow-hidden items-center px-4',
+  base: 'relative flex min-h-screen w-full items-center px-4 overflow-x-hidden',
 })
 
 const {
@@ -98,7 +98,7 @@ const {
     class="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
     <img
       alt=""
-      class="mask-[radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
+      class="w-full max-w-6xl mask-[radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
       src={gridPattern.src}
     />
   </div>
