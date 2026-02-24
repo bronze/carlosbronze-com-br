@@ -121,22 +121,19 @@ const {
             </p>
             <div class="mt-8 flex flex-wrap gap-3">
               <Button
-                asChild
+                href={primaryButtonHref}
                 class="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-6">
-                <a href={primaryButtonHref} class="inline-flex items-center">
-                  <Mail class="mr-4 size-4" />
-                  {primaryButtonText}
-                </a>
+                <Mail class="mr-4 size-4" />
+                {primaryButtonText}
               </Button>
-              <Button variant="outline" class="rounded-full" asChild>
-                <a
-                  href={secondaryButtonHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center">
-                  <BrandLinkedin class="mr-4 size-4" />
-                  {secondaryButtonText}
-                </a>
+              <Button
+                variant="outline"
+                href={secondaryButtonHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded-full">
+                <BrandLinkedin class="mr-4 size-4" />
+                {secondaryButtonText}
               </Button>
             </div>
           </div>
