@@ -1,18 +1,33 @@
 ---
-const BASE = 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block'
-
-const integrationRows = [
-  ['block-1', 'block-2', 'block-3', 'block-4', 'block-5'],
-  ['block-6', 'block-1', 'block-2', 'block-3', 'block-4'],
-  ['block-5', 'block-6', 'block-1', 'block-2', 'block-3'],
-]
-
 import type { HTMLAttributes } from 'astro/types'
 import { tv } from 'tailwind-variants'
 
 import { Button } from '@/components/starwind/button'
 import Mail from '@tabler/icons/outline/mail.svg'
 import BrandLinkedin from '@tabler/icons/outline/brand-linkedin.svg'
+
+import gridPattern from '@/assets/blocks/patterns/square-alt-grid.svg'
+import block1 from '@/assets/blocks/block-1.svg'
+import block2 from '@/assets/blocks/block-2.svg'
+import block3 from '@/assets/blocks/block-3.svg'
+import block4 from '@/assets/blocks/block-4.svg'
+import block5 from '@/assets/blocks/block-5.svg'
+import block6 from '@/assets/blocks/block-6.svg'
+
+const blocks: Record<string, { src: string }> = {
+  'block-1': block1,
+  'block-2': block2,
+  'block-3': block3,
+  'block-4': block4,
+  'block-5': block5,
+  'block-6': block6,
+}
+
+const integrationRows = [
+  ['block-1', 'block-2', 'block-3', 'block-4', 'block-5'],
+  ['block-6', 'block-1', 'block-2', 'block-3', 'block-4'],
+  ['block-5', 'block-6', 'block-1', 'block-2', 'block-3'],
+]
 
 interface Props extends HTMLAttributes<'section'> {
   /** Main heading text */
@@ -30,7 +45,7 @@ interface Props extends HTMLAttributes<'section'> {
 }
 
 const hero2Styles = tv({
-  base: 'relative flex min-h-screen w-full items-center px-4',
+  base: 'relative flex min-h-screen w-full overflow-hidden items-center px-4',
 })
 
 const {
@@ -46,7 +61,7 @@ const {
 ---
 
 <section class={hero2Styles({ class: className })} {...rest}>
-  <div class="@container mx-auto w-full max-w-7xl">
+  <!-- <div class="@container mx-auto w-full max-w-7xl">
     <div class="flex max-w-3xl flex-col">
       <h1
         class="font-heading text-4xl font-medium tracking-tight @xl:text-5xl @3xl:text-6xl">
@@ -77,8 +92,84 @@ const {
         </Button>
       </div>
     </div>
+  </div> -->
+  <!-- Background grid pattern -->
+  <div
+    class="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
+    <img
+      alt=""
+      class="mask-[radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
+      src={gridPattern.src}
+    />
   </div>
 
+  <div class="@container mx-auto w-full max-w-7xl">
+    <div
+      class="relative container flex flex-col items-start md:flex-row md:items-center md:-space-x-26">
+      <!-- Left: text content -->
+      <div
+        class="bg-background z-20 w-full shrink-0 pt-32 md:-mx-4 md:w-1/2 md:bg-transparent md:px-4 md:pb-32">
+        <div class="flex flex-col items-start text-left">
+          <div class="max-w-3xl">
+            <h1
+              class="font-heading text-4xl font-medium tracking-tight @xl:text-5xl @3xl:text-6xl">
+              {heading}
+            </h1>
+            <p
+              class="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed text-pretty">
+              {description}
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <Button
+                asChild
+                class="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-6">
+                <a href={primaryButtonHref} class="inline-flex items-center">
+                  <Mail class="mr-4 size-4" />
+                  {primaryButtonText}
+                </a>
+              </Button>
+              <Button variant="outline" class="rounded-full" asChild>
+                <a
+                  href={secondaryButtonHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center">
+                  <BrandLinkedin class="mr-4 size-4" />
+                  {secondaryButtonText}
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: integration icon grid -->
+      <div>
+        <div
+          class="flex -translate-x-10 flex-col gap-8 pt-12 pb-8 sm:translate-x-0 md:gap-16 md:py-32">
+          {
+            integrationRows.map(row => (
+              <div class="flex gap-x-22 even:translate-x-22">
+                {row.map(icon => (
+                  <div class="border-background bg-background size-22 rounded-xl border shadow-xl">
+                    <div class="bg-muted/20 h-full w-full p-4">
+                      <img
+                        alt="Integration"
+                        class="size-full dark:invert"
+                        src={blocks[icon].src}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
   <a
     href="#about"
     class="text-muted-foreground hover:text-foreground absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce transition-colors"
@@ -95,70 +186,4 @@ const {
       <path d="M12 5v14M5 12l7 7 7-7"></path>
     </svg>
   </a>
-</section>
-
-<section class="relative flex min-h-screen w-full items-center px-4">
-  <div class="@container mx-auto w-full max-w-7xl">
-    <!-- Background grid pattern -->
-    <div
-      class="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
-      <img
-        alt=""
-        class="[mask-image:radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
-        src={`${BASE}/patterns/square-alt-grid.svg`}
-      />
-    </div>
-
-    <div class="relative">
-      <div
-        class="relative container flex flex-col items-start md:flex-row md:items-center md:-space-x-26">
-        <!-- Left: text content -->
-        <div
-          class="bg-background z-20 w-full shrink-0 pt-32 md:-mx-4 md:w-1/2 md:bg-transparent md:px-4 md:pb-32">
-          <div class="flex flex-col items-start text-left">
-            <div class="max-w-sm">
-              <h1 class="my-6 text-4xl font-bold text-pretty lg:text-6xl">
-                Blocks Built With Shadcn &amp; Tailwind
-              </h1>
-              <p class="text-muted-foreground">
-                Fully decomposable components, all the images and background
-                patterns are individual images or svgs that can be replaced.
-              </p>
-              <Button
-                href="https://www.shadcnblocks.com"
-                size="lg"
-                variant="primary"
-                class="mt-10">
-                Discover all components
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: integration icon grid -->
-        <div>
-          <div
-            class="flex -translate-x-10 flex-col gap-8 pt-12 pb-8 sm:-translate-x-0 md:gap-16 md:py-32">
-            {
-              integrationRows.map(row => (
-                <div class="flex gap-x-22 even:translate-x-22">
-                  {row.map(icon => (
-                    <div class="border-background bg-background size-22 rounded-xl border shadow-xl">
-                      <div class="bg-muted/20 h-full w-full p-4">
-                        <img
-                          alt="Integration"
-                          class="size-full dark:invert"
-                          src={`${BASE}/${icon}.svg`}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
