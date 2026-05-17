@@ -1,6 +1,7 @@
 ---
 import '@/styles/starwind.css'
 import { Font } from 'astro:assets'
+import PostHog from '../components/posthog.astro'
 ---
 
 <!doctype html>
@@ -39,6 +40,7 @@ import { Font } from 'astro:assets'
         })
       }
     </script>
+    <PostHog />
   </head>
   <body>
     <slot />

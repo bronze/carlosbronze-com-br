@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Welcome from '../components/Welcome.astro'
+
+import Navbar1, {
+  type NavLink,
+} from '../components/starwind-pro/navbar/Navbar1.astro'
+import Hero2 from '../components/starwind-pro/hero/Hero2.astro'
+import About from '../components/About.astro'
+import Footer from '../components/Footer.astro'
+
+const links: NavLink[] = [
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
+]
+---
+
+<Layout>
+  <Navbar1 siteName="Carlos Bronze" links={links} ctaText="" ctaHref="" />
+  <Hero2
+    heading="Carlos Bronze"
+    description="Strategic product leader driving growth through user-centered innovation, cross-functional alignment, and data-driven decision making."
+    primaryButtonText="Get in Touch"
+    primaryButtonHref="#projects"
+    secondaryButtonText="LinkedIn"
+    secondaryButtonHref="#contact"
+  />
+  <About />
+  <Welcome />
+  <Footer />
+</Layout>

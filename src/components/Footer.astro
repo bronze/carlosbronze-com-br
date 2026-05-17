@@ -55,7 +55,8 @@ const socials = [
               aria-label={label}
               target={href.startsWith('http') ? '_blank' : undefined}
               rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              class="text-muted-foreground hover:text-foreground transition-colors"
+              class="text-muted-foreground hover:text-foreground social-link transition-colors"
+              data-label={label}
               set:html={icon}
             />
           ))
@@ -69,3 +70,13 @@ const socials = [
     </p>
   </div>
 </footer>
+
+<script is:inline>
+  document.querySelectorAll('.social-link').forEach(function (el) {
+    el.addEventListener('click', function () {
+      window.posthog?.capture('social_link_clicked', {
+        platform: el.dataset.label,
+      })
+    })
+  })
+</script>

@@ -3,40 +3,62 @@ import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout>
-  <main class="min-h-screen bg-background text-foreground flex items-center justify-center px-4">
+  <main
+    class="bg-background text-foreground flex min-h-screen items-center justify-center px-4">
     <div class="w-full max-w-sm space-y-6">
-
       <div class="space-y-3">
         <h1 class="text-2xl font-semibold tracking-tight">Carlos Bronze</h1>
 
-        <div class="flex items-center gap-1 text-xs text-muted-foreground">
-          <button id="btn-pt" class="lang-btn px-2 py-0.5 rounded font-medium transition-colors" data-lang="pt">PT</button>
+        <div class="text-muted-foreground flex items-center gap-1 text-xs">
+          <button
+            id="btn-pt"
+            class="lang-btn rounded px-2 py-0.5 font-medium transition-colors"
+            data-lang="pt">PT</button
+          >
           <span class="opacity-30">/</span>
-          <button id="btn-en" class="lang-btn px-2 py-0.5 rounded font-medium transition-colors" data-lang="en">EN</button>
+          <button
+            id="btn-en"
+            class="lang-btn rounded px-2 py-0.5 font-medium transition-colors"
+            data-lang="en">EN</button
+          >
         </div>
 
-        <p id="tagline-pt" class="text-sm text-muted-foreground leading-relaxed lang-text">
-          Ajudo lideranças e times de produto a transformar ambiguidade em direção clara. Conectando visão, métricas e entrega para gerar impacto mensurável.
+        <p
+          id="tagline-pt"
+          class="text-muted-foreground lang-text text-sm leading-relaxed">
+          Ajudo lideranças e times de produto a transformar ambiguidade em
+          direção clara. Conectando visão, métricas e entrega para gerar impacto
+          mensurável.
         </p>
-        <p id="tagline-en" class="text-sm text-muted-foreground leading-relaxed lang-text hidden">
-          I help product leaders and teams turn ambiguity into clear direction. Connecting vision, metrics, and delivery to drive measurable impact.
+        <p
+          id="tagline-en"
+          class="text-muted-foreground lang-text hidden text-sm leading-relaxed">
+          I help product leaders and teams turn ambiguity into clear direction.
+          Connecting vision, metrics, and delivery to drive measurable impact.
         </p>
       </div>
 
-      <div class="h-px bg-border"></div>
+      <div class="bg-border h-px"></div>
 
       <div class="space-y-2">
         <a
           href="/obsidian"
-          class="flex items-center justify-between w-full rounded-md border border-border bg-card px-4 py-3 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors"
-        >
+          class="border-border bg-card hover:bg-accent hover:text-accent-foreground flex w-full items-center justify-between rounded-md border px-4 py-3 text-sm font-medium shadow-sm transition-colors">
           <span>Obsidian Notes</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
           </svg>
         </a>
       </div>
-
     </div>
   </main>
 </Layout>
@@ -58,8 +80,22 @@ import Layout from '../layouts/Layout.astro'
   }
 
   const saved = localStorage.getItem('lang')
-  const detected = navigator.language.toLowerCase().startsWith('pt') ? 'pt' : 'en'
+  const detected = navigator.language.toLowerCase().startsWith('pt')
+    ? 'pt'
+    : 'en'
   setLang(saved ?? detected)
 
-  btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang!)))
+  btns.forEach(b =>
+    b.addEventListener('click', () => {
+      const lang = b.dataset.lang!
+      setLang(lang)
+      ;(window as any).posthog?.capture('language_switched', { language: lang })
+    }),
+  )
+
+  document
+    .querySelector('a[href="/obsidian"]')
+    ?.addEventListener('click', () => {
+      ;(window as any).posthog?.capture('obsidian_link_clicked')
+    })
 </script>
