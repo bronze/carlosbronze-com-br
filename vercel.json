@@ -1,4 +1,14 @@
 {
   "buildCommand": "pnpm run build",
-  "cleanUrls": true
+  "cleanUrls": true,
+    "rewrites": [
+    {
+      "source": "/obsidian/",
+      "destination": "https://publish.obsidian.md/serve?url=www.carlosbronze.com.br/obsidian"
+    },
+    {
+      "source": "/obsidian/:path*",
+      "destination": "https://publish.obsidian.md/serve?url=www.carlosbronze.com.br/obsidian/:path*"
+    }
+  ]
 }

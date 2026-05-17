@@ -1,33 +1,65 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import Welcome from '../components/Welcome.astro'
-
-import Navbar1, {
-  type NavLink,
-} from '../components/starwind-pro/navbar/Navbar1.astro'
-import Hero2 from '../components/starwind-pro/hero/Hero2.astro'
-import About from '../components/About.astro'
-import Footer from '../components/Footer.astro'
-
-const links: NavLink[] = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
-]
 ---
 
 <Layout>
-  <Navbar1 siteName="Carlos Bronze" links={links} ctaText="" ctaHref="" />
-  <Hero2
-    heading="Carlos Bronze"
-    description="Strategic product leader driving growth through user-centered innovation, cross-functional alignment, and data-driven decision making."
-    primaryButtonText="Get in Touch"
-    primaryButtonHref="#projects"
-    secondaryButtonText="LinkedIn"
-    secondaryButtonHref="#contact"
-  />
-  <About />
-  <Welcome />
-  <Footer />
+  <main class="min-h-screen bg-background text-foreground flex items-center justify-center px-4">
+    <div class="w-full max-w-sm space-y-6">
+
+      <div class="space-y-3">
+        <h1 class="text-2xl font-semibold tracking-tight">Carlos Bronze</h1>
+
+        <div class="flex items-center gap-1 text-xs text-muted-foreground">
+          <button id="btn-pt" class="lang-btn px-2 py-0.5 rounded font-medium transition-colors" data-lang="pt">PT</button>
+          <span class="opacity-30">/</span>
+          <button id="btn-en" class="lang-btn px-2 py-0.5 rounded font-medium transition-colors" data-lang="en">EN</button>
+        </div>
+
+        <p id="tagline-pt" class="text-sm text-muted-foreground leading-relaxed lang-text">
+          Ajudo lideranças e times de produto a transformar ambiguidade em direção clara. Conectando visão, métricas e entrega para gerar impacto mensurável.
+        </p>
+        <p id="tagline-en" class="text-sm text-muted-foreground leading-relaxed lang-text hidden">
+          I help product leaders and teams turn ambiguity into clear direction. Connecting vision, metrics, and delivery to drive measurable impact.
+        </p>
+      </div>
+
+      <div class="h-px bg-border"></div>
+
+      <div class="space-y-2">
+        <a
+          href="/obsidian"
+          class="flex items-center justify-between w-full rounded-md border border-border bg-card px-4 py-3 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors"
+        >
+          <span>Obsidian Notes</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </main>
 </Layout>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.lang-btn')
+  const taglinePt = document.getElementById('tagline-pt')!
+  const taglineEn = document.getElementById('tagline-en')!
+
+  function setLang(lang: string) {
+    taglinePt.classList.toggle('hidden', lang !== 'pt')
+    taglineEn.classList.toggle('hidden', lang !== 'en')
+    btns.forEach(b => {
+      const active = b.dataset.lang === lang
+      b.classList.toggle('text-foreground', active)
+      b.classList.toggle('text-muted-foreground', !active)
+    })
+    localStorage.setItem('lang', lang)
+  }
+
+  const saved = localStorage.getItem('lang')
+  const detected = navigator.language.toLowerCase().startsWith('pt') ? 'pt' : 'en'
+  setLang(saved ?? detected)
+
+  btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang!)))
+</script>
