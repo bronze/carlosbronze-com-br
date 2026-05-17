@@ -55,7 +55,7 @@ const apiHost = import.meta.env.PUBLIC_POSTHOG_HOST
       (e.__SV = 1))
   })(document, window.posthog || [])
   posthog.init(apiKey || '', {
-    api_host: apiHost || '',
+    api_host: apiHost || 'https://us.i.posthog.com',
     defaults: '2026-01-30',
   })
 </script>
