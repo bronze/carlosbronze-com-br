@@ -2,8 +2,7 @@
 import '@/styles/starwind.css'
 import { Font } from 'astro:assets'
 import PostHog from '../components/posthog.astro'
-import { Analytics } from '@vercel/analytics/next';
-
+import Analytics from '@vercel/analytics/astro';
 ---
 
 <!doctype html>
@@ -42,6 +41,7 @@ import { Analytics } from '@vercel/analytics/next';
         })
       }
     </script>
+    <Analytics />
     <PostHog />
     <script
       defer
@@ -53,7 +53,6 @@ import { Analytics } from '@vercel/analytics/next';
   </head>
   <body>
     <slot />
-    <Analytics />
   </body>
 </html>
 
