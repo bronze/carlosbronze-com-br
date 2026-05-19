@@ -3,6 +3,8 @@ import '@/styles/starwind.css'
 import { Font } from 'astro:assets'
 import PostHog from '../components/posthog.astro'
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
+
 ---
 
 <!doctype html>
@@ -16,7 +18,7 @@ import Analytics from '@vercel/analytics/astro';
     <Font cssVariable="--font-geist" preload />
     <Font cssVariable="--font-geist-mono" />
     <title>Carlos Bronze</title>
-
+    <SpeedInsights />
     <script is:inline>
       function initTheme() {
         const stored =
