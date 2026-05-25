@@ -1,6 +1,17 @@
 {
   "buildCommand": "pnpm run build",
   "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Clacks-Overhead",
+          "value": "GNU Terry Pratchett"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/obsidian/",
