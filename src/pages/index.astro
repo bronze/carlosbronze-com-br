@@ -9,21 +9,24 @@ import Layout from '../layouts/Layout.astro'
       <div class="space-y-3">
         <h1 class="text-2xl font-semibold tracking-tight">Carlos Bronze</h1>
 
-        <div class="text-muted-foreground flex items-center gap-1 text-xs">
-          <button
-            id="btn-pt"
-            class="lang-btn rounded px-2 py-0.5 font-medium transition-colors"
-            data-lang="pt"
-            data-foley-press="tick">PT</button
+        <button
+          id="lang-toggle"
+          type="button"
+          class="text-muted-foreground flex items-center gap-1 text-xs"
+          aria-pressed="false"
+          data-foley-toggle>
+          <span
+            id="label-pt"
+            class="lang-label rounded px-2 py-0.5 font-medium transition-colors"
+            >PT</span
           >
           <span class="opacity-30">/</span>
-          <button
-            id="btn-en"
-            class="lang-btn rounded px-2 py-0.5 font-medium transition-colors"
-            data-lang="en"
-            data-foley-press="tick">EN</button
+          <span
+            id="label-en"
+            class="lang-label rounded px-2 py-0.5 font-medium transition-colors"
+            >EN</span
           >
-        </div>
+        </button>
 
         <p
           id="tagline-pt"
@@ -71,20 +74,25 @@ import Layout from '../layouts/Layout.astro'
   import { bind, set } from '@foleyjs/core'
 
   bind()
-  set({ volume: 0.5, theme: 'glass' })
+  set({ volume: 1, theme: 'mechanical' })
 
-  const btns = document.querySelectorAll<HTMLButtonElement>('.lang-btn')
+  const langToggle = document.getElementById('lang-toggle')!
+  const labelPt = document.getElementById('label-pt')!
+  const labelEn = document.getElementById('label-en')!
   const taglinePt = document.getElementById('tagline-pt')!
   const taglineEn = document.getElementById('tagline-en')!
 
+  let currentLang = 'pt'
+
   function setLang(lang: string) {
+    currentLang = lang
     taglinePt.classList.toggle('hidden', lang !== 'pt')
     taglineEn.classList.toggle('hidden', lang !== 'en')
-    btns.forEach(b => {
-      const active = b.dataset.lang === lang
-      b.classList.toggle('text-foreground', active)
-      b.classList.toggle('text-muted-foreground', !active)
-    })
+    labelPt.classList.toggle('text-foreground', lang === 'pt')
+    labelPt.classList.toggle('text-muted-foreground', lang !== 'pt')
+    labelEn.classList.toggle('text-foreground', lang === 'en')
+    labelEn.classList.toggle('text-muted-foreground', lang !== 'en')
+    langToggle.setAttribute('aria-pressed', String(lang === 'en'))
     localStorage.setItem('lang', lang)
   }
 
@@ -94,13 +102,11 @@ import Layout from '../layouts/Layout.astro'
     : 'en'
   setLang(saved ?? detected)
 
-  btns.forEach(b =>
-    b.addEventListener('click', () => {
-      const lang = b.dataset.lang!
-      setLang(lang)
-      ;(window as any).posthog?.capture('language_switched', { language: lang })
-    }),
-  )
+  langToggle.addEventListener('click', () => {
+    const lang = currentLang === 'pt' ? 'en' : 'pt'
+    setLang(lang)
+    ;(window as any).posthog?.capture('language_switched', { language: lang })
+  })
 
   document
     .querySelector('a[href="/obsidian"]')
