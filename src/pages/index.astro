@@ -13,13 +13,15 @@ import Layout from '../layouts/Layout.astro'
           <button
             id="btn-pt"
             class="lang-btn rounded px-2 py-0.5 font-medium transition-colors"
-            data-lang="pt">PT</button
+            data-lang="pt"
+            data-foley-press="tick">PT</button
           >
           <span class="opacity-30">/</span>
           <button
             id="btn-en"
             class="lang-btn rounded px-2 py-0.5 font-medium transition-colors"
-            data-lang="en">EN</button
+            data-lang="en"
+            data-foley-press="tick">EN</button
           >
         </div>
 
@@ -43,6 +45,8 @@ import Layout from '../layouts/Layout.astro'
       <div class="space-y-2">
         <a
           href="/obsidian"
+          data-foley-press="tap"
+          data-foley-hover="tick"
           class="border-border bg-card hover:bg-accent hover:text-accent-foreground flex w-full items-center justify-between rounded-md border px-4 py-3 text-sm font-medium shadow-sm transition-colors">
           <span>Obsidian Notes</span>
           <svg
@@ -64,6 +68,11 @@ import Layout from '../layouts/Layout.astro'
 </Layout>
 
 <script>
+  import { bind, set } from '@foleyjs/core'
+
+  bind()
+  set({ volume: 0.5, theme: 'glass' })
+
   const btns = document.querySelectorAll<HTMLButtonElement>('.lang-btn')
   const taglinePt = document.getElementById('tagline-pt')!
   const taglineEn = document.getElementById('tagline-en')!
