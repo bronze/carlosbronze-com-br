@@ -72,9 +72,12 @@ import Layout from '../layouts/Layout.astro'
 
 <script>
   import { bind, set } from '@foleyjs/core'
+  import { WebHaptics } from 'web-haptics'
 
   bind()
   set({ volume: 1, theme: 'mechanical' })
+
+  const haptics = new WebHaptics()
 
   const langToggle = document.getElementById('lang-toggle')!
   const labelPt = document.getElementById('label-pt')!
@@ -105,12 +108,14 @@ import Layout from '../layouts/Layout.astro'
   langToggle.addEventListener('click', () => {
     const lang = currentLang === 'pt' ? 'en' : 'pt'
     setLang(lang)
+    haptics.trigger('selection')
     ;(window as any).posthog?.capture('language_switched', { language: lang })
   })
 
   document
     .querySelector('a[href="/obsidian"]')
     ?.addEventListener('click', () => {
+      haptics.trigger('light')
       ;(window as any).posthog?.capture('obsidian_link_clicked')
     })
 </script>
