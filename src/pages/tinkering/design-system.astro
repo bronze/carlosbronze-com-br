@@ -17,7 +17,7 @@ const steps = ['0', '50', '100', '200', '300', '400', '500', '600', '700', '800'
 const brandSteps = steps.slice(1)
 
 const greys = [
-  { value: 'neutro', label: { pt: 'Neutro', en: 'Neutral' } },
+  { value: 'neutro', label: { pt: 'Neutro', en: 'Neutral' }, live: true },
   { value: 'pedra', label: { pt: 'Pedra', en: 'Stone' } },
   { value: 'papel', label: { pt: 'Papel', en: 'Paper' } },
   // Single mode: light only, on a ground darker than near-white.
@@ -27,14 +27,14 @@ const greys = [
 ]
 const accents = [
   { value: 'nenhum', label: { pt: 'Nenhum', en: 'None' } },
-  { value: 'bronze', label: { pt: 'Bronze', en: 'Bronze' } },
+  { value: 'bronze', label: { pt: 'Bronze', en: 'Bronze' }, live: true },
   { value: 'cobalto', label: { pt: 'Cobalto', en: 'Cobalt' } },
   { value: 'musgo', label: { pt: 'Musgo', en: 'Moss' } },
   { value: 'gelo', label: { pt: 'Gelo', en: 'Frost' } },
   { value: 'ardosia', label: { pt: 'Ardósia', en: 'Slate' } },
 ]
 const modes = [
-  { value: 'claro', label: { pt: 'Claro', en: 'Light' } },
+  { value: 'claro', label: { pt: 'Claro', en: 'Light' }, live: true },
   { value: 'escuro', label: { pt: 'Escuro', en: 'Dark' } },
 ]
 
@@ -122,7 +122,7 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
                   type="radio"
                   name={group.name}
                   value={o.value}
-                  checked={i === 0}
+                  checked={'live' in o && o.live}
                   class="sr-only"
                 />
                 <T {...o.label} />
@@ -137,8 +137,8 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
 
   <p class="text-muted-foreground mt-6 text-base leading-[1.6]">
     <T
-      pt="O site no ar usa Neutro, sem destaque. As outras opções são candidatas: troque para ver cada uma aplicada nesta página, inclusive no cabeçalho. As de modo único não têm modo escuro: um só tema, com fundo menos claro."
-      en="The live site uses Neutral with no accent. The other options are candidates: switch to see each one applied to this page, header included. The single-mode ones have no dark mode: one theme, on a less bright ground."
+      pt="O site no ar usa Neutro com Bronze. As outras opções são candidatas: troque para ver cada uma aplicada nesta página, inclusive no cabeçalho. As de modo único não têm modo escuro: um só tema, com fundo menos claro."
+      en="The live site uses Neutral with Bronze. The other options are candidates: switch to see each one applied to this page, header included. The single-mode ones have no dark mode: one theme, on a less bright ground."
     />
   </p>
 
@@ -429,7 +429,7 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
     document.querySelectorAll<HTMLElement>('[data-value]').forEach(el => {
       el.textContent = css.getPropertyValue(el.dataset.value!).trim().replace(/^var\(--color-(\w+)-(\d+)\)$/, '$1 $2')
     })
-    const hasAccent = root.hasAttribute('data-accent')
+    const hasAccent = root.dataset.accent !== 'nenhum'
     document.querySelectorAll<HTMLElement>('[data-when-accent]').forEach(el => (el.hidden = !hasAccent))
     document.querySelectorAll<HTMLElement>('[data-when-no-accent]').forEach(el => (el.hidden = hasAccent))
 
@@ -454,7 +454,8 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
 
     if (greys === 'neutro') root.removeAttribute('data-greys')
     else root.setAttribute('data-greys', greys)
-    if (accent === 'nenhum') root.removeAttribute('data-accent')
+    // Bronze is the live accent: no attribute needed for it.
+    if (accent === 'bronze') root.removeAttribute('data-accent')
     else root.setAttribute('data-accent', accent)
 
     // Preview only: the next page load follows the system again.
@@ -463,7 +464,7 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
     // Shareable: /tinkering/design-system?greys=pedra&accent=bronze
     const params = new URLSearchParams()
     if (greys !== 'neutro') params.set('greys', greys)
-    if (accent !== 'nenhum') params.set('accent', accent)
+    if (accent !== 'bronze') params.set('accent', accent)
     history.replaceState(null, '', params.size ? `?${params}` : location.pathname)
 
     render()

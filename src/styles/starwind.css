@@ -198,8 +198,8 @@
       of those scales. Components only ever use the semantic tokens.
    A palette swaps the primitives and nothing else.
 
-   The live palette is plain neutral with no accent, so --brand falls back to
-   the text color. The candidates below are switched on through data-greys and
+   The live palette is neutral greys with a bronze accent (on trial). With
+   data-accent='nenhum', --brand falls back to the text color. The candidates below are switched on through data-greys and
    data-accent on <html>, which only /tinkering/design-system sets. */
 :root {
   /* #fafafa, not pure white: easier on the eyes. Same as base-50. */
@@ -216,8 +216,21 @@
   --color-base-900: var(--color-neutral-900);
   --color-base-950: var(--color-neutral-950);
 
-  --brand-on-light: var(--color-base-950);
-  --brand-on-dark: var(--color-base-50);
+  /* Bronze, on trial as the live accent. */
+  --color-brand-50: oklch(0.972 0.02 80);
+  --color-brand-100: oklch(0.938 0.04 78);
+  --color-brand-200: oklch(0.88 0.07 75);
+  --color-brand-300: oklch(0.8 0.1 70);
+  --color-brand-400: oklch(0.72 0.12 65);
+  --color-brand-500: oklch(0.64 0.13 60);
+  --color-brand-600: oklch(0.52 0.115 56);
+  --color-brand-700: oklch(0.46 0.1 54);
+  --color-brand-800: oklch(0.38 0.08 52);
+  --color-brand-900: oklch(0.3 0.06 50);
+  --color-brand-950: oklch(0.22 0.04 50);
+
+  --brand-on-light: var(--color-brand-600);
+  --brand-on-dark: var(--color-brand-400);
   --brand: var(--brand-on-light);
 }
 .dark {
@@ -311,18 +324,9 @@
   --brand-on-light: var(--color-brand-600);
   --brand-on-dark: var(--color-brand-400);
 }
-:root[data-accent='bronze'] {
-  --color-brand-50: oklch(0.972 0.02 80);
-  --color-brand-100: oklch(0.938 0.04 78);
-  --color-brand-200: oklch(0.88 0.07 75);
-  --color-brand-300: oklch(0.8 0.1 70);
-  --color-brand-400: oklch(0.72 0.12 65);
-  --color-brand-500: oklch(0.64 0.13 60);
-  --color-brand-600: oklch(0.52 0.115 56);
-  --color-brand-700: oklch(0.46 0.1 54);
-  --color-brand-800: oklch(0.38 0.08 52);
-  --color-brand-900: oklch(0.3 0.06 50);
-  --color-brand-950: oklch(0.22 0.04 50);
+:root[data-accent='nenhum'] {
+  --brand-on-light: var(--color-base-950);
+  --brand-on-dark: var(--color-base-50);
 }
 :root[data-accent='cobalto'] {
   --color-brand-50: oklch(0.97 0.015 255);
