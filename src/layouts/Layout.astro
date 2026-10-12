@@ -1,6 +1,7 @@
 ---
 import '@/styles/starwind.css'
 import { Font } from 'astro:assets'
+import { ClientRouter } from 'astro:transitions'
 import PostHog from '../components/posthog.astro'
 import Analytics from '@vercel/analytics/astro'
 import SpeedInsights from '@vercel/speed-insights/astro'
@@ -36,16 +37,25 @@ const full = (t: string) => `${t} · Carlos Bronze`
       )
     }
     <SpeedInsights />
+    <ClientRouter />
     <script is:inline>
-      try {
-        const lang =
-          localStorage.getItem('lang') ??
-          (navigator.language.toLowerCase().startsWith('pt') ? 'pt' : 'en')
-        document.documentElement.dataset.lang = lang
-        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en'
-        const title = document.querySelector('title[data-title-en]')
-        if (title && lang === 'en') document.title = title.dataset.titleEn
-      } catch {}
+      // Language and theme live on <html>. The router copies the next page's
+      // <html> attributes over the current ones, so they're applied to the
+      // incoming document before each swap, as well as on the first load.
+      function currentLang() {
+        try {
+          const saved = localStorage.getItem('lang')
+          if (saved) return saved
+        } catch {}
+        return navigator.language.toLowerCase().startsWith('pt') ? 'pt' : 'en'
+      }
+      function applyLang(doc) {
+        const lang = currentLang()
+        doc.documentElement.dataset.lang = lang
+        doc.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en'
+        const title = doc.querySelector('title[data-title-en]')
+        if (title && lang === 'en') title.textContent = title.dataset.titleEn
+      }
 
       // Follow the system's light/dark preference, live: changing it (in the
       // OS, or with an extension that overrides prefers-color-scheme) updates
@@ -55,12 +65,17 @@ const full = (t: string) => `${t} · Carlos Bronze`
         localStorage.removeItem('colorTheme')
       } catch {}
       const darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      function initTheme() {
-        document.documentElement.classList.toggle('dark', darkQuery.matches)
+      function applyTheme(doc) {
+        doc.documentElement.classList.toggle('dark', darkQuery.matches)
       }
-      initTheme()
-      darkQuery.addEventListener('change', initTheme)
-      document.addEventListener('astro:after-swap', initTheme)
+
+      applyLang(document)
+      applyTheme(document)
+      darkQuery.addEventListener('change', () => applyTheme(document))
+      document.addEventListener('astro:before-swap', event => {
+        applyLang(event.newDocument)
+        applyTheme(event.newDocument)
+      })
     </script>
     <Analytics />
     <PostHog />
@@ -83,8 +98,9 @@ const full = (t: string) => `${t} · Carlos Bronze`
 <script>
   import { bind, set } from '@foleyjs/core'
 
-  bind()
   set({ volume: 1, theme: 'mechanical' })
+  // Each navigation brings new elements to wire up (bind skips ones it's seen).
+  document.addEventListener('astro:page-load', () => bind())
 </script>
 
 <style>

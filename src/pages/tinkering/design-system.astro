@@ -387,7 +387,6 @@ const h3 = `${label} mt-10 mb-4`
 
 <script>
   const root = document.documentElement
-  const form = document.getElementById('palette') as HTMLFormElement
 
   // Paint a color on a 1px canvas to get sRGB back, whatever the color space.
   const ctx = document.createElement('canvas').getContext('2d', { willReadFrequently: true })!
@@ -410,75 +409,87 @@ const h3 = `${label} mt-10 mb-4`
     return (l1 + 0.05) / (l2 + 0.05)
   }
 
-  // The resolved color of an element's background / text.
-  const probe = document.createElement('span')
-  probe.hidden = true
-  document.body.append(probe)
-  function resolve(token: string) {
-    probe.style.color = `var(${token})`
-    return getComputedStyle(probe).color
+  // Runs on every visit to this page (the router doesn't re-run module scripts).
+  function setup() {
+    const palette = document.getElementById('palette') as HTMLFormElement | null
+    if (!palette) return
+    const form = palette
+
+    // The resolved color of an element's background / text.
+    const probe = document.createElement('span')
+    probe.hidden = true
+    document.body.append(probe)
+    function resolve(token: string) {
+      probe.style.color = `var(${token})`
+      return getComputedStyle(probe).color
+    }
+
+    function render() {
+      const css = getComputedStyle(root)
+      document.querySelectorAll<HTMLElement>('[data-value]').forEach(el => {
+        el.textContent = css.getPropertyValue(el.dataset.value!).trim().replace(/^var\(--color-(\w+)-(\d+)\)$/, '$1 $2')
+      })
+      const hasAccent = root.dataset.accent !== 'nenhum'
+      document.querySelectorAll<HTMLElement>('[data-when-accent]').forEach(el => (el.hidden = !hasAccent))
+      document.querySelectorAll<HTMLElement>('[data-when-no-accent]').forEach(el => (el.hidden = hasAccent))
+
+      const en = root.dataset.lang === 'en'
+      document.querySelectorAll<HTMLElement>('[data-contrast-fg]').forEach(el => {
+        const ratio = contrast(resolve(el.dataset.contrastFg!), resolve(el.dataset.contrastBg!))
+        const grade = ratio >= 7 ? 'AAA' : ratio >= 4.5 ? 'AA' : en ? 'below AA' : 'abaixo de AA'
+        const n = ratio.toFixed(1)
+        el.querySelector('[data-contrast-result]')!.textContent = `${en ? n : n.replace('.', ',')}:1 · ${grade}`
+      })
+    }
+
+    function apply() {
+      const data = new FormData(form)
+      const greys = data.get('greys') as string
+      const accent = data.get('accent') as string
+      // Single-mode greys have no dark side.
+      const single = ['areia', 'grafite', 'nord'].includes(greys)
+      const modeGroup = form.querySelector<HTMLFieldSetElement>('[data-group="mode"]')!
+      modeGroup.disabled = single
+      const dark = !single && data.get('mode') === 'escuro'
+
+      if (greys === 'neutro') root.removeAttribute('data-greys')
+      else root.setAttribute('data-greys', greys)
+      // Bronze is the live accent: no attribute needed for it.
+      if (accent === 'bronze') root.removeAttribute('data-accent')
+      else root.setAttribute('data-accent', accent)
+
+      // Preview only: the next page load follows the system again.
+      root.classList.toggle('dark', dark)
+
+      // Shareable: /tinkering/design-system?greys=pedra&accent=bronze
+      const params = new URLSearchParams()
+      if (greys !== 'neutro') params.set('greys', greys)
+      if (accent !== 'bronze') params.set('accent', accent)
+      // Keep the router's state, or back/forward stops working.
+      history.replaceState(history.state, '', params.size ? `?${params}` : location.pathname)
+
+      render()
+    }
+
+    // Start from the URL, and from the current theme for the mode.
+    const params = new URLSearchParams(location.search)
+    const preset: Record<string, string | null> = {
+      greys: params.get('greys'),
+      accent: params.get('accent'),
+      mode: root.classList.contains('dark') ? 'escuro' : 'claro',
+    }
+    for (const [name, value] of Object.entries(preset)) {
+      const input = value && form.querySelector<HTMLInputElement>(`input[name="${name}"][value="${value}"]`)
+      if (input) input.checked = true
+    }
+
+    form.addEventListener('change', apply)
+    // The language toggle changes the contrast labels.
+    const observer = new MutationObserver(render)
+    observer.observe(root, { attributes: true, attributeFilter: ['data-lang'] })
+    document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true })
+    apply()
   }
 
-  function render() {
-    const css = getComputedStyle(root)
-    document.querySelectorAll<HTMLElement>('[data-value]').forEach(el => {
-      el.textContent = css.getPropertyValue(el.dataset.value!).trim().replace(/^var\(--color-(\w+)-(\d+)\)$/, '$1 $2')
-    })
-    const hasAccent = root.dataset.accent !== 'nenhum'
-    document.querySelectorAll<HTMLElement>('[data-when-accent]').forEach(el => (el.hidden = !hasAccent))
-    document.querySelectorAll<HTMLElement>('[data-when-no-accent]').forEach(el => (el.hidden = hasAccent))
-
-    const en = root.dataset.lang === 'en'
-    document.querySelectorAll<HTMLElement>('[data-contrast-fg]').forEach(el => {
-      const ratio = contrast(resolve(el.dataset.contrastFg!), resolve(el.dataset.contrastBg!))
-      const grade = ratio >= 7 ? 'AAA' : ratio >= 4.5 ? 'AA' : en ? 'below AA' : 'abaixo de AA'
-      const n = ratio.toFixed(1)
-      el.querySelector('[data-contrast-result]')!.textContent = `${en ? n : n.replace('.', ',')}:1 · ${grade}`
-    })
-  }
-
-  function apply() {
-    const data = new FormData(form)
-    const greys = data.get('greys') as string
-    const accent = data.get('accent') as string
-    // Single-mode greys have no dark side.
-    const single = ['areia', 'grafite', 'nord'].includes(greys)
-    const modeGroup = form.querySelector<HTMLFieldSetElement>('[data-group="mode"]')!
-    modeGroup.disabled = single
-    const dark = !single && data.get('mode') === 'escuro'
-
-    if (greys === 'neutro') root.removeAttribute('data-greys')
-    else root.setAttribute('data-greys', greys)
-    // Bronze is the live accent: no attribute needed for it.
-    if (accent === 'bronze') root.removeAttribute('data-accent')
-    else root.setAttribute('data-accent', accent)
-
-    // Preview only: the next page load follows the system again.
-    root.classList.toggle('dark', dark)
-
-    // Shareable: /tinkering/design-system?greys=pedra&accent=bronze
-    const params = new URLSearchParams()
-    if (greys !== 'neutro') params.set('greys', greys)
-    if (accent !== 'bronze') params.set('accent', accent)
-    history.replaceState(null, '', params.size ? `?${params}` : location.pathname)
-
-    render()
-  }
-
-  // Start from the URL, and from the current theme for the mode.
-  const params = new URLSearchParams(location.search)
-  const preset: Record<string, string | null> = {
-    greys: params.get('greys'),
-    accent: params.get('accent'),
-    mode: root.classList.contains('dark') ? 'escuro' : 'claro',
-  }
-  for (const [name, value] of Object.entries(preset)) {
-    const input = value && form.querySelector<HTMLInputElement>(`input[name="${name}"][value="${value}"]`)
-    if (input) input.checked = true
-  }
-
-  form.addEventListener('change', apply)
-  // The language toggle changes the contrast labels.
-  new MutationObserver(render).observe(root, { attributes: true, attributeFilter: ['data-lang'] })
-  apply()
+  document.addEventListener('astro:page-load', setup)
 </script>

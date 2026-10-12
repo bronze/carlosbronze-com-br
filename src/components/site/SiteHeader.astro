@@ -96,24 +96,29 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
         lang === 'en' ? title.dataset.titleEn : title.dataset.titlePt
       )!
   }
-  applyAriaLabels(root.dataset.lang ?? 'pt')
 
-  document.getElementById('lang-toggle')!.addEventListener('click', () => {
-    const lang = root.dataset.lang === 'en' ? 'pt' : 'en'
-    root.dataset.lang = lang
-    root.lang = lang === 'pt' ? 'pt-BR' : 'en'
-    applyAriaLabels(lang)
-    try {
-      localStorage.setItem('lang', lang)
-    } catch {}
-    haptics.trigger('selection')
-    ;(window as any).posthog?.capture('language_switched', { language: lang })
+  // The header is re-rendered on every navigation, so it's wired up again on
+  // each page load (the router runs this module only once).
+  document.addEventListener('astro:page-load', () => {
+    applyAriaLabels(root.dataset.lang ?? 'pt')
+
+    document.getElementById('lang-toggle')!.addEventListener('click', () => {
+      const lang = root.dataset.lang === 'en' ? 'pt' : 'en'
+      root.dataset.lang = lang
+      root.lang = lang === 'pt' ? 'pt-BR' : 'en'
+      applyAriaLabels(lang)
+      try {
+        localStorage.setItem('lang', lang)
+      } catch {}
+      haptics.trigger('selection')
+      ;(window as any).posthog?.capture('language_switched', { language: lang })
+    })
+
+    document.querySelectorAll<HTMLElement>('[data-track]').forEach(el =>
+      el.addEventListener('click', () => {
+        haptics.trigger('light')
+        ;(window as any).posthog?.capture(el.dataset.track!)
+      }),
+    )
   })
-
-  document.querySelectorAll<HTMLElement>('[data-track]').forEach(el =>
-    el.addEventListener('click', () => {
-      haptics.trigger('light')
-      ;(window as any).posthog?.capture(el.dataset.track!)
-    }),
-  )
 </script>
