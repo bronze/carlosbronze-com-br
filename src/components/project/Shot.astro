@@ -1,7 +1,8 @@
 ---
 // A screenshot with an optional caption. Use in .mdx by file name, from
 // src/assets/projects (see src/lib/project-images.ts):
-//   <Shot name="fsakm-before" alt="…" caption="…" />
+//   <Shot name="fsakm-before" alt="…" caption="…" source="https://web.archive.org/…" />
+// `source` links the caption to where the screenshot came from.
 import { Image } from 'astro:assets'
 import { projectImage } from '@/lib/project-images'
 
@@ -9,11 +10,16 @@ interface Props {
   name: string
   alt: string
   caption?: string
+  source?: string
   // The cover sits near the top of the page, so it loads right away.
   eager?: boolean
 }
 
-const { name, alt, caption, eager = false } = Astro.props
+const { name, alt, caption, source, eager = false } = Astro.props
+const sourceLabel =
+  source && new URL(source).hostname === 'web.archive.org'
+    ? 'Internet Archive'
+    : source && new URL(source).hostname.replace(/^www\./, '')
 const src = projectImage(name)
 if (!src) throw new Error(`No screenshot "${name}" in src/assets/projects`)
 ---
@@ -31,6 +37,19 @@ if (!src) throw new Error(`No screenshot "${name}" in src/assets/projects`)
     caption && (
       <figcaption class="text-muted-foreground mt-2.5 font-mono text-xs">
         {caption}
+        {source && (
+          <>
+            {' '}
+            <a
+              href={source}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-foreground underline decoration-current/30 underline-offset-4 transition-colors">
+              {sourceLabel}
+              <span aria-hidden="true"> ↗</span>
+            </a>
+          </>
+        )}
       </figcaption>
     )
   }
