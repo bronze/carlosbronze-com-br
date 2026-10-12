@@ -4,12 +4,12 @@ import T from '@/components/site/T.astro'
 
 const story = [
   {
-    pt: 'Vim do planejamento de agências, onde aprendi que valor é percepção. Hoje levo isso pro produto: na MySparkle, uso gamificação como alavanca de ativação, retenção e LTV.',
-    en: "I came from agency strategy, where I learned that value is perception. Now I bring that to product: at MySparkle, I use gamification as a lever for activation, retention and LTV.",
+    pt: 'Comecei a programar em 1999, criando sites para comunidades de jogos online, e me formei em Desenho Industrial. Jogo e design nunca saíram do meu jeito de pensar produto.',
+    en: 'I started coding in 1999, building websites for online gaming communities, and studied industrial design. Games and design never left the way I think about product.',
   },
   {
-    pt: 'Comecei fazendo sites para clãs de jogos online e me formei em Desenho Industrial. Jogo e design nunca saíram do meu jeito de pensar produto.',
-    en: 'I started out building websites for online gaming clans and studied industrial design. Games and design never left the way I think about product.',
+    pt: 'Depois, no planejamento de agências, aprendi que valor é percepção. Hoje levo isso pro produto: na MySparkle, uso gamificação como alavanca de ativação, retenção e LTV.',
+    en: 'Then, in agency strategy, I learned that value is perception. Now I bring that to product: at MySparkle, I use gamification as a lever for activation, retention and LTV.',
   },
 ]
 
@@ -49,27 +49,26 @@ const focus = [
     },
   },
   {
-    title: { pt: 'Criatividade com resultado', en: 'Creativity with results' },
+    title: { pt: 'Narrativa e percepção', en: 'Story & perception' },
     body: {
-      pt: 'Narrativa, design e ideia a serviço de um número que precisa se mexer.',
-      en: 'Story, design and ideas in service of a number that needs to move.',
+      pt: 'A história que um produto conta muda o que as pessoas fazem com ele.',
+      en: 'The story a product tells changes what people do with it.',
     },
   },
 ]
 ---
 
 <PageLayout
-  title="Sobre"
-  eyebrow={{ pt: 'Sobre', en: 'About' }}
   heading={{
-    pt: 'Onde criatividade vira resultado.',
-    en: 'Where creativity turns into results.',
+    pt: 'Criatividade em função de resultado.',
+    en: 'Creativity in service of results.',
   }}
   intro={{
-    pt: 'Sou Carlos Bronze, Product Manager no Rio de Janeiro. Trabalho no encontro entre estratégia, criatividade e produto: entender o que move o negócio, escolher as métricas que contam essa história e desenhar experiências que fazem esses números mudarem.',
-    en: 'I’m Carlos Bronze, a product manager based in Rio de Janeiro. I work where strategy, creativity and product meet: understanding what moves the business, choosing the metrics that tell that story, and designing experiences that make those numbers move.',
+    pt: 'Sou Carlos Bronze, Product Manager no Rio de Janeiro. Trabalho no encontro entre estratégia, criatividade e produto: entender o que faz o negócio crescer, escolher as métricas que contam essa história e desenhar experiências que fazem esses números mudarem.',
+    en: 'I’m Carlos Bronze, a product manager based in Rio de Janeiro. I work where strategy, creativity and product meet: understanding what grows the business, choosing the metrics that tell that story, and designing experiences that make those numbers move.',
   }}>
-  <div class="text-foreground/80 -mt-6 space-y-5 text-lg leading-[1.75] text-pretty">
+  <div
+    class="text-foreground/80 -mt-6 space-y-5 text-lg leading-[1.75] text-pretty">
     {
       story.map(p => (
         <p>
@@ -85,7 +84,8 @@ const focus = [
       class="text-muted-foreground font-mono text-xs tracking-[0.06em] uppercase">
       <T pt="Onde eu foco" en="Where I focus" />
     </h2>
-    <div class="mt-5 grid grid-cols-[repeat(auto-fit,minmax(148px,1fr))] gap-x-[22px] gap-y-6">
+    <div
+      class="mt-5 grid grid-cols-[repeat(auto-fit,minmax(148px,1fr))] gap-x-[22px] gap-y-6">
       {
         focus.map(f => (
           <div>
@@ -104,18 +104,30 @@ const focus = [
   <!-- Has inline links, so it can't use <T>; the data-lang-* spans follow the same toggle. -->
   <p class="text-foreground/80 text-lg leading-[1.75] text-pretty">
     <span data-lang-pt>
-      A essa altura, já são quase 20 anos pensando produtos digitais e marcas.
-      Fora do trabalho, treino <a href={links.krav} {...external} class={link}>Krav Maga</a>,
-      assisto muito <a href={links.critrole} {...external} class={link}>Critical Role</a>, leio bastante (sou muito fã do
-      <a href={links.sanderson} {...external} class={link}>Brandon Sanderson</a>) e ando
-      maratonando <a href={links.rory} {...external} class={link}>vídeos do Rory Sutherland</a> no YouTube.
+      A essa altura, já são quase 20 anos pensando em produtos digitais e marcas.
+      Fora do trabalho, treino <a href={links.krav} {...external} class={link}
+        >Krav Maga</a
+      >, assisto muito <a href={links.critrole} {...external} class={link}
+        >Critical Role</a
+      >, leio bastante (sou muito fã do
+      <a href={links.sanderson} {...external} class={link}>Brandon Sanderson</a
+      >) e ando maratonando <a href={links.rory} {...external} class={link}
+        >vídeos do Rory Sutherland</a
+      > no YouTube.
     </span>
     <span data-lang-en>
-      By now, I’ve spent almost 20 years thinking about digital products and brands.
-      Outside work, I train <a href={links.krav} {...external} class={link}>Krav Maga</a>,
-      watch a lot of <a href={links.critrole} {...external} class={link}>Critical Role</a>, read a bunch (big
-      <a href={links.sanderson} {...external} class={link}>Brandon Sanderson</a> fan), and
-      have been binging <a href={links.rory} {...external} class={link}>Rory Sutherland videos</a>
+      By now, I’ve spent almost 20 years thinking about digital products and
+      brands. Outside work, I train <a
+        href={links.krav}
+        {...external}
+        class={link}>Krav Maga</a
+      >, watch a lot of <a href={links.critrole} {...external} class={link}
+        >Critical Role</a
+      >, read a bunch (big
+      <a href={links.sanderson} {...external} class={link}>Brandon Sanderson</a> fan),
+      and have been binging <a href={links.rory} {...external} class={link}
+        >Rory Sutherland videos</a
+      >
       on YouTube.
     </span>
   </p>
