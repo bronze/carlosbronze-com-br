@@ -39,15 +39,18 @@ const projects = [
   },
 ]
 
-const quick = [
+// `live` marks a link to a running site instead of a repo.
+const quick: { name: string; nameEn?: string; href: string; live?: boolean }[] = [
   {
-    name: 'Tera Workshop · Mapbox',
-    href: 'https://github.com/bronze/tera-workshop-dados',
+    name: 'Mapa das academias de Krav Maga · Mapbox',
+    nameEn: 'Krav Maga gym map · Mapbox',
+    href: 'https://mapa-krav-maga.vercel.app/mapa.html',
+    live: true,
   },
   {
-    name: 'Este site',
-    nameEn: 'This website',
-    href: 'https://github.com/bronze/carlosbronze-com-br',
+    name: 'Tera Workshop · Mapbox',
+    href: 'https://tera-workshop-dados.carlosbronze.com.br/',
+    live: true,
   },
 ]
 
@@ -128,7 +131,7 @@ const link =
                 {q.nameEn ? <T pt={q.name} en={q.nameEn} /> : q.name}
               </span>
               <span class="text-muted-foreground font-mono text-xs">
-                repo{' '}
+                {q.live ? <T pt="ver no ar" en="see it live" /> : 'repo'}{' '}
                 <span
                   class="inline-block transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true">
