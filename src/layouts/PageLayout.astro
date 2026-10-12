@@ -14,6 +14,9 @@ interface Props {
   heading: Bilingual
   subheading?: Bilingual
   intro?: Bilingual
+  // The page's text carries on from the intro (About): one paragraph gap
+  // below it instead of a section gap.
+  continueIntro?: boolean
   hero?: boolean
   pager?: boolean
 }
@@ -25,6 +28,7 @@ const {
   heading,
   subheading,
   intro,
+  continueIntro = false,
   hero = false,
   pager = true,
 } = Astro.props
@@ -49,12 +53,19 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
     id="main"
     tabindex="-1"
     class="mx-auto w-full max-w-5xl flex-1 px-4 pt-12 pb-16 outline-none sm:px-6 sm:pt-16">
-    <!-- Home uses the full column; inner pages read in a narrower centred one. -->
+    <!-- Home uses the full column; inner pages read in a narrower centred one.
+         Flat, like alliethu.com: the page's content sits right next to the
+         heading, and every block spaces itself with its own margin-bottom.
+         The last block's margin is dropped (also when the phone-only pager
+         follows it), so the end of the page is the layout's job. -->
     <section
       aria-labelledby="page-title"
-      class:list={['reveal', !hero && 'mx-auto max-w-[720px]']}>
+      class:list={[
+        'reveal [&>:has(+[data-pager])]:mb-0 [&>:last-child]:mb-0',
+        !hero && 'mx-auto max-w-[720px]',
+      ]}>
       <p
-        class="text-muted-foreground font-mono text-[13px] tracking-[0.08em] uppercase">
+        class="text-muted-foreground mb-5 font-mono text-[13px] tracking-[0.08em] uppercase">
         {
           back ? (
             // On a sub-page the eyebrow doubles as the way back up.
@@ -81,7 +92,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
       <h1
         id="page-title"
         class:list={[
-          'mt-5 font-serif font-medium tracking-tight text-balance',
+          'mb-6 font-serif font-medium tracking-tight text-balance',
           hero
             ? 'max-w-[8ch] text-6xl leading-[0.92] sm:text-8xl'
             : 'text-[clamp(32px,4vw,46px)] leading-[1.15]',
@@ -90,7 +101,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
       </h1>
       {
         subheading && (
-          <p class="text-muted-foreground mt-6 font-mono text-sm">
+          <p class="text-muted-foreground mb-4 font-mono text-sm">
             <T {...subheading} />
           </p>
         )
@@ -101,17 +112,16 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
             class:list={[
               'text-foreground/80 text-pretty',
               hero
-                ? 'mt-4 max-w-[32ch] text-base leading-relaxed sm:text-lg'
-                : 'mt-6 text-lg leading-[1.75]',
+                ? 'mb-14 max-w-[32ch] text-base leading-relaxed sm:text-lg'
+                : 'text-lg leading-[1.75]',
+              !hero && (continueIntro ? 'mb-5' : 'mb-11'),
             ]}>
             <T {...intro} />
           </p>
         )
       }
 
-      <div class:list={[hero ? 'mt-14' : 'mt-11']}>
-        <slot />
-      </div>
+      <slot />
 
       {
         pager && (
@@ -119,6 +129,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
           // on a phone it has scrolled away by the time you reach the end.
           <nav
             {...ariaLabel({ pt: 'Explorar seções', en: 'Explore sections' })}
+            data-pager
             class="mt-11 min-[821px]:hidden">
             <SectionLink
               section={prev}

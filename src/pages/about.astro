@@ -20,6 +20,10 @@ const links = {
   rory: 'https://www.youtube.com/playlist?list=PLGxDladnEAZ1wNjUglLAnDR4nQDAhntKc',
 }
 const external = { target: '_blank', rel: 'noopener noreferrer' }
+// Every paragraph on the page, the intro included (PageLayout), has the same
+// 20px below it, like alliethu.com/about. The focus section's own margins
+// collapse with it.
+const paragraph = 'text-foreground/80 mb-5 text-lg leading-[1.75] text-pretty'
 const link =
   'text-foreground underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-brand'
 
@@ -42,17 +46,17 @@ const focus = [
     },
   },
   {
-    title: { pt: 'Gamificação', en: 'Gamification' },
-    body: {
-      pt: 'Mecânicas de jogo como alavanca de hábito e retenção, não como enfeite.',
-      en: 'Game mechanics as a lever for habit and retention, not as a gimmick.',
-    },
-  },
-  {
     title: { pt: 'Narrativa e percepção', en: 'Story & perception' },
     body: {
       pt: 'A história que um produto conta muda o que as pessoas fazem com ele.',
       en: 'The story a product tells changes what people do with it.',
+    },
+  },
+  {
+    title: { pt: 'Gamificação', en: 'Gamification' },
+    body: {
+      pt: 'Mecânicas de jogo como alavanca de hábito e retenção, não como enfeite.',
+      en: 'Game mechanics as a lever for habit and retention, not as a gimmick.',
     },
   },
 ]
@@ -66,33 +70,31 @@ const focus = [
   intro={{
     pt: 'Sou Carlos Bronze, Product Manager no Rio de Janeiro. Trabalho no encontro entre estratégia, criatividade e produto: entender o que faz o negócio crescer, escolher as métricas que contam essa história e desenhar experiências que fazem esses números mudarem.',
     en: 'I’m Carlos Bronze, a product manager based in Rio de Janeiro. I work where strategy, creativity and product meet: understanding what grows the business, choosing the metrics that tell that story, and designing experiences that make those numbers move.',
-  }}>
-  <div
-    class="text-foreground/80 -mt-6 space-y-5 text-lg leading-[1.75] text-pretty">
-    {
-      story.map(p => (
-        <p>
-          <T {...p} />
-        </p>
-      ))
-    }
-  </div>
+  }}
+  continueIntro>
+  {
+    story.map(p => (
+      <p class={paragraph}>
+        <T {...p} />
+      </p>
+    ))
+  }
 
   <section aria-labelledby="focus-title" class="mt-10 mb-11">
     <h2
       id="focus-title"
-      class="text-muted-foreground font-mono text-xs tracking-[0.06em] uppercase">
+      class="text-muted-foreground mb-5 font-mono text-xs tracking-[0.06em] uppercase">
       <T pt="Onde eu foco" en="Where I focus" />
     </h2>
     <div
-      class="mt-5 grid grid-cols-[repeat(auto-fit,minmax(148px,1fr))] gap-x-[22px] gap-y-6">
+      class="grid grid-cols-[repeat(auto-fit,minmax(148px,1fr))] gap-x-[22px] gap-y-6">
       {
         focus.map(f => (
           <div>
-            <h3 class="font-serif text-lg leading-snug">
+            <h3 class="mb-1.5 font-serif text-lg leading-snug">
               <T {...f.title} />
             </h3>
-            <p class="text-muted-foreground mt-1.5 text-sm leading-normal">
+            <p class="text-muted-foreground text-sm leading-normal">
               <T {...f.body} />
             </p>
           </div>
@@ -102,7 +104,7 @@ const focus = [
   </section>
 
   <!-- Has inline links, so it can't use <T>; the data-lang-* spans follow the same toggle. -->
-  <p class="text-foreground/80 text-lg leading-[1.75] text-pretty">
+  <p class={paragraph}>
     <span data-lang-pt>
       A essa altura, já são quase 20 anos pensando em produtos digitais e marcas.
       Fora do trabalho, treino <a href={links.krav} {...external} class={link}

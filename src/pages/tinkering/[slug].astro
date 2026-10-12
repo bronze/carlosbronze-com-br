@@ -36,8 +36,9 @@ const tinkering = sectionFor('/tinkering')!
   back={{ href: tinkering.href, label: tinkering.label }}
   heading={{ pt: pt.data.title, en: en.data.title }}
   intro={{ pt: pt.data.summary, en: en.data.summary }}
+  continueIntro
   pager={false}>
-  <p class="-mt-4 flex flex-wrap gap-x-6 text-lg leading-[1.75]">
+  <p class="mb-12 flex flex-wrap gap-x-6 text-lg leading-[1.75]">
     {
       [
         { href: pt.data.url, label: { pt: 'ver no ar', en: 'see it live' } },
@@ -62,10 +63,10 @@ const tinkering = sectionFor('/tinkering')!
     }
   </p>
 
-  <ProjectBody class="mt-12" data-lang-pt>
+  <ProjectBody data-lang-pt>
     <ContentPt components={components} />
   </ProjectBody>
-  <ProjectBody class="mt-12" data-lang-en>
+  <ProjectBody data-lang-en>
     <ContentEn components={components} />
   </ProjectBody>
 </PageLayout>

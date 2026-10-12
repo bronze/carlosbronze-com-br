@@ -101,16 +101,15 @@ const external = (href: string) =>
     pt: 'De onde vêm as ideias que uso pra pensar produto, estratégia e comportamento: minhas notas, os podcasts que acompanho e o que ando lendo.',
     en: "Where the ideas I use to think about product, strategy and behavior come from: my own notes, the podcasts I follow and what I've been reading.",
   }}>
-  <div class="space-y-14">
-    {
-      groups.map(g => (
-        <section aria-labelledby={`${g.id}-title`}>
-          <h2
-            id={`${g.id}-title`}
-            class="text-muted-foreground font-mono text-xs tracking-[0.06em] uppercase">
-            <T {...g.heading} />
-          </h2>
-          <ul class="border-border divide-border mt-4 divide-y border-y">
+  {
+    groups.map(g => (
+      <section aria-labelledby={`${g.id}-title`} class="mb-14">
+        <h2
+          id={`${g.id}-title`}
+          class="text-muted-foreground mb-4 font-mono text-xs tracking-[0.06em] uppercase">
+          <T {...g.heading} />
+        </h2>
+        <ul class="border-border divide-border divide-y border-y">
             {g.items.map(item => {
               const hrefs: { href: string; lang?: string }[] =
                 typeof item.href === 'string'
@@ -143,9 +142,8 @@ const external = (href: string) =>
                 </li>
               )
             })}
-          </ul>
-        </section>
-      ))
-    }
-  </div>
+        </ul>
+      </section>
+    ))
+  }
 </PageLayout>

@@ -52,7 +52,7 @@ A palette swaps primitives and nothing else. Without an accent, `--brand` falls 
 
 ### Palettes
 
-The live site uses **neutral greys with no accent**, on a `#fafafa` ground rather than pure white. The candidates below can be compared on `/tinkering/design-system`.
+The live site uses **neutral greys with the Bronze accent**, on a `#fafafa` ground rather than pure white. The candidates below can be compared on `/tinkering/design-system`.
 
 **Two modes (light and dark):**
 
@@ -74,7 +74,7 @@ The live site uses **neutral greys with no accent**, on a `#fafafa` ground rathe
 
 | Accent | Base (500) | Text (600) | Note |
 | --- | --- | --- | --- |
-| Bronze | `oklch(0.64 0.13 60)` | `oklch(0.52 0.115 56)` | The name |
+| Bronze (live) | `oklch(0.64 0.13 60)` | `oklch(0.52 0.115 56)` | The name |
 | Cobalto | `oklch(0.58 0.17 263)` | `oklch(0.5 0.17 264)` | Safe, saturated blue |
 | Musgo | `oklch(0.61 0.12 157)` | `oklch(0.5 0.105 158)` | Moss green |
 | Gelo | `oklch(0.594 0.077 254)` (nord10) | `oklch(0.51 0.08 256)` | Nord's Frost |
@@ -114,6 +114,14 @@ Body text must reach **4.5:1 (WCAG AA)** on its background, in both modes. The d
 The scale, in px: **4 · 8 · 12 · 16 · 24 · 32 · 48 · 64**. It's tight at the small end and opens up at the large end, so no step is within about 25% of its neighbour. Start with too much space and take it away.
 
 Off the scale and in use today, to review: 6, 14, 20, 40, 44, 56. Several come from matching alliethu.com's measurements (44px after the intro, 20px between paragraphs). Fold them into the scale or document them as exceptions; don't add more.
+
+How space is applied:
+
+- **Every block spaces itself with `margin-bottom`**, as on alliethu.com. Paragraphs get `mb-5`, section labels `mb-4`, page sections `mb-14`/`mb-16`. No `margin-top`, no `space-y` wrappers, no negative margins to undo a gap.
+- **Headings that open a section in long text are the exception.** The `h2` in project text and the `h3` labels on the design system page keep a top margin, because the block before them can't know a section ends. Adjacent margins collapse, so the larger one wins and nothing adds up.
+- **Pages are flat.** Content sits directly in `PageLayout`'s `<section>`, so each block gets its own entrance animation. A wrapper `div` is only for real grouping (a grid, a language variant), never for spacing.
+- **The last block's margin is dropped** by `PageLayout`, so the end of every page is the layout's job.
+- **Inside a component**, use `gap` on a flex or grid parent rather than margins on the children.
 
 Widths:
 

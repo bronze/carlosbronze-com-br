@@ -75,9 +75,12 @@ const offScale = [6, 14, 20, 40, 44, 56]
 
 const pill =
   'border-border text-muted-foreground has-[:checked]:border-foreground has-[:checked]:text-foreground has-[:focus-visible]:outline-ring cursor-pointer rounded-full border px-3 py-1 font-mono text-xs transition-colors has-[:focus-visible]:outline-2 hover:text-foreground'
+// Blocks space themselves with margin-bottom. Sub-headings (h3) are the one
+// exception, as in project text: they carry the room above them.
 const h2 = 'font-serif text-2xl leading-[1.2] font-medium'
-const lead = 'text-foreground/80 mt-3 text-lg leading-[1.75] text-pretty'
+const lead = 'text-foreground/80 mb-8 text-lg leading-[1.75] text-pretty'
 const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] uppercase'
+const h3 = `${label} mt-10 mb-4`
 ---
 
 <PageLayout
@@ -91,14 +94,13 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
   pager={false}>
   <form
     id="palette"
-    class="bg-background/90 border-border sticky top-0 z-10 -mx-4 flex flex-col gap-3 border-b px-4 py-4 backdrop-blur"
+    class="bg-background/90 border-border sticky top-0 z-10 -mx-4 mb-6 flex flex-wrap gap-x-6 gap-y-3 border-b px-4 py-4 backdrop-blur"
     aria-labelledby="palette-title">
-    <p id="palette-title" class={label}>
+    <p id="palette-title" class:list={[label, 'w-full']}>
       <T pt="Paleta em teste" en="Palette on trial" />
     </p>
-    <div class="flex flex-wrap gap-x-6 gap-y-3">
-      {
-        [
+    {
+      [
           { name: 'greys', legend: { pt: 'Cinzas', en: 'Greys' }, options: greys },
           { name: 'accent', legend: { pt: 'Destaque', en: 'Accent' }, options: accents },
           { name: 'mode', legend: { pt: 'Modo', en: 'Mode' }, options: modes },
@@ -131,11 +133,10 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
             ))}
           </fieldset>
         ))
-      }
-    </div>
+    }
   </form>
 
-  <p class="text-muted-foreground mt-6 text-base leading-[1.6]">
+  <p class="text-muted-foreground mb-16 text-base leading-[1.6]">
     <T
       pt="O site no ar usa Neutro com Bronze. As outras opções são candidatas: troque para ver cada uma aplicada nesta página, inclusive no cabeçalho. As de modo único não têm modo escuro: um só tema, com fundo menos claro."
       en="The live site uses Neutral with Bronze. The other options are candidates: switch to see each one applied to this page, header included. The single-mode ones have no dark mode: one theme, on a less bright ground."
@@ -143,8 +144,8 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
   </p>
 
   <!-- Color -->
-  <section aria-labelledby="color-title" class="mt-16">
-    <h2 id="color-title" class={h2}><T pt="Cor" en="Color" /></h2>
+  <section aria-labelledby="color-title" class="mb-16">
+    <h2 id="color-title" class:list={[h2, 'mb-3']}><T pt="Cor" en="Color" /></h2>
     <p class={lead}>
       <T
         pt="Duas camadas. As escalas guardam os valores em OKLCH, onde a luminosidade é perceptual: o mesmo número parece igualmente claro em qualquer matiz. Os papéis apontam para um degrau da escala, e os componentes só usam os papéis. Trocar de paleta é trocar a escala."
@@ -152,43 +153,43 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
       />
     </p>
 
-    <h3 class:list={[label, 'mt-10']}><T pt="Cinzas" en="Greys" /></h3>
-    <ul class="mt-4 grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-6">
+    <h3 class={h3}><T pt="Cinzas" en="Greys" /></h3>
+    <ul class="grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-6">
       {
         steps.map(s => (
           <li>
             <div
-              class="border-border h-12 rounded-md border"
+              class="border-border mb-1.5 h-12 rounded-md border"
               style={`background: var(--color-base-${s})`}
             />
-            <p class="mt-1.5 font-mono text-xs">{s}</p>
+            <p class="font-mono text-xs">{s}</p>
             <p class="text-muted-foreground font-mono text-[10px] leading-tight" data-value={`--color-base-${s}`} />
           </li>
         ))
       }
     </ul>
 
-    <h3 class:list={[label, 'mt-10']}><T pt="Destaque" en="Accent" /></h3>
-    <p class="text-muted-foreground mt-4 text-base leading-[1.6]" data-when-no-accent>
+    <h3 class={h3}><T pt="Destaque" en="Accent" /></h3>
+    <p class="text-muted-foreground text-base leading-[1.6]" data-when-no-accent>
       <T pt="Sem destaque nesta paleta: o papel --brand usa a cor do texto." en="No accent in this palette: the --brand role uses the text color." />
     </p>
-    <ul class="mt-4 grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-6" data-when-accent hidden>
+    <ul class="grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-6" data-when-accent hidden>
       {
         brandSteps.map(s => (
           <li>
             <div
-              class="border-border h-12 rounded-md border"
+              class="border-border mb-1.5 h-12 rounded-md border"
               style={`background: var(--color-brand-${s})`}
             />
-            <p class="mt-1.5 font-mono text-xs">{s}</p>
+            <p class="font-mono text-xs">{s}</p>
             <p class="text-muted-foreground font-mono text-[10px] leading-tight" data-value={`--color-brand-${s}`} />
           </li>
         ))
       }
     </ul>
 
-    <h3 class:list={[label, 'mt-10']}><T pt="Papéis" en="Roles" /></h3>
-    <dl class="divide-border border-border mt-4 divide-y border-y">
+    <h3 class={h3}><T pt="Papéis" en="Roles" /></h3>
+    <dl class="divide-border border-border divide-y border-y">
       {
         roles.map(r => (
           <div class="grid grid-cols-[2.5rem_1fr] items-center gap-x-4 py-3 sm:grid-cols-[2.5rem_11rem_1fr]">
@@ -208,14 +209,14 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
       }
     </dl>
 
-    <h3 class:list={[label, 'mt-10']}><T pt="Contraste" en="Contrast" /></h3>
-    <p class="text-muted-foreground mt-4 text-base leading-[1.6]">
+    <h3 class={h3}><T pt="Contraste" en="Contrast" /></h3>
+    <p class="text-muted-foreground mb-4 text-base leading-[1.6]">
       <T
         pt="Calculado na hora, para a paleta e o modo escolhidos. Texto precisa de pelo menos 4,5:1 (AA)."
         en="Calculated live for the chosen palette and mode. Text needs at least 4.5:1 (AA)."
       />
     </p>
-    <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+    <ul class="grid gap-3 sm:grid-cols-2">
       {
         pairs.map(p => (
           <li
@@ -223,9 +224,9 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
             style={`background: var(${p.bg}); color: var(${p.fg})`}
             data-contrast-fg={p.fg}
             data-contrast-bg={p.bg}>
-            <p class="font-serif text-xl leading-tight">Aa</p>
-            <p class="mt-2 text-sm"><T {...p.label} /></p>
-            <p class="mt-1 font-mono text-xs" data-contrast-result>
+            <p class="mb-2 font-serif text-xl leading-tight">Aa</p>
+            <p class="mb-1 text-sm"><T {...p.label} /></p>
+            <p class="font-mono text-xs" data-contrast-result>
               …
             </p>
           </li>
@@ -235,30 +236,30 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
   </section>
 
   <!-- Type -->
-  <section aria-labelledby="type-title" class="mt-16">
-    <h2 id="type-title" class={h2}><T pt="Tipografia" en="Type" /></h2>
+  <section aria-labelledby="type-title" class="mb-16">
+    <h2 id="type-title" class:list={[h2, 'mb-3']}><T pt="Tipografia" en="Type" /></h2>
     <p class={lead}>
       <T
         pt="Três famílias, cada uma com um papel: Newsreader (serifa) para títulos e números, Geist para leitura, Geist Mono para navegação e rótulos. Uma escala feita à mão, em px e rem, nunca em em."
         en="Three families, each with a job: Newsreader (serif) for headings and numbers, Geist for reading, Geist Mono for navigation and labels. A hand-picked scale, in px and rem, never em."
       />
     </p>
-    <ul class="divide-border border-border mt-8 divide-y border-y">
+    <ul class="divide-border border-border mb-4 divide-y border-y">
       {
         type.map(t => (
           <li class="py-5">
-            <p class="flex flex-wrap items-baseline justify-between gap-x-4">
+            <p class="mb-3 flex flex-wrap items-baseline justify-between gap-x-4">
               <span class={label}><T {...t.name} /></span>
               <span class="text-muted-foreground font-mono text-xs">{t.spec}</span>
             </p>
-            <p class:list={[t.cls, 'mt-3 break-words']}>
+            <p class:list={[t.cls, 'break-words']}>
               {typeof t.sample === 'string' ? t.sample : <T {...t.sample} />}
             </p>
           </li>
         ))
       }
     </ul>
-    <p class="text-muted-foreground mt-4 text-base leading-[1.6]">
+    <p class="text-muted-foreground text-base leading-[1.6]">
       <T
         pt="Entre 16, 18 e 20px os degraus são menores que os 25% que o livro recomenda. É de propósito: corpo e citação precisam desse ajuste fino. O resto da escala respeita a regra."
         en="Between 16, 18 and 20px the steps are smaller than the 25% the book recommends. That's on purpose: body and quote text need the finer control. The rest of the scale follows the rule."
@@ -267,15 +268,15 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
   </section>
 
   <!-- Spacing -->
-  <section aria-labelledby="space-title" class="mt-16">
-    <h2 id="space-title" class={h2}><T pt="Espaço" en="Spacing" /></h2>
+  <section aria-labelledby="space-title" class="mb-16">
+    <h2 id="space-title" class:list={[h2, 'mb-3']}><T pt="Espaço" en="Spacing" /></h2>
     <p class={lead}>
       <T
         pt="Começar com espaço demais e tirar até ficar bom. A escala aperta embaixo e abre em cima, para que nenhum degrau fique a menos de uns 25% do vizinho."
         en="Start with too much white space and remove it until it looks right. The scale is tight at the bottom and opens up at the top, so no step sits within about 25% of its neighbour."
       />
     </p>
-    <ul class="mt-8 space-y-2">
+    <ul class="mb-6 space-y-2">
       {
         space.map(px => (
           <li class="grid grid-cols-[3rem_1fr] items-center gap-4">
@@ -285,15 +286,15 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
         ))
       }
     </ul>
-    <p class="text-muted-foreground mt-6 text-base leading-[1.6]">
+    <p class="text-muted-foreground text-base leading-[1.6]">
       <T pt="Fora da escala, em uso hoje e a revisar:" en="Off the scale, in use today and up for review:" />
       <span class="text-foreground font-mono text-sm"> {offScale.join(' · ')}</span>
     </p>
   </section>
 
   <!-- Components -->
-  <section aria-labelledby="components-title" class="mt-16">
-    <h2 id="components-title" class={h2}><T pt="Componentes" en="Components" /></h2>
+  <section aria-labelledby="components-title" class="mb-16">
+    <h2 id="components-title" class:list={[h2, 'mb-3']}><T pt="Componentes" en="Components" /></h2>
     <p class={lead}>
       <T
         pt="Os mesmos componentes das páginas de projeto, para quebrar parágrafos sem inventar estilos novos."
@@ -301,19 +302,17 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
       />
     </p>
 
-    <h3 class:list={[label, 'mt-10']}>Stats</h3>
-    <div class="mt-4">
-      <Stats
-        items={[
-          { label: 'Performance', before: '77', after: '91' },
-          { label: 'Speed Index', before: '4,4 s', after: '0,9 s' },
-          { label: 'PageSpeed', before: '34', after: '100' },
-        ]}
-      />
-    </div>
+    <h3 class={h3}>Stats</h3>
+    <Stats
+      items={[
+        { label: 'Performance', before: '77', after: '91' },
+        { label: 'Speed Index', before: '4,4 s', after: '0,9 s' },
+        { label: 'PageSpeed', before: '34', after: '100' },
+      ]}
+    />
 
-    <h3 class:list={[label, 'mt-10']}>Steps</h3>
-    <div class="mt-4" data-lang-pt>
+    <h3 class={h3}>Steps</h3>
+    <div data-lang-pt>
       <Steps
         items={[
           { title: 'Mapear', text: 'Rodar o crawler no site.' },
@@ -322,7 +321,7 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
         ]}
       />
     </div>
-    <div class="mt-4" data-lang-en>
+    <div data-lang-en>
       <Steps
         items={[
           { title: 'Map', text: 'Crawl the site.' },
@@ -332,19 +331,17 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
       />
     </div>
 
-    <h3 class:list={[label, 'mt-10']}>Rows</h3>
-    <div class="mt-4">
-      <Rows
-        items={[
-          { title: '2021', text: 'VitePress' },
-          { title: '2023', text: 'Astro Starlight' },
-          { title: '2025', text: 'Fumadocs' },
-        ]}
-      />
-    </div>
+    <h3 class={h3}>Rows</h3>
+    <Rows
+      items={[
+        { title: '2021', text: 'VitePress' },
+        { title: '2023', text: 'Astro Starlight' },
+        { title: '2025', text: 'Fumadocs' },
+      ]}
+    />
 
-    <h3 class:list={[label, 'mt-10']}><T pt="Texto de projeto" en="Project text" /></h3>
-    <ProjectBody class="mt-4" data-lang-pt>
+    <h3 class={h3}><T pt="Texto de projeto" en="Project text" /></h3>
+    <ProjectBody data-lang-pt>
       <h2>O que aprendi</h2>
       <p>
         Parágrafo com um <a href="#type-title">link</a> e um trecho de
@@ -352,7 +349,7 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
       </p>
       <blockquote><p>Antes de pensar na interface, vale pensar no formato do dado.</p></blockquote>
     </ProjectBody>
-    <ProjectBody class="mt-4" data-lang-en>
+    <ProjectBody data-lang-en>
       <h2>What I learned</h2>
       <p>
         A paragraph with a <a href="#type-title">link</a> and some
@@ -361,18 +358,16 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
       <blockquote><p>Before thinking about the interface, think about the shape of the data.</p></blockquote>
     </ProjectBody>
 
-    <h3 class:list={[label, 'mt-10']}><T pt="Link de seção" en="Section link" /></h3>
-    <div class="mt-4">
-      <SectionLink section={sections[0]} direction="next" />
-    </div>
+    <h3 class={h3}><T pt="Link de seção" en="Section link" /></h3>
+    <SectionLink section={sections[0]} direction="next" />
   </section>
 
   <!-- Principles -->
-  <section aria-labelledby="principles-title" class="mt-16">
-    <h2 id="principles-title" class={h2}>
+  <section aria-labelledby="principles-title" class="mb-16">
+    <h2 id="principles-title" class:list={[h2, 'mb-6']}>
       <T pt="O que levei do Refactoring UI" en="What I took from Refactoring UI" />
     </h2>
-    <ul class="mt-6 space-y-4 text-lg leading-[1.75]">
+    <ul class="space-y-4 text-lg leading-[1.75]">
       {
         [
           { pt: 'Hierarquia vem de cor e peso, não só de tamanho. Texto secundário é mais claro, não menor.', en: 'Hierarchy comes from color and weight, not just size. Secondary text is lighter, not smaller.' },
