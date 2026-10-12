@@ -12,5 +12,18 @@
       capture_pageview: 'history_change',
       person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
     })
+
+    // The toolbar mounts itself in <body>, which the router replaces on every
+    // navigation. Put the same element back once the new body is in, so it
+    // keeps its state (and its styles, which belong to this document).
+    document.addEventListener('astro:before-swap', event => {
+      const toolbar = document.getElementById('__POSTHOG_TOOLBAR__')
+      if (!toolbar) return
+      const swap = event.swap
+      event.swap = () => {
+        swap()
+        document.body.append(toolbar)
+      }
+    })
   }
 </script>
