@@ -5,10 +5,15 @@ import PostHog from '../components/posthog.astro'
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 
+interface Props {
+  title?: string
+}
+
+const { title } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -17,9 +22,18 @@ import SpeedInsights from '@vercel/speed-insights/astro';
     <meta name="generator" content={Astro.generator} />
     <Font cssVariable="--font-geist" preload />
     <Font cssVariable="--font-geist-mono" />
-    <title>Carlos Bronze</title>
+    <Font cssVariable="--font-newsreader" preload />
+    <title>{title ? `${title} · Carlos Bronze` : 'Carlos Bronze'}</title>
     <SpeedInsights />
     <script is:inline>
+      try {
+        const lang =
+          localStorage.getItem('lang') ??
+          (navigator.language.toLowerCase().startsWith('pt') ? 'pt' : 'en')
+        document.documentElement.dataset.lang = lang
+        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en'
+      } catch {}
+
       function initTheme() {
         const stored =
           typeof localStorage !== 'undefined' &&
@@ -53,10 +67,17 @@ import SpeedInsights from '@vercel/speed-insights/astro';
     <!-- 100% privacy-first analytics -->
     <script async src="https://scripts.simpleanalyticscdn.com/latest.js" is:inline></script>
   </head>
-  <body>
+  <body class="flex min-h-dvh flex-col">
     <slot />
   </body>
 </html>
+
+<script>
+  import { bind, set } from '@foleyjs/core'
+
+  bind()
+  set({ volume: 1, theme: 'mechanical' })
+</script>
 
 <style>
   html,

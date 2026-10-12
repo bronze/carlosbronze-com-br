@@ -25,3 +25,6 @@ pnpm-debug.log*
 .idea/
 
 .vercel
+
+# obsidian
+obsidian/

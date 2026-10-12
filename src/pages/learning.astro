@@ -1,0 +1,90 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import T from '@/components/site/T.astro'
+
+// Placeholder content — to be replaced.
+const groups = [
+  {
+    id: 'notes',
+    heading: { pt: 'Minhas notas', en: 'My notes' },
+    items: [
+      {
+        name: 'Obsidian Notes',
+        tag: { pt: 'jardim digital', en: 'digital garden' },
+        href: '/obsidian',
+        track: 'obsidian_link_clicked',
+      },
+    ],
+  },
+  {
+    id: 'podcasts',
+    heading: { pt: 'Podcasts', en: 'Podcasts' },
+    items: [
+      { name: 'Podcast um', tag: { pt: 'produto', en: 'product' }, href: '#' },
+      {
+        name: 'Podcast dois',
+        tag: { pt: 'liderança', en: 'leadership' },
+        href: '#',
+      },
+      { name: 'Podcast três', tag: { pt: 'dados', en: 'data' }, href: '#' },
+    ],
+  },
+  {
+    id: 'writers',
+    heading: { pt: 'Autores', en: 'Writers' },
+    items: [
+      { name: 'Autor um', href: '#' },
+      { name: 'Autor dois', href: '#' },
+      { name: 'Autor três', href: '#' },
+    ],
+  },
+]
+---
+
+<PageLayout
+  title="Aprendendo"
+  eyebrow={{ pt: 'Aprendendo', en: 'Always learning' }}
+  heading={{ pt: 'O que estou absorvendo.', en: "What I'm picking up." }}
+  intro={{
+    pt: 'Notas, podcasts e autores aos quais sempre volto.',
+    en: 'Notes, podcasts and writers I keep coming back to.',
+  }}>
+  <div class="space-y-14">
+    {
+      groups.map(g => (
+        <section aria-labelledby={`${g.id}-title`}>
+          <h2
+            id={`${g.id}-title`}
+            class="text-muted-foreground font-mono text-xs tracking-[0.06em] uppercase">
+            <T {...g.heading} />
+          </h2>
+          <ul class="border-border divide-border mt-4 divide-y border-y">
+            {g.items.map(item => (
+              <li>
+                <a
+                  href={item.href}
+                  {...(item.href.startsWith('http') && {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                  })}
+                  class="group flex items-baseline justify-between gap-4 py-3 text-[17px]"
+                  data-foley-press="tap"
+                  data-foley-hover="tick"
+                  data-track={'track' in item ? item.track : undefined}>
+                  <span class="group-hover:underline group-hover:underline-offset-4">
+                    {item.name}
+                  </span>
+                  {'tag' in item && item.tag && (
+                    <span class="text-muted-foreground font-mono text-xs">
+                      <T {...item.tag} />
+                    </span>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</PageLayout>

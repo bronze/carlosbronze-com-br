@@ -1,0 +1,54 @@
+---
+import T from './T.astro'
+import type { Bilingual, Section } from '@/lib/site'
+
+interface Props {
+  section: Section
+  direction?: 'prev' | 'next'
+  // Read before the label by screen readers only, e.g. "Previous:".
+  srPrefix?: Bilingual
+  class?: string
+}
+
+const { section, direction = 'next', srPrefix, class: className } = Astro.props
+---
+
+<a
+  href={section.href}
+  class:list={['group block', className]}
+  data-foley-press="tap"
+  data-foley-hover="tick">
+  <span class="text-foreground font-mono text-sm">
+    {
+      srPrefix && (
+        <span class="sr-only">
+          <T {...srPrefix} />{' '}
+        </span>
+      )
+    }
+    {
+      direction === 'prev' && (
+        <span
+          class="inline-block transition-transform group-hover:-translate-x-1"
+          aria-hidden="true">
+          ←
+        </span>
+      )
+    }
+    <span class="group-hover:underline group-hover:underline-offset-4"
+      ><T {...section.label} /></span
+    ><span class="sr-only">.</span>
+    {
+      direction === 'next' && (
+        <span
+          class="inline-block transition-transform group-hover:translate-x-1"
+          aria-hidden="true">
+          →
+        </span>
+      )
+    }
+  </span>
+  <span class="text-muted-foreground mt-1 block text-sm">
+    <T {...section.blurb} />
+  </span>
+</a>

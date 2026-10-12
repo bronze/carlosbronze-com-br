@@ -1,121 +1,28 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import PageLayout from '@/layouts/PageLayout.astro'
+import SectionLink from '@/components/site/SectionLink.astro'
+import { ariaLabel, sections } from '@/lib/site'
 ---
 
-<Layout>
-  <main
-    class="bg-background text-foreground flex min-h-dvh items-center justify-center px-4">
-    <div class="w-full max-w-sm space-y-6">
-      <div class="space-y-3">
-        <h1 class="text-2xl font-semibold tracking-tight">Carlos Bronze</h1>
-
-        <button
-          id="lang-toggle"
-          type="button"
-          class="text-muted-foreground flex items-center gap-1 text-xs"
-          aria-pressed="false"
-          data-foley-toggle>
-          <span
-            id="label-pt"
-            class="lang-label rounded px-2 py-0.5 font-medium transition-colors"
-            >PT</span
-          >
-          <span class="opacity-30">/</span>
-          <span
-            id="label-en"
-            class="lang-label rounded px-2 py-0.5 font-medium transition-colors"
-            >EN</span
-          >
-        </button>
-
-        <p
-          id="tagline-pt"
-          class="text-muted-foreground lang-text text-sm leading-relaxed">
-          Ajudo lideranças e times de produto a transformar ambiguidade em
-          direção clara. Conectando visão, métricas e entrega para gerar impacto
-          mensurável.
-        </p>
-        <p
-          id="tagline-en"
-          class="text-muted-foreground lang-text hidden text-sm leading-relaxed">
-          I help product leaders and teams turn ambiguity into clear direction.
-          Connecting vision, metrics, and delivery to drive measurable impact.
-        </p>
-      </div>
-
-      <div class="bg-border h-px"></div>
-
-      <div class="space-y-2">
-        <a
-          href="/obsidian"
-          data-foley-press="tap"
-          data-foley-hover="tick"
-          class="border-border bg-card hover:bg-accent hover:text-accent-foreground flex w-full items-center justify-between rounded-md border px-4 py-3 text-sm font-medium shadow-sm transition-colors">
-          <span>Obsidian Notes</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </main>
-</Layout>
-
-<script>
-  import { bind, set } from '@foleyjs/core'
-  import { WebHaptics } from 'web-haptics'
-
-  bind()
-  set({ volume: 1, theme: 'mechanical' })
-
-  const haptics = new WebHaptics()
-
-  const langToggle = document.getElementById('lang-toggle')!
-  const labelPt = document.getElementById('label-pt')!
-  const labelEn = document.getElementById('label-en')!
-  const taglinePt = document.getElementById('tagline-pt')!
-  const taglineEn = document.getElementById('tagline-en')!
-
-  let currentLang = 'pt'
-
-  function setLang(lang: string) {
-    currentLang = lang
-    taglinePt.classList.toggle('hidden', lang !== 'pt')
-    taglineEn.classList.toggle('hidden', lang !== 'en')
-    labelPt.classList.toggle('text-foreground', lang === 'pt')
-    labelPt.classList.toggle('text-muted-foreground', lang !== 'pt')
-    labelEn.classList.toggle('text-foreground', lang === 'en')
-    labelEn.classList.toggle('text-muted-foreground', lang !== 'en')
-    langToggle.setAttribute('aria-pressed', String(lang === 'en'))
-    localStorage.setItem('lang', lang)
-  }
-
-  const saved = localStorage.getItem('lang')
-  const detected = navigator.language.toLowerCase().startsWith('pt')
-    ? 'pt'
-    : 'en'
-  setLang(saved ?? detected)
-
-  langToggle.addEventListener('click', () => {
-    const lang = currentLang === 'pt' ? 'en' : 'pt'
-    setLang(lang)
-    haptics.trigger('selection')
-    ;(window as any).posthog?.capture('language_switched', { language: lang })
-  })
-
-  document
-    .querySelector('a[href="/obsidian"]')
-    ?.addEventListener('click', () => {
-      haptics.trigger('light')
-      ;(window as any).posthog?.capture('obsidian_link_clicked')
-    })
-</script>
+<PageLayout
+  hero
+  eyebrow={{ pt: 'Rio de Janeiro, BR', en: 'Rio de Janeiro, BR' }}
+  heading={{ pt: 'Carlos Bronze.', en: 'Carlos Bronze.' }}
+  subheading={{ pt: 'Product Manager', en: 'Product Manager' }}
+  intro={{
+    pt: 'Conecto estratégia, métricas e criatividade para construir produtos que movem o negócio.',
+    en: 'I connect strategy, metrics and creativity to build products that move the business.',
+  }}
+  pager={false}>
+  <nav {...ariaLabel({ pt: 'Seções', en: 'Sections' })}>
+    <ul class="grid max-w-3xl gap-x-10 gap-y-6 sm:grid-cols-3">
+      {
+        sections.map(s => (
+          <li>
+            <SectionLink section={s} />
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</PageLayout>

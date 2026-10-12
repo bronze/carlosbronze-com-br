@@ -1,0 +1,114 @@
+---
+import Layout from './Layout.astro'
+import SiteHeader from '@/components/site/SiteHeader.astro'
+import SectionLink from '@/components/site/SectionLink.astro'
+import T from '@/components/site/T.astro'
+import { ariaLabel, neighbours, type Bilingual } from '@/lib/site'
+
+interface Props {
+  title?: string
+  eyebrow: Bilingual
+  heading: Bilingual
+  subheading?: Bilingual
+  intro?: Bilingual
+  hero?: boolean
+  pager?: boolean
+}
+
+const {
+  title,
+  eyebrow,
+  heading,
+  subheading,
+  intro,
+  hero = false,
+  pager = true,
+} = Astro.props
+const path = Astro.url.pathname.replace(/\/$/, '') || '/'
+const { prev, next } = neighbours(path)
+---
+
+<Layout title={title}>
+  <a
+    href="#main"
+    class="bg-foreground text-background sr-only z-50 rounded px-3 py-2 font-mono text-xs focus:not-sr-only focus:fixed focus:top-4 focus:left-4">
+    <T pt="Pular para o conteúdo" en="Skip to content" />
+  </a>
+
+  <SiteHeader />
+
+  <main
+    id="main"
+    tabindex="-1"
+    class="mx-auto w-full max-w-5xl flex-1 px-4 pt-12 pb-16 outline-none sm:px-6 sm:pt-16">
+    <!-- Home uses the full column; inner pages read in a narrower centred one. -->
+    <section
+      aria-labelledby="page-title"
+      class:list={['reveal', !hero && 'mx-auto max-w-[720px]']}>
+      <p
+        class="text-muted-foreground font-mono text-[13px] tracking-[0.08em] uppercase">
+        <T {...eyebrow} />
+      </p>
+      <h1
+        id="page-title"
+        class:list={[
+          'mt-5 font-serif font-medium tracking-tight text-balance',
+          hero
+            ? 'max-w-[8ch] text-6xl leading-[0.92] sm:text-8xl'
+            : 'text-[clamp(32px,4vw,46px)] leading-[1.15]',
+        ]}>
+        <T {...heading} />
+      </h1>
+      {
+        subheading && (
+          <p class="text-muted-foreground mt-6 font-mono text-sm">
+            <T {...subheading} />
+          </p>
+        )
+      }
+      {
+        intro && (
+          <p
+            class:list={[
+              'text-foreground/80 text-pretty',
+              hero
+                ? 'mt-4 max-w-[30ch] text-base leading-relaxed sm:text-lg'
+                : 'mt-6 text-lg leading-[1.75]',
+            ]}>
+            <T {...intro} />
+          </p>
+        )
+      }
+
+      <div class:list={[hero ? 'mt-14' : 'mt-11']}>
+        <slot />
+      </div>
+
+      {
+        pager && (
+          // Small screens only: on desktop the header nav is always in view,
+          // on a phone it has scrolled away by the time you reach the end.
+          <nav
+            {...ariaLabel({ pt: 'Explorar seções', en: 'Explore sections' })}
+            class="mt-11 min-[821px]:hidden">
+            <SectionLink
+              section={prev}
+              direction="prev"
+              srPrefix={{ pt: 'Anterior:', en: 'Previous:' }}
+              class="border-border min-h-16 border-t py-3.5"
+            />
+            <SectionLink
+              section={next}
+              srPrefix={{ pt: 'Próxima:', en: 'Next:' }}
+              class="border-border min-h-16 border-t py-3.5"
+            />
+          </nav>
+        )
+      }
+    </section>
+  </main>
+
+  <footer class="text-muted-foreground px-4 pb-8 text-center font-mono text-xs">
+    © {new Date().getFullYear()}
+  </footer>
+</Layout>

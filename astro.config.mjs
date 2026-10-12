@@ -6,6 +6,11 @@ import react from '@astrojs/react'
 
 // https://astro.build/config
 export default defineConfig({
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
@@ -24,6 +29,14 @@ export default defineConfig({
         name: 'Geist Mono',
         cssVariable: '--font-geist-mono',
         weights: [400, 500, 600, 700],
+        subsets: ['latin'],
+      },
+      {
+        provider: fontProviders.fontsource(),
+        name: 'Newsreader',
+        cssVariable: '--font-newsreader',
+        weights: [400, 500],
+        styles: ['normal', 'italic'],
         subsets: ['latin'],
       },
     ],

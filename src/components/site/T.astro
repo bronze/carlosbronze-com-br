@@ -1,0 +1,11 @@
+---
+// Renders both languages; CSS in starwind.css hides the inactive one.
+interface Props {
+  pt: string
+  en: string
+}
+
+const { pt, en } = Astro.props
+---
+
+<span data-lang-pt>{pt}</span><span data-lang-en>{en}</span>

@@ -1,0 +1,113 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import T from '@/components/site/T.astro'
+
+// Short versions of the notes in obsidian/projetos-pessoais — copy still to be refined.
+const projects = [
+  {
+    name: 'FSAKM',
+    body: {
+      pt: 'O site da Federação Sul Americana de Krav Maga estava lento. Refiz com Next.js, Nextra e shadcn/ui.',
+      en: 'The South American Krav Maga Federation site was slow. I rebuilt it with Next.js, Nextra and shadcn/ui.',
+    },
+    href: 'https://fsakm.carlosbronze.com.br/pt',
+  },
+  {
+    name: 'Thompson Total Branding',
+    body: {
+      pt: 'Um manual clássico de planejamento da Thompson, republicado na web com foco em tipografia e navegação.',
+      en: 'A classic Thompson planning manual, republished for the web with a focus on typography and navigation.',
+    },
+    href: 'https://ttb.carlosbronze.com.br/',
+  },
+  {
+    name: 'Brandon Sanderson Redesign',
+    body: {
+      pt: 'O site do autor tirava 34 no PageSpeed. Achei que dava pra fazer melhor, então tentei.',
+      en: "The author's site scored 34 on PageSpeed. I thought I could do better, so I tried.",
+    },
+    href: 'https://brandonsanderson-redesign.carlosbronze.com.br/',
+  },
+]
+
+const quick = [
+  {
+    name: 'Tera Workshop · Mapbox',
+    href: 'https://github.com/bronze/tera-workshop-dados',
+  },
+  { name: 'Este site', nameEn: 'This website', href: '#' },
+]
+---
+
+<PageLayout
+  title="Experimentos"
+  eyebrow={{ pt: 'Experimentos', en: 'My tinkering' }}
+  heading={{
+    pt: 'Coisas que construo por diversão.',
+    en: 'Things I build for fun.',
+  }}
+  intro={{
+    pt: 'Projetos que fiz porque precisava, queria entender algo, ou não conseguia largar a ideia.',
+    en: "Things I built because I needed them, wanted to understand something, or couldn't let the idea go.",
+  }}>
+  <ul class="space-y-10">
+    {
+      projects.map(p => (
+        <li>
+          <a
+            href={p.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group block"
+            data-foley-press="tap"
+            data-foley-hover="tick">
+            <h2 class="font-serif text-2xl">
+              {p.name}
+              <span
+                class="text-muted-foreground group-hover:text-foreground text-base transition-colors"
+                aria-hidden="true">
+                {' '}
+                ↗
+              </span>
+            </h2>
+            <p class="text-muted-foreground mt-2 text-base leading-[1.6]">
+              <T {...p.body} />
+            </p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <section aria-labelledby="quick-title" class="mt-16">
+    <h2
+      id="quick-title"
+      class="text-muted-foreground font-mono text-xs tracking-[0.06em] uppercase">
+      <T pt="Rapidinhas" en="Quick ones" />
+    </h2>
+    <ul class="border-border divide-border mt-4 divide-y border-y">
+      {
+        quick.map(q => (
+          <li>
+            <a
+              href={q.href}
+              {...(q.href.startsWith('http') && {
+                target: '_blank',
+                rel: 'noopener noreferrer',
+              })}
+              class="group flex items-baseline justify-between py-3"
+              data-foley-press="tap"
+              data-foley-hover="tick">
+              <span class="group-hover:underline group-hover:underline-offset-4">
+                {q.nameEn ? <T pt={q.name} en={q.nameEn} /> : q.name}
+              </span>
+              <span class="text-muted-foreground font-mono text-xs">
+                repo <span aria-hidden="true">↗</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</PageLayout>

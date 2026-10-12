@@ -1,0 +1,105 @@
+---
+import T from './T.astro'
+import { ariaLabel, linkedin, sections } from '@/lib/site'
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/'
+---
+
+<header
+  class="mx-auto grid w-full max-w-5xl grid-cols-[1fr_auto] items-baseline gap-x-8 gap-y-3 px-4 pt-6 sm:grid-cols-[auto_1fr_auto] sm:px-6 sm:pt-8"
+  style="view-transition-name: site-header">
+  <a
+    href="/"
+    class="text-foreground font-mono text-xs tracking-[0.12em] uppercase"
+    aria-current={path === '/' ? 'page' : undefined}
+    {...ariaLabel({ pt: 'Carlos Bronze, início', en: 'Carlos Bronze, home' })}
+    data-foley-press="tap">
+    Carlos Bronze
+  </a>
+
+  <nav
+    id="site-navigation"
+    {...ariaLabel({ pt: 'Navegação principal', en: 'Main navigation' })}
+    class="col-span-2 flex flex-wrap gap-x-5 gap-y-1 font-mono text-[13px] sm:col-span-1 sm:justify-end">
+    {
+      sections.map(s => (
+        <a
+          href={s.href}
+          aria-current={path === s.href ? 'page' : undefined}
+          class="text-muted-foreground hover:text-foreground aria-[current=page]:text-foreground transition-colors aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[6px]"
+          data-foley-press="tap"
+          data-foley-hover="tick">
+          <T {...s.label} />
+        </a>
+      ))
+    }
+    <a
+      href={linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-muted-foreground hover:text-foreground transition-colors"
+      data-foley-press="tap"
+      data-foley-hover="tick"
+      data-track="linkedin_clicked">
+      <T pt="trabalho" en="work" />
+      <span aria-hidden="true">↗</span>
+    </a>
+  </nav>
+
+  <button
+    id="lang-toggle"
+    type="button"
+    class="text-muted-foreground col-start-2 row-start-1 flex items-center gap-1 justify-self-end font-mono text-xs sm:col-start-3"
+    {...ariaLabel({ pt: 'Read in English', en: 'Ler em português' })}
+    data-foley-toggle>
+    <span class="lang-label" data-for="pt" aria-hidden="true">PT</span>
+    <span class="opacity-30" aria-hidden="true">/</span>
+    <span class="lang-label" data-for="en" aria-hidden="true">EN</span>
+  </button>
+</header>
+
+<style>
+  .lang-label {
+    transition: color 150ms;
+  }
+  :global(html:not([data-lang='en'])) .lang-label[data-for='pt'],
+  :global(html[data-lang='en']) .lang-label[data-for='en'] {
+    color: var(--foreground);
+  }
+</style>
+
+<script>
+  import { WebHaptics } from 'web-haptics'
+
+  const haptics = new WebHaptics()
+  const root = document.documentElement
+
+  function applyAriaLabels(lang: string) {
+    document.querySelectorAll<HTMLElement>('[data-label-pt]').forEach(el => {
+      el.setAttribute(
+        'aria-label',
+        (lang === 'en' ? el.dataset.labelEn : el.dataset.labelPt)!,
+      )
+    })
+  }
+  applyAriaLabels(root.dataset.lang ?? 'pt')
+
+  document.getElementById('lang-toggle')!.addEventListener('click', () => {
+    const lang = root.dataset.lang === 'en' ? 'pt' : 'en'
+    root.dataset.lang = lang
+    root.lang = lang === 'pt' ? 'pt-BR' : 'en'
+    applyAriaLabels(lang)
+    try {
+      localStorage.setItem('lang', lang)
+    } catch {}
+    haptics.trigger('selection')
+    ;(window as any).posthog?.capture('language_switched', { language: lang })
+  })
+
+  document.querySelectorAll<HTMLElement>('[data-track]').forEach(el =>
+    el.addEventListener('click', () => {
+      haptics.trigger('light')
+      ;(window as any).posthog?.capture(el.dataset.track!)
+    }),
+  )
+</script>
