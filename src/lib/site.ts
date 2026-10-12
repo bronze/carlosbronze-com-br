@@ -40,8 +40,8 @@ export const sections: Section[] = [
     href: '/tinkering',
     label: { pt: 'Experimentos', en: 'Tinkering' },
     blurb: {
-      pt: 'Coisas que construí por conta própria',
-      en: 'Things I built for myself',
+      pt: 'Coisas que fiz por diversão',
+      en: 'Things I built for fun',
     },
   },
 ]
