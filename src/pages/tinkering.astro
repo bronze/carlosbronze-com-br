@@ -17,16 +17,19 @@ const projects = [
   {
     name: 'Critical Role Homepage',
     body: {
-      pt: 'Achar o que vai ao ar na semana era confuso no site do Critical Role. Revi a arquitetura de informação para pôr o calendário e as campanhas à mão.',
-      en: "Finding what's airing this week on Critical Role's site was confusing. I reworked the information architecture to put the schedule and campaigns within reach.",
+      pt: 'Achar o que vai ao ar na semana era confuso no site do Critical Role. No redesign, revi a arquitetura de informação para pôr o calendário e as campanhas à mão.',
+      en: "Finding what's airing this week on Critical Role's site was confusing. In the redesign, I reworked the information architecture to put the schedule and campaigns within reach.",
     },
     href: '/tinkering/critical-role',
   },
   {
-    name: 'FSAKM',
+    name: {
+      pt: 'Federação Sul Americana de Krav Maga',
+      en: 'South American Krav Maga Federation',
+    },
     body: {
-      pt: 'O site da Federação Sul Americana de Krav Maga estava lento. Refiz com Next.js, Nextra e shadcn/ui.',
-      en: 'The South American Krav Maga Federation site was slow. I rebuilt it with Next.js, Nextra and shadcn/ui.',
+      pt: 'O site da federação estava lento. Fiz um redesign com Next.js, Nextra e shadcn/ui.',
+      en: "The federation's site was slow. I redesigned it with Next.js, Nextra and shadcn/ui.",
     },
     href: '/tinkering/fsakm',
   },
@@ -39,10 +42,10 @@ const projects = [
     href: '/tinkering/thompson-total-branding',
   },
   {
-    name: 'Brandon Sanderson Redesign',
+    name: 'Brandon Sanderson',
     body: {
-      pt: 'O site do autor tirava 34 no PageSpeed. Achei que dava pra fazer melhor, então tentei.',
-      en: "The author's site scored 34 on PageSpeed. I thought I could do better, so I tried.",
+      pt: 'O site do autor tirava 34 no PageSpeed. Achei que dava pra fazer melhor, então fiz um redesign.',
+      en: "The author's site scored 34 on PageSpeed. I thought I could do better, so I redesigned it.",
     },
     // Has its own page (src/content/projects/brandon-sanderson).
     href: '/tinkering/brandon-sanderson',
@@ -113,7 +116,7 @@ const link =
             })()}
             <div>
               <h2 class="mb-2 font-serif text-2xl">
-                {p.name}{' '}
+                {typeof p.name === 'string' ? p.name : <T {...p.name} />}{' '}
                 <span
                   class:list={[
                     'text-muted-foreground group-hover:text-brand inline-block text-base transition-[color,transform]',
