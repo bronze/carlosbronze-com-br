@@ -6,18 +6,32 @@ url: https://critical-role-homepage-redesign.vercel.app/
 
 ## O incômodo
 
-Assisto muito [Critical Role](https://critrole.com/), e a página inicial deles funciona como um catálogo: tudo tem o mesmo peso, e quem chega precisa descobrir sozinho por onde começar. Para quem acompanha toda semana, para quem está chegando agora e para quem poderia assinar, a página é a mesma lista.
+Assisto muito [Critical Role](https://critrole.com/), e a página inicial deles funciona como um catálogo: tudo tem o mesmo peso, e quem chega precisa descobrir sozinho por onde começar.
+
+O que mais me incomodava era a pergunta mais básica de quem acompanha o canal: o que vai ao ar esta semana, e quando? No site atual, a programação é confusa e difícil de achar. E quem quer entender as campanhas, quem são os personagens e por onde começar a assistir, também precisa garimpar.
+
+## O estalo
+
+A própria página pergunta "How do you want to do this?", a frase mais famosa do Matt Mercer. Só que as respostas são Games, Shows, Books e Charity: os departamentos da empresa. A homepage estava organizada pelo organograma do Critical Role, e não pelas perguntas de quem chega. A programação da semana, que era o que eu mais queria encontrar, existia, mas como imagem de carrossel no topo e como lista lá embaixo, depois de oito banners.
+
+Então me coloquei no lugar de usuário, que no caso era eu mesmo, e resolvi a minha própria dor primeiro.
 
 ## O que fiz
 
-Em vez de tratar a página como um catálogo, estruturei a navegação como um sistema de decisão, deixando claro o que o usuário precisa primeiro, o que explora em seguida e onde a assinatura entra de forma natural.
+Comecei revendo a arquitetura de informação do site, e não o visual. Em vez de tratar a página como um catálogo, estruturei a navegação como um sistema de decisão, deixando claro o que o usuário precisa primeiro, o que explora em seguida e onde a assinatura entra de forma natural.
 
 <Steps items={[
-  { title: 'O que está acontecendo', text: 'Assistir ao episódio mais recente e a programação da semana, com o que está ao vivo hoje.' },
-  { title: 'Alcançar e explorar', text: 'Recaps para quem perdeu um episódio e as campanhas, da primeira à atual, para quem está chegando.' },
+  { title: 'O que vai ao ar', text: 'O calendário da semana logo no topo, com o que está ao vivo hoje, os horários e o episódio mais recente.' },
+  { title: 'Alcançar e explorar', text: 'Recaps para quem perdeu um episódio, e as campanhas, da primeira à atual, a um clique para quem está chegando.' },
   { title: 'Assinar', text: 'O Beacon aparece depois de a pessoa ver o valor do conteúdo, com os benefícios claros e o teste grátis.' },
 ]} />
 
 ## O resultado
 
 Uma estrutura mais simples e intencional, que reduz a carga cognitiva e guia melhor o engajamento: cada bloco da página responde a uma pergunta de quem chega, na ordem em que ela aparece.
+
+## O que aprendi
+
+> A primeira coisa da página deveria responder à pergunta que as pessoas mais fazem, e não à que a empresa mais quer responder.
+
+A ordem importa tanto quanto o conteúdo. Parte do trabalho foi criar o que faltava, mas boa parte foi decidir o que vem primeiro. E a assinatura funciona melhor depois que a página já respondeu a pergunta de quem chegou.
