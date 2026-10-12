@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content'
 import PageLayout from '@/layouts/PageLayout.astro'
 import T from '@/components/site/T.astro'
 import { sectionFor } from '@/lib/site'
+import { personId } from '@/lib/seo'
 import Rows from '@/components/project/Rows.astro'
 import Stats from '@/components/project/Stats.astro'
 import Steps from '@/components/project/Steps.astro'
@@ -29,9 +30,24 @@ const { pt, en } = Astro.props
 const { Content: ContentPt } = await render(pt)
 const { Content: ContentEn } = await render(en)
 const tinkering = sectionFor('/tinkering')!
+const jsonLd = [
+  {
+    '@type': 'CreativeWork',
+    name: pt.data.title,
+    alternateName: en.data.title,
+    description: pt.data.summary,
+    url: new URL(Astro.url.pathname.replace(/\/$/, ''), Astro.site).href,
+    // The live project, and its code when there is some.
+    sameAs: [pt.data.url, ...(pt.data.repo ? [pt.data.repo] : [])],
+    inLanguage: ['pt-BR', 'en'],
+    author: { '@id': personId(Astro.site!) },
+  },
+]
 ---
 
 <PageLayout
+  type="article"
+  jsonLd={jsonLd}
   title={{ pt: pt.data.title, en: en.data.title }}
   back={{ href: tinkering.href, label: tinkering.label }}
   heading={{ pt: pt.data.title, en: en.data.title }}

@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
     "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.4",
     "@foleyjs/core": "^2.6.1",
     "@radix-ui/react-slot": "^1.2.4",
     "@tabler/icons": "^3.38.0",

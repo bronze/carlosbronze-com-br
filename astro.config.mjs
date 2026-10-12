@@ -4,9 +4,13 @@ import { defineConfig, fontProviders } from 'astro/config'
 
 import react from '@astrojs/react'
 import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
 
 // https://astro.build/config
 export default defineConfig({
+  // Canonical URLs, Open Graph and the sitemap are built from this.
+  site: 'https://www.carlosbronze.com.br',
+
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'hover',
@@ -43,5 +47,12 @@ export default defineConfig({
     ],
   },
 
-  integrations: [react(), mdx()],
+  integrations: [
+    react(),
+    mdx(),
+    sitemap({
+      // Vercel serves pages without the trailing slash (cleanUrls).
+      serialize: item => ({ ...item, url: item.url.replace(/(?<=.)\/$/, '') }),
+    }),
+  ],
 })

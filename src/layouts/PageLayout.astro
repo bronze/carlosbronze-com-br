@@ -4,6 +4,7 @@ import SiteHeader from '@/components/site/SiteHeader.astro'
 import SectionLink from '@/components/site/SectionLink.astro'
 import T from '@/components/site/T.astro'
 import { ariaLabel, neighbours, sectionFor, type Bilingual } from '@/lib/site'
+import type { JsonLd } from '@/lib/seo'
 
 interface Props {
   // Both default to the section's label from src/lib/site.ts.
@@ -19,6 +20,10 @@ interface Props {
   continueIntro?: boolean
   hero?: boolean
   pager?: boolean
+  // Search/share snippet; defaults to the intro (PT), then the site's own.
+  description?: string
+  type?: 'website' | 'article' | 'profile'
+  jsonLd?: JsonLd[]
 }
 
 const {
@@ -31,6 +36,9 @@ const {
   continueIntro = false,
   hero = false,
   pager = true,
+  description,
+  type,
+  jsonLd,
 } = Astro.props
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 const { prev, next } = neighbours(path)
@@ -40,7 +48,11 @@ const eyebrow = eyebrowProp ?? section!.label
 const title = path === '/' ? undefined : (titleProp ?? section?.label)
 ---
 
-<Layout title={title}>
+<Layout
+  title={title}
+  description={description ?? (path === '/' ? undefined : intro?.pt)}
+  type={type}
+  jsonLd={jsonLd}>
   <a
     href="#main"
     class="bg-foreground text-background sr-only z-50 rounded px-3 py-2 font-mono text-xs focus:not-sr-only focus:fixed focus:top-4 focus:left-4">

@@ -1,6 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro'
 import T from '@/components/site/T.astro'
+import { personId } from '@/lib/seo'
 
 const story = [
   {
@@ -63,6 +64,14 @@ const focus = [
 ---
 
 <PageLayout
+  type="profile"
+  jsonLd={[
+    {
+      '@type': 'ProfilePage',
+      url: new URL('/about', Astro.site).href,
+      mainEntity: { '@id': personId(Astro.site!) },
+    },
+  ]}
   heading={{
     pt: 'Criatividade em função de resultado.',
     en: 'Creativity in service of results.',
