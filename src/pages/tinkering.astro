@@ -127,13 +127,13 @@ const link =
               class="group flex items-baseline justify-between py-3"
               data-foley-press="tap"
               data-foley-hover="tick">
-              <span class="group-hover:underline group-hover:underline-offset-4">
+              <span class="group-hover:decoration-brand group-hover:underline group-hover:underline-offset-4">
                 {q.nameEn ? <T pt={q.name} en={q.nameEn} /> : q.name}
               </span>
               <span class="text-muted-foreground font-mono text-xs">
                 {q.live ? <T pt="ver no ar" en="see it live" /> : 'repo'}{' '}
                 <span
-                  class="inline-block transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  class="group-hover:text-brand inline-block transition-[color,transform] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true">
                   ↗
                 </span>
