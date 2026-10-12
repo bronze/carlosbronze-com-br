@@ -1,0 +1,28 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import SectionLink from '@/components/site/SectionLink.astro'
+import { ariaLabel, home, sections } from '@/lib/site'
+---
+
+<PageLayout
+  noindex
+  title={{ pt: 'Página não encontrada', en: 'Page not found' }}
+  eyebrow={{ pt: 'Erro 404', en: 'Error 404' }}
+  heading={{ pt: 'Por aqui não tem nada.', en: 'Nothing over here.' }}
+  intro={{
+    pt: 'O link pode estar quebrado, ou a página mudou de lugar. Talvez uma destas sirva:',
+    en: 'The link may be broken, or the page has moved. Maybe one of these will do:',
+  }}
+  pager={false}>
+  <nav {...ariaLabel({ pt: 'Seções', en: 'Sections' })}>
+    <ul class="grid gap-y-6">
+      {
+        [home, ...sections].map(s => (
+          <li>
+            <SectionLink section={s} />
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</PageLayout>

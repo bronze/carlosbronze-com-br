@@ -18,6 +18,8 @@ interface Props {
   type?: 'website' | 'article' | 'profile'
   // Extra schema.org nodes for this page, next to the site and person.
   jsonLd?: JsonLd[]
+  // Keeps the page out of search results (the 404).
+  noindex?: boolean
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   image = '/og.png',
   type = 'website',
   jsonLd = [],
+  noindex = false,
 } = Astro.props
 const full = (t: string) => `${t} · ${SITE_NAME}`
 // Home's tab says what the person does; other pages say where you are.
@@ -61,7 +64,7 @@ const graph = JSON.stringify({
       )
     }
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={SITE_NAME} />
