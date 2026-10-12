@@ -47,28 +47,20 @@ const full = (t: string) => `${t} · Carlos Bronze`
         if (title && lang === 'en') document.title = title.dataset.titleEn
       } catch {}
 
+      // Follow the system's light/dark preference, live: changing it (in the
+      // OS, or with an extension that overrides prefers-color-scheme) updates
+      // the open page. There's no theme toggle, so nothing is stored; the
+      // old site's saved choice is cleared so it can't override the system.
+      try {
+        localStorage.removeItem('colorTheme')
+      } catch {}
+      const darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
       function initTheme() {
-        const stored =
-          typeof localStorage !== 'undefined' &&
-          localStorage.getItem('colorTheme')
-        const isDark = stored
-          ? stored === 'dark'
-          : window.matchMedia('(prefers-color-scheme: dark)').matches
-        document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
+        document.documentElement.classList.toggle('dark', darkQuery.matches)
       }
       initTheme()
+      darkQuery.addEventListener('change', initTheme)
       document.addEventListener('astro:after-swap', initTheme)
-
-      if (typeof localStorage !== 'undefined') {
-        const observer = new MutationObserver(() => {
-          const isDark = document.documentElement.classList.contains('dark')
-          localStorage.setItem('colorTheme', isDark ? 'dark' : 'light')
-        })
-        observer.observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ['class'],
-        })
-      }
     </script>
     <Analytics />
     <PostHog />

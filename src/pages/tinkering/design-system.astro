@@ -457,21 +457,8 @@ const label = 'text-muted-foreground font-mono text-xs tracking-[0.06em] upperca
     if (accent === 'nenhum') root.removeAttribute('data-accent')
     else root.setAttribute('data-accent', accent)
 
-    // Layout.astro saves every change to the .dark class as the visitor's
-    // theme. Previewing shouldn't, so put the saved value back afterwards.
-    if (root.classList.contains('dark') !== dark) {
-      let saved: string | null = null
-      try {
-        saved = localStorage.getItem('colorTheme')
-      } catch {}
-      root.classList.toggle('dark', dark)
-      queueMicrotask(() => {
-        try {
-          if (saved === null) localStorage.removeItem('colorTheme')
-          else localStorage.setItem('colorTheme', saved)
-        } catch {}
-      })
-    }
+    // Preview only: the next page load follows the system again.
+    root.classList.toggle('dark', dark)
 
     // Shareable: /tinkering/design-system?greys=pedra&accent=bronze
     const params = new URLSearchParams()
