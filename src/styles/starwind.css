@@ -405,10 +405,10 @@ html[data-lang='en'] [data-lang-pt] {
   display: none !important;
 }
 
-/* Page motion. On every load the blocks inside <main>'s .reveal wrapper rise in one after
-   another, top to bottom. Between pages the header stays put (it has its own
-   view-transition-name) while the old page fades out; the new page needs no
-   transition of its own because its blocks already animate in.
+/* Page motion. On every load the blocks inside <main>'s .reveal wrapper rise in with a
+   short stagger, top to bottom. Between pages the header stays put (it has its own
+   view-transition-name) while the old page fades out quickly and the new one fades in
+   over it at the same time, so there's never a blank frame in between.
    Browsers without view transitions just navigate. */
 @view-transition {
   navigation: auto;
@@ -416,18 +416,33 @@ html[data-lang='en'] [data-lang-pt] {
 
 :root {
   --ease-enter: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --duration-enter: 480ms;
+  --duration-exit: 240ms;
+}
+
+/* Reserve the scrollbar's space on every page, so going between a short page and a
+   long one doesn't shift the layout (and the header) sideways. */
+html {
+  scrollbar-gutter: stable;
 }
 
 ::view-transition-old(root) {
-  animation: 160ms ease-in both fade-out;
+  animation: vt-out var(--duration-exit) var(--ease-exit) both;
 }
 
 ::view-transition-new(root) {
-  animation: none;
+  animation: vt-in var(--duration-enter) var(--ease-enter) both;
 }
 
-@keyframes fade-out {
+@keyframes vt-out {
   to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-in {
+  from {
     opacity: 0;
   }
 }
@@ -443,20 +458,17 @@ html[data-lang='en'] [data-lang-pt] {
   main > .reveal > * {
     animation: rise-in 0.8s var(--ease-enter) both;
   }
-  main > .reveal > :nth-child(1) {
-    animation-delay: 60ms;
-  }
   main > .reveal > :nth-child(2) {
-    animation-delay: 160ms;
+    animation-delay: 40ms;
   }
   main > .reveal > :nth-child(3) {
-    animation-delay: 240ms;
+    animation-delay: 80ms;
   }
   main > .reveal > :nth-child(4) {
-    animation-delay: 320ms;
+    animation-delay: 120ms;
   }
   main > .reveal > :nth-child(n + 5) {
-    animation-delay: 420ms;
+    animation-delay: 160ms;
   }
 }
 
