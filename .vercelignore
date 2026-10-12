@@ -1,0 +1,10 @@
+# Keep CLI deploys (`vercel deploy`) to what's in git: no personal notes,
+# secrets, local tooling or build output.
+obsidian/
+.env*
+.claude/
+.agents/
+.mcp.json
+.astro/
+dist/
+pnpm-workspace.yaml

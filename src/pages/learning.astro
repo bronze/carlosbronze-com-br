@@ -1,9 +1,17 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro'
 import T from '@/components/site/T.astro'
+import type { Bilingual } from '@/lib/site'
 
-// Placeholder content — to be replaced.
-const groups = [
+interface Item {
+  name: string
+  tag?: Bilingual
+  // A Bilingual href points each language at its own page.
+  href: string | Bilingual
+  track?: string
+}
+
+const groups: { id: string; heading: Bilingual; items: Item[] }[] = [
   {
     id: 'notes',
     heading: { pt: 'Minhas notas', en: 'My notes' },
@@ -20,34 +28,74 @@ const groups = [
     id: 'podcasts',
     heading: { pt: 'Podcasts', en: 'Podcasts' },
     items: [
-      { name: 'Podcast um', tag: { pt: 'produto', en: 'product' }, href: '#' },
       {
-        name: 'Podcast dois',
-        tag: { pt: 'liderança', en: 'leadership' },
-        href: '#',
+        name: "Lenny's Podcast",
+        tag: { pt: 'produto & carreira', en: 'product & career' },
+        href: 'https://www.lennysnewsletter.com/podcast',
       },
-      { name: 'Podcast três', tag: { pt: 'dados', en: 'data' }, href: '#' },
+      {
+        name: 'Papo na Arena',
+        tag: { pt: 'produto', en: 'product' },
+        href: 'https://podcasts.apple.com/br/podcast/id1699461885',
+      },
     ],
   },
   {
-    id: 'writers',
-    heading: { pt: 'Autores', en: 'Writers' },
+    id: 'reading',
+    heading: { pt: 'Leituras', en: 'Reading' },
     items: [
-      { name: 'Autor um', href: '#' },
-      { name: 'Autor dois', href: '#' },
-      { name: 'Autor três', href: '#' },
+      {
+        name: 'Tim Herbig',
+        tag: { pt: 'newsletter', en: 'newsletter' },
+        href: 'https://herbig.co/newsletter/',
+      },
+      {
+        name: 'Joca Torres',
+        tag: { pt: 'newsletter', en: 'newsletter' },
+        href: {
+          pt: 'https://www.gyaco.com/pt/artigos/',
+          en: 'https://www.gyaco.com/articles/',
+        },
+      },
+      {
+        name: 'Brilliant Basics',
+        tag: { pt: 'Substack do Arthur Castro', en: 'Arthur Castro’s Substack' },
+        href: 'https://arthurcastro.substack.com/',
+      },
+      {
+        name: 'The Beautiful Mess',
+        tag: { pt: 'Substack do John Cutler', en: 'John Cutler’s Substack' },
+        href: 'https://cutlefish.substack.com/',
+      },
+      {
+        name: 'Roger Martin',
+        tag: { pt: 'Substack do Roger Martin', en: 'Roger Martin’s Substack' },
+        href: 'https://rogerlmartin.substack.com/',
+      },
+      {
+        name: 'Packlead',
+        tag: { pt: 'Substack da Cacau Fonseca', en: 'Cacau Fonseca’s Substack' },
+        href: 'https://www.packlead.com.br/',
+      },
     ],
   },
 ]
+
+const linkClass =
+  'group flex items-baseline justify-between gap-4 py-3 text-[17px]'
+const external = (href: string) =>
+  href.startsWith('http')
+    ? { target: '_blank', rel: 'noopener noreferrer' }
+    : {}
 ---
 
 <PageLayout
   title="Aprendendo"
-  eyebrow={{ pt: 'Aprendendo', en: 'Always learning' }}
-  heading={{ pt: 'O que estou absorvendo.', en: "What I'm picking up." }}
+  eyebrow={{ pt: 'Aprendendo', en: 'Learning' }}
+  heading={{ pt: 'Repertório em construção.', en: 'A repertoire in progress.' }}
   intro={{
-    pt: 'Notas, podcasts e autores aos quais sempre volto.',
-    en: 'Notes, podcasts and writers I keep coming back to.',
+    pt: 'De onde vêm as ideias que uso pra pensar produto, estratégia e comportamento: minhas notas, os podcasts que acompanho e o que ando lendo.',
+    en: "Where the ideas I use to think about product, strategy and behavior come from: my own notes, the podcasts I follow and what I've been reading.",
   }}>
   <div class="space-y-14">
     {
@@ -59,29 +107,38 @@ const groups = [
             <T {...g.heading} />
           </h2>
           <ul class="border-border divide-border mt-4 divide-y border-y">
-            {g.items.map(item => (
-              <li>
-                <a
-                  href={item.href}
-                  {...(item.href.startsWith('http') && {
-                    target: '_blank',
-                    rel: 'noopener noreferrer',
-                  })}
-                  class="group flex items-baseline justify-between gap-4 py-3 text-[17px]"
-                  data-foley-press="tap"
-                  data-foley-hover="tick"
-                  data-track={'track' in item ? item.track : undefined}>
-                  <span class="group-hover:underline group-hover:underline-offset-4">
-                    {item.name}
-                  </span>
-                  {'tag' in item && item.tag && (
-                    <span class="text-muted-foreground font-mono text-xs">
-                      <T {...item.tag} />
-                    </span>
-                  )}
-                </a>
-              </li>
-            ))}
+            {g.items.map(item => {
+              const hrefs =
+                typeof item.href === 'string'
+                  ? [{ href: item.href }]
+                  : [
+                      { href: item.href.pt, lang: 'data-lang-pt' },
+                      { href: item.href.en, lang: 'data-lang-en' },
+                    ]
+              return (
+                <li>
+                  {hrefs.map(({ href, lang }) => (
+                    <a
+                      href={href}
+                      {...external(href)}
+                      {...(lang && { [lang]: '' })}
+                      class={linkClass}
+                      data-foley-press="tap"
+                      data-foley-hover="tick"
+                      data-track={item.track}>
+                      <span class="group-hover:underline group-hover:underline-offset-4">
+                        {item.name}
+                      </span>
+                      {item.tag && (
+                        <span class="text-muted-foreground font-mono text-xs">
+                          <T {...item.tag} />
+                        </span>
+                      )}
+                    </a>
+                  ))}
+                </li>
+              )
+            })}
           </ul>
         </section>
       ))

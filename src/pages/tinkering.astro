@@ -5,6 +5,14 @@ import T from '@/components/site/T.astro'
 // Short versions of the notes in obsidian/projetos-pessoais — copy still to be refined.
 const projects = [
   {
+    name: 'Papo na Arena Radar',
+    body: {
+      pt: 'Todos os produtos da semana citados no podcast Papo na Arena, organizados em rankings, episódios, categorias e quem recomendou o quê.',
+      en: 'Every "product of the week" mentioned on the Papo na Arena podcast, organized into rankings, episodes, categories and who recommended what.',
+    },
+    href: 'https://paponaarena-produtosdasemana.replit.app/',
+  },
+  {
     name: 'FSAKM',
     body: {
       pt: 'O site da Federação Sul Americana de Krav Maga estava lento. Refiz com Next.js, Nextra e shadcn/ui.',
@@ -41,14 +49,14 @@ const quick = [
 
 <PageLayout
   title="Experimentos"
-  eyebrow={{ pt: 'Experimentos', en: 'My tinkering' }}
+  eyebrow={{ pt: 'Experimentos', en: 'Tinkering' }}
   heading={{
-    pt: 'Coisas que construo por diversão.',
-    en: 'Things I build for fun.',
+    pt: 'Coisas que faço por curiosidade.',
+    en: 'Things I make out of curiosity.',
   }}
   intro={{
-    pt: 'Projetos que fiz porque precisava, queria entender algo, ou não conseguia largar a ideia.',
-    en: "Things I built because I needed them, wanted to understand something, or couldn't let the idea go.",
+    pt: 'Projetos que nasceram de um incômodo, de uma pergunta ou de uma ideia que não saía da cabeça.',
+    en: "Projects that started with an itch, a question, or an idea I couldn't shake.",
   }}>
   <ul class="space-y-10">
     {
