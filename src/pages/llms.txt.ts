@@ -15,7 +15,7 @@ export const GET: APIRoute = async ({ site }) => {
 
 > ${descriptions.en}
 
-Carlos Bronze is a product manager in Rio de Janeiro, Brazil, with almost 20 years in digital products and brands, from agencies to startups. He started coding in 1999, building websites for online gaming communities, and studied industrial design. In agency strategy he learned that value is perception; at MySparkle he uses gamification as a lever for activation, retention and LTV.
+Carlos Bronze is a senior product manager in Rio de Janeiro, Brazil, with almost 20 years in digital products and brands, from agencies to startups. He started coding in 1999, building websites for online gaming communities, and studied industrial design. In agency strategy he learned that value is perception; at MySparkle he uses gamification as a lever for activation, retention and LTV.
 
 He focuses on product strategy, metrics that connect user behavior to business outcomes, the story and perception a product creates, and gamification. The site is bilingual (Portuguese and English) on the same URLs.
 

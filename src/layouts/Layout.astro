@@ -32,7 +32,7 @@ const {
 } = Astro.props
 const full = (t: string) => `${t} · ${SITE_NAME}`
 // Home's tab says what the person does; other pages say where you are.
-const pageTitle = title ? full(title.pt) : `${SITE_NAME} · Product Manager`
+const pageTitle = title ? full(title.pt) : `${SITE_NAME} · Senior Product Manager`
 const site = Astro.site!
 const path = Astro.url.pathname.replace(/(?<=.)\/$/, '')
 const canonical = new URL(path, site).href
@@ -74,7 +74,7 @@ const graph = JSON.stringify({
     <meta property="og:image" content={imageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${SITE_NAME}, Product Manager`} />
+    <meta property="og:image:alt" content={`${SITE_NAME}, Senior Product Manager`} />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />

@@ -10,8 +10,8 @@ export const profiles = {
 }
 
 export const descriptions = {
-  pt: 'Carlos Bronze, Product Manager no Rio de Janeiro. Conecto estratégia, métricas e criatividade para construir produtos que movem o negócio.',
-  en: 'Carlos Bronze, product manager based in Rio de Janeiro. I connect strategy, metrics and creativity to build products that move the business.',
+  pt: 'Carlos Bronze, Senior Product Manager no Rio de Janeiro. Conecto estratégia, métricas e criatividade para construir produtos que movem o negócio.',
+  en: 'Carlos Bronze, senior product manager based in Rio de Janeiro. I connect strategy, metrics and creativity to build products that move the business.',
 }
 
 export type JsonLd = Record<string, unknown>
@@ -36,7 +36,7 @@ export function baseGraph(site: URL): JsonLd[] {
       '@id': personId(site),
       name: SITE_NAME,
       url,
-      jobTitle: 'Product Manager',
+      jobTitle: 'Senior Product Manager',
       description: descriptions.en,
       address: {
         '@type': 'PostalAddress',
