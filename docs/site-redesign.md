@@ -75,7 +75,7 @@ The old components `About.astro`, `Welcome.astro` and `Footer.astro` in `src/com
 | Role                                  | Font               | Notes                                                                            |
 | ------------------------------------- | ------------------ | -------------------------------------------------------------------------------- |
 | Headlines, project names              | Newsreader (serif) | weight 500, tight tracking; home name `text-6xl → sm:text-8xl`, line height 0.92; inner page headlines `clamp(32px, 4vw, 46px)`, line height 1.15 |
-| Body, intro                           | Geist (sans)       | home intro 16 → 18px, max width `30ch`; inner pages 18px, line height 1.75                                   |
+| Body, intro                           | Geist (sans)       | home intro 16 → 18px, max width `32ch`; inner pages 18px, line height 1.75                                   |
 | Labels, nav, role line, section links | Geist Mono         | small labels are uppercase with `tracking-[0.12em]`                              |
 
 The fonts are loaded through Astro's experimental fonts API (fontsource) in `astro.config.mjs`. `--font-serif` maps to Newsreader in `starwind.css`.
