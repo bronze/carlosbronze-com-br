@@ -1,0 +1,44 @@
+---
+title: Os produtos da semana do Papo na Arena, todos num lugar só.
+summary: Um projeto de fã, não oficial, que organiza cada recomendação do podcast em rankings, categorias, episódios e pessoas.
+url: https://paponaarena-produtosdasemana.replit.app/
+repo: https://github.com/bronze/paponaarena-produtosdasemana-replit
+---
+
+## O incômodo
+
+Todo episódio do [Papo na Arena](https://open.spotify.com/show/7lcBkPYn5HgEZjTkJhNUFJ) termina com os produtos da semana: ferramentas, apps e serviços que os participantes estão usando. É uma das partes que eu mais gosto, mas em áudio elas se perdem. Semanas depois, sobra só a pergunta: qual era mesmo aquela ferramenta que alguém citou?
+
+## O estalo
+
+Cada recomendação tem sempre os mesmos três pedaços: um episódio, uma pessoa e um produto. Anotando isso de forma estruturada, o resto vem de graça. O ranking, as categorias e o histórico de cada pessoa são só jeitos diferentes de olhar a mesma lista.
+
+## O que fiz
+
+Montei o site no Replit e passei a registrar as menções à mão depois que cada episódio vai ao ar. A partir dessa lista, o site oferece quatro formas de navegar:
+
+<Rows items={[
+  { title: 'Ranking', text: 'Os produtos mais citados, do mais recomendado para baixo.', href: 'https://paponaarena-produtosdasemana.replit.app/produtos' },
+  { title: 'Categorias', text: 'IA, produtividade, finanças, saúde e outras 24.', href: 'https://paponaarena-produtosdasemana.replit.app/categorias' },
+  { title: 'Episódios', text: 'O que apareceu em cada episódio, com o tema da conversa.', href: 'https://paponaarena-produtosdasemana.replit.app/episodios' },
+  { title: 'Pessoas', text: 'O que cada host e convidado recomendou ao longo do tempo.', href: 'https://paponaarena-produtosdasemana.replit.app/pessoas' },
+]} />
+
+Como é um projeto de fã, deixei claro no próprio site que ele não tem vínculo com o podcast nem com a Product Arena.
+
+## O resultado
+
+<Stats items={[
+  { label: 'Menções', after: '1.501' },
+  { label: 'Produtos', after: '636' },
+  { label: 'Episódios', after: '104' },
+  { label: 'Pessoas', after: '413' },
+]} />
+
+O Claude Code lidera o ranking, com 69 menções. E foi ele também a milésima menção da lista, no episódio 108.
+
+## O que aprendi
+
+> Antes de pensar na interface, vale pensar no formato do dado.
+
+Com a lista bem estruturada, cada nova visão do site virou um filtro, e não uma página nova para manter.

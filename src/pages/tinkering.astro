@@ -10,7 +10,7 @@ const projects = [
       pt: 'Todos os produtos da semana citados no podcast Papo na Arena, organizados em rankings, episódios, categorias e quem recomendou o quê.',
       en: 'Every "product of the week" mentioned on the Papo na Arena podcast, organized into rankings, episodes, categories and who recommended what.',
     },
-    href: 'https://paponaarena-produtosdasemana.replit.app/',
+    href: '/tinkering/papo-na-arena-radar',
   },
   {
     name: 'FSAKM',
@@ -84,10 +84,15 @@ const link =
             data-foley-hover="tick">
             <h2 class="font-serif text-2xl">
               {p.name}
+              {' '}
               <span
-                class="text-muted-foreground group-hover:text-foreground text-base transition-colors"
+                class:list={[
+                  'text-muted-foreground group-hover:text-foreground inline-block text-base transition-[color,transform]',
+                  p.href.startsWith('http')
+                    ? 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+                    : 'group-hover:translate-x-1',
+                ]}
                 aria-hidden="true">
-                {' '}
                 {p.href.startsWith('http') ? '↗' : '→'}
               </span>
             </h2>
@@ -123,7 +128,12 @@ const link =
                 {q.nameEn ? <T pt={q.name} en={q.nameEn} /> : q.name}
               </span>
               <span class="text-muted-foreground font-mono text-xs">
-                repo <span aria-hidden="true">↗</span>
+                repo{' '}
+                <span
+                  class="inline-block transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true">
+                  ↗
+                </span>
               </span>
             </a>
           </li>

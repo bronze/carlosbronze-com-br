@@ -1,0 +1,44 @@
+---
+title: Every Papo na Arena product of the week, all in one place.
+summary: An unofficial fan project that organizes every recommendation from the podcast into rankings, categories, episodes and people.
+url: https://paponaarena-produtosdasemana.replit.app/
+repo: https://github.com/bronze/paponaarena-produtosdasemana-replit
+---
+
+## The itch
+
+Every [Papo na Arena](https://open.spotify.com/show/7lcBkPYn5HgEZjTkJhNUFJ) episode ends with the products of the week: tools, apps and services the guests are using. It's one of my favourite parts, but in audio they get lost. Weeks later, all that's left is the question: what was that tool someone mentioned?
+
+## The insight
+
+Every recommendation has the same three pieces: an episode, a person and a product. Write that down in a structured way and the rest comes for free. The ranking, the categories and each person's history are just different ways of looking at the same list.
+
+## What I did
+
+I built the site on Replit and started logging the mentions by hand after each episode airs. From that list, the site offers four ways to browse:
+
+<Rows items={[
+  { title: 'Ranking', text: 'The most mentioned products, from the top down.', href: 'https://paponaarena-produtosdasemana.replit.app/produtos' },
+  { title: 'Categories', text: 'AI, productivity, finance, health and 24 more.', href: 'https://paponaarena-produtosdasemana.replit.app/categorias' },
+  { title: 'Episodes', text: 'What came up in each episode, alongside the topic.', href: 'https://paponaarena-produtosdasemana.replit.app/episodios' },
+  { title: 'People', text: 'What each host and guest has recommended over time.', href: 'https://paponaarena-produtosdasemana.replit.app/pessoas' },
+]} />
+
+Since it's a fan project, the site says plainly that it isn't affiliated with the podcast or with Product Arena.
+
+## The result
+
+<Stats items={[
+  { label: 'Mentions', after: '1,501' },
+  { label: 'Products', after: '636' },
+  { label: 'Episodes', after: '104' },
+  { label: 'People', after: '413' },
+]} />
+
+Claude Code tops the ranking with 69 mentions. It was also the thousandth mention on the list, in episode 108.
+
+## What I learned
+
+> Before thinking about the interface, think about the shape of the data.
+
+With the list well structured, each new view of the site became a filter, not another page to maintain.
