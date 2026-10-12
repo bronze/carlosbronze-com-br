@@ -60,7 +60,7 @@ const credit = {
 }
 const external = { target: '_blank', rel: 'noopener noreferrer' }
 const link =
-  'text-foreground underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground'
+  'text-foreground underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-brand'
 ---
 
 <PageLayout
@@ -90,7 +90,7 @@ const link =
               {' '}
               <span
                 class:list={[
-                  'text-muted-foreground group-hover:text-foreground inline-block text-base transition-[color,transform]',
+                  'text-muted-foreground group-hover:text-brand inline-block text-base transition-[color,transform]',
                   p.href.startsWith('http')
                     ? 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
                     : 'group-hover:translate-x-1',

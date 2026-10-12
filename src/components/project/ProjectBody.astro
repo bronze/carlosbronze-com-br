@@ -1,0 +1,84 @@
+---
+// Long-form text of a project page: headings, paragraphs, lists, links,
+// inline code and pull quotes (a Markdown `> …`). Also used as the type
+// specimen on /tinkering/design-system.
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'div'>
+
+const { class: className, ...rest } = Astro.props
+---
+
+<div class:list={['project-body', className]} {...rest}>
+  <slot />
+</div>
+
+<style>
+  .project-body :global(h2) {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 3rem 0 1rem;
+  }
+  .project-body :global(h2:first-child) {
+    margin-top: 0;
+  }
+  .project-body :global(p),
+  .project-body :global(ul > li) {
+    color: color-mix(in oklab, var(--foreground) 80%, transparent);
+    font-size: 1.125rem;
+    line-height: 1.75;
+    text-wrap: pretty;
+  }
+  /* Same gap between any two blocks: paragraph, list, either order. */
+  .project-body :global(:is(p, ul, ol) + :is(p, ul, ol)) {
+    margin-top: 1.25rem;
+  }
+  .project-body :global(ul) {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .project-body :global(ul > li + li) {
+    margin-top: 0.5rem;
+  }
+  .project-body :global(a) {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-decoration-color: color-mix(
+      in oklab,
+      var(--foreground) 30%,
+      transparent
+    );
+    text-underline-offset: 4px;
+    transition: text-decoration-color 150ms;
+  }
+  .project-body :global(a:hover) {
+    text-decoration-color: var(--brand);
+  }
+  .project-body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--muted);
+    border-radius: 0.25rem;
+    padding: 0.1em 0.35em;
+    overflow-wrap: anywhere;
+  }
+  /* Components and pull quotes get more room than plain paragraphs. */
+  .project-body > :global(:is(dl, ol, blockquote)) {
+    margin-block: 2rem;
+  }
+  .project-body :global(blockquote) {
+    border-left: 2px solid var(--brand);
+    padding-left: 1.25rem;
+  }
+  .project-body :global(blockquote p) {
+    color: var(--foreground);
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+  .project-body :global(li::marker) {
+    color: var(--muted-foreground);
+  }
+</style>

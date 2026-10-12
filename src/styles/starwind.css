@@ -59,6 +59,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-outline: var(--outline);
+  --color-brand: var(--brand);
 
   --radius-xs: calc(var(--radius) - 0.375rem);
   --radius-sm: calc(var(--radius) - 0.25rem);
@@ -88,24 +89,24 @@
 }
 
 :root {
-  --background: var(--color-white);
-  --foreground: var(--color-neutral-950);
-  --card: var(--color-white);
-  --card-foreground: var(--color-neutral-950);
-  --popover: var(--color-white);
-  --popover-foreground: var(--color-neutral-950);
+  --background: var(--color-base-0);
+  --foreground: var(--color-base-950);
+  --card: var(--color-base-0);
+  --card-foreground: var(--color-base-950);
+  --popover: var(--color-base-0);
+  --popover-foreground: var(--color-base-950);
   --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-neutral-50);
+  --primary-foreground: var(--color-base-50);
   --primary-accent: var(--color-blue-700);
   /* --secondary: var(--color-fuchsia-700); */
-  /* --secondary-foreground: var(--color-neutral-50); */
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  /* --secondary-foreground: var(--color-base-50); */
+  --secondary: var(--color-base-100);
+  --secondary-foreground: var(--color-base-900);
   --secondary-accent: var(--color-fuchsia-700);
-  --muted: var(--color-neutral-100);
-  --muted-foreground: var(--color-neutral-600);
-  --accent: var(--color-neutral-100);
-  --accent-foreground: var(--color-neutral-900);
+  --muted: var(--color-base-100);
+  --muted-foreground: var(--color-base-600);
+  --accent: var(--color-base-100);
+  --accent-foreground: var(--color-base-900);
   --info: var(--color-sky-300);
   --info-foreground: var(--color-sky-950);
   --success: var(--color-green-300);
@@ -113,23 +114,23 @@
   --warning: var(--color-amber-300);
   --warning-foreground: var(--color-amber-950);
   --error: var(--color-red-700);
-  --error-foreground: var(--color-neutral-50);
-  --border: var(--color-neutral-200);
-  --input: var(--color-neutral-200);
-  --outline: var(--color-neutral-400);
+  --error-foreground: var(--color-base-50);
+  --border: var(--color-base-200);
+  --input: var(--color-base-200);
+  --outline: var(--color-base-400);
   --radius: 0.625rem;
 
   /* sidebar variables */
-  --sidebar-background: var(--color-neutral-50);
-  --sidebar-foreground: var(--color-neutral-950);
+  --sidebar-background: var(--color-base-50);
+  --sidebar-foreground: var(--color-base-950);
   --sidebar-primary: var(--color-blue-700);
-  --sidebar-primary-foreground: var(--color-neutral-50);
-  --sidebar-accent: var(--color-neutral-100);
-  --sidebar-accent-foreground: var(--color-neutral-900);
-  --sidebar-border: var(--color-neutral-200);
-  --sidebar-outline: var(--color-neutral-400);
+  --sidebar-primary-foreground: var(--color-base-50);
+  --sidebar-accent: var(--color-base-100);
+  --sidebar-accent-foreground: var(--color-base-900);
+  --sidebar-border: var(--color-base-200);
+  --sidebar-outline: var(--color-base-400);
   --destructive: oklch(0.577 0.245 27.325);
-  --ring: oklch(0.708 0 0);
+  --ring: var(--color-base-400);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,24 +141,24 @@
 }
 
 .dark {
-  --background: var(--color-neutral-950);
-  --foreground: var(--color-neutral-50);
-  --card: var(--color-neutral-900);
-  --card-foreground: var(--color-neutral-50);
-  --popover: var(--color-neutral-800);
-  --popover-foreground: var(--color-neutral-50);
+  --background: var(--color-base-950);
+  --foreground: var(--color-base-50);
+  --card: var(--color-base-900);
+  --card-foreground: var(--color-base-50);
+  --popover: var(--color-base-800);
+  --popover-foreground: var(--color-base-50);
   --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-neutral-50);
+  --primary-foreground: var(--color-base-50);
   --primary-accent: var(--color-blue-400);
   /* --secondary: var(--color-fuchsia-700);
-  --secondary-foreground: var(--color-neutral-50); */
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
+  --secondary-foreground: var(--color-base-50); */
+  --secondary: var(--color-base-800);
+  --secondary-foreground: var(--color-base-50);
   --secondary-accent: var(--color-fuchsia-400);
-  --muted: var(--color-neutral-800);
-  --muted-foreground: var(--color-neutral-400);
-  --accent: var(--color-neutral-700);
-  --accent-foreground: var(--color-neutral-100);
+  --muted: var(--color-base-800);
+  --muted-foreground: var(--color-base-400);
+  --accent: var(--color-base-700);
+  --accent-foreground: var(--color-base-100);
   --info: var(--color-sky-300);
   --info-foreground: var(--color-sky-950);
   --success: var(--color-green-300);
@@ -165,22 +166,22 @@
   --warning: var(--color-amber-300);
   --warning-foreground: var(--color-amber-950);
   --error: var(--color-red-800);
-  --error-foreground: var(--color-neutral-50);
+  --error-foreground: var(--color-base-50);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --outline: var(--color-neutral-500);
+  --outline: var(--color-base-500);
 
   /* sidebars variables */
-  --sidebar-background: var(--color-neutral-900);
-  --sidebar-foreground: var(--color-neutral-50);
+  --sidebar-background: var(--color-base-900);
+  --sidebar-foreground: var(--color-base-50);
   --sidebar-primary: var(--color-blue-700);
-  --sidebar-primary-foreground: var(--color-neutral-50);
-  --sidebar-accent: var(--color-neutral-800);
-  --sidebar-accent-foreground: var(--color-neutral-100);
-  --sidebar-border: var(--color-neutral-800);
-  --sidebar-outline: var(--color-neutral-600);
+  --sidebar-primary-foreground: var(--color-base-50);
+  --sidebar-accent: var(--color-base-800);
+  --sidebar-accent-foreground: var(--color-base-100);
+  --sidebar-border: var(--color-base-800);
+  --sidebar-outline: var(--color-base-600);
   --destructive: oklch(0.704 0.191 22.216);
-  --ring: oklch(0.556 0 0);
+  --ring: var(--color-base-500);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -188,6 +189,195 @@
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Color system (see DESIGN.md). Two layers:
+   1. Primitive scales hold the raw OKLCH values: --color-base-* (the greys,
+      0 = page background, 950 = darkest text) and --color-brand-* (the accent).
+   2. Semantic tokens (--background, --foreground, --brand…) point at steps
+      of those scales. Components only ever use the semantic tokens.
+   A palette swaps the primitives and nothing else.
+
+   The live palette is plain neutral with no accent, so --brand falls back to
+   the text color. The candidates below are switched on through data-greys and
+   data-accent on <html>, which only /tinkering/design-system sets. */
+:root {
+  /* #fafafa, not pure white: easier on the eyes. Same as base-50. */
+  --color-base-0: var(--color-neutral-50);
+  --color-base-50: var(--color-neutral-50);
+  --color-base-100: var(--color-neutral-100);
+  --color-base-200: var(--color-neutral-200);
+  --color-base-300: var(--color-neutral-300);
+  --color-base-400: var(--color-neutral-400);
+  --color-base-500: var(--color-neutral-500);
+  --color-base-600: var(--color-neutral-600);
+  --color-base-700: var(--color-neutral-700);
+  --color-base-800: var(--color-neutral-800);
+  --color-base-900: var(--color-neutral-900);
+  --color-base-950: var(--color-neutral-950);
+
+  --brand-on-light: var(--color-base-950);
+  --brand-on-dark: var(--color-base-50);
+  --brand: var(--brand-on-light);
+}
+.dark {
+  --brand: var(--brand-on-dark);
+}
+
+/* Candidate greys. Same lightness steps as neutral, with a little chroma so
+   they lean cool (pedra) or warm (papel). */
+:root[data-greys='pedra'] {
+  --color-base-0: oklch(0.993 0.002 250);
+  --color-base-50: oklch(0.978 0.004 250);
+  --color-base-100: oklch(0.962 0.006 250);
+  --color-base-200: oklch(0.918 0.008 250);
+  --color-base-300: oklch(0.866 0.011 250);
+  --color-base-400: oklch(0.706 0.015 250);
+  --color-base-500: oklch(0.554 0.018 250);
+  --color-base-600: oklch(0.44 0.018 250);
+  --color-base-700: oklch(0.372 0.017 250);
+  --color-base-800: oklch(0.27 0.014 250);
+  --color-base-900: oklch(0.207 0.011 250);
+  --color-base-950: oklch(0.147 0.008 250);
+}
+:root[data-greys='papel'] {
+  --color-base-0: oklch(0.993 0.004 85);
+  --color-base-50: oklch(0.978 0.007 80);
+  --color-base-100: oklch(0.962 0.009 80);
+  --color-base-200: oklch(0.918 0.012 78);
+  --color-base-300: oklch(0.866 0.015 75);
+  --color-base-400: oklch(0.706 0.019 70);
+  --color-base-500: oklch(0.554 0.02 65);
+  --color-base-600: oklch(0.44 0.018 60);
+  --color-base-700: oklch(0.372 0.016 58);
+  --color-base-800: oklch(0.27 0.013 55);
+  --color-base-900: oklch(0.207 0.01 55);
+  --color-base-950: oklch(0.147 0.007 55);
+}
+
+/* Single-mode candidates: one light theme, no dark mode, with a ground that
+   isn't near-white (L ≈ 0.95). Here base-0 is that ground, the steps above it
+   get darker, and 950 is the text color, softer than black. The design
+   system page forces light mode while one of these is on. */
+:root[data-greys='areia'] {
+  --color-base-0: oklch(0.955 0.012 82);
+  --color-base-50: oklch(0.94 0.014 80);
+  --color-base-100: oklch(0.925 0.016 78);
+  --color-base-200: oklch(0.885 0.019 75);
+  --color-base-300: oklch(0.83 0.022 72);
+  --color-base-400: oklch(0.69 0.025 68);
+  --color-base-500: oklch(0.55 0.025 62);
+  --color-base-600: oklch(0.45 0.022 58);
+  --color-base-700: oklch(0.38 0.02 55);
+  --color-base-800: oklch(0.32 0.018 55);
+  --color-base-900: oklch(0.29 0.016 55);
+  --color-base-950: oklch(0.26 0.014 55);
+}
+:root[data-greys='grafite'] {
+  --color-base-0: oklch(0.955 0 0);
+  --color-base-50: oklch(0.94 0 0);
+  --color-base-100: oklch(0.925 0 0);
+  --color-base-200: oklch(0.885 0 0);
+  --color-base-300: oklch(0.83 0 0);
+  --color-base-400: oklch(0.69 0 0);
+  --color-base-500: oklch(0.55 0 0);
+  --color-base-600: oklch(0.44 0 0);
+  --color-base-700: oklch(0.37 0 0);
+  --color-base-800: oklch(0.31 0 0);
+  --color-base-900: oklch(0.28 0 0);
+  --color-base-950: oklch(0.252 0 0);
+}
+/* Nord: Snow Storm for the ground and borders (nord6, nord5, nord4), Polar
+   Night for text (nord3 … nord0). */
+:root[data-greys='nord'] {
+  --color-base-0: oklch(0.951 0.007 261);
+  --color-base-50: oklch(0.933 0.01 262);
+  --color-base-100: oklch(0.915 0.013 262);
+  --color-base-200: oklch(0.899 0.016 263);
+  --color-base-300: oklch(0.84 0.02 263);
+  --color-base-400: oklch(0.7 0.03 264);
+  --color-base-500: oklch(0.56 0.035 264);
+  --color-base-600: oklch(0.452 0.035 264);
+  --color-base-700: oklch(0.416 0.032 264);
+  --color-base-800: oklch(0.379 0.029 266);
+  --color-base-900: oklch(0.35 0.026 265);
+  --color-base-950: oklch(0.324 0.023 264);
+}
+
+/* Candidate accents. Text uses 600 on light backgrounds and 400 on dark.
+   Hue drifts slightly along each scale and chroma peaks in the middle, so the
+   light and dark ends don't wash out. */
+:root[data-accent] {
+  --brand-on-light: var(--color-brand-600);
+  --brand-on-dark: var(--color-brand-400);
+}
+:root[data-accent='bronze'] {
+  --color-brand-50: oklch(0.972 0.02 80);
+  --color-brand-100: oklch(0.938 0.04 78);
+  --color-brand-200: oklch(0.88 0.07 75);
+  --color-brand-300: oklch(0.8 0.1 70);
+  --color-brand-400: oklch(0.72 0.12 65);
+  --color-brand-500: oklch(0.64 0.13 60);
+  --color-brand-600: oklch(0.52 0.115 56);
+  --color-brand-700: oklch(0.46 0.1 54);
+  --color-brand-800: oklch(0.38 0.08 52);
+  --color-brand-900: oklch(0.3 0.06 50);
+  --color-brand-950: oklch(0.22 0.04 50);
+}
+:root[data-accent='cobalto'] {
+  --color-brand-50: oklch(0.97 0.015 255);
+  --color-brand-100: oklch(0.93 0.035 257);
+  --color-brand-200: oklch(0.87 0.065 258);
+  --color-brand-300: oklch(0.78 0.1 260);
+  --color-brand-400: oklch(0.68 0.14 262);
+  --color-brand-500: oklch(0.58 0.17 263);
+  --color-brand-600: oklch(0.5 0.17 264);
+  --color-brand-700: oklch(0.43 0.15 265);
+  --color-brand-800: oklch(0.36 0.12 266);
+  --color-brand-900: oklch(0.29 0.09 266);
+  --color-brand-950: oklch(0.21 0.06 266);
+}
+:root[data-accent='musgo'] {
+  --color-brand-50: oklch(0.97 0.02 150);
+  --color-brand-100: oklch(0.93 0.045 152);
+  --color-brand-200: oklch(0.87 0.075 154);
+  --color-brand-300: oklch(0.79 0.1 155);
+  --color-brand-400: oklch(0.7 0.12 156);
+  --color-brand-500: oklch(0.61 0.12 157);
+  --color-brand-600: oklch(0.5 0.105 158);
+  --color-brand-700: oklch(0.44 0.09 160);
+  --color-brand-800: oklch(0.37 0.07 162);
+  --color-brand-900: oklch(0.3 0.055 163);
+  --color-brand-950: oklch(0.22 0.04 165);
+}
+
+/* Gelo: Nord's Frost (nord10 is the 500). Ardósia: the slate blue of the
+   Minimal theme (minimal.guide). */
+:root[data-accent='gelo'] {
+  --color-brand-50: oklch(0.97 0.012 245);
+  --color-brand-100: oklch(0.94 0.022 247);
+  --color-brand-200: oklch(0.88 0.04 249);
+  --color-brand-300: oklch(0.8 0.055 250);
+  --color-brand-400: oklch(0.7 0.068 252);
+  --color-brand-500: oklch(0.594 0.077 254);
+  --color-brand-600: oklch(0.51 0.08 256);
+  --color-brand-700: oklch(0.44 0.072 258);
+  --color-brand-800: oklch(0.37 0.06 260);
+  --color-brand-900: oklch(0.3 0.045 262);
+  --color-brand-950: oklch(0.23 0.03 264);
+}
+:root[data-accent='ardosia'] {
+  --color-brand-50: oklch(0.97 0.006 230);
+  --color-brand-100: oklch(0.94 0.01 230);
+  --color-brand-200: oklch(0.88 0.018 231);
+  --color-brand-300: oklch(0.8 0.026 231);
+  --color-brand-400: oklch(0.7 0.034 232);
+  --color-brand-500: oklch(0.604 0.039 232);
+  --color-brand-600: oklch(0.514 0.036 232);
+  --color-brand-700: oklch(0.44 0.032 233);
+  --color-brand-800: oklch(0.37 0.027 234);
+  --color-brand-900: oklch(0.3 0.02 235);
+  --color-brand-950: oklch(0.23 0.015 236);
 }
 
 @layer base {

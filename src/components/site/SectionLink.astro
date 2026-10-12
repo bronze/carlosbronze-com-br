@@ -29,7 +29,7 @@ const { section, direction = 'next', srPrefix, class: className } = Astro.props
     {
       direction === 'prev' && (
         <span
-          class="inline-block transition-transform group-hover:-translate-x-1"
+          class="group-hover:text-brand inline-block transition-[color,transform] group-hover:-translate-x-1"
           aria-hidden="true">
           ←
         </span>
@@ -41,7 +41,7 @@ const { section, direction = 'next', srPrefix, class: className } = Astro.props
     {
       direction === 'next' && (
         <span
-          class="inline-block transition-transform group-hover:translate-x-1"
+          class="group-hover:text-brand inline-block transition-[color,transform] group-hover:translate-x-1"
           aria-hidden="true">
           →
         </span>

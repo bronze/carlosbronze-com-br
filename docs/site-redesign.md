@@ -95,7 +95,7 @@ Inner page sizes are copied from alliethu.com's CSS:
 
 ## Colour
 
-We keep **our own neutral Starwind tokens** (`--background`, `--foreground`, `--muted-foreground`, …). There's no accent colour on the links; they use foreground for labels and muted for subtitles. Dark mode works through the existing `.dark` class.
+The colour system (primitive OKLCH scales, semantic roles, the `--brand` accent and the candidate palettes) is documented in [`DESIGN.md`](../DESIGN.md) and shown live at `/tinkering/design-system`. The live palette is still plain neutral with no accent. Dark mode works through the existing `.dark` class.
 
 ## Bilingual (PT/EN)
 

@@ -33,7 +33,7 @@ This is a personal portfolio site built with **Astro 5** + **Tailwind CSS v4** +
 
 ### Theming
 
-`src/styles/starwind.css` defines CSS custom properties (`--background`, `--foreground`, `--primary`, etc.) for both `:root` (light) and `.dark`. Tailwind color utilities like `bg-background`, `text-foreground` map to these tokens via `@theme inline` declarations in the same file. The base color palette is **neutral**.
+`src/styles/starwind.css` defines CSS custom properties (`--background`, `--foreground`, `--primary`, etc.) for both `:root` (light) and `.dark`. Tailwind color utilities like `bg-background`, `text-foreground` map to these tokens via `@theme inline` declarations in the same file. The base color palette is **neutral**. Semantic tokens point at primitive OKLCH scales (`--color-base-*`, `--color-brand-*`); see `DESIGN.md` for the design system and its rules, and `/tinkering/design-system` for the live reference.
 
 ### Deployment
 
