@@ -6,8 +6,11 @@ import T from '@/components/site/T.astro'
 import { ariaLabel, neighbours, sectionFor, type Bilingual } from '@/lib/site'
 
 interface Props {
-  // Defaults to the section's label from src/lib/site.ts.
+  // Both default to the section's label from src/lib/site.ts.
   eyebrow?: Bilingual
+  title?: Bilingual
+  // Turns the eyebrow into a link up, e.g. "← EXPERIMENTOS" on a project page.
+  back?: { href: string; label: Bilingual }
   heading: Bilingual
   subheading?: Bilingual
   intro?: Bilingual
@@ -17,6 +20,8 @@ interface Props {
 
 const {
   eyebrow: eyebrowProp,
+  title: titleProp,
+  back,
   heading,
   subheading,
   intro,
@@ -28,7 +33,7 @@ const { prev, next } = neighbours(path)
 const section = sectionFor(path)
 const eyebrow = eyebrowProp ?? section!.label
 // Home's tab is just the name; other pages get "Section · Carlos Bronze".
-const title = path === '/' ? undefined : section?.label
+const title = path === '/' ? undefined : (titleProp ?? section?.label)
 ---
 
 <Layout title={title}>
@@ -50,7 +55,28 @@ const title = path === '/' ? undefined : section?.label
       class:list={['reveal', !hero && 'mx-auto max-w-[720px]']}>
       <p
         class="text-muted-foreground font-mono text-[13px] tracking-[0.08em] uppercase">
-        <T {...eyebrow} />
+        {
+          back ? (
+            // On a sub-page the eyebrow doubles as the way back up.
+            <a
+              href={back.href}
+              class="group hover:text-foreground transition-colors"
+              data-foley-press="tap"
+              data-foley-hover="tick">
+              <span
+                class="inline-block transition-transform group-hover:-translate-x-1"
+                aria-hidden="true">
+                ←
+              </span>{' '}
+              <span class="sr-only">
+                <T pt="Voltar para" en="Back to" />{' '}
+              </span>
+              <T {...back.label} />
+            </a>
+          ) : (
+            <T {...eyebrow} />
+          )
+        }
       </p>
       <h1
         id="page-title"

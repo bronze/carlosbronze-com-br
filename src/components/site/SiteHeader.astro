@@ -28,8 +28,14 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
       sections.map(s => (
         <a
           href={s.href}
-          aria-current={path === s.href ? 'page' : undefined}
-          class="text-muted-foreground hover:text-foreground aria-[current=page]:text-foreground lowercase transition-colors aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[6px]"
+          aria-current={
+            path === s.href
+              ? 'page'
+              : path.startsWith(s.href + '/')
+                ? 'true'
+                : undefined
+          }
+          class="text-muted-foreground hover:text-foreground [&[aria-current]]:text-foreground lowercase transition-colors [&[aria-current]]:underline [&[aria-current]]:decoration-1 [&[aria-current]]:underline-offset-[6px]"
           data-foley-press="tap"
           data-foley-hover="tick">
           <T {...s.label} />

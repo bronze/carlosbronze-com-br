@@ -145,6 +145,24 @@ Copied from alliethu.com's CSS (exact values):
 - **Haptics:** web haptics (`web-haptics`) on the toggle and on tracked links.
 - **PostHog events:** `language_switched`, `obsidian_link_clicked`, `linkedin_clicked`.
 
+## Project pages (Tinkering)
+
+Projects with a story get their own page at `/tinkering/<slug>`; small ones stay as external links under "Quick ones".
+
+- **Files:** `src/content/projects/<slug>/pt.md` and `en.md`, each with `title` (page headline), `summary` (intro), `url` (live project) and an optional `repo` (source code), shown as "see it live ↗" and "source code ↗" under the intro. The build fails if a language is missing. Rendered by `src/pages/tinkering/[slug].astro`; collection defined in `src/content.config.ts`.
+- **Card:** point the project's `href` in `tinkering.astro` to `/tinkering/<slug>`. Internal cards show `→`, external ones `↗`.
+- **Structure: PEARL** (from the argumentation-frameworks note), one `##` per step:
+
+| Step | EN heading | PT heading |
+| --- | --- | --- |
+| Problem | The itch | O incômodo |
+| Epiphany | The insight | O estalo |
+| Action | What I did | O que fiz |
+| Result | The result | O resultado |
+| Learning | What I learned | O que aprendi |
+
+Chosen over STAR because side projects have no assigned Task (the motivation is the problem), and STAR folds learning into Result. Epiphany is optional: skip it when there wasn't a real turning point.
+
 ## Open items
 
 - Write the About copy (headline, intro, 4 focus areas, personal line) in PT and EN.

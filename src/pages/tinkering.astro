@@ -26,7 +26,7 @@ const projects = [
       pt: 'Um manual clássico de planejamento da Thompson, republicado na web com foco em tipografia e navegação.',
       en: 'A classic Thompson planning manual, republished for the web with a focus on typography and navigation.',
     },
-    href: 'https://ttb.carlosbronze.com.br/',
+    href: '/tinkering/thompson-total-branding',
   },
   {
     name: 'Brandon Sanderson Redesign',
@@ -34,7 +34,8 @@ const projects = [
       pt: 'O site do autor tirava 34 no PageSpeed. Achei que dava pra fazer melhor, então tentei.',
       en: "The author's site scored 34 on PageSpeed. I thought I could do better, so I tried.",
     },
-    href: 'https://brandonsanderson-redesign.carlosbronze.com.br/',
+    // Has its own page (src/content/projects/brandon-sanderson).
+    href: '/tinkering/brandon-sanderson',
   },
 ]
 
@@ -74,8 +75,10 @@ const link =
         <li>
           <a
             href={p.href}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(p.href.startsWith('http') && {
+              target: '_blank',
+              rel: 'noopener noreferrer',
+            })}
             class="group block"
             data-foley-press="tap"
             data-foley-hover="tick">
@@ -85,7 +88,7 @@ const link =
                 class="text-muted-foreground group-hover:text-foreground text-base transition-colors"
                 aria-hidden="true">
                 {' '}
-                ↗
+                {p.href.startsWith('http') ? '↗' : '→'}
               </span>
             </h2>
             <p class="text-muted-foreground mt-2 text-base leading-[1.6]">

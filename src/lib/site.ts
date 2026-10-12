@@ -46,8 +46,10 @@ export const sections: Section[] = [
   },
 ]
 
-export function sectionFor(href: string) {
-  return [home, ...sections].find(s => s.href === href)
+// Sub-pages (e.g. /tinkering/some-project) belong to their parent section.
+export function sectionFor(path: string) {
+  if (path === '/') return home
+  return sections.find(s => path === s.href || path.startsWith(s.href + '/'))
 }
 
 export function neighbours(href: string) {

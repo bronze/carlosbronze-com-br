@@ -1,0 +1,104 @@
+---
+import { getCollection, render } from 'astro:content'
+import PageLayout from '@/layouts/PageLayout.astro'
+import T from '@/components/site/T.astro'
+import { sectionFor } from '@/lib/site'
+
+// One page per project folder, with the PT and EN files rendered side by
+// side; the language toggle hides one, like everywhere else on the site.
+export async function getStaticPaths() {
+  const entries = await getCollection('projects')
+  const slugs = [...new Set(entries.map(e => e.id.split('/')[0]))]
+  return slugs.map(slug => {
+    const pt = entries.find(e => e.id === `${slug}/pt`)
+    const en = entries.find(e => e.id === `${slug}/en`)
+    if (!pt || !en)
+      throw new Error(`Project "${slug}" needs both pt.md and en.md`)
+    return { params: { slug }, props: { pt, en } }
+  })
+}
+
+const { pt, en } = Astro.props
+const { Content: ContentPt } = await render(pt)
+const { Content: ContentEn } = await render(en)
+const tinkering = sectionFor('/tinkering')!
+---
+
+<PageLayout
+  title={{ pt: pt.data.title, en: en.data.title }}
+  back={{ href: tinkering.href, label: tinkering.label }}
+  heading={{ pt: pt.data.title, en: en.data.title }}
+  intro={{ pt: pt.data.summary, en: en.data.summary }}
+  pager={false}>
+  <p class="-mt-4 flex flex-wrap gap-x-6 text-lg leading-[1.75]">
+    {
+      [
+        { href: pt.data.url, label: { pt: 'ver no ar', en: 'see it live' } },
+        pt.data.repo && {
+          href: pt.data.repo,
+          label: { pt: 'código', en: 'source code' },
+        },
+      ]
+        .filter(l => !!l)
+        .map(l => (
+          <a
+            href={l.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-foreground underline decoration-current/30 underline-offset-4 transition-colors hover:decoration-current"
+            data-foley-press="tap"
+            data-foley-hover="tick">
+            <T {...l.label} />
+            <span aria-hidden="true">↗</span>
+          </a>
+        ))
+    }
+  </p>
+
+  <div class="project-body mt-12" data-lang-pt><ContentPt /></div>
+  <div class="project-body mt-12" data-lang-en><ContentEn /></div>
+</PageLayout>
+
+<style>
+  .project-body :global(h2) {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 3rem 0 1rem;
+  }
+  .project-body :global(h2:first-child) {
+    margin-top: 0;
+  }
+  .project-body :global(p),
+  .project-body :global(li) {
+    color: color-mix(in oklab, var(--foreground) 80%, transparent);
+    font-size: 1.125rem;
+    line-height: 1.75;
+    text-wrap: pretty;
+  }
+  .project-body :global(p + p) {
+    margin-top: 1.25rem;
+  }
+  .project-body :global(ul) {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  .project-body :global(li + li) {
+    margin-top: 0.5rem;
+  }
+  .project-body :global(a) {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--foreground) 30%, transparent);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 150ms;
+  }
+  .project-body :global(a:hover) {
+    text-decoration-color: var(--foreground);
+  }
+  .project-body :global(li::marker) {
+    color: var(--muted-foreground);
+  }
+</style>
