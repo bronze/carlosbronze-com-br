@@ -3,11 +3,11 @@ import Layout from './Layout.astro'
 import SiteHeader from '@/components/site/SiteHeader.astro'
 import SectionLink from '@/components/site/SectionLink.astro'
 import T from '@/components/site/T.astro'
-import { ariaLabel, neighbours, type Bilingual } from '@/lib/site'
+import { ariaLabel, neighbours, sectionFor, type Bilingual } from '@/lib/site'
 
 interface Props {
-  title?: string
-  eyebrow: Bilingual
+  // Defaults to the section's label from src/lib/site.ts.
+  eyebrow?: Bilingual
   heading: Bilingual
   subheading?: Bilingual
   intro?: Bilingual
@@ -16,8 +16,7 @@ interface Props {
 }
 
 const {
-  title,
-  eyebrow,
+  eyebrow: eyebrowProp,
   heading,
   subheading,
   intro,
@@ -26,6 +25,10 @@ const {
 } = Astro.props
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 const { prev, next } = neighbours(path)
+const section = sectionFor(path)
+const eyebrow = eyebrowProp ?? section!.label
+// Home's tab is just the name; other pages get "Section · Carlos Bronze".
+const title = path === '/' ? undefined : section?.label
 ---
 
 <Layout title={title}>

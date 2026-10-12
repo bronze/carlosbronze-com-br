@@ -59,7 +59,10 @@ const groups: { id: string; heading: Bilingual; items: Item[] }[] = [
       },
       {
         name: 'Brilliant Basics',
-        tag: { pt: 'Substack do Arthur Castro', en: 'Arthur Castro’s Substack' },
+        tag: {
+          pt: 'Substack do Arthur Castro',
+          en: 'Arthur Castro’s Substack',
+        },
         href: 'https://arthurcastro.substack.com/',
       },
       {
@@ -74,7 +77,10 @@ const groups: { id: string; heading: Bilingual; items: Item[] }[] = [
       },
       {
         name: 'Packlead',
-        tag: { pt: 'Substack da Cacau Fonseca', en: 'Cacau Fonseca’s Substack' },
+        tag: {
+          pt: 'Substack da Cacau Fonseca',
+          en: 'Cacau Fonseca’s Substack',
+        },
         href: 'https://www.packlead.com.br/',
       },
     ],
@@ -90,8 +96,6 @@ const external = (href: string) =>
 ---
 
 <PageLayout
-  title="Aprendendo"
-  eyebrow={{ pt: 'Aprendendo', en: 'Learning' }}
   heading={{ pt: 'Repertório em construção.', en: 'A repertoire in progress.' }}
   intro={{
     pt: 'De onde vêm as ideias que uso pra pensar produto, estratégia e comportamento: minhas notas, os podcasts que acompanho e o que ando lendo.',
@@ -108,7 +112,7 @@ const external = (href: string) =>
           </h2>
           <ul class="border-border divide-border mt-4 divide-y border-y">
             {g.items.map(item => {
-              const hrefs =
+              const hrefs: { href: string; lang?: string }[] =
                 typeof item.href === 'string'
                   ? [{ href: item.href }]
                   : [

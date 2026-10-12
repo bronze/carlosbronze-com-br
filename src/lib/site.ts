@@ -6,11 +6,17 @@ export interface Section {
   blurb: Bilingual
 }
 
-export const linkedin = 'https://www.linkedin.com/in/carlosbronze/'
+// Labels are stored capitalised. Places that show them in lowercase (nav,
+// section links) or uppercase (page eyebrows) change the case with CSS.
+
+export const work = {
+  href: 'https://www.linkedin.com/in/carlosbronze/',
+  label: { pt: 'Trabalho', en: 'Work' },
+}
 
 export const home: Section = {
   href: '/',
-  label: { pt: 'início', en: 'home' },
+  label: { pt: 'Início', en: 'Home' },
   blurb: { pt: 'De volta ao começo', en: 'Back to the beginning' },
 }
 
@@ -19,20 +25,30 @@ export const home: Section = {
 export const sections: Section[] = [
   {
     href: '/about',
-    label: { pt: 'sobre', en: 'about' },
-    blurb: { pt: 'Como eu trabalho, e por quê', en: 'How I work, and why' },
+    label: { pt: 'Sobre', en: 'About' },
+    blurb: { pt: 'O que me move', en: 'What drives me' },
   },
   {
     href: '/learning',
-    label: { pt: 'aprendendo', en: 'learning' },
-    blurb: { pt: 'Leituras, podcasts e notas', en: 'Reading, listening and notes' },
+    label: { pt: 'Aprendendo', en: 'Learning' },
+    blurb: {
+      pt: 'Leituras, podcasts e notas',
+      en: 'Reading, listening and notes',
+    },
   },
   {
     href: '/tinkering',
-    label: { pt: 'experimentos', en: 'tinkering' },
-    blurb: { pt: 'Coisas que construí por conta própria', en: 'Things I built for myself' },
+    label: { pt: 'Experimentos', en: 'Tinkering' },
+    blurb: {
+      pt: 'Coisas que construí por conta própria',
+      en: 'Things I built for myself',
+    },
   },
 ]
+
+export function sectionFor(href: string) {
+  return [home, ...sections].find(s => s.href === href)
+}
 
 export function neighbours(href: string) {
   const ring = [home, ...sections]

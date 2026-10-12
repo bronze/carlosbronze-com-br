@@ -40,7 +40,7 @@ We took the structure, spacing, typography roles and motion from it. **We did no
 
 ## Code map
 
-- **`src/lib/site.ts`:** the single source for the nav order, bilingual labels and subtitles, the LinkedIn URL, and `neighbours()`, which works out the previous/next pages. To add, rename or reorder a section, edit this file.
+- **`src/lib/site.ts`:** the single source for the nav order, bilingual labels and subtitles, the LinkedIn URL, and `neighbours()`, which works out the previous/next pages. To add, rename or reorder a section, edit this file. Each page's eyebrow and browser-tab title also come from here (`sectionFor()`), so a section's name lives in one place. Labels are stored capitalised ("Sobre", "About"); the nav and section links lowercase them with CSS, and eyebrows uppercase them. The tab title switches language with the toggle.
 - **`src/layouts/Layout.astro`:**
   - The base HTML document, fonts and analytics.
   - The blocking script that sets the theme and the `data-lang` attribute before the first paint.

@@ -1,6 +1,6 @@
 ---
 import T from './T.astro'
-import { ariaLabel, linkedin, sections } from '@/lib/site'
+import { ariaLabel, home, sections, work } from '@/lib/site'
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
@@ -12,7 +12,10 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
     href="/"
     class="text-foreground font-mono text-xs tracking-[0.12em] uppercase"
     aria-current={path === '/' ? 'page' : undefined}
-    {...ariaLabel({ pt: 'Carlos Bronze, início', en: 'Carlos Bronze, home' })}
+    {...ariaLabel({
+      pt: `Carlos Bronze, ${home.label.pt.toLowerCase()}`,
+      en: `Carlos Bronze, ${home.label.en.toLowerCase()}`,
+    })}
     data-foley-press="tap">
     Carlos Bronze
   </a>
@@ -26,7 +29,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
         <a
           href={s.href}
           aria-current={path === s.href ? 'page' : undefined}
-          class="text-muted-foreground hover:text-foreground aria-[current=page]:text-foreground transition-colors aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[6px]"
+          class="text-muted-foreground hover:text-foreground aria-[current=page]:text-foreground lowercase transition-colors aria-[current=page]:underline aria-[current=page]:decoration-1 aria-[current=page]:underline-offset-[6px]"
           data-foley-press="tap"
           data-foley-hover="tick">
           <T {...s.label} />
@@ -34,14 +37,14 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
       ))
     }
     <a
-      href={linkedin}
+      href={work.href}
       target="_blank"
       rel="noopener noreferrer"
-      class="text-muted-foreground hover:text-foreground transition-colors"
+      class="text-muted-foreground hover:text-foreground lowercase transition-colors"
       data-foley-press="tap"
       data-foley-hover="tick"
       data-track="linkedin_clicked">
-      <T pt="trabalho" en="work" />
+      <T {...work.label} />
       <span aria-hidden="true">↗</span>
     </a>
   </nav>
@@ -81,6 +84,11 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
         (lang === 'en' ? el.dataset.labelEn : el.dataset.labelPt)!,
       )
     })
+    const title = document.querySelector<HTMLElement>('title[data-title-en]')
+    if (title)
+      document.title = (
+        lang === 'en' ? title.dataset.titleEn : title.dataset.titlePt
+      )!
   }
   applyAriaLabels(root.dataset.lang ?? 'pt')
 
