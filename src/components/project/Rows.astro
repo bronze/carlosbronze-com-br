@@ -1,0 +1,70 @@
+---
+// Label-and-description rows with rules between them. Use in .mdx:
+//   <Rows items={[{ title: '2019', text: 'Gridsome', href: '…' }]} />
+// `href` is optional and links the description.
+interface Props {
+  items: { title: string; text: string; href?: string }[]
+}
+
+const { items } = Astro.props
+---
+
+<dl class="rows">
+  {
+    items.map(({ title, text, href }) => (
+      <div class="row">
+        <dt>{title}</dt>
+        <dd>
+          {href ? (
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              {text}
+              <span aria-hidden="true"> ↗</span>
+            </a>
+          ) : (
+            text
+          )}
+        </dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .rows {
+    border-bottom: 1px solid var(--border);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-block: 0.875rem;
+  }
+  @media (min-width: 640px) {
+    .row {
+      grid-template-columns: 9rem minmax(0, 1fr);
+    }
+  }
+  dt {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+  dd {
+    color: var(--muted-foreground);
+    line-height: 1.6;
+  }
+  a {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-decoration-color: color-mix(
+      in oklab,
+      var(--foreground) 30%,
+      transparent
+    );
+    text-underline-offset: 4px;
+  }
+  a:hover {
+    text-decoration-color: var(--foreground);
+  }
+</style>

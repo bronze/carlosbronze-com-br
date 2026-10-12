@@ -3,6 +3,12 @@ import { getCollection, render } from 'astro:content'
 import PageLayout from '@/layouts/PageLayout.astro'
 import T from '@/components/site/T.astro'
 import { sectionFor } from '@/lib/site'
+import Rows from '@/components/project/Rows.astro'
+import Stats from '@/components/project/Stats.astro'
+import Steps from '@/components/project/Steps.astro'
+
+// Available in every project .mdx without importing.
+const components = { Rows, Stats, Steps }
 
 // One page per project folder, with the PT and EN files rendered side by
 // side; the language toggle hides one, like everywhere else on the site.
@@ -55,8 +61,12 @@ const tinkering = sectionFor('/tinkering')!
     }
   </p>
 
-  <div class="project-body mt-12" data-lang-pt><ContentPt /></div>
-  <div class="project-body mt-12" data-lang-en><ContentEn /></div>
+  <div class="project-body mt-12" data-lang-pt>
+    <ContentPt components={components} />
+  </div>
+  <div class="project-body mt-12" data-lang-en>
+    <ContentEn components={components} />
+  </div>
 </PageLayout>
 
 <style>
@@ -71,32 +81,58 @@ const tinkering = sectionFor('/tinkering')!
     margin-top: 0;
   }
   .project-body :global(p),
-  .project-body :global(li) {
+  .project-body :global(ul > li) {
     color: color-mix(in oklab, var(--foreground) 80%, transparent);
     font-size: 1.125rem;
     line-height: 1.75;
     text-wrap: pretty;
   }
-  .project-body :global(p + p) {
+  /* Same gap between any two blocks: paragraph, list, either order. */
+  .project-body :global(:is(p, ul, ol) + :is(p, ul, ol)) {
     margin-top: 1.25rem;
   }
   .project-body :global(ul) {
     list-style: disc;
     padding-left: 1.25rem;
-    margin-top: 1.25rem;
   }
-  .project-body :global(li + li) {
+  .project-body :global(ul > li + li) {
     margin-top: 0.5rem;
   }
   .project-body :global(a) {
     color: var(--foreground);
     text-decoration: underline;
-    text-decoration-color: color-mix(in oklab, var(--foreground) 30%, transparent);
+    text-decoration-color: color-mix(
+      in oklab,
+      var(--foreground) 30%,
+      transparent
+    );
     text-underline-offset: 4px;
     transition: text-decoration-color 150ms;
   }
   .project-body :global(a:hover) {
     text-decoration-color: var(--foreground);
+  }
+  .project-body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--muted);
+    border-radius: 0.25rem;
+    padding: 0.1em 0.35em;
+    overflow-wrap: anywhere;
+  }
+  /* Components and pull quotes get more room than plain paragraphs. */
+  .project-body > :global(:is(dl, ol, blockquote)) {
+    margin-block: 2rem;
+  }
+  .project-body :global(blockquote) {
+    border-left: 2px solid var(--foreground);
+    padding-left: 1.25rem;
+  }
+  .project-body :global(blockquote p) {
+    color: var(--foreground);
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1.35;
   }
   .project-body :global(li::marker) {
     color: var(--muted-foreground);

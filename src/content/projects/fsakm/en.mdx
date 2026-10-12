@@ -1,0 +1,45 @@
+---
+title: The South American Krav Maga Federation's site, lighter and easier to read.
+summary: An unofficial redesign, rebuilt from scratch for performance, readability and accessibility.
+url: https://fsakm.carlosbronze.com.br/pt
+repo: https://github.com/bronze/fsakm
+---
+
+## The itch
+
+The [federation's website](https://kravmaga.com.br/) was heavy, slow and hard to read. The menu blurred its sections together, and the cards had low-contrast text and were only clickable on a thin red strip.
+
+## The insight
+
+A real site with real problems was the chance I wanted to go deeper into Next.js, accessibility and componentization with shadcn/ui. Better than any tutorial: if it worked, the result would be visible to the people who use the site.
+
+## What I did
+
+I crawled the site and found around 500 pages organized into sections, almost like documentation. So instead of building everything from scratch, I looked for a documentation tool, which would already handle navigation, search and languages. I compared Docusaurus, Fumadocs and Nextra, and picked Nextra 4: it's built on Next.js, has native internationalization and search with Pagefind.
+
+I kept the original site's sections. I only tidied up the URLs for instructors and gyms, which were scattered, into a clearer format: `/federacao/instrutores/name` and `/academias/country/state/gym`.
+
+<Steps items={[
+  { title: 'Content first', text: 'Page by page, just text and images, leaving carousels for later.' },
+  { title: 'Components', text: 'Once the patterns were clear, cards, a lightbox and carousels with shadcn/ui and Embla.' },
+  { title: 'Polish', text: 'Desktop and mobile, a footer with a sitemap, and optimized images.' },
+]} />
+
+## The result
+
+On PageSpeed (desktop), measuring both sites on the same day:
+
+<Stats items={[
+  { label: 'Performance', before: '77', after: '91' },
+  { label: 'Accessibility', before: '74', after: '96' },
+  { label: 'Best practices', before: '74', after: '100' },
+  { label: 'Speed Index', before: '4.4 s', after: '0.9 s' },
+]} />
+
+And no layout shift while loading.
+
+## What I learned
+
+> Starting with content, not components, shows you which components you actually need.
+
+One thing still bugs me: the mandatory `/pt` in Portuguese URLs. If I pick the project back up, that's the first fix.

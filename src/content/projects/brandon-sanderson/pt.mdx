@@ -26,11 +26,16 @@ No fim de 2023, refiz o site do zero com o 11ty (Eleventy), um gerador de sites 
 
 ## O resultado
 
-- PageSpeed de 34 para 100, em performance, acessibilidade, boas práticas e SEO.
-- Carregamento de cerca de 5 segundos para menos de 1.
+<Stats items={[
+  { label: 'PageSpeed', before: '34', after: '100' },
+  { label: 'Carregamento', before: '~5 s', after: '<1 s' },
+  { label: 'Peso das imagens', after: '−90%' },
+]} />
+
+Nota 100 no PageSpeed em todas as categorias: performance, acessibilidade, boas práticas e SEO.
 
 ## O que aprendi
 
-Performance não é só velocidade. É respeito pelo tempo de quem usa.
+> Performance não é só velocidade. É respeito pelo tempo de quem usa.
 
 O 11ty me deu controle total, mas senti falta do que o Astro faz bem na experiência de desenvolvimento. Não por acaso, este site é em Astro.

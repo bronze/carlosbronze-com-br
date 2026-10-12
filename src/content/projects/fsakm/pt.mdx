@@ -1,0 +1,45 @@
+---
+title: O site da Federação Sul Americana de Krav Maga, mais leve e mais fácil de ler.
+summary: Um redesign não oficial, refeito do zero com foco em performance, legibilidade e acessibilidade.
+url: https://fsakm.carlosbronze.com.br/pt
+repo: https://github.com/bronze/fsakm
+---
+
+## O incômodo
+
+O [site da federação](https://kravmaga.com.br/) era pesado, lento e difícil de ler. O menu misturava as seções, e os cards tinham texto com pouco contraste e só eram clicáveis numa faixa vermelha.
+
+## O estalo
+
+Um site real, com problemas reais, era a chance que eu queria para aprofundar Next.js, acessibilidade e componentização com shadcn/ui. Melhor que qualquer tutorial: se desse certo, o resultado seria visível para quem usa o site.
+
+## O que fiz
+
+Mapeei o site com crawlers e encontrei cerca de 500 páginas organizadas em seções, quase uma documentação. Então, em vez de construir tudo do zero, fui atrás de uma ferramenta de documentação, que já resolveria navegação, busca e idiomas. Avaliei Docusaurus, Fumadocs e Nextra, e escolhi o Nextra 4: é feito em Next.js, tem internacionalização nativa e busca com Pagefind.
+
+Mantive as seções do site original. Só arrumei as URLs de instrutores e academias, que estavam espalhadas, para um formato mais claro: `/federacao/instrutores/nome` e `/academias/pais/estado/unidade`.
+
+<Steps items={[
+  { title: 'Conteúdo primeiro', text: 'Página por página, só texto e imagem, deixando carrosséis para depois.' },
+  { title: 'Componentes', text: 'Com os padrões claros, cards, lightbox e carrosséis com shadcn/ui e Embla.' },
+  { title: 'Pente-fino', text: 'Desktop e mobile, rodapé com mapa do site e imagens otimizadas.' },
+]} />
+
+## O resultado
+
+No PageSpeed (desktop), medindo os dois sites no mesmo dia:
+
+<Stats items={[
+  { label: 'Performance', before: '77', after: '91' },
+  { label: 'Acessibilidade', before: '74', after: '96' },
+  { label: 'Boas práticas', before: '74', after: '100' },
+  { label: 'Speed Index', before: '4,4 s', after: '0,9 s' },
+]} />
+
+E nenhum deslocamento de layout durante o carregamento.
+
+## O que aprendi
+
+> Começar pelo conteúdo, e não pelos componentes, mostra quais componentes você realmente precisa.
+
+Uma coisa ainda me incomoda: o `/pt` obrigatório nas URLs em português. Se eu retomar o projeto, é o primeiro ajuste.

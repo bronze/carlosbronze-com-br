@@ -26,11 +26,16 @@ In late 2023, I rebuilt the site from scratch with 11ty (Eleventy), a static sit
 
 ## The result
 
-- PageSpeed from 34 to 100, across performance, accessibility, best practices and SEO.
-- Load time from about 5 seconds to under 1.
+<Stats items={[
+  { label: 'PageSpeed', before: '34', after: '100' },
+  { label: 'Load time', before: '~5 s', after: '<1 s' },
+  { label: 'Image weight', after: '−90%' },
+]} />
+
+A PageSpeed score of 100 in every category: performance, accessibility, best practices and SEO.
 
 ## What I learned
 
-Performance isn't just speed. It's respect for people's time.
+> Performance isn't just speed. It's respect for people's time.
 
 11ty gave me full control, but I missed what Astro does well for developer experience. Not by chance, this site is built with Astro.

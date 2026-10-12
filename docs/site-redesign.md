@@ -149,7 +149,7 @@ Copied from alliethu.com's CSS (exact values):
 
 Projects with a story get their own page at `/tinkering/<slug>`; small ones stay as external links under "Quick ones".
 
-- **Files:** `src/content/projects/<slug>/pt.md` and `en.md`, each with `title` (page headline), `summary` (intro), `url` (live project) and an optional `repo` (source code), shown as "see it live ↗" and "source code ↗" under the intro. The build fails if a language is missing. Rendered by `src/pages/tinkering/[slug].astro`; collection defined in `src/content.config.ts`.
+- **Files:** `src/content/projects/<slug>/pt.mdx` and `en.mdx` (plain `.md` also works), each with `title` (page headline), `summary` (intro), `url` (live project) and an optional `repo` (source code), shown as "see it live ↗" and "source code ↗" under the intro. The build fails if a language is missing. Rendered by `src/pages/tinkering/[slug].astro`; collection defined in `src/content.config.ts`.
 - **Card:** point the project's `href` in `tinkering.astro` to `/tinkering/<slug>`. Internal cards show `→`, external ones `↗`.
 - **Structure: PEARL** (from the argumentation-frameworks note), one `##` per step:
 
@@ -160,6 +160,12 @@ Projects with a story get their own page at `/tinkering/<slug>`; small ones stay
 | Action | What I did | O que fiz |
 | Result | The result | O resultado |
 | Learning | What I learned | O que aprendi |
+
+- **Components** (in `src/components/project/`, available in every `.mdx` without importing), to break up long runs of paragraphs:
+  - `<Stats items={[{ label, before?, after }]} />`: big numbers for the result, with an optional "before" value (e.g. PageSpeed 34 → 100).
+  - `<Steps items={[{ title, text? }]} />`: a numbered 01/02/03 sequence, for how the work was done.
+  - `<Rows items={[{ title, text, href? }]} />`: label/description rows with rules between them, e.g. a timeline.
+  - A Markdown blockquote (`> …`) renders as a pull quote; use it for the one line worth remembering, usually in "What I learned".
 
 Chosen over STAR because side projects have no assigned Task (the motivation is the problem), and STAR folds learning into Result. Epiphany is optional: skip it when there wasn't a real turning point.
 
