@@ -7,10 +7,11 @@ import { personId } from '@/lib/seo'
 import Rows from '@/components/project/Rows.astro'
 import Stats from '@/components/project/Stats.astro'
 import Steps from '@/components/project/Steps.astro'
+import Shot from '@/components/project/Shot.astro'
 import ProjectBody from '@/components/project/ProjectBody.astro'
 
 // Available in every project .mdx without importing.
-const components = { Rows, Stats, Steps }
+const components = { Rows, Stats, Steps, Shot }
 
 // One page per project folder, with the PT and EN files rendered side by
 // side; the language toggle hides one, like everywhere else on the site.
@@ -30,6 +31,7 @@ const { pt, en } = Astro.props
 const { Content: ContentPt } = await render(pt)
 const { Content: ContentEn } = await render(en)
 const tinkering = sectionFor('/tinkering')!
+const slug = pt.id.split('/')[0]
 const jsonLd = [
   {
     '@type': 'CreativeWork',
@@ -54,7 +56,7 @@ const jsonLd = [
   intro={{ pt: pt.data.summary, en: en.data.summary }}
   continueIntro
   pager={false}>
-  <p class="mb-12 flex flex-wrap gap-x-6 text-lg leading-[1.75]">
+  <p class="mb-8 flex flex-wrap gap-x-6 text-lg leading-[1.75]">
     {
       [
         { href: pt.data.url, label: { pt: 'ver no ar', en: 'see it live' } },
@@ -69,7 +71,7 @@ const jsonLd = [
             href={l.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-foreground underline decoration-current/30 underline-offset-4 transition-colors hover:decoration-brand"
+            class="text-foreground hover:decoration-brand underline decoration-current/30 underline-offset-4 transition-colors"
             data-foley-press="tap"
             data-foley-hover="tick">
             <T {...l.label} />
@@ -78,6 +80,22 @@ const jsonLd = [
         ))
     }
   </p>
+
+  <!-- One per language for the alt text; both point at the same file. -->
+  <div class="mb-12" data-lang-pt>
+    <Shot
+      name={slug}
+      alt={`Captura de tela do projeto no ar: ${pt.data.title}`}
+      eager
+    />
+  </div>
+  <div class="mb-12" data-lang-en>
+    <Shot
+      name={slug}
+      alt={`Screenshot of the live project: ${en.data.title}`}
+      eager
+    />
+  </div>
 
   <ProjectBody data-lang-pt>
     <ContentPt components={components} />

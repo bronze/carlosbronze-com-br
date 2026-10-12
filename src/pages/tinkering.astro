@@ -1,6 +1,8 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro'
+import { Image } from 'astro:assets'
 import T from '@/components/site/T.astro'
+import { projectImage } from '@/lib/project-images'
 
 // Short versions of the notes in obsidian/projetos-pessoais — copy still to be refined.
 const projects = [
@@ -48,19 +50,20 @@ const projects = [
 ]
 
 // `live` marks a link to a running site instead of a repo.
-const quick: { name: string; nameEn?: string; href: string; live?: boolean }[] = [
-  {
-    name: 'Mapa das academias de Krav Maga · Mapbox',
-    nameEn: 'Krav Maga gym map · Mapbox',
-    href: 'https://mapa-krav-maga.vercel.app/mapa.html',
-    live: true,
-  },
-  {
-    name: 'Tera Workshop · Mapbox',
-    href: 'https://tera-workshop-dados.carlosbronze.com.br/',
-    live: true,
-  },
-]
+const quick: { name: string; nameEn?: string; href: string; live?: boolean }[] =
+  [
+    {
+      name: 'Mapa das academias de Krav Maga · Mapbox',
+      nameEn: 'Krav Maga gym map · Mapbox',
+      href: 'https://mapa-krav-maga.vercel.app/mapa.html',
+      live: true,
+    },
+    {
+      name: 'Tera Workshop · Mapbox',
+      href: 'https://tera-workshop-dados.carlosbronze.com.br/',
+      live: true,
+    },
+  ]
 
 const credit = {
   allie: 'https://alliethu.com/',
@@ -90,26 +93,42 @@ const link =
               target: '_blank',
               rel: 'noopener noreferrer',
             })}
-            class="group block"
+            class="group grid gap-x-6 gap-y-4 sm:grid-cols-[13rem_minmax(0,1fr)] sm:items-start"
             data-foley-press="tap"
             data-foley-hover="tick">
-            <h2 class="mb-2 font-serif text-2xl">
-              {p.name}
-              {' '}
-              <span
-                class:list={[
-                  'text-muted-foreground group-hover:text-brand inline-block text-base transition-[color,transform]',
-                  p.href.startsWith('http')
-                    ? 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
-                    : 'group-hover:translate-x-1',
-                ]}
-                aria-hidden="true">
-                {p.href.startsWith('http') ? '↗' : '→'}
-              </span>
-            </h2>
-            <p class="text-muted-foreground text-base leading-[1.6]">
-              <T {...p.body} />
-            </p>
+            {(() => {
+              // The project as it is now, from src/assets/projects.
+              const img = projectImage(p.href.split('/').pop()!)
+              return (
+                img && (
+                  <Image
+                    src={img}
+                    alt=""
+                    widths={[416, 720, 1440]}
+                    sizes="(min-width: 640px) 208px, 100vw"
+                    class="border-border aspect-[16/10] w-full rounded-md border object-cover object-top transition-opacity group-hover:opacity-85"
+                  />
+                )
+              )
+            })()}
+            <div>
+              <h2 class="mb-2 font-serif text-2xl">
+                {p.name}{' '}
+                <span
+                  class:list={[
+                    'text-muted-foreground group-hover:text-brand inline-block text-base transition-[color,transform]',
+                    p.href.startsWith('http')
+                      ? 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+                      : 'group-hover:translate-x-1',
+                  ]}
+                  aria-hidden="true">
+                  {p.href.startsWith('http') ? '↗' : '→'}
+                </span>
+              </h2>
+              <p class="text-muted-foreground text-base leading-[1.6]">
+                <T {...p.body} />
+              </p>
+            </div>
           </a>
         </li>
       ))

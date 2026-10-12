@@ -1,0 +1,37 @@
+---
+// A screenshot with an optional caption. Use in .mdx by file name, from
+// src/assets/projects (see src/lib/project-images.ts):
+//   <Shot name="fsakm-before" alt="…" caption="…" />
+import { Image } from 'astro:assets'
+import { projectImage } from '@/lib/project-images'
+
+interface Props {
+  name: string
+  alt: string
+  caption?: string
+  // The cover sits near the top of the page, so it loads right away.
+  eager?: boolean
+}
+
+const { name, alt, caption, eager = false } = Astro.props
+const src = projectImage(name)
+if (!src) throw new Error(`No screenshot "${name}" in src/assets/projects`)
+---
+
+<figure class="shot">
+  <Image
+    src={src}
+    alt={alt}
+    widths={[720, 1440]}
+    sizes="(min-width: 768px) 720px, 100vw"
+    loading={eager ? 'eager' : 'lazy'}
+    class="border-border w-full rounded-lg border"
+  />
+  {
+    caption && (
+      <figcaption class="text-muted-foreground mt-2.5 font-mono text-xs">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>
