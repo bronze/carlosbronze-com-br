@@ -51,9 +51,14 @@ const graph = JSON.stringify({
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <Font cssVariable="--font-geist" preload />
-    <Font cssVariable="--font-geist-mono" />
-    <Font cssVariable="--font-newsreader" preload />
+    <!-- Preload only what the first screen uses (body text, the mono labels and
+         the serif headline), so those files don't queue behind the rest. -->
+    <Font cssVariable="--font-geist" preload={[{ weight: 400 }]} />
+    <Font cssVariable="--font-geist-mono" preload={[{ weight: 400 }]} />
+    <Font
+      cssVariable="--font-newsreader"
+      preload={[{ weight: 500, style: 'normal' }]}
+    />
     {
       title ? (
         <title data-title-pt={full(title.pt)} data-title-en={full(title.en)}>
