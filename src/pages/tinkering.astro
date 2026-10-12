@@ -43,8 +43,20 @@ const quick = [
     name: 'Tera Workshop · Mapbox',
     href: 'https://github.com/bronze/tera-workshop-dados',
   },
-  { name: 'Este site', nameEn: 'This website', href: '#' },
+  {
+    name: 'Este site',
+    nameEn: 'This website',
+    href: 'https://github.com/bronze/carlosbronze-com-br',
+  },
 ]
+
+const credit = {
+  allie: 'https://alliethu.com/',
+  kleon: 'https://austinkleon.com/steal/',
+}
+const external = { target: '_blank', rel: 'noopener noreferrer' }
+const link =
+  'text-foreground underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground'
 ---
 
 <PageLayout
@@ -117,5 +129,32 @@ const quick = [
         ))
       }
     </ul>
+  </section>
+
+  <!-- Credit for the design. Has inline links, so it can't use <T>. -->
+  <section aria-labelledby="colophon-title" class="mt-16">
+    <h2
+      id="colophon-title"
+      class="text-muted-foreground font-mono text-xs tracking-[0.06em] uppercase">
+      <T pt="Sobre este site" en="About this site" />
+    </h2>
+    <p class="text-foreground/80 mt-4 text-base leading-[1.6]">
+      <span data-lang-pt>
+        Este site é uma homenagem descarada ao
+        <a href={credit.allie} {...external} class={link}>site da Allie Thu</a>. A
+        estrutura, o ritmo e as animações vêm de lá; o conteúdo, os erros e as
+        escolhas são meus. Como diz o
+        <a href={credit.kleon} {...external} class={link}>Austin Kleon</a>: copie,
+        mas dê o crédito. Obrigado, Allie.
+      </span>
+      <span data-lang-en>
+        This site is a shameless homage to
+        <a href={credit.allie} {...external} class={link}>Allie Thu’s site</a>. The
+        structure, rhythm and animations come from there; the content, the mistakes
+        and the choices are mine. As
+        <a href={credit.kleon} {...external} class={link}>Austin Kleon</a> says:
+        steal like an artist, and credit your sources. Thanks, Allie.
+      </span>
+    </p>
   </section>
 </PageLayout>
