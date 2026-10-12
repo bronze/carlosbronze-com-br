@@ -103,10 +103,16 @@ const focus = [
     </div>
   </section>
 
+  <p class={paragraph}>
+    <T
+      pt="A essa altura, já são quase 20 anos pensando em produtos digitais e marcas, de agência a startup. As ferramentas mudaram muito, mas a pergunta por trás continua a mesma: como criar uma experiência boa o bastante para fazer as pessoas voltarem?"
+      en="By now, I’ve spent almost 20 years thinking about digital products and brands, from agencies to startups. The tools have changed a lot, but the question behind them is still the same: how do you build an experience good enough to make people come back?"
+    />
+  </p>
+
   <!-- Has inline links, so it can't use <T>; the data-lang-* spans follow the same toggle. -->
   <p class={paragraph}>
     <span data-lang-pt>
-      A essa altura, já são quase 20 anos pensando em produtos digitais e marcas.
       Fora do trabalho, treino <a href={links.krav} {...external} class={link}
         >Krav Maga</a
       >, assisto muito <a href={links.critrole} {...external} class={link}
@@ -118,8 +124,7 @@ const focus = [
       > no YouTube.
     </span>
     <span data-lang-en>
-      By now, I’ve spent almost 20 years thinking about digital products and
-      brands. Outside work, I train <a
+      Outside work, I train <a
         href={links.krav}
         {...external}
         class={link}>Krav Maga</a
