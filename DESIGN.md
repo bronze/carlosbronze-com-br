@@ -144,6 +144,7 @@ Patterns:
 - **Arrows:** `→` for internal links, `↗` for external. On hover, `→` moves 4px right and `↗` moves 2px up and right; both take `--brand`.
 - **Links in text:** underlined at 30% of the text colour, turning `--brand` on hover.
 - **Borders:** 1px `--border`, used sparingly: rules between rows, above and below `Stats`. No cards with shadows.
+- **Text selection:** inverted, `--foreground` behind `--background` text, in both modes.
 - **Radius:** small (`rounded-md`) on swatches and boxes, full on pills. Nothing in between.
 
 ## Motion

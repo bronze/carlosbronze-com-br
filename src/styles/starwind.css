@@ -396,6 +396,11 @@
   button {
     @apply cursor-pointer;
   }
+  /* Selected text inverts: text colour as the highlight, page colour as the
+     text. Both tokens flip in dark mode, so it inverts there too. */
+  ::selection {
+    @apply bg-foreground text-background;
+  }
 }
 
 /* PT/EN: both languages are rendered, the inactive one is hidden.
