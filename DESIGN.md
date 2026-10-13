@@ -94,7 +94,7 @@ Body text must reach **4.5:1 (WCAG AA)** on its background, in both modes. The d
 
 | Role | Font | Size / line height | Where |
 | --- | --- | --- | --- |
-| Display | Newsreader 500 | 60 → 96px / 0.92 | Home name |
+| Display | Newsreader 500 | 44 → 84px (7vw) / 0.94 | Home name |
 | Page title | Newsreader 500 | `clamp(32px, 4vw, 46px)` / 1.15 | Inner page headline |
 | Number | Newsreader 500 | 40px / 1 | `Stats` |
 | Section title | Newsreader 500 | 24px / 1.2 | Project `##`, project cards |

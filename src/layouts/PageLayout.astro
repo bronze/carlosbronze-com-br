@@ -67,7 +67,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
   <main
     id="main"
     tabindex="-1"
-    class="mx-auto w-full max-w-5xl flex-1 px-4 pt-12 pb-16 outline-none sm:px-6 sm:pt-16">
+    class="mx-auto w-full max-w-5xl flex-1 px-4 pt-6 pb-16 outline-none sm:px-6 sm:pt-12">
     <!-- Home uses the full column; inner pages read in a narrower centred one.
          Flat, like alliethu.com: the page's content sits right next to the
          heading, and every block spaces itself with its own margin-bottom.
@@ -107,10 +107,10 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
       <h1
         id="page-title"
         class:list={[
-          'mb-6 font-serif font-medium tracking-tight text-balance',
+          'font-serif font-medium tracking-tight text-balance',
           hero
-            ? 'max-w-[8ch] text-6xl leading-[0.92] sm:text-8xl'
-            : 'text-[clamp(32px,4vw,46px)] leading-[1.15]',
+            ? 'mb-4 max-w-[8ch] text-[clamp(44px,7vw,84px)] leading-[0.94]'
+            : 'mb-6 text-[clamp(32px,4vw,46px)] leading-[1.15]',
         ]}>
         <T {...heading} />
       </h1>
