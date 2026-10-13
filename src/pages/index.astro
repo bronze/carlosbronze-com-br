@@ -14,6 +14,10 @@ import { ariaLabel, sections } from '@/lib/site'
     en: 'I connect strategy, metrics and creativity to build products that move the business.',
   }}
   pager={false}>
+  <!-- Same copy as `intro`, with a forced break in EN. -->
+  <Fragment slot="intro">
+    <span data-lang-pt>Conecto estratégia, métricas e criatividade para construir produtos que movem o negócio.</span><span data-lang-en>I connect strategy, metrics and creativity<br /> to build products that move the business.</span>
+  </Fragment>
   <nav {...ariaLabel({ pt: 'Seções', en: 'Sections' })}>
     <ul class="grid max-w-3xl gap-x-10 gap-y-6 sm:grid-cols-3">
       {

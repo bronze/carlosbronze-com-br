@@ -131,7 +131,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
                 : 'text-lg leading-[1.75]',
               !hero && (continueIntro ? 'mb-5' : 'mb-11'),
             ]}>
-            <T {...intro} />
+            {Astro.slots.has('intro') ? <slot name="intro" /> : <T {...intro} />}
           </p>
         )
       }
