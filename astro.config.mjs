@@ -9,7 +9,7 @@ import sitemap from '@astrojs/sitemap'
 // https://astro.build/config
 export default defineConfig({
   // Canonical URLs, Open Graph and the sitemap are built from this.
-  site: 'https://www.carlosbronze.com.br',
+  site: 'https://www.carlosbronze.com',
 
   prefetch: {
     prefetchAll: true,

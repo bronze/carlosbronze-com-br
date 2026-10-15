@@ -1,6 +1,6 @@
 # DESIGN.md
 
-The design system for carlosbronze.com.br: what the site should feel like, the tokens it's built from, and the rules for adding to it. The live reference is `/tinkering/design-system`, which reads its values from the CSS so it can't drift from this file's source of truth, `src/styles/starwind.css`.
+The design system for carlosbronze.com: what the site should feel like, the tokens it's built from, and the rules for adding to it. The live reference is `/tinkering/design-system`, which reads its values from the CSS so it can't drift from this file's source of truth, `src/styles/starwind.css`.
 
 For layout history, Allie Thu's influence and the project page format, see [`docs/site-redesign.md`](docs/site-redesign.md).
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.carlosbronze.com.br/sitemap-index.xml
+Sitemap: https://www.carlosbronze.com/sitemap-index.xml

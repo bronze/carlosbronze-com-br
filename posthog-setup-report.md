@@ -1,7 +1,7 @@
 <wizard-report>
 # PostHog post-wizard report
 
-The wizard has completed a deep integration of PostHog analytics into the carlosbronze.com.br portfolio site. Key changes made:
+The wizard has completed a deep integration of PostHog analytics into the carlosbronze.com portfolio site. Key changes made:
 
 - **`src/components/posthog.astro`** — Fixed the `api_host` fallback to use `https://us.i.posthog.com` instead of an empty string. Environment variables (`PUBLIC_POSTHOG_PROJECT_TOKEN`, `PUBLIC_POSTHOG_HOST`) are used via Astro's `define:vars` directive with `<script is:inline>`.
 - **`.env`** — Updated with the correct `PUBLIC_POSTHOG_PROJECT_TOKEN` and `PUBLIC_POSTHOG_HOST` values. The file is covered by `.gitignore`.
