@@ -1,46 +1,70 @@
-# Astro Starter Kit: Basics
+# carlosbronze.com
+
+Personal site of Carlos Bronze, senior product manager in Rio de Janeiro. Live at [www.carlosbronze.com](https://www.carlosbronze.com).
+
+Bilingual (PT/EN), four pages: home, about, learning and tinkering. Built with [Astro 5](https://astro.build), [Tailwind CSS v4](https://tailwindcss.com) and [Starwind UI](https://starwind.dev), deployed on [Vercel](https://vercel.com).
+
+## Getting started
+
+Needs Node and [pnpm](https://pnpm.io) (the version is pinned in `package.json`).
 
 ```sh
-pnpm create astro@latest -- --template basics
+pnpm install
+pnpm dev          # dev server at localhost:4321
+pnpm build        # production build to ./dist/
+pnpm preview      # serve the production build
+pnpm astro check  # type-check
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Adding Starwind Pro blocks needs a `STARWIND_LICENSE_KEY` environment variable. Nothing else does.
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## How it's put together
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+src/
+├── pages/                 # one file per route; llms.txt.ts builds /llms.txt
+│   └── tinkering/         # [slug].astro renders projects; design-system.astro is the live style reference
+├── layouts/
+│   ├── Layout.astro       # <head>, SEO, language/theme scripts, analytics
+│   └── PageLayout.astro   # header, page heading, footer, prev/next links
+├── components/
+│   ├── site/              # header, section links, <T> for bilingual text
+│   ├── project/           # blocks used inside project write-ups (<Stats>, <Steps>, …)
+│   ├── starwind/          # Starwind UI components
+│   └── starwind-pro/      # Starwind Pro blocks
+├── content/projects/      # project write-ups, one folder per project
+├── lib/
+│   ├── site.ts            # sections, nav order, labels
+│   └── seo.ts             # descriptions, profile links, structured data
+└── styles/starwind.css    # design tokens and global styles
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- **Both languages ship in every page.** `<T pt="…" en="…" />` renders both, and CSS hides the one not in use. The choice is stored in `localStorage`, and defaults to the browser's language.
+- **Theme follows the system.** There's no toggle; `prefers-color-scheme` sets the `.dark` class, live.
+- **Navigation** uses Astro's `<ClientRouter />` for view transitions. Scripts that touch the page re-run on `astro:page-load`.
+- **Sound and haptics** on links come from [Foley](https://www.npmjs.com/package/@foleyjs/core) (`data-foley-*` attributes) and [web-haptics](https://www.npmjs.com/package/web-haptics).
 
-## 🧞 Commands
+## Adding a project
 
-All commands are run from the root of the project, from a terminal:
+Create `src/content/projects/<slug>/pt.mdx` and `en.mdx`. The folder name becomes `/tinkering/<slug>`.
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+```mdx
+---
+title: Page headline
+summary: One or two lines under the headline.
+url: https://live-project.example/
+repo: https://github.com/bronze/repo   # optional
+---
+```
 
-## 👀 Want to learn more?
+The body follows PEARL as `##` sections: Problem, Epiphany (optional), Action, Result, Learning. `src/content.config.ts` has the exact headings in both languages.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Design
+
+`DESIGN.md` describes the design system and its rules. `/tinkering/design-system` shows it live, reading its values straight from `src/styles/starwind.css`. `docs/site-redesign.md` records why the site is structured the way it is.
+
+## Deployment
+
+Pushing to `master` deploys to Vercel. `vercel.json` sets clean URLs and proxies `/obsidian/*` to Obsidian Publish, which serves the notes at [www.carlosbronze.com/obsidian](https://www.carlosbronze.com/obsidian/).
+
+Analytics: Vercel Analytics and Speed Insights, PostHog, Umami and Simple Analytics.
