@@ -4,7 +4,7 @@ import SiteHeader from '@/components/site/SiteHeader.astro'
 import SectionLink from '@/components/site/SectionLink.astro'
 import T from '@/components/site/T.astro'
 import { ariaLabel, neighbours, sectionFor, type Bilingual } from '@/lib/site'
-import type { JsonLd } from '@/lib/seo'
+import { profiles, type JsonLd } from '@/lib/seo'
 
 interface Props {
   // Both default to the section's label from src/lib/site.ts.
@@ -165,5 +165,27 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
 
   <footer class="text-muted-foreground px-4 pb-8 text-center font-mono text-xs">
     © {new Date().getFullYear()}
+    {
+      // Click tracking is wired by SiteHeader's [data-track] handler.
+      [
+        { label: 'linkedin', href: profiles.linkedin, track: 'linkedin_clicked' },
+        { label: 'github', href: profiles.github, track: 'github_clicked' },
+      ].map(l => (
+        <>
+          <span class="mx-2 opacity-50" aria-hidden="true">·</span>
+          <a
+            href={l.href}
+            target="_blank"
+            rel="noopener noreferrer me"
+            class="hover:text-foreground transition-colors"
+            data-foley-press="tap"
+            data-foley-hover="tick"
+            data-track={l.track}>
+            {l.label}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </>
+      ))
+    }
   </footer>
 </Layout>

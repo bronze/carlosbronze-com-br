@@ -1,3 +1,5 @@
+import { profiles } from './seo'
+
 export type Bilingual = { pt: string; en: string }
 
 export interface Section {
@@ -10,7 +12,7 @@ export interface Section {
 // section links) or uppercase (page eyebrows) change the case with CSS.
 
 export const work = {
-  href: 'https://www.linkedin.com/in/carlosbronze/',
+  href: profiles.linkedin,
   label: { pt: 'Trabalho', en: 'Work' },
 }
 
