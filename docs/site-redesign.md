@@ -57,8 +57,6 @@ We took the structure, spacing, typography roles and motion from it. **We did no
 - **`src/components/site/T.astro`:** `<T pt="…" en="…" />` renders both languages.
 - **`src/styles/starwind.css`:** design tokens, plus (at the end of the file) the rules that hide the inactive language and the motion rules.
 
-The old components `About.astro` and `Welcome.astro` in `src/components/` are no longer used.
-
 ## Layout and spacing
 
 - **`<header>`, `<main>` and `<footer>` are direct children of `<body>`** (no wrapper div), like hers. Each one sets its own width with `mx-auto w-full max-w-5xl px-4 sm:px-6`.
@@ -174,7 +172,5 @@ Chosen over STAR because side projects have no assigned Task (the motivation is 
 - Write the About copy (headline, intro, 4 focus areas, personal line) in PT and EN.
 - Fill Learning with real podcasts, writers or books.
 - Add a repo link for "This website" in Tinkering (currently `#`).
-- Decide whether to delete the unused `About.astro` and `Welcome.astro`.
 - Optional: a dark/light toggle in the header (right now it follows the system).
 - Optional: make each item inside long content areas rise in its own turn.
-- Pre-existing `astro check` errors in `posthog.astro` and `About.astro`.

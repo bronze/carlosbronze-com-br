@@ -86,7 +86,7 @@ const graph = JSON.stringify({
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
-    <script type="application/ld+json" set:html={graph} />
+    <script is:inline type="application/ld+json" set:html={graph} />
     <SpeedInsights />
     <ClientRouter />
     <script is:inline>
