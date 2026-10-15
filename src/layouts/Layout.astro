@@ -147,9 +147,17 @@ const graph = JSON.stringify({
 </html>
 
 <script>
-  import { bind, set } from '@foleyjs/core'
+  import { bind, set, unlock } from '@foleyjs/core'
 
   set({ volume: 1, theme: 'mechanical' })
+  // Foley builds its audio engine (an AudioContext plus a generated reverb
+  // buffer) on the first tap anywhere, which blocked that tap's paint for
+  // ~270ms (INP). Build it while the browser is idle instead: the context
+  // starts suspended, and the first tap only has to resume it.
+  const warmUp = () => unlock()
+  if ('requestIdleCallback' in window)
+    requestIdleCallback(warmUp, { timeout: 3000 })
+  else setTimeout(warmUp, 1500)
   // Each navigation brings new elements to wire up (bind skips ones it's seen).
   document.addEventListener('astro:page-load', () => bind())
 </script>
