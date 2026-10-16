@@ -9,8 +9,8 @@ const story = [
     en: 'I started coding in 1999, building websites for online gaming communities, and studied industrial design. Games and design never left the way I think about product.',
   },
   {
-    pt: 'Depois, no planejamento de agências, aprendi que valor é percepção. Hoje levo isso pro produto: na MySparkle, uso gamificação como alavanca de ativação, retenção e LTV.',
-    en: 'Then, in agency strategy, I learned that value is perception. Now I bring that to product: at MySparkle, I use gamification as a lever for activation, retention and LTV.',
+    pt: 'Depois, no planejamento de agências, aprendi que valor é percepção. Hoje levo isso pro produto: na MySparkle, desenho a gamificação em torno de hábito, com uma north star de streaks definida antes do lançamento.',
+    en: 'Then, in agency strategy, I learned that value is perception. Now I bring that to product: at MySparkle, I design gamification around habit, with a streak-based north star set before launch.',
   },
 ]
 
@@ -56,8 +56,8 @@ const focus = [
   {
     title: { pt: 'Gamificação', en: 'Gamification' },
     body: {
-      pt: 'Mecânicas de jogo como alavanca de hábito e retenção, não como enfeite.',
-      en: 'Game mechanics as a lever for habit and retention, not as a gimmick.',
+      pt: 'Design comportamental e mecânicas de jogo como alavanca de hábito e retenção, não como enfeite.',
+      en: 'Behavioral design and game mechanics as a lever for habit and retention, not as a gimmick.',
     },
   },
 ]
@@ -145,6 +145,24 @@ const focus = [
         >Rory Sutherland videos</a
       >
       on YouTube.
+    </span>
+  </p>
+
+  <!-- Each language points at its own CV; click tracking is wired by SiteHeader's [data-track] handler. -->
+  <p class={paragraph}>
+    <span data-lang-pt>
+      Quer a versão completa? Meu <a
+        href="/obsidian/curriculo"
+        class={link}
+        data-track="resume_clicked">currículo</a
+      > está aqui.
+    </span>
+    <span data-lang-en>
+      Want the full version? My <a
+        href="/obsidian/resume"
+        class={link}
+        data-track="resume_clicked">resume</a
+      > is here.
     </span>
   </p>
 </PageLayout>
