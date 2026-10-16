@@ -1,0 +1,46 @@
+---
+title: As palestras do Rory Sutherland, transcritas e organizadas.
+summary: Um arquivo de fã com 31 palestras, entrevistas e aulas do Rory Sutherland, com transcrições, temas, livros e as histórias que ele repete.
+url: https://rory-talks.vercel.app/
+repo: https://github.com/bronze/rory-talks
+---
+
+## O incômodo
+
+O Rory Sutherland é uma das pessoas que mais mudaram o jeito como eu penso marketing e comportamento. Mas o que ele fala está espalhado pelo YouTube, em palestras e entrevistas de uma hora ou mais, em canais diferentes. E ele reconta as mesmas histórias em lugares diferentes, cada vez de um jeito. Achar de novo aquele exemplo do Eurostar significava assistir tudo outra vez.
+
+## O estalo
+
+Vídeo não se pesquisa, texto sim. Com cada palestra transcrita em markdown puro, dá para buscar uma palavra em 32 horas de conteúdo, e dá para pedir ao Claude que leia tudo de uma vez e encontre padrões: quais histórias se repetem, que livros aparecem, que ideias atravessam as palestras.
+
+## O que fiz
+
+Montei o site em Astro, com uma playlist no YouTube como fonte. Um script em Python usa o yt-dlp para baixar os metadados e as legendas de cada vídeo e salvar como transcrição. Em cima disso, o Claude gerou os principais pontos de cada palestra e indexou as histórias. O site oferece quatro formas de navegar:
+
+<Rows items={[
+  { title: 'Palestras', text: 'As 31, com transcrição completa e os principais pontos de cada uma.', href: 'https://rory-talks.vercel.app/' },
+  { title: 'Temas', text: 'Alquimia, reenquadramento, sinalização, marca e outros três conceitos.', href: 'https://rory-talks.vercel.app/topics' },
+  { title: 'Livros', text: 'Os livros dele e os que ele recomenda, ligados às palestras em que aparecem.', href: 'https://rory-talks.vercel.app/books' },
+  { title: 'Histórias', text: 'Cada anedota, com o minuto exato em que ela aparece em cada palestra.', href: 'https://rory-talks.vercel.app/stories' },
+]} />
+
+E uma busca com ⌘K que procura nos títulos, nos pontos principais e no texto de todas as transcrições.
+
+## O resultado
+
+<Stats items={[
+  { label: 'Palestras', after: '31' },
+  { label: 'Horas', after: '32' },
+  { label: 'Histórias', after: '102' },
+  { label: 'Livros', after: '17' },
+]} />
+
+Só uma parte das palestras teve as histórias catalogadas até agora. A mais repetida, por enquanto, é a do Eurostar: em vez de gastar bilhões para encurtar a viagem, pagar supermodelos para servir vinho de primeira a todos os passageiros, com uma fração do dinheiro. Ela aparece em quatro palestras.
+
+## O que aprendi
+
+> Design, código e dados foram a parte fácil. Difícil foi entender o conteúdo.
+
+Montar o site, buscar as transcrições e organizar temas e livros andou rápido. Catalogar as histórias se provou muito mais difícil do que eu esperava. Para achar uma anedota, o Claude precisa ler a transcrição inteira, entender o contexto e reconhecer que é a mesma história contada de outro jeito em outra palestra. Isso custa muito token por palestra, e é por isso que o catálogo ainda está pela metade.
+
+Ter o conteúdo em texto foi necessário, mas não suficiente. A parte cara não é guardar, é interpretar.
