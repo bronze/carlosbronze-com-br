@@ -91,7 +91,7 @@ const moreStars = stars.slice(8)
       { group: 'few', list: fewStars },
       { group: 'more', list: moreStars },
     ].map(({ group, list }) => (
-      <g class="stars" opacity="0" filter="url(#sky-glow)" data-stars={group}>
+      <g class="fade slow" style="opacity: 0" filter="url(#sky-glow)" data-stars={group}>
         {list.map(s => (
           <use
             href="#sky-sparkle"
@@ -104,14 +104,21 @@ const moreStars = stars.slice(8)
       </g>
     ))
   }
-  <!-- Placed by the script below; hidden until then, so nothing jumps. -->
-  <circle r="22" fill="var(--sun)" visibility="hidden" data-body="sun"></circle>
-  <g visibility="hidden" data-body="moon">
-    <circle r="15" fill="var(--moon-shadow)" stroke="var(--moon-edge)" stroke-width="1"></circle>
-    <path fill="var(--moon-lit)" data-moon-lit></path>
+  <!-- Placed by the script below, then faded in, so nothing pops or jumps.
+       The outer group holds the position; the inner one rises on load. -->
+  <g class="fade" style="opacity: 0" data-body="sun">
+    <circle r="22" fill="var(--sun)" class="rise"></circle>
   </g>
-  <path fill="var(--hill)" d="M309.2 121.5 C309.8 118.9 310.7 112.3 312.7 106 C314.8 99.7 318.1 91.3 321.5 83.9 C325 76.6 329.9 67.9 333.5 61.8 C337 55.8 339.8 50.9 342.7 47.7 C345.7 44.5 348.3 43.3 351.1 42.4 C353.9 41.5 356.8 41.7 359.5 42.4 C362.3 43.1 364.8 44.2 367.5 46.8 C370.1 49.5 372.9 54 375.4 58.3 C377.9 62.6 380.3 67.7 382.5 72.9 C384.7 78 386.6 83.3 388.7 89.2 C390.7 95.1 393.8 105 394.9 108.2 L394.9 123.7 L309.2 123.7 Z"></path>
-  <path fill="var(--hill)" d="M159.9 168.7 C164.2 167.1 176.8 162.4 185.5 159 C194.2 155.6 201.7 151.6 212 148.4 C222.3 145.2 235.6 142.8 247.3 139.6 C259.1 136.3 272.4 132.1 282.7 129 C293 125.8 297.4 123.1 309.2 120.6 C321 118.1 339 116 353.3 114 C367.7 111.9 384.3 110.1 395.3 108.2 C406.3 106.4 411.9 104.7 419.6 102.9 C427.3 101.1 435.8 98.6 441.7 97.6 C447.6 96.6 450.5 96.4 454.9 96.7 C459.4 97.1 463.8 98.1 468.2 99.8 C472.6 101.6 476.7 103.4 481.4 107.3 C486.2 111.3 491.4 118 496.9 123.7 C502.4 129.3 508.7 135.6 514.6 141.3 C520.5 147.1 526 153.3 532.2 158.1 C538.5 162.9 548.8 168.1 552.1 170 L552.1 176.7 L159.9 176.7 Z"></path>
+  <g class="fade" style="opacity: 0" data-body="moon">
+    <g class="rise">
+      <circle r="15" fill="var(--moon-shadow)" stroke="var(--moon-edge)" stroke-width="1"></circle>
+      <path fill="var(--moon-lit)" data-moon-lit></path>
+    </g>
+  </g>
+  <g class="hills">
+    <path fill="var(--hill)" d="M309.2 121.5 C309.8 118.9 310.7 112.3 312.7 106 C314.8 99.7 318.1 91.3 321.5 83.9 C325 76.6 329.9 67.9 333.5 61.8 C337 55.8 339.8 50.9 342.7 47.7 C345.7 44.5 348.3 43.3 351.1 42.4 C353.9 41.5 356.8 41.7 359.5 42.4 C362.3 43.1 364.8 44.2 367.5 46.8 C370.1 49.5 372.9 54 375.4 58.3 C377.9 62.6 380.3 67.7 382.5 72.9 C384.7 78 386.6 83.3 388.7 89.2 C390.7 95.1 393.8 105 394.9 108.2 L394.9 176.7 L309.2 176.7 Z"></path>
+    <path fill="var(--hill)" d="M118 176.7 C138 176.4 149.2 172.7 159.9 168.7 C164.2 167.1 176.8 162.4 185.5 159 C194.2 155.6 201.7 151.6 212 148.4 C222.3 145.2 235.6 142.8 247.3 139.6 C259.1 136.3 272.4 132.1 282.7 129 C293 125.8 297.4 123.1 309.2 120.6 C321 118.1 339 116 353.3 114 C367.7 111.9 384.3 110.1 395.3 108.2 C406.3 106.4 411.9 104.7 419.6 102.9 C427.3 101.1 435.8 98.6 441.7 97.6 C447.6 96.6 450.5 96.4 454.9 96.7 C459.4 97.1 463.8 98.1 468.2 99.8 C472.6 101.6 476.7 103.4 481.4 107.3 C486.2 111.3 491.4 118 496.9 123.7 C502.4 129.3 508.7 135.6 514.6 141.3 C520.5 147.1 526 153.3 532.2 158.1 C538.5 162.9 548.8 168.1 552.1 170 C557 172.8 568 176.2 582 176.7 Z"></path>
+  </g>
 </svg>
 
 <style>
@@ -132,12 +139,36 @@ const moreStars = stars.slice(8)
     --hill: var(--color-base-800);
     --star: var(--color-base-300);
   }
-  .stars {
-    transition: opacity 1.5s ease;
+  /* The scene has its own entrance, not the page's rise-in: the hills fade
+     in, and the sun or moon fades in while rising a little. */
+  .scene {
+    animation: none;
   }
   @media (prefers-reduced-motion: no-preference) {
+    .hills {
+      animation: sky-fade 1.2s var(--ease-enter) both;
+    }
+    .rise {
+      animation: sky-rise 1.4s var(--ease-enter) 0.2s both;
+    }
+    .fade {
+      transition: opacity 1s ease;
+    }
+    .slow {
+      transition-duration: 1.5s;
+    }
     .twinkle {
       animation: twinkle 4s ease-in-out infinite;
+    }
+  }
+  @keyframes sky-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes sky-rise {
+    from {
+      transform: translateY(14px);
     }
   }
   @keyframes twinkle {
@@ -161,6 +192,10 @@ const moreStars = stars.slice(8)
     const path = svg.querySelector<SVGElement>('[data-sky-path]')!
     const root = document.documentElement
     const daylight = svg.hasAttribute('data-daylight')
+    // Ease the ground into each new shade, from the first one on load.
+    if (daylight && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.body.style.transition = 'background-color 1s ease'
+    }
     const fewStars = svg.querySelector<SVGElement>('[data-stars="few"]')!
     const moreStars = svg.querySelector<SVGElement>('[data-stars="more"]')!
 
@@ -180,13 +215,14 @@ const moreStars = stars.slice(8)
         [sun, positions.sun],
         [moon, positions.moon],
       ] as const) {
+        // A body that's down keeps its last spot while it fades out.
         if (t === null) {
-          body.setAttribute('visibility', 'hidden')
+          body.style.opacity = '0'
           continue
         }
         const { x, y } = pointOnArc(t)
         body.setAttribute('transform', `translate(${x} ${y})`)
-        body.setAttribute('visibility', 'visible')
+        body.style.opacity = '1'
       }
       const shape = litMoonPath(phase, 15)
       lit.setAttribute('d', shape.d)
@@ -196,8 +232,8 @@ const moreStars = stars.slice(8)
         root.style.setProperty('--background', ground)
       }
       const night = nightness(hour)
-      fewStars.setAttribute('opacity', String(night))
-      moreStars.setAttribute('opacity', String(positions.moon === null ? night : 0))
+      fewStars.style.opacity = String(night)
+      moreStars.style.opacity = String(positions.moon === null ? night : 0)
       path.setAttribute('visibility', state.path ? 'visible' : 'hidden')
       document.dispatchEvent(
         new CustomEvent('sky:tick', {
@@ -223,6 +259,7 @@ const moreStars = stars.slice(8)
         theme.disconnect()
         document.removeEventListener('sky:control', control)
         root.style.removeProperty('--background')
+        document.body.style.removeProperty('transition')
       },
       { once: true },
     )
