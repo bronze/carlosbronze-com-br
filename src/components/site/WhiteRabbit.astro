@@ -1,0 +1,42 @@
+---
+// An easter egg in the bottom-right corner, the way The Net hid its π: a small
+// white rabbit, barely there until you hover it. Following it starts the
+// Matrix rain (src/lib/matrix-rain.ts), which only loads on that click.
+---
+
+<button
+  type="button"
+  data-white-rabbit
+  aria-label="Follow the white rabbit"
+  title="Follow the white rabbit"
+  class="text-muted-foreground hover:text-foreground focus-visible:text-foreground focus-visible:ring-ring fixed right-3 bottom-3 z-40 size-6 cursor-pointer rounded-sm opacity-30 transition-opacity duration-300 hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none print:hidden"
+>
+  <svg viewBox="0 0 24 24" class="size-full overflow-visible" aria-hidden="true">
+    <defs>
+      <g id="white-rabbit-shape">
+        <ellipse cx="10" cy="16" rx="6.5" ry="5" />
+        <circle cx="16" cy="10" r="3.6" />
+        <ellipse cx="14.8" cy="4.6" rx="1.3" ry="3.6" transform="rotate(-12 14.8 4.6)" />
+        <ellipse cx="17.6" cy="4.8" rx="1.3" ry="3.6" transform="rotate(14 17.6 4.8)" />
+        <circle cx="3.8" cy="15" r="1.8" />
+        <ellipse cx="13" cy="20.6" rx="3.2" ry="1.1" />
+      </g>
+    </defs>
+    <!-- Outline drawn under a white fill, so the overlapping shapes read as one
+         silhouette: white in both themes, edged in the muted text color. -->
+    <use href="#white-rabbit-shape" fill="currentColor" stroke="currentColor" stroke-width="2.4" />
+    <use href="#white-rabbit-shape" fill="#fff" />
+    <circle cx="17.3" cy="9.6" r="0.6" fill="currentColor" />
+  </svg>
+</button>
+
+<script>
+  type Capture = { capture(event: string): void }
+
+  // Delegated, so it keeps working after the router swaps the body.
+  document.addEventListener('click', event => {
+    if (!(event.target as Element).closest('[data-white-rabbit]')) return
+    (window as { posthog?: Capture }).posthog?.capture('white_rabbit_followed')
+    import('@/lib/matrix-rain').then(({ rain }) => rain())
+  })
+</script>

@@ -3,6 +3,7 @@ import '@/styles/starwind.css'
 import { Font } from 'astro:assets'
 import { ClientRouter } from 'astro:transitions'
 import PostHog from '../components/posthog.astro'
+import WhiteRabbit from '@/components/site/WhiteRabbit.astro'
 import Analytics from '@vercel/analytics/astro'
 import SpeedInsights from '@vercel/speed-insights/astro'
 
@@ -143,6 +144,7 @@ const graph = JSON.stringify({
   </head>
   <body class="flex min-h-dvh flex-col">
     <slot />
+    <WhiteRabbit />
   </body>
 </html>
 
