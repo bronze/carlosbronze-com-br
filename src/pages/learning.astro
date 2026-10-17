@@ -142,6 +142,16 @@ const external = (href: string) =>
                     <span>
                       <span class="group-hover:decoration-brand group-hover:underline group-hover:underline-offset-4">
                         {item.name}
+                      </span>{' '}
+                      <span
+                        class:list={[
+                          'text-muted-foreground group-hover:text-brand inline-block text-base transition-[color,transform]',
+                          href.startsWith('http')
+                            ? 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+                            : 'group-hover:translate-x-1',
+                        ]}
+                        aria-hidden="true">
+                        {href.startsWith('http') ? '↗' : '→'}
                       </span>
                       {item.langs && (
                         <span class="text-muted-foreground ml-2 font-mono text-xs">
