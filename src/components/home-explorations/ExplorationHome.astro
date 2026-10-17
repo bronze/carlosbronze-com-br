@@ -1,6 +1,10 @@
 ---
 // The home page as it is today, plus a Rio scene in the slot. Only for the
 // /home-exploration-* pages: trials, kept out of search and the sitemap.
+//
+// The scenes sit behind the content. On phones they go top right, next to
+// the name, as on alliethu.com, so they're seen on arrival and add no
+// scrolling; from `sm` up they're fixed to the bottom-right corner.
 import PageLayout from '@/layouts/PageLayout.astro'
 import SectionLink from '@/components/site/SectionLink.astro'
 import { ariaLabel, sections, type Bilingual } from '@/lib/site'

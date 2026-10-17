@@ -46,8 +46,10 @@ const button =
   import { formatHour, phaseName } from './sky'
 
   document.addEventListener('astro:page-load', () => {
-    const panel = document.querySelector<HTMLElement>('[data-sky-debug]')
+    const panel = document.querySelector<HTMLDetailsElement>('[data-sky-debug]')
     if (!panel) return
+    // On a phone, open, it would cover the page: start it folded there.
+    if (matchMedia('(max-width: 639px)').matches) panel.open = false
     const $ = <E extends Element>(selector: string) => panel.querySelector<E>(selector)!
     const hourIn = $<HTMLInputElement>('[data-in="hour"]')
     const phaseIn = $<HTMLInputElement>('[data-in="phase"]')
