@@ -25,7 +25,7 @@ const random = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
 const stars = Array.from({ length: 30 }, (_, i) => ({
   x: 125 + random() * 450,
   y: -65 + random() * 170,
-  r: 0.7 + random() * 1.1,
+  size: 2 + random() * 2.8,
   twinkle: i % 4 === 0,
   delay: random() * 4,
 }))
@@ -64,18 +64,31 @@ const moreStars = stars.slice(8)
       ))
     }
   </g>
-  <!-- Stars, faded in by the script at night -->
+  <!-- Stars, faded in by the script at night: four-pointed sparkles with a
+       soft glow (a blurred copy under each one). -->
+  <defs>
+    <path id="sky-sparkle" d="M0 -1 Q0.16 -0.16 1 0 Q0.16 0.16 0 1 Q-0.16 0.16 -1 0 Q-0.16 -0.16 0 -1 Z"></path>
+    <filter id="sky-glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="1.4" result="blur"></feGaussianBlur>
+      <feComponentTransfer in="blur" result="glow">
+        <feFuncA type="linear" slope="0.7"></feFuncA>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="glow"></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+  </defs>
   {
     [
       { group: 'few', list: fewStars },
       { group: 'more', list: moreStars },
     ].map(({ group, list }) => (
-      <g class="stars" opacity="0" data-stars={group}>
+      <g class="stars" opacity="0" filter="url(#sky-glow)" data-stars={group}>
         {list.map(s => (
-          <circle
-            cx={s.x.toFixed(1)}
-            cy={s.y.toFixed(1)}
-            r={s.r.toFixed(2)}
+          <use
+            href="#sky-sparkle"
+            transform={`translate(${s.x.toFixed(1)} ${s.y.toFixed(1)}) scale(${s.size.toFixed(2)})`}
             fill="var(--star)"
             class:list={[s.twinkle && 'twinkle']}
             style={`animation-delay: ${s.delay.toFixed(1)}s`}
