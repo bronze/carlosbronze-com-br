@@ -192,9 +192,13 @@ const moreStars = stars.slice(8)
     const path = svg.querySelector<SVGElement>('[data-sky-path]')!
     const root = document.documentElement
     const daylight = svg.hasAttribute('data-daylight')
-    // Ease the ground into each new shade, from the first one on load.
+    // Ease the ground into its first shade on load, then drop the transition:
+    // the minute ticks barely move it, and the dev panel's slider has to
+    // repaint it at once, not trail a second behind (the panel itself, on the
+    // same token but with no transition, would show the new shade first).
     if (daylight && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.body.style.transition = 'background-color 1s ease'
+      setTimeout(() => document.body.style.removeProperty('transition'), 1000)
     }
     const fewStars = svg.querySelector<SVGElement>('[data-stars="few"]')!
     const moreStars = svg.querySelector<SVGElement>('[data-stars="more"]')!
