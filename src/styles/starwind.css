@@ -198,23 +198,26 @@
       of those scales. Components only ever use the semantic tokens.
    A palette swaps the primitives and nothing else.
 
-   The live palette is neutral greys with a bronze accent (on trial). With
-   data-accent='nenhum', --brand falls back to the text color. The candidates below are switched on through data-greys and
-   data-accent on <html>, which only /tinkering/design-system sets. */
+   The live palette is Mix with a bronze accent (on trial): Areia's sand
+   greys in light mode, Tailwind neutral in dark. With data-accent='nenhum',
+   --brand falls back to the text color. The candidates below are switched on
+   through data-greys and data-accent on <html>, which only
+   /tinkering/design-system sets. */
 :root {
-  /* #fafafa, not pure white: easier on the eyes. Same as base-50. */
-  --color-base-0: var(--color-neutral-50);
-  --color-base-50: var(--color-neutral-50);
-  --color-base-100: var(--color-neutral-100);
-  --color-base-200: var(--color-neutral-200);
-  --color-base-300: var(--color-neutral-300);
-  --color-base-400: var(--color-neutral-400);
-  --color-base-500: var(--color-neutral-500);
-  --color-base-600: var(--color-neutral-600);
-  --color-base-700: var(--color-neutral-700);
-  --color-base-800: var(--color-neutral-800);
-  --color-base-900: var(--color-neutral-900);
-  --color-base-950: var(--color-neutral-950);
+  /* Areia: a sand ground at L 0.955 instead of near-white, and text softer
+     than black. base-0 is the ground, and the steps above it get darker. */
+  --color-base-0: oklch(0.955 0.012 82);
+  --color-base-50: oklch(0.94 0.014 80);
+  --color-base-100: oklch(0.925 0.016 78);
+  --color-base-200: oklch(0.885 0.019 75);
+  --color-base-300: oklch(0.83 0.022 72);
+  --color-base-400: oklch(0.69 0.025 68);
+  --color-base-500: oklch(0.55 0.025 62);
+  --color-base-600: oklch(0.45 0.022 58);
+  --color-base-700: oklch(0.38 0.02 55);
+  --color-base-800: oklch(0.32 0.018 55);
+  --color-base-900: oklch(0.29 0.016 55);
+  --color-base-950: oklch(0.26 0.014 55);
 
   /* Bronze, on trial as the live accent. */
   --color-brand-50: oklch(0.972 0.02 80);
@@ -234,11 +237,38 @@
   --brand: var(--brand-on-light);
 }
 .dark {
+  --color-base-0: var(--color-neutral-50);
+  --color-base-50: var(--color-neutral-50);
+  --color-base-100: var(--color-neutral-100);
+  --color-base-200: var(--color-neutral-200);
+  --color-base-300: var(--color-neutral-300);
+  --color-base-400: var(--color-neutral-400);
+  --color-base-500: var(--color-neutral-500);
+  --color-base-600: var(--color-neutral-600);
+  --color-base-700: var(--color-neutral-700);
+  --color-base-800: var(--color-neutral-800);
+  --color-base-900: var(--color-neutral-900);
+  --color-base-950: var(--color-neutral-950);
   --brand: var(--brand-on-dark);
 }
 
-/* Candidate greys. Same lightness steps as neutral, with a little chroma so
-   they lean cool (pedra) or warm (papel). */
+/* Candidate greys. Neutro is the former live palette: Tailwind neutral in
+   both modes, on a #fafafa ground. Pedra and papel keep its lightness steps,
+   with a little chroma so they lean cool (pedra) or warm (papel). */
+:root[data-greys='neutro'] {
+  --color-base-0: var(--color-neutral-50);
+  --color-base-50: var(--color-neutral-50);
+  --color-base-100: var(--color-neutral-100);
+  --color-base-200: var(--color-neutral-200);
+  --color-base-300: var(--color-neutral-300);
+  --color-base-400: var(--color-neutral-400);
+  --color-base-500: var(--color-neutral-500);
+  --color-base-600: var(--color-neutral-600);
+  --color-base-700: var(--color-neutral-700);
+  --color-base-800: var(--color-neutral-800);
+  --color-base-900: var(--color-neutral-900);
+  --color-base-950: var(--color-neutral-950);
+}
 :root[data-greys='pedra'] {
   --color-base-0: oklch(0.993 0.002 250);
   --color-base-50: oklch(0.978 0.004 250);
@@ -271,38 +301,8 @@
 /* Single-mode candidates: one light theme, no dark mode, with a ground that
    isn't near-white (L ≈ 0.95). Here base-0 is that ground, the steps above it
    get darker, and 950 is the text color, softer than black. The design
-   system page forces light mode while one of these is on.
-   Mix is Areia in light mode and Neutral in dark: the darker ground without
-   giving up the dark mode. */
-:root[data-greys='areia'],
-:root[data-greys='mix'] {
-  --color-base-0: oklch(0.955 0.012 82);
-  --color-base-50: oklch(0.94 0.014 80);
-  --color-base-100: oklch(0.925 0.016 78);
-  --color-base-200: oklch(0.885 0.019 75);
-  --color-base-300: oklch(0.83 0.022 72);
-  --color-base-400: oklch(0.69 0.025 68);
-  --color-base-500: oklch(0.55 0.025 62);
-  --color-base-600: oklch(0.45 0.022 58);
-  --color-base-700: oklch(0.38 0.02 55);
-  --color-base-800: oklch(0.32 0.018 55);
-  --color-base-900: oklch(0.29 0.016 55);
-  --color-base-950: oklch(0.26 0.014 55);
-}
-:root[data-greys='mix'].dark {
-  --color-base-0: var(--color-neutral-50);
-  --color-base-50: var(--color-neutral-50);
-  --color-base-100: var(--color-neutral-100);
-  --color-base-200: var(--color-neutral-200);
-  --color-base-300: var(--color-neutral-300);
-  --color-base-400: var(--color-neutral-400);
-  --color-base-500: var(--color-neutral-500);
-  --color-base-600: var(--color-neutral-600);
-  --color-base-700: var(--color-neutral-700);
-  --color-base-800: var(--color-neutral-800);
-  --color-base-900: var(--color-neutral-900);
-  --color-base-950: var(--color-neutral-950);
-}
+   system page forces light mode while one of these is on. Areia is the live
+   light mode, so it needs no values of its own. */
 :root[data-greys='grafite'] {
   --color-base-0: oklch(0.955 0 0);
   --color-base-50: oklch(0.94 0 0);

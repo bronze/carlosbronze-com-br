@@ -17,11 +17,11 @@ const steps = ['0', '50', '100', '200', '300', '400', '500', '600', '700', '800'
 const brandSteps = steps.slice(1)
 
 const greys = [
-  { value: 'neutro', label: { pt: 'Neutro', en: 'Neutral' }, live: true },
+  // Areia's ground in light mode, Neutral in dark.
+  { value: 'mix', label: { pt: 'Mix', en: 'Mix' }, live: true },
+  { value: 'neutro', label: { pt: 'Neutro', en: 'Neutral' } },
   { value: 'pedra', label: { pt: 'Pedra', en: 'Stone' } },
   { value: 'papel', label: { pt: 'Papel', en: 'Paper' } },
-  // Areia's ground in light mode, Neutral in dark.
-  { value: 'mix', label: { pt: 'Mix', en: 'Mix' } },
 ]
 const accents = [
   { value: 'nenhum', label: { pt: 'Nenhum', en: 'None' } },
@@ -143,8 +143,8 @@ const h3 = `${label} mt-10 mb-4`
 
   <p class="text-muted-foreground mb-16 text-base leading-[1.6]">
     <T
-      pt="O site no ar usa Neutro com Bronze. As outras opções são candidatas: troque para ver cada uma aplicada nesta página, inclusive no cabeçalho. Mix usa o fundo da Areia no claro e o Neutro no escuro. As de modo único não têm modo escuro: um só tema, com fundo menos claro, e trazem os próprios tons."
-      en="The live site uses Neutral with Bronze. The other options are candidates: switch to see each one applied to this page, header included. Mix uses Sand's ground in light mode and Neutral in dark. The single-mode ones have no dark mode: one theme, on a less bright ground, with their own tones."
+      pt="O site no ar usa Mix com Bronze: o fundo da Areia no claro e o Neutro no escuro. As outras opções são candidatas: troque para ver cada uma aplicada nesta página, inclusive no cabeçalho. As de modo único não têm modo escuro: um só tema, com fundo menos claro, e trazem os próprios tons."
+      en="The live site uses Mix with Bronze: Sand's ground in light mode and Neutral in dark. The other options are candidates: switch to see each one applied to this page, header included. The single-mode ones have no dark mode: one theme, on a less bright ground, with their own tones."
     />
   </p>
 
@@ -460,7 +460,8 @@ const h3 = `${label} mt-10 mb-4`
       const greys = single ? mode : checked('greys')
       const dark = mode === 'escuro'
 
-      if (greys === 'neutro') root.removeAttribute('data-greys')
+      // Mix is the live palette: no attribute needed for it.
+      if (greys === 'mix') root.removeAttribute('data-greys')
       else root.setAttribute('data-greys', greys)
       // Bronze is the live accent: no attribute needed for it.
       if (accent === 'bronze') root.removeAttribute('data-accent')
@@ -471,7 +472,7 @@ const h3 = `${label} mt-10 mb-4`
 
       // Shareable: /tinkering/design-system?greys=pedra&accent=bronze
       const params = new URLSearchParams()
-      if (greys !== 'neutro') params.set('greys', greys)
+      if (greys !== 'mix') params.set('greys', greys)
       if (accent !== 'bronze') params.set('accent', accent)
       // Keep the router's state, or back/forward stops working.
       history.replaceState(history.state, '', params.size ? `?${params}` : location.pathname)

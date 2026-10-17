@@ -52,22 +52,22 @@ A palette swaps primitives and nothing else. Without an accent, `--brand` falls 
 
 ### Palettes
 
-The live site uses **neutral greys with the Bronze accent**, on a `#fafafa` ground rather than pure white. The candidates below can be compared on `/tinkering/design-system`.
+The live site uses **Mix with the Bronze accent**: Areia's sand greys in light mode, on an `oklch(0.955 0.012 82)` ground rather than near-white, and Tailwind `neutral` in dark mode. The candidates below can be compared on `/tinkering/design-system`.
 
 **Two modes (light and dark):**
 
 | Greys | Character |
 | --- | --- |
-| Neutral (live) | Tailwind `neutral`, zero chroma; ground `#fafafa` |
+| Mix (live) | Areia's scale in light mode, Neutral in dark: the darker ground of a single-mode palette, keeping the dark mode |
+| Neutral | Tailwind `neutral` in both modes, zero chroma; ground `#fafafa`. The live palette before Mix |
 | Pedra (stone) | Hue 250, chroma up to 0.018: cool, slate-like |
 | Papel (paper) | Hue 55–85, chroma up to 0.02: warm, much whiter than Allie's cream. Works in light mode; the dark side reads muddy |
-| Mix | Areia's scale in light mode, Neutral in dark: the darker ground of a single-mode palette, keeping the dark mode |
 
 **Single mode (light only, no dark mode):** the ground sits at L ≈ 0.95 instead of near-white, and text is softer than black. In these scales `base-0` is the ground and `950` is the text.
 
 | Greys | Ground | Text | Reference |
 | --- | --- | --- | --- |
-| Areia (sand) | `oklch(0.955 0.012 82)` | `oklch(0.26 0.014 55)` | Warm, close to Allie's `#f3ecdf` (L 0.945, C 0.019). Too close to use with a warm accent |
+| Areia (sand) | `oklch(0.955 0.012 82)` | `oklch(0.26 0.014 55)` | Warm, close to Allie's `#f3ecdf` (L 0.945, C 0.019). Live as Mix's light mode. Close in hue to Bronze, so the accent leans on lightness for contrast |
 | Grafite (graphite) | `oklch(0.955 0 0)` (`#f0f0f0`) | `oklch(0.252 0 0)` (`#222`) | The plain grey of the Minimal theme (minimal.guide) |
 | Nord | nord6 `oklch(0.951 0.007 261)` | nord0 `oklch(0.324 0.023 264)` | Nord's Snow Storm and Polar Night |
 
