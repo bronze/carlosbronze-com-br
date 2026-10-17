@@ -4,17 +4,33 @@
 // photographed view of Rio.
 //
 // The sky follows the time in Rio (see sky.ts): the sun rises behind the
-// hills on the left at 6h, peaks at noon and sets on the right at 18h; at
-// night the moon, in today's phase, takes the same arc. ?hora=17.5 pins the
-// time. SkyDebug drives it through `sky:control` events and listens to
-// `sky:tick`.
-import { arc, arcPath, pointOnArc } from './sky'
+// hills on the left around 6h, peaks at noon and sets on the right around
+// 18h. The moon, in today's phase, takes the same arc for twelve hours, rising
+// when its phase says (so a crescent shares the afternoon with the sun). At
+// night there are always a few stars, and more when the moon is down.
+// ?hora=17.5 pins the time. SkyDebug drives it through `sky:control` events
+// and listens to `sky:tick`.
+import { arc, arcPath, arcPosition, pointOnArc, twilight } from './sky'
 
-// Hour marks along the arc, labelled for the sun and the moon.
-const marks = [0, 0.25, 0.5, 0.75, 1].map(t => ({
-  ...pointOnArc(t),
-  label: `${6 + 12 * t}h · ${(18 + 12 * t) % 24}h`,
+// Hour marks along the arc, for the sun.
+const marks = [6, 9, 12, 15, 18].map(hour => ({
+  ...pointOnArc(arcPosition(hour, 6, twilight)!),
+  label: `${hour}h`,
 }))
+
+// Stars scattered over the sky above the hills, from a fixed seed so they
+// don't move between builds. The first few are the ones always out at night.
+let seed = 11
+const random = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
+const stars = Array.from({ length: 30 }, (_, i) => ({
+  x: 125 + random() * 450,
+  y: -65 + random() * 170,
+  r: 0.7 + random() * 1.1,
+  twinkle: i % 4 === 0,
+  delay: random() * 4,
+}))
+const fewStars = stars.slice(0, 8)
+const moreStars = stars.slice(8)
 ---
 
 <svg
@@ -48,6 +64,26 @@ const marks = [0, 0.25, 0.5, 0.75, 1].map(t => ({
       ))
     }
   </g>
+  <!-- Stars, faded in by the script at night -->
+  {
+    [
+      { group: 'few', list: fewStars },
+      { group: 'more', list: moreStars },
+    ].map(({ group, list }) => (
+      <g class="stars" opacity="0" data-stars={group}>
+        {list.map(s => (
+          <circle
+            cx={s.x.toFixed(1)}
+            cy={s.y.toFixed(1)}
+            r={s.r.toFixed(2)}
+            fill="var(--star)"
+            class:list={[s.twinkle && 'twinkle']}
+            style={`animation-delay: ${s.delay.toFixed(1)}s`}
+          />
+        ))}
+      </g>
+    ))
+  }
   <!-- Placed by the script below; hidden until then, so nothing jumps. -->
   <circle r="22" fill="var(--sun)" visibility="hidden" data-body="sun"></circle>
   <g visibility="hidden" data-body="moon">
@@ -65,6 +101,8 @@ const marks = [0, 0.25, 0.5, 0.75, 1].map(t => ({
     --moon-shadow: transparent;
     --moon-edge: var(--color-base-300);
     --hill: var(--color-base-200);
+    /* Pale, or on the light ground they read as specks of dust. */
+    --star: var(--color-base-300);
   }
   :global(.dark) .scene {
     --sun: var(--color-brand-700);
@@ -72,11 +110,25 @@ const marks = [0, 0.25, 0.5, 0.75, 1].map(t => ({
     --moon-shadow: var(--color-base-800);
     --moon-edge: transparent;
     --hill: var(--color-base-800);
+    --star: var(--color-base-300);
+  }
+  .stars {
+    transition: opacity 1.5s ease;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .twinkle {
+      animation: twinkle 4s ease-in-out infinite;
+    }
+  }
+  @keyframes twinkle {
+    50% {
+      opacity: 0.3;
+    }
   }
 </style>
 
 <script>
-  import { hourInRio, litMoonPath, moonPhase, pointOnArc, skyAt } from './sky'
+  import { hourInRio, litMoonPath, moonPhase, moonRise, nightness, pointOnArc, skyAt } from './sky'
 
   type Control = { hour?: number | null; phase?: number | null; path?: boolean }
 
@@ -87,6 +139,8 @@ const marks = [0, 0.25, 0.5, 0.75, 1].map(t => ({
     const moon = svg.querySelector<SVGElement>('[data-body="moon"]')!
     const lit = svg.querySelector<SVGPathElement>('[data-moon-lit]')!
     const path = svg.querySelector<SVGElement>('[data-sky-path]')!
+    const fewStars = svg.querySelector<SVGElement>('[data-stars="few"]')!
+    const moreStars = svg.querySelector<SVGElement>('[data-stars="more"]')!
 
     // null means "now"; the debug panel can pin either.
     const pinned = Number.parseFloat(new URLSearchParams(location.search).get('hora') ?? '')
@@ -99,17 +153,31 @@ const marks = [0, 0.25, 0.5, 0.75, 1].map(t => ({
     function render() {
       const hour = state.hour ?? hourInRio()
       const phase = state.phase ?? moonPhase()
-      const { day, t } = skyAt(hour)
-      const { x, y } = pointOnArc(t)
-      const [up, down] = day ? [sun, moon] : [moon, sun]
-      up.setAttribute('transform', `translate(${x} ${y})`)
-      up.setAttribute('visibility', 'visible')
-      down.setAttribute('visibility', 'hidden')
+      const positions = skyAt(hour, phase)
+      for (const [body, t] of [
+        [sun, positions.sun],
+        [moon, positions.moon],
+      ] as const) {
+        if (t === null) {
+          body.setAttribute('visibility', 'hidden')
+          continue
+        }
+        const { x, y } = pointOnArc(t)
+        body.setAttribute('transform', `translate(${x} ${y})`)
+        body.setAttribute('visibility', 'visible')
+      }
       const shape = litMoonPath(phase, 15)
       lit.setAttribute('d', shape.d)
       lit.setAttribute('transform', shape.mirror ? 'scale(-1 1)' : '')
+      const night = nightness(hour)
+      fewStars.setAttribute('opacity', String(night))
+      moreStars.setAttribute('opacity', String(positions.moon === null ? night : 0))
       path.setAttribute('visibility', state.path ? 'visible' : 'hidden')
-      document.dispatchEvent(new CustomEvent('sky:tick', { detail: { hour, phase, live: state.hour === null } }))
+      document.dispatchEvent(
+        new CustomEvent('sky:tick', {
+          detail: { hour, phase, moonRise: moonRise(phase), live: state.hour === null },
+        }),
+      )
     }
 
     function control(event: Event) {

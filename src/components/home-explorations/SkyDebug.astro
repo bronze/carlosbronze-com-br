@@ -36,6 +36,10 @@ const button =
       </span>
       <input type="range" min="0" max="1" step="0.01" value="0.5" class="w-full accent-current" data-in="phase" />
     </label>
+    <p class="flex justify-between">
+      <T pt="a lua nasce às" en="moon rises at" />
+      <output class="text-foreground" data-out="moonrise">--:--</output>
+    </p>
     <div class="flex gap-2">
       <button type="button" class={button} data-act="today" aria-pressed="true"><T pt="hoje" en="today" /></button>
     </div>
@@ -55,6 +59,7 @@ const button =
     const phaseIn = $<HTMLInputElement>('[data-in="phase"]')
     const hourOut = $<HTMLOutputElement>('[data-out="hour"]')
     const phaseOut = $<HTMLOutputElement>('[data-out="phase"]')
+    const riseOut = $<HTMLOutputElement>('[data-out="moonrise"]')
     const now = $<HTMLButtonElement>('[data-act="now"]')
     const play = $<HTMLButtonElement>('[data-act="play"]')
     const path = $<HTMLButtonElement>('[data-act="path"]')
@@ -81,8 +86,9 @@ const button =
     }
 
     function onTick(event: Event) {
-      const { hour, phase, live } = (event as CustomEvent).detail
+      const { hour, phase, moonRise, live } = (event as CustomEvent).detail
       hourOut.textContent = formatHour(hour)
+      riseOut.textContent = formatHour(moonRise)
       if (document.activeElement !== hourIn) hourIn.value = String(hour)
       if (document.activeElement !== phaseIn) phaseIn.value = String(phase)
       const name = phaseName(phase)

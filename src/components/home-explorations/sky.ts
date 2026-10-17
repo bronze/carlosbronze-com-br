@@ -4,7 +4,10 @@
 
 // The arc, in the scene's viewBox units: from the left edge to the right one,
 // starting and ending a sun's width below the bottom, peaking well above Pão
-// de Açúcar. The sun takes it from 6h to 18h, the moon from 18h to 6h.
+// de Açúcar. The sun takes it from 6h to 18h, stretched by `twilight` hours
+// at both ends so it lingers low at dawn and dusk. The moon takes twelve
+// hours too, but when depends on its phase (see moonRise).
+export const twilight = 1
 export const arc = { left: 130, right: 570, horizon: 200, top: -30 }
 
 // t runs from 0 (rising) to 1 (setting).
@@ -22,11 +25,36 @@ export function arcPath(steps = 48) {
   }).join(' ')
 }
 
-// Which body is up at this hour, and how far along the arc it is.
-export function skyAt(hour: number) {
-  const day = hour >= 6 && hour < 18
-  const t = ((((hour - (day ? 6 : 18)) % 24) + 24) % 24) / 12
-  return { day, t }
+// How far along the arc a body is at this hour (0 rising, 1 setting), or
+// null while it's down.
+export function arcPosition(hour: number, rise: number, extra = 0) {
+  const t = ((((hour - rise + extra) % 24) + 24) % 24) / (12 + 2 * extra)
+  return t <= 1 ? t : null
+}
+
+// The moon rises about 50 minutes later each day, a full turn of the clock
+// per cycle: with the sun when new (6h), at noon at first quarter, at sunset
+// when full (18h), at midnight at last quarter.
+export function moonRise(phase: number) {
+  return (6 + 24 * phase) % 24
+}
+
+// Within a day or so of new, the moon is lost in the sun's glare.
+const newMoonWindow = 0.035
+
+export function skyAt(hour: number, phase: number) {
+  const nearNew = Math.min(phase, 1 - phase) < newMoonWindow
+  return {
+    sun: arcPosition(hour, 6, twilight),
+    moon: nearNew ? null : arcPosition(hour, moonRise(phase)),
+  }
+}
+
+// How dark the sky is, 0 (day) to 1 (night), for the stars: they fade in
+// from 17:30 to 19h and out from 5h to 6:30.
+export function nightness(hour: number) {
+  const clamp = (n: number) => Math.min(1, Math.max(0, n))
+  return hour < 12 ? clamp((6.5 - hour) / 1.5) : clamp((hour - 17.5) / 1.5)
 }
 
 const clock = new Intl.DateTimeFormat('en-GB', {
