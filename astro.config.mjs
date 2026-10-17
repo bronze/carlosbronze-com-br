@@ -51,6 +51,8 @@ export default defineConfig({
     react(),
     mdx(),
     sitemap({
+      // The home explorations are trials, not pages to index.
+      filter: page => !page.includes('/home-exploration-'),
       // Vercel serves pages without the trailing slash (cleanUrls).
       serialize: item => ({ ...item, url: item.url.replace(/(?<=.)\/$/, '') }),
     }),

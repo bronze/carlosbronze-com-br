@@ -1,0 +1,38 @@
+---
+// Exploration 3: the Copacabana promenade, its wave paving seen from above,
+// filling the bottom-right corner and fading out towards the text.
+---
+
+<svg
+  class="scene pointer-events-none mt-12 ml-auto block sm:fixed sm:right-0 sm:bottom-0 sm:-z-10 sm:mt-0 print:hidden -mr-4 size-[min(100vw,480px)] sm:mr-0 sm:size-[min(60vw,560px)]"
+  viewBox="0 0 480 480"
+  aria-hidden="true">
+  <defs>
+    <!-- The paving's waves, one band per tile. The lower edge is the upper
+         one moved down, so bands and gaps are equally thick: broad round
+         crests, steep (not vertical) sides. A band spills past the tile, so
+         copies one tile up and down fill the overflow. -->
+    <pattern id="calcadao-waves" width="120" height="75" patternUnits="userSpaceOnUse">
+      <path id="calcadao-band" fill="var(--t1)" d="M0 23 C7 10.4 16 2 30 2 C44 2 53 10.4 60 23 C67 35.6 76 44 90 44 C104 44 113 35.6 120 23 V60.5 C113 73.1 104 81.5 90 81.5 C76 81.5 67 73.1 60 60.5 C53 47.9 44 39.5 30 39.5 C16 39.5 7 47.9 0 60.5 Z"></path>
+      <use href="#calcadao-band" y="-75"></use>
+      <use href="#calcadao-band" y="75"></use>
+    </pattern>
+    <radialGradient id="calcadao-fade" cx="1" cy="1" r="1">
+      <stop offset="0.35" stop-color="#fff"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+    </radialGradient>
+    <mask id="calcadao-mask">
+      <rect width="480" height="480" fill="url(#calcadao-fade)"></rect>
+    </mask>
+  </defs>
+  <rect width="480" height="480" fill="url(#calcadao-waves)" mask="url(#calcadao-mask)"></rect>
+</svg>
+
+<style>
+  .scene {
+    --t1: var(--color-base-200);
+  }
+  :global(.dark) .scene {
+    --t1: var(--color-base-800);
+  }
+</style>

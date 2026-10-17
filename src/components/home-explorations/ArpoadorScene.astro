@@ -1,0 +1,57 @@
+---
+// Exploration 1: the Arpoador sunset. Dois Irmãos in front, the flat top of
+// Pedra da Gávea behind it, the sun going into the sea. Flat silhouettes in
+// three grey steps, the sun in the accent.
+---
+
+<svg
+  class="scene pointer-events-none mt-12 ml-auto block sm:fixed sm:right-0 sm:bottom-0 sm:-z-10 sm:mt-0 print:hidden w-full sm:w-[min(60vw,600px)]"
+  viewBox="0 0 640 360"
+  aria-hidden="true">
+  <defs>
+    <!-- Fades the left edge into the page, so the scene has no hard start. -->
+    <linearGradient id="arpoador-fade" x1="0" x2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+      <stop offset="0.3" stop-color="#fff"></stop>
+    </linearGradient>
+    <mask id="arpoador-mask">
+      <rect width="640" height="360" fill="url(#arpoador-fade)"></rect>
+    </mask>
+  </defs>
+  <g mask="url(#arpoador-mask)">
+    <!-- Winter sunset: the sun goes down behind the hills, not into the sea -->
+    <circle cx="372" cy="226" r="24" fill="var(--brand)"></circle>
+    <!-- Pedra da Gávea -->
+    <path
+      fill="var(--t1)"
+      d="M150 300 C190 284 210 244 228 186 C234 164 244 152 262 149 L318 143 C334 142 342 153 350 175 C362 206 380 234 410 252 L410 300 Z"
+    ></path>
+    <!-- Dois Irmãos: the taller peak towards the sea, the lower one inland -->
+    <path
+      fill="var(--t2)"
+      d="M330 300 C368 290 392 244 414 176 C423 146 430 126 440 122 C450 120 458 136 468 154 C480 174 490 182 504 180 C518 178 530 158 546 154 C562 152 578 176 598 206 C612 228 626 244 640 252 L640 300 Z"
+    ></path>
+    <!-- The sea: the page ground over the bottom of the sun, and a few swells -->
+    <rect y="300" width="640" height="60" fill="var(--background)"></rect>
+    <g stroke="var(--t2)" stroke-width="2" stroke-linecap="round" fill="none">
+      <path d="M96 312 H210 M250 312 H300"></path>
+      <path d="M130 324 H180 M330 324 H470 M520 324 H600"></path>
+      <path d="M220 338 H380 M440 338 H520"></path>
+    </g>
+    <!-- Ipanema's sand, curving out of the corner -->
+    <path fill="var(--t3)" d="M360 360 C450 352 560 346 640 330 L640 360 Z"></path>
+  </g>
+</svg>
+
+<style>
+  .scene {
+    --t1: var(--color-base-100);
+    --t2: var(--color-base-200);
+    --t3: var(--color-base-300);
+  }
+  :global(.dark) .scene {
+    --t1: var(--color-base-900);
+    --t2: var(--color-base-800);
+    --t3: var(--color-base-700);
+  }
+</style>

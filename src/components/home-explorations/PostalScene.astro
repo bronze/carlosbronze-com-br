@@ -1,0 +1,132 @@
+---
+// Exploration 4: the postcard view, reduced to its essentials. Pão de Açúcar
+// and Urca in silhouette, as seen from Dona Marta, traced from the most
+// photographed view of Rio.
+//
+// The sky follows the time in Rio (see sky.ts): the sun rises behind the
+// hills on the left at 6h, peaks at noon and sets on the right at 18h; at
+// night the moon, in today's phase, takes the same arc. ?hora=17.5 pins the
+// time. SkyDebug drives it through `sky:control` events and listens to
+// `sky:tick`.
+import { arc, arcPath, pointOnArc } from './sky'
+
+// Hour marks along the arc, labelled for the sun and the moon.
+const marks = [0, 0.25, 0.5, 0.75, 1].map(t => ({
+  ...pointOnArc(t),
+  label: `${6 + 12 * t}h · ${(18 + 12 * t) % 24}h`,
+}))
+---
+
+<svg
+  class="scene pointer-events-none mt-12 ml-auto block w-full sm:fixed sm:right-0 sm:bottom-0 sm:-z-10 sm:mt-0 sm:w-[min(55vw,680px)] print:hidden"
+  viewBox="120 -70 460 247"
+  aria-hidden="true"
+  data-sky>
+  <!-- The path, for the debug panel -->
+  <g data-sky-path visibility="hidden">
+    <path
+      d={arcPath()}
+      fill="none"
+      stroke="var(--outline)"
+      stroke-width="1"
+      stroke-dasharray="3 4"
+      vector-effect="non-scaling-stroke"></path>
+    {
+      marks.map(m => (
+        <>
+          <circle cx={m.x} cy={m.y} r="2.5" fill="var(--outline)" />
+          <text
+            x={m.x}
+            y={m.y < arc.horizon - 10 ? m.y - 9 : m.y - 30}
+            text-anchor="middle"
+            fill="var(--muted-foreground)"
+            font-family="var(--font-mono)"
+            font-size="9">
+            {m.label}
+          </text>
+        </>
+      ))
+    }
+  </g>
+  <!-- Placed by the script below; hidden until then, so nothing jumps. -->
+  <circle r="22" fill="var(--sun)" visibility="hidden" data-body="sun"></circle>
+  <g visibility="hidden" data-body="moon">
+    <circle r="15" fill="var(--moon-shadow)" stroke="var(--moon-edge)" stroke-width="1"></circle>
+    <path fill="var(--moon-lit)" data-moon-lit></path>
+  </g>
+  <path fill="var(--hill)" d="M309.2 121.5 C309.8 118.9 310.7 112.3 312.7 106 C314.8 99.7 318.1 91.3 321.5 83.9 C325 76.6 329.9 67.9 333.5 61.8 C337 55.8 339.8 50.9 342.7 47.7 C345.7 44.5 348.3 43.3 351.1 42.4 C353.9 41.5 356.8 41.7 359.5 42.4 C362.3 43.1 364.8 44.2 367.5 46.8 C370.1 49.5 372.9 54 375.4 58.3 C377.9 62.6 380.3 67.7 382.5 72.9 C384.7 78 386.6 83.3 388.7 89.2 C390.7 95.1 393.8 105 394.9 108.2 L394.9 123.7 L309.2 123.7 Z"></path>
+  <path fill="var(--hill)" d="M159.9 168.7 C164.2 167.1 176.8 162.4 185.5 159 C194.2 155.6 201.7 151.6 212 148.4 C222.3 145.2 235.6 142.8 247.3 139.6 C259.1 136.3 272.4 132.1 282.7 129 C293 125.8 297.4 123.1 309.2 120.6 C321 118.1 339 116 353.3 114 C367.7 111.9 384.3 110.1 395.3 108.2 C406.3 106.4 411.9 104.7 419.6 102.9 C427.3 101.1 435.8 98.6 441.7 97.6 C447.6 96.6 450.5 96.4 454.9 96.7 C459.4 97.1 463.8 98.1 468.2 99.8 C472.6 101.6 476.7 103.4 481.4 107.3 C486.2 111.3 491.4 118 496.9 123.7 C502.4 129.3 508.7 135.6 514.6 141.3 C520.5 147.1 526 153.3 532.2 158.1 C538.5 162.9 548.8 168.1 552.1 170 L552.1 176.7 L159.9 176.7 Z"></path>
+</svg>
+
+<style>
+  .scene {
+    --sun: var(--color-brand-300);
+    --moon-lit: var(--color-base-300);
+    --moon-shadow: transparent;
+    --moon-edge: var(--color-base-300);
+    --hill: var(--color-base-200);
+  }
+  :global(.dark) .scene {
+    --sun: var(--color-brand-700);
+    --moon-lit: var(--color-base-300);
+    --moon-shadow: var(--color-base-800);
+    --moon-edge: transparent;
+    --hill: var(--color-base-800);
+  }
+</style>
+
+<script>
+  import { hourInRio, litMoonPath, moonPhase, pointOnArc, skyAt } from './sky'
+
+  type Control = { hour?: number | null; phase?: number | null; path?: boolean }
+
+  document.addEventListener('astro:page-load', () => {
+    const svg = document.querySelector<SVGSVGElement>('[data-sky]')
+    if (!svg) return
+    const sun = svg.querySelector<SVGElement>('[data-body="sun"]')!
+    const moon = svg.querySelector<SVGElement>('[data-body="moon"]')!
+    const lit = svg.querySelector<SVGPathElement>('[data-moon-lit]')!
+    const path = svg.querySelector<SVGElement>('[data-sky-path]')!
+
+    // null means "now"; the debug panel can pin either.
+    const pinned = Number.parseFloat(new URLSearchParams(location.search).get('hora') ?? '')
+    const state: Required<Control> = {
+      hour: pinned >= 0 && pinned < 24 ? pinned : null,
+      phase: null,
+      path: false,
+    }
+
+    function render() {
+      const hour = state.hour ?? hourInRio()
+      const phase = state.phase ?? moonPhase()
+      const { day, t } = skyAt(hour)
+      const { x, y } = pointOnArc(t)
+      const [up, down] = day ? [sun, moon] : [moon, sun]
+      up.setAttribute('transform', `translate(${x} ${y})`)
+      up.setAttribute('visibility', 'visible')
+      down.setAttribute('visibility', 'hidden')
+      const shape = litMoonPath(phase, 15)
+      lit.setAttribute('d', shape.d)
+      lit.setAttribute('transform', shape.mirror ? 'scale(-1 1)' : '')
+      path.setAttribute('visibility', state.path ? 'visible' : 'hidden')
+      document.dispatchEvent(new CustomEvent('sky:tick', { detail: { hour, phase, live: state.hour === null } }))
+    }
+
+    function control(event: Event) {
+      Object.assign(state, (event as CustomEvent<Control>).detail)
+      render()
+    }
+
+    document.addEventListener('sky:control', control)
+    const timer = setInterval(render, 60_000)
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        clearInterval(timer)
+        document.removeEventListener('sky:control', control)
+      },
+      { once: true },
+    )
+    render()
+  })
+</script>

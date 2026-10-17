@@ -1,0 +1,131 @@
+---
+// A floating dev panel for exploration 4: scrub through the 24 hours, play a
+// whole day, show the sun's and moon's path, and try any moon phase. It talks
+// to PostalScene through `sky:control` and `sky:tick` events, so dropping
+// this component removes it without touching the scene.
+import T from '@/components/site/T.astro'
+
+const button =
+  'border-border hover:text-foreground aria-pressed:text-foreground aria-pressed:border-foreground rounded border px-2 py-1 transition-colors'
+---
+
+<details
+  class="bg-background/95 border-border text-muted-foreground fixed bottom-4 left-4 z-50 w-72 rounded-lg border font-mono text-xs shadow-sm backdrop-blur print:hidden"
+  data-sky-debug
+  open>
+  <summary class="hover:text-foreground cursor-pointer px-3 py-2 select-none">
+    <T pt="céu · modo dev" en="sky · dev mode" />
+  </summary>
+  <div class="space-y-3 border-t border-inherit px-3 py-3">
+    <label class="block">
+      <span class="mb-1 flex justify-between">
+        <T pt="hora no Rio" en="time in Rio" />
+        <output class="text-foreground" data-out="hour">--:--</output>
+      </span>
+      <input type="range" min="0" max="24" step="0.25" value="12" class="w-full accent-current" data-in="hour" />
+    </label>
+    <div class="flex gap-2">
+      <button type="button" class={button} data-act="now" aria-pressed="true"><T pt="agora" en="now" /></button>
+      <button type="button" class={button} data-act="play" aria-pressed="false"><T pt="▶ dia em 24s" en="▶ day in 24s" /></button>
+      <button type="button" class={button} data-act="path" aria-pressed="false"><T pt="trajetória" en="path" /></button>
+    </div>
+    <label class="block">
+      <span class="mb-1 flex justify-between">
+        <T pt="fase da lua" en="moon phase" />
+        <output class="text-foreground" data-out="phase">–</output>
+      </span>
+      <input type="range" min="0" max="1" step="0.01" value="0.5" class="w-full accent-current" data-in="phase" />
+    </label>
+    <div class="flex gap-2">
+      <button type="button" class={button} data-act="today" aria-pressed="true"><T pt="hoje" en="today" /></button>
+    </div>
+  </div>
+</details>
+
+<script>
+  import { formatHour, phaseName } from './sky'
+
+  document.addEventListener('astro:page-load', () => {
+    const panel = document.querySelector<HTMLElement>('[data-sky-debug]')
+    if (!panel) return
+    const $ = <E extends Element>(selector: string) => panel.querySelector<E>(selector)!
+    const hourIn = $<HTMLInputElement>('[data-in="hour"]')
+    const phaseIn = $<HTMLInputElement>('[data-in="phase"]')
+    const hourOut = $<HTMLOutputElement>('[data-out="hour"]')
+    const phaseOut = $<HTMLOutputElement>('[data-out="phase"]')
+    const now = $<HTMLButtonElement>('[data-act="now"]')
+    const play = $<HTMLButtonElement>('[data-act="play"]')
+    const path = $<HTMLButtonElement>('[data-act="path"]')
+    const today = $<HTMLButtonElement>('[data-act="today"]')
+
+    const send = (detail: object) => document.dispatchEvent(new CustomEvent('sky:control', { detail }))
+    const pressed = (b: HTMLButtonElement, on: boolean) => (b.ariaPressed = String(on))
+    let frame = 0
+
+    function stop() {
+      cancelAnimationFrame(frame)
+      pressed(play, false)
+    }
+
+    // A whole day in 24 seconds: one hour a second.
+    function run(from: number) {
+      let start: number | undefined
+      const step = (time: number) => {
+        start ??= time
+        send({ hour: (from + (time - start) / 1000) % 24 })
+        frame = requestAnimationFrame(step)
+      }
+      frame = requestAnimationFrame(step)
+    }
+
+    function onTick(event: Event) {
+      const { hour, phase, live } = (event as CustomEvent).detail
+      hourOut.textContent = formatHour(hour)
+      if (document.activeElement !== hourIn) hourIn.value = String(hour)
+      if (document.activeElement !== phaseIn) phaseIn.value = String(phase)
+      const name = phaseName(phase)
+      const en = document.documentElement.dataset.lang === 'en'
+      phaseOut.textContent = `${en ? name.en : name.pt} · ${Math.round(phase * 100)}%`
+      pressed(now, live)
+    }
+    document.addEventListener('sky:tick', onTick)
+
+    hourIn.addEventListener('input', () => {
+      stop()
+      send({ hour: Number(hourIn.value) % 24 })
+    })
+    phaseIn.addEventListener('input', () => {
+      pressed(today, false)
+      send({ phase: Number(phaseIn.value) })
+    })
+    now.addEventListener('click', () => {
+      stop()
+      send({ hour: null })
+    })
+    play.addEventListener('click', () => {
+      if (play.ariaPressed === 'true') return stop()
+      pressed(play, true)
+      run(Number(hourIn.value))
+    })
+    path.addEventListener('click', () => {
+      const on = path.ariaPressed !== 'true'
+      pressed(path, on)
+      send({ path: on })
+    })
+    today.addEventListener('click', () => {
+      pressed(today, true)
+      send({ phase: null })
+    })
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        stop()
+        document.removeEventListener('sky:tick', onTick)
+      },
+      { once: true },
+    )
+    // Ask the scene for its current state.
+    send({})
+  })
+</script>

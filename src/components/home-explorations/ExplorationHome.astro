@@ -1,0 +1,40 @@
+---
+// The home page as it is today, plus a Rio scene in the slot. Only for the
+// /home-exploration-* pages: trials, kept out of search and the sitemap.
+import PageLayout from '@/layouts/PageLayout.astro'
+import SectionLink from '@/components/site/SectionLink.astro'
+import { ariaLabel, sections, type Bilingual } from '@/lib/site'
+
+interface Props {
+  title: Bilingual
+}
+---
+
+<PageLayout
+  hero
+  title={Astro.props.title}
+  eyebrow={{ pt: 'Rio de Janeiro, BR', en: 'Rio de Janeiro, BR' }}
+  heading={{ pt: 'Carlos Bronze.', en: 'Carlos Bronze.' }}
+  subheading={{ pt: 'Senior Product Manager', en: 'Senior Product Manager' }}
+  intro={{
+    pt: 'Conecto estratégia, métricas e criatividade para construir produtos que movem o negócio.',
+    en: 'I connect strategy, metrics and creativity to build products that move the business.',
+  }}
+  pager={false}
+  noindex>
+  <Fragment slot="intro">
+    <span data-lang-pt>Conecto estratégia, métricas e criatividade para construir produtos que movem o negócio.</span><span data-lang-en>I connect strategy, metrics and creativity<br /> to build products that move the business.</span>
+  </Fragment>
+  <nav {...ariaLabel({ pt: 'Seções', en: 'Sections' })}>
+    <ul class="grid max-w-3xl gap-x-10 gap-y-6 sm:grid-cols-3">
+      {
+        sections.map(s => (
+          <li>
+            <SectionLink section={s} />
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <slot />
+</PageLayout>

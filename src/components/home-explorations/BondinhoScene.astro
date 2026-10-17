@@ -1,0 +1,57 @@
+---
+// Exploration 2: Pão de Açúcar and Morro da Urca as one thin line, with the
+// cable car (the accent) crossing slowly between them, Urca to the top and
+// back.
+---
+
+<svg
+  class="scene pointer-events-none mt-12 ml-auto block sm:fixed sm:right-0 sm:bottom-0 sm:-z-10 sm:mt-0 print:hidden w-full sm:w-[min(60vw,640px)]"
+  viewBox="0 0 640 360"
+  aria-hidden="true"
+  data-bondinho>
+  <g
+    fill="none"
+    stroke="var(--outline)"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    vector-effect="non-scaling-stroke">
+    <!-- Traced from the classic view from Dona Marta: the dome of Pão de
+         Açúcar behind, Morro da Urca in front of it with its long slope
+         down to the left. -->
+    <path d="M200.5 232.7 C201.4 228.3 202.9 216.1 205.9 206.2 C209 196.2 213.9 183.5 218.8 172.8 C223.8 162.2 230.7 150.5 235.8 142.2 C240.9 134 245 127.7 249.4 123.2 C253.9 118.7 258.2 116.5 262.4 115 C266.6 113.6 270.7 113.5 274.6 114.4 C278.5 115.3 281.7 116.7 285.5 120.5 C289.2 124.2 293.3 130.5 297 136.8 C300.8 143.1 304.4 150.4 307.9 158.6 C311.4 166.7 314.9 176.4 318.1 185.8 C321.3 195.2 325.5 210.1 327 215"></path>
+    <path d="M19.6 300 C23 299 26.4 299.8 40 293.9 C53.6 288 81.9 272.5 101.2 264.6 C120.5 256.8 139.2 252.3 155.6 247 C172 241.6 181.7 236.5 199.8 232.7 C217.9 228.8 242.9 226.8 264.4 223.8 C285.9 220.9 312 217.8 329 215 C346 212.2 354.5 209.4 366.4 206.8 C378.3 204.2 391.3 200.8 400.4 199.4 C409.5 197.9 414 197.4 420.8 198 C427.6 198.6 434.4 199.9 441.2 202.8 C448 205.6 454.2 209 461.6 215 C469 221 476.9 230.1 485.4 238.8 C493.9 247.5 503.5 258.5 512.6 267.4 C521.7 276.2 531.3 286.4 539.8 291.8 C548.3 297.3 559.6 298.6 563.6 300"></path>
+    <!-- The water line and a few swells -->
+    <path d="M0 300 H630"></path>
+    <path d="M120 314 H200 M300 314 H420"></path>
+    <path d="M220 328 H260 M460 328 H580"></path>
+    <!-- Cables: Pão de Açúcar to Urca, Urca down to Praia Vermelha -->
+    <path d="M270 114.6 Q340 152 414 197.3"></path>
+    <path d="M270 118.6 Q340 156 414 201.3" stroke-dasharray="1 5"></path>
+    <path d="M414 197.3 Q520 235 630 300"></path>
+  </g>
+  <!-- The cabin, drawn at the origin and moved along the upper cable -->
+  <g fill="var(--brand)">
+    <path d="M0 0 V7" stroke="var(--brand)" stroke-width="1.5"></path>
+    <rect x="-9" y="7" width="18" height="12" rx="2.5"></rect>
+    <animateMotion
+      dur="40s"
+      repeatCount="indefinite"
+      keyPoints="0;1;1;0;0"
+      keyTimes="0;0.4;0.5;0.9;1"
+      calcMode="spline"
+      keySplines="0.45 0 0.55 1; 0 0 1 1; 0.45 0 0.55 1; 0 0 1 1"
+      path="M414 197.3 Q340 152 270 114.6"></animateMotion>
+  </g>
+</svg>
+
+<script>
+  // SMIL ignores prefers-reduced-motion, so stop the cabin by hand.
+  document.addEventListener('astro:page-load', () => {
+    const svg = document.querySelector<SVGSVGElement>('[data-bondinho]')
+    if (svg && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      svg.pauseAnimations()
+      svg.setCurrentTime(16)
+    }
+  })
+</script>
