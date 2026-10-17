@@ -55,11 +55,13 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
     </a>
   </nav>
 
+  <!-- The label starts with the visible text, so voice control finds the
+       button by what it shows. -->
   <button
     id="lang-toggle"
     type="button"
     class="text-muted-foreground col-start-2 row-start-1 flex items-center gap-1 justify-self-end font-mono text-xs sm:col-start-3"
-    {...ariaLabel({ pt: 'Read in English', en: 'Ler em português' })}
+    {...ariaLabel({ pt: 'PT / EN, read in English', en: 'PT / EN, ler em português' })}
     data-foley-toggle>
     <span class="lang-label" data-for="pt" aria-hidden="true">PT</span>
     <span class="opacity-30" aria-hidden="true">/</span>
