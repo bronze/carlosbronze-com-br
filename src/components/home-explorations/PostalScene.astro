@@ -12,6 +12,12 @@
 // and listens to `sky:tick`.
 import { arc, arcPath, arcPosition, pointOnArc, twilight } from './sky'
 
+interface Props {
+  // Trial: the page ground follows the hour too (see groundAt in sky.ts).
+  daylight?: boolean
+}
+const { daylight = false } = Astro.props
+
 // Hour marks along the arc, for the sun.
 const marks = [6, 9, 12, 15, 18].map(hour => ({
   ...pointOnArc(arcPosition(hour, 6, twilight)!),
@@ -37,7 +43,8 @@ const moreStars = stars.slice(8)
   class="scene pointer-events-none absolute top-24 right-4 -z-10 block sm:fixed sm:top-auto sm:right-0 sm:bottom-0 print:hidden w-[48vw] sm:w-[min(55vw,680px)]"
   viewBox="120 -70 460 247"
   aria-hidden="true"
-  data-sky>
+  data-sky
+  data-daylight={daylight ? '' : undefined}>
   <!-- The path, for the debug panel -->
   <g data-sky-path visibility="hidden">
     <path
@@ -141,7 +148,7 @@ const moreStars = stars.slice(8)
 </style>
 
 <script>
-  import { hourInRio, litMoonPath, moonPhase, moonRise, nightness, pointOnArc, skyAt } from './sky'
+  import { groundAt, hourInRio, litMoonPath, moonPhase, moonRise, nightness, pointOnArc, skyAt } from './sky'
 
   type Control = { hour?: number | null; phase?: number | null; path?: boolean }
 
@@ -152,6 +159,8 @@ const moreStars = stars.slice(8)
     const moon = svg.querySelector<SVGElement>('[data-body="moon"]')!
     const lit = svg.querySelector<SVGPathElement>('[data-moon-lit]')!
     const path = svg.querySelector<SVGElement>('[data-sky-path]')!
+    const root = document.documentElement
+    const daylight = svg.hasAttribute('data-daylight')
     const fewStars = svg.querySelector<SVGElement>('[data-stars="few"]')!
     const moreStars = svg.querySelector<SVGElement>('[data-stars="more"]')!
 
@@ -182,6 +191,10 @@ const moreStars = stars.slice(8)
       const shape = litMoonPath(phase, 15)
       lit.setAttribute('d', shape.d)
       lit.setAttribute('transform', shape.mirror ? 'scale(-1 1)' : '')
+      if (daylight) {
+        const ground = groundAt(hour, root.classList.contains('dark'))
+        root.style.setProperty('--background', ground)
+      }
       const night = nightness(hour)
       fewStars.setAttribute('opacity', String(night))
       moreStars.setAttribute('opacity', String(positions.moon === null ? night : 0))
@@ -200,11 +213,16 @@ const moreStars = stars.slice(8)
 
     document.addEventListener('sky:control', control)
     const timer = setInterval(render, 60_000)
+    // The theme toggle swaps the ground's range.
+    const theme = new MutationObserver(render)
+    theme.observe(root, { attributes: true, attributeFilter: ['class'] })
     document.addEventListener(
       'astro:before-swap',
       () => {
         clearInterval(timer)
+        theme.disconnect()
         document.removeEventListener('sky:control', control)
+        root.style.removeProperty('--background')
       },
       { once: true },
     )

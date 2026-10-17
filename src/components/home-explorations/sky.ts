@@ -111,3 +111,22 @@ export function phaseName(phase: number) {
   if (phase < 0.75) return { pt: 'minguante gibosa', en: 'waning gibbous' }
   return { pt: 'minguante', en: 'waning crescent' }
 }
+
+// The page ground through the day, for exploration 4: lightest at noon,
+// darkest at night, in both themes. The ends are as far as the ground can go
+// with every text role still at AA (accent text is the tightest: 4.6:1 on the
+// light night ground, 7:1 on the dark day one).
+const ground = {
+  light: { day: [0.975, 0.011, 84], night: [0.925, 0.014, 80] },
+  dark: { day: [0.21, 0, 0], night: [0.145, 0, 0] },
+}
+
+export function groundAt(hour: number, dark: boolean) {
+  const sun = arcPosition(hour, 6, twilight)
+  // Daylight follows the sun's height, eased so the morning brightens fast.
+  const day = sun === null ? 0 : Math.sin(Math.PI * sun) ** 0.6
+  const { day: a, night: b } = ground[dark ? 'dark' : 'light']
+  const [l, c, h] = b.map((n, i) => n + (a[i] - n) * day)
+  return `oklch(${l.toFixed(4)} ${c.toFixed(4)} ${h.toFixed(1)})`
+}
+
