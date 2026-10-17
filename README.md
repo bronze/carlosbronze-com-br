@@ -40,7 +40,7 @@ src/
 ```
 
 - **Both languages ship in every page.** `<T pt="…" en="…" />` renders both, and CSS hides the one not in use. The choice is stored in `localStorage`, and defaults to the browser's language.
-- **Theme follows the system.** There's no toggle; `prefers-color-scheme` sets the `.dark` class, live.
+- **Theme follows the system** (`prefers-color-scheme` sets the `.dark` class, live) until the footer toggle saves a choice. A second footer toggle turns the interface sounds off.
 - **Navigation** uses Astro's `<ClientRouter />` for view transitions. Scripts that touch the page re-run on `astro:page-load`.
 - **Sound and haptics** on links come from [Foley](https://www.npmjs.com/package/@foleyjs/core) (`data-foley-*` attributes) and [web-haptics](https://www.npmjs.com/package/web-haptics).
 

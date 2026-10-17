@@ -458,7 +458,7 @@ const h3 = `${label} mt-10 mb-4`
       if (accent === 'bronze') root.removeAttribute('data-accent')
       else root.setAttribute('data-accent', accent)
 
-      // Preview only: the next page load follows the system again.
+      // Preview only: the next page load goes back to the saved theme or the system.
       root.classList.toggle('dark', dark)
 
       // Shareable: /tinkering/design-system?greys=pedra&accent=bronze

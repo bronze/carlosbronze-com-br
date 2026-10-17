@@ -22,7 +22,7 @@ This is a personal portfolio site built with **Astro 5** + **Tailwind CSS v4** +
 - `@/` path alias maps to `src/` (configured in `tsconfig.json`)
 - Tailwind CSS is loaded via the `@tailwindcss/vite` plugin (not PostCSS config)
 - All global styles and CSS design tokens live in `src/styles/starwind.css`
-- Dark mode uses the `.dark` class on `<html>`, set by a blocking inline script in `src/layouts/Layout.astro` that follows `prefers-color-scheme` live (no toggle, nothing stored)
+- Dark mode uses the `.dark` class on `<html>`, set by a blocking inline script in `src/layouts/Layout.astro` that follows `prefers-color-scheme` live until the footer toggle saves a choice (`localStorage.theme`). The footer's sound toggle mutes Foley (`localStorage.sound`, mirrored as `data-sound` on `<html>`)
 
 ### Component layers
 

@@ -109,24 +109,41 @@ const graph = JSON.stringify({
         if (title && lang === 'en') title.textContent = title.dataset.titleEn
       }
 
-      // Follow the system's light/dark preference, live: changing it (in the
-      // OS, or with an extension that overrides prefers-color-scheme) updates
-      // the open page. There's no theme toggle, so nothing is stored; the
-      // old site's saved choice is cleared so it can't override the system.
+      // Follow the system's light/dark preference, live (in the OS, or with
+      // an extension that overrides prefers-color-scheme), until the footer
+      // toggle saves a choice; from then on that choice wins. The old site's
+      // saved choice is cleared so it can't come back.
       try {
         localStorage.removeItem('colorTheme')
       } catch {}
+      function saved(key) {
+        try {
+          return localStorage.getItem(key)
+        } catch {
+          return null
+        }
+      }
       const darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
       function applyTheme(doc) {
-        doc.documentElement.classList.toggle('dark', darkQuery.matches)
+        const theme = saved('theme')
+        doc.documentElement.classList.toggle(
+          'dark',
+          theme ? theme === 'dark' : darkQuery.matches,
+        )
+      }
+      // Interface sounds are on unless the footer toggle turned them off.
+      function applySound(doc) {
+        doc.documentElement.dataset.sound = saved('sound') === 'off' ? 'off' : 'on'
       }
 
       applyLang(document)
       applyTheme(document)
+      applySound(document)
       darkQuery.addEventListener('change', () => applyTheme(document))
       document.addEventListener('astro:before-swap', event => {
         applyLang(event.newDocument)
         applyTheme(event.newDocument)
+        applySound(event.newDocument)
       })
     </script>
     <Analytics />
@@ -151,7 +168,11 @@ const graph = JSON.stringify({
 <script>
   import { bind, set, unlock } from '@foleyjs/core'
 
-  set({ volume: 1, theme: 'mechanical' })
+  set({
+    volume: 1,
+    theme: 'mechanical',
+    muted: document.documentElement.dataset.sound === 'off',
+  })
   // Foley builds its audio engine (an AudioContext plus a generated reverb
   // buffer) on the first tap anywhere, which blocked that tap's paint for
   // ~270ms (INP). Build it while the browser is idle instead: the context
