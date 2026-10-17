@@ -61,6 +61,7 @@ The live site uses **neutral greys with the Bronze accent**, on a `#fafafa` grou
 | Neutral (live) | Tailwind `neutral`, zero chroma; ground `#fafafa` |
 | Pedra (stone) | Hue 250, chroma up to 0.018: cool, slate-like |
 | Papel (paper) | Hue 55–85, chroma up to 0.02: warm, much whiter than Allie's cream. Works in light mode; the dark side reads muddy |
+| Mix | Areia's scale in light mode, Neutral in dark: the darker ground of a single-mode palette, keeping the dark mode |
 
 **Single mode (light only, no dark mode):** the ground sits at L ≈ 0.95 instead of near-white, and text is softer than black. In these scales `base-0` is the ground and `950` is the text.
 
@@ -82,7 +83,7 @@ The live site uses **neutral greys with the Bronze accent**, on a `#fafafa` grou
 
 Every grey and accent combination passes AA for accent text, in every mode. The lowest is 4.9:1 (Bronze or Musgo on Nord). Main text runs from about 11:1 (Nord) to 19:1 (two-mode palettes), and secondary text from 6.4:1 to 7.7:1.
 
-The candidates are switched on by `data-greys` and `data-accent` on `<html>`. Only the design system page sets them, and nothing is persisted. Picking a single-mode grey forces light mode there. A combination can be shared as a link: `/tinkering/design-system?greys=nord&accent=gelo`.
+The candidates are switched on by `data-greys` and `data-accent` on `<html>`. Only the design system page sets them, and nothing is persisted. There, the single-mode palettes sit in the mode row, next to light and dark, since they bring their own greys; picking one forces light mode and disables the tones row. A combination can be shared as a link: `/tinkering/design-system?greys=nord&accent=gelo`.
 
 **Promoting a palette to live:** copy its values into the default `:root` primitive block, set `--brand-on-light` and `--brand-on-dark` there, and delete the candidate blocks you no longer need. No component changes. Going single mode also means removing the `.dark` blocks and the theme script in `Layout.astro`.
 
