@@ -31,16 +31,16 @@ const groups: { id: string; heading: Bilingual; items: Item[] }[] = [
     heading: { pt: 'Podcasts', en: 'Podcasts' },
     items: [
       {
-        name: "Lenny's Podcast",
-        tag: { pt: 'produto & carreira', en: 'product & career' },
-        href: 'https://www.lennysnewsletter.com/podcast',
-        langs: ['en'],
-      },
-      {
         name: 'Papo na Arena',
         tag: { pt: 'produto', en: 'product' },
         href: 'https://podcasts.apple.com/br/podcast/id1699461885',
         langs: ['pt'],
+      },
+      {
+        name: "Lenny's Podcast",
+        tag: { pt: 'produto & carreira', en: 'product & career' },
+        href: 'https://www.lennysnewsletter.com/podcast',
+        langs: ['en'],
       },
     ],
   },
@@ -49,10 +49,13 @@ const groups: { id: string; heading: Bilingual; items: Item[] }[] = [
     heading: { pt: 'Leituras', en: 'Reading' },
     items: [
       {
-        name: 'Tim Herbig',
-        tag: { pt: 'newsletter', en: 'newsletter' },
-        href: 'https://herbig.co/newsletter/',
-        langs: ['en'],
+        name: 'Brilliant Basics',
+        tag: {
+          pt: 'Substack do Arthur Castro',
+          en: 'Arthur Castro’s Substack',
+        },
+        href: 'https://arthurcastro.substack.com/',
+        langs: ['pt'],
       },
       {
         name: 'Joca Torres',
@@ -64,13 +67,19 @@ const groups: { id: string; heading: Bilingual; items: Item[] }[] = [
         langs: ['en', 'pt'],
       },
       {
-        name: 'Brilliant Basics',
+        name: 'Packlead',
         tag: {
-          pt: 'Substack do Arthur Castro',
-          en: 'Arthur Castro’s Substack',
+          pt: 'Substack da Cacau Fonseca',
+          en: 'Cacau Fonseca’s Substack',
         },
-        href: 'https://arthurcastro.substack.com/',
+        href: 'https://www.packlead.com.br/',
         langs: ['pt'],
+      },
+      {
+        name: 'Tim Herbig',
+        tag: { pt: 'newsletter', en: 'newsletter' },
+        href: 'https://herbig.co/newsletter/',
+        langs: ['en'],
       },
       {
         name: 'The Beautiful Mess',
@@ -83,15 +92,6 @@ const groups: { id: string; heading: Bilingual; items: Item[] }[] = [
         tag: { pt: 'Substack do Roger Martin', en: 'Roger Martin’s Substack' },
         href: 'https://rogerlmartin.substack.com/',
         langs: ['en'],
-      },
-      {
-        name: 'Packlead',
-        tag: {
-          pt: 'Substack da Cacau Fonseca',
-          en: 'Cacau Fonseca’s Substack',
-        },
-        href: 'https://www.packlead.com.br/',
-        langs: ['pt'],
       },
     ],
   },
