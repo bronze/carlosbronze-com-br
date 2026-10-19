@@ -245,11 +245,11 @@ const moreStars = stars.slice(8)
 
     function render() {
       const hour = state.hour ?? hourInRio()
-      // A pinned phase only changes the moon's face: it keeps today's rise,
-      // so the slider doesn't swing it in and out of the sky.
-      const rise = moonRise(moonPhase())
+      // A pinned phase moves the moon too: it rises when that phase would,
+      // so at this hour it may be down.
       const phase = state.phase ?? moonPhase()
-      const positions = skyAt(hour, phase, rise)
+      const rise = moonRise(phase)
+      const positions = skyAt(hour, phase)
       for (const [body, t] of [
         [sun, positions.sun],
         [moon, positions.moon],

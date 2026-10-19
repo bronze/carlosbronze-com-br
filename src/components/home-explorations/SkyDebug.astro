@@ -2,8 +2,11 @@
 // A floating dev panel for exploration 4: scrub through the 24 hours, play a
 // whole day, show the sun's and moon's path, and try any moon phase. It talks
 // to PostalScene through `sky:control` and `sky:tick` events, so dropping
-// this component removes it without touching the scene.
+// this component removes it without touching the scene. With `flag`, it
+// stays hidden unless the URL carries that parameter (e.g. ?dev).
 import T from '@/components/site/T.astro'
+
+const { flag } = Astro.props as { flag?: string }
 
 const button =
   'border-border hover:text-foreground aria-pressed:text-foreground aria-pressed:border-foreground rounded border px-2 py-1 transition-colors'
@@ -12,6 +15,8 @@ const button =
 <details
   class="bg-background/95 border-border text-muted-foreground fixed bottom-4 left-4 z-50 w-72 rounded-lg border font-mono text-xs shadow-sm backdrop-blur print:hidden"
   data-sky-debug
+  data-flag={flag}
+  hidden={!!flag}
   open>
   <summary class="hover:text-foreground cursor-pointer px-3 py-2 select-none">
     <T pt="céu · modo dev" en="sky · dev mode" />
@@ -52,6 +57,9 @@ const button =
   document.addEventListener('astro:page-load', () => {
     const panel = document.querySelector<HTMLDetailsElement>('[data-sky-debug]')
     if (!panel) return
+    const { flag } = panel.dataset
+    if (flag && !new URLSearchParams(location.search).has(flag)) return
+    panel.hidden = false
     // On a phone, open, it would cover the page: start it folded there.
     if (matchMedia('(max-width: 639px)').matches) panel.open = false
     const $ = <E extends Element>(selector: string) => panel.querySelector<E>(selector)!

@@ -35,20 +35,21 @@ export function arcPosition(hour: number, rise: number, extra = 0) {
 // The moon rises about 50 minutes later each day, a full turn of the clock
 // per cycle: with the sun when new (6h), at noon at first quarter, at sunset
 // when full (18h), at midnight at last quarter.
+//
+// It's an approximation, off by an hour or two: the real delay runs 30 to 70
+// minutes, the moon stays up 10 to 14 hours, and Rio's sunrise drifts from
+// about 5h to 6h40 over the year. If the sky ever needs to be the real one,
+// suncalc (~3 kB) gives true sun and moon times for Rio.
 export function moonRise(phase: number) {
   return (6 + 24 * phase) % 24
 }
 
-// Within a day or so of new, the moon is lost in the sun's glare.
-const newMoonWindow = 0.035
-
-// The moon's rise can come from another phase than the one it shows, so the
-// debug panel can change its face without sending it across the sky.
-export function skyAt(hour: number, phase: number, rise = moonRise(phase)) {
-  const nearNew = Math.min(phase, 1 - phase) < newMoonWindow
+// A new moon stays in the sky as a dark disc, though the real one is lost in
+// the sun's glare.
+export function skyAt(hour: number, phase: number) {
   return {
     sun: arcPosition(hour, 6, twilight),
-    moon: nearNew ? null : arcPosition(hour, rise),
+    moon: arcPosition(hour, moonRise(phase)),
   }
 }
 
