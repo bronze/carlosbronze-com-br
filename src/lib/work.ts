@@ -466,6 +466,10 @@ export const education: {
         href: 'https://productarena.io/curso/pensamento-critico-para-lideres-e-pms',
       },
       {
+        name: { pt: 'Product Ops', en: 'Product Ops' },
+        href: 'https://productarena.io/curso/product-ops-primeiro-curso-do-brasil',
+      },
+      {
         name: { pt: 'Growth', en: 'Growth' },
         href: 'https://productarena.io/curso/growth-marketing',
       },
@@ -483,8 +487,8 @@ export const education: {
         href: 'https://productarena.io/curso/ai-automacoes-na-pratica',
       },
       {
-        name: { pt: 'Product Ops', en: 'Product Ops' },
-        href: 'https://productarena.io/curso/product-ops-primeiro-curso-do-brasil',
+        name: { pt: 'AI Product Sense', en: 'AI Product Sense' },
+        href: 'https://productarena.io/curso/ia-product-sense-curso-product-arena',
       },
     ],
   },
