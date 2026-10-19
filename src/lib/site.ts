@@ -1,5 +1,3 @@
-import { profiles } from './seo'
-
 export type Bilingual = { pt: string; en: string }
 
 export interface Section {
@@ -10,11 +8,6 @@ export interface Section {
 
 // Labels are stored capitalised. Places that show them in lowercase (nav,
 // section links) or uppercase (page eyebrows) change the case with CSS.
-
-export const work = {
-  href: profiles.linkedin,
-  label: { pt: 'Trabalho', en: 'Work' },
-}
 
 export const home: Section = {
   href: '/',
@@ -44,6 +37,14 @@ export const sections: Section[] = [
     blurb: {
       pt: 'Coisas que fiz por diversão',
       en: 'Things I built for fun',
+    },
+  },
+  {
+    href: '/work',
+    label: { pt: 'Trabalho', en: 'Work' },
+    blurb: {
+      pt: 'Onde trabalhei e o que fiz',
+      en: 'Where I worked and what I did',
     },
   },
 ]

@@ -1,0 +1,196 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import T from '@/components/site/T.astro'
+import { personId } from '@/lib/seo'
+import type { Bilingual } from '@/lib/site'
+import {
+  about,
+  certifications,
+  closing,
+  education,
+  experience,
+  headline,
+  highlights,
+  languages,
+  skills,
+  summary,
+} from '@/lib/work'
+
+// The CV keeps the notes' **bold**; escape the rest, then turn the markers
+// into <strong>.
+const bold = (s: string) =>
+  s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(
+      /\*\*(.+?)\*\*/g,
+      '<strong class="text-foreground font-medium">$1</strong>',
+    )
+const rich = (b: Bilingual) => ({ pt: bold(b.pt), en: bold(b.en) })
+
+const paragraph = 'text-foreground/80 mb-5 text-lg leading-[1.75] text-pretty'
+const sectionTitle =
+  'text-muted-foreground mb-5 font-mono text-xs tracking-[0.06em] uppercase'
+const bullets =
+  'text-foreground/80 list-disc space-y-2 pl-5 leading-relaxed marker:text-muted-foreground'
+---
+
+<PageLayout
+  type="profile"
+  jsonLd={[
+    {
+      '@type': 'ProfilePage',
+      url: new URL('/work', Astro.site).href,
+      mainEntity: { '@id': personId(Astro.site!) },
+    },
+  ]}
+  heading={{
+    pt: 'Transformo ambiguidade em direção clara de produto.',
+    en: 'I turn ambiguity into clear product direction.',
+  }}
+  subheading={headline}
+  intro={summary}
+  continueIntro>
+  {
+    about.map(p => {
+      const r = rich(p)
+      return (
+        <p class={paragraph}>
+          <span data-lang-pt set:html={r.pt} />
+          <span data-lang-en set:html={r.en} />
+        </p>
+      )
+    })
+  }
+
+  <section aria-labelledby="highlights-title" class="mt-10 mb-10">
+    <h2 id="highlights-title" class={sectionTitle}>
+      <T pt="Trabalhos em destaque" en="Selected work" />
+    </h2>
+    <ul class:list={[bullets, 'text-lg']}>
+      {
+        highlights.map(h => {
+          const r = rich(h)
+          return (
+            <li>
+              <span data-lang-pt set:html={r.pt} />
+              <span data-lang-en set:html={r.en} />
+            </li>
+          )
+        })
+      }
+    </ul>
+  </section>
+
+  {
+    closing.map(p => (
+      <p class={paragraph}>
+        <T {...p} />
+      </p>
+    ))
+  }
+
+  <section aria-labelledby="experience-title" class="mt-14 mb-14">
+    <h2 id="experience-title" class={sectionTitle}>
+      <T pt="Experiência" en="Experience" />
+    </h2>
+    <ol class="space-y-11">
+      {
+        experience.map(role => (
+          <li>
+            <h3 class="font-serif text-2xl leading-snug">{role.company}</h3>
+            <p class="text-foreground mb-1">
+              <T {...role.title} />
+            </p>
+            <p class="text-muted-foreground mb-4 font-mono text-xs">
+              <T {...role.dates} />
+              <span class="mx-1.5 opacity-50" aria-hidden="true">
+                ·
+              </span>
+              <T {...role.place} />
+            </p>
+            <p class="text-foreground/80 mb-4 leading-relaxed text-pretty">
+              <T {...role.context} />
+            </p>
+            <ul class={bullets}>
+              {role.points.map(point => (
+                <li>
+                  <T {...point} />
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section aria-labelledby="skills-title" class="mb-14">
+    <h2 id="skills-title" class={sectionTitle}>
+      <T pt="Competências" en="Skills" />
+    </h2>
+    <dl class="grid gap-y-4">
+      {
+        skills.map(s => (
+          <div>
+            <dt class="font-serif text-lg leading-snug">
+              <T {...s.area} />
+            </dt>
+            <dd class="text-muted-foreground leading-normal">
+              <T {...s.items} />
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section aria-labelledby="education-title" class="mb-14">
+    <h2 id="education-title" class={sectionTitle}>
+      <T pt="Formação" en="Education" />
+    </h2>
+    <ul class="grid gap-y-4">
+      {
+        education.map(e => (
+          <li>
+            <p class="font-serif text-lg leading-snug">{e.school}</p>
+            <p class="text-muted-foreground leading-normal">
+              <T {...e.course} />
+            </p>
+            {e.dates && (
+              <p class="text-muted-foreground mt-0.5 font-mono text-xs">
+                <T {...e.dates} />
+              </p>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <div class="mb-11 grid gap-x-10 gap-y-10 sm:grid-cols-2">
+    <section aria-labelledby="certifications-title">
+      <h2 id="certifications-title" class={sectionTitle}>
+        <T pt="Certificações" en="Certifications" />
+      </h2>
+      <ul class="text-muted-foreground space-y-2 leading-normal">
+        {certifications.map(c => <li>{c}</li>)}
+      </ul>
+    </section>
+    <section aria-labelledby="languages-title">
+      <h2 id="languages-title" class={sectionTitle}>
+        <T pt="Idiomas" en="Languages" />
+      </h2>
+      <ul class="text-muted-foreground space-y-2 leading-normal">
+        {
+          languages.map(l => (
+            <li>
+              <T {...l} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</PageLayout>

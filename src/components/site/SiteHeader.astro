@@ -1,6 +1,6 @@
 ---
 import T from './T.astro'
-import { ariaLabel, home, sections, work } from '@/lib/site'
+import { ariaLabel, home, sections } from '@/lib/site'
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
@@ -42,17 +42,6 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
         </a>
       ))
     }
-    <a
-      href={work.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-muted-foreground hover:text-foreground lowercase transition-colors"
-      data-foley-press="tap"
-      data-foley-hover="tick"
-      data-track="linkedin_clicked">
-      <T {...work.label} />
-      <span aria-hidden="true">↗</span>
-    </a>
   </nav>
 
   <!-- The label starts with the visible text, so voice control finds the
