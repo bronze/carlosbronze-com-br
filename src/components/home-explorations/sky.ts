@@ -42,11 +42,13 @@ export function moonRise(phase: number) {
 // Within a day or so of new, the moon is lost in the sun's glare.
 const newMoonWindow = 0.035
 
-export function skyAt(hour: number, phase: number) {
+// The moon's rise can come from another phase than the one it shows, so the
+// debug panel can change its face without sending it across the sky.
+export function skyAt(hour: number, phase: number, rise = moonRise(phase)) {
   const nearNew = Math.min(phase, 1 - phase) < newMoonWindow
   return {
     sun: arcPosition(hour, 6, twilight),
-    moon: nearNew ? null : arcPosition(hour, moonRise(phase)),
+    moon: nearNew ? null : arcPosition(hour, rise),
   }
 }
 

@@ -245,8 +245,11 @@ const moreStars = stars.slice(8)
 
     function render() {
       const hour = state.hour ?? hourInRio()
+      // A pinned phase only changes the moon's face: it keeps today's rise,
+      // so the slider doesn't swing it in and out of the sky.
+      const rise = moonRise(moonPhase())
       const phase = state.phase ?? moonPhase()
-      const positions = skyAt(hour, phase)
+      const positions = skyAt(hour, phase, rise)
       for (const [body, t] of [
         [sun, positions.sun],
         [moon, positions.moon],
@@ -274,7 +277,7 @@ const moreStars = stars.slice(8)
       path.setAttribute('visibility', state.path ? 'visible' : 'hidden')
       document.dispatchEvent(
         new CustomEvent('sky:tick', {
-          detail: { hour, phase, moonRise: moonRise(phase), live: state.hour === null },
+          detail: { hour, phase, moonRise: rise, live: state.hour === null },
         }),
       )
     }
