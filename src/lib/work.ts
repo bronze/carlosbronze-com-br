@@ -391,17 +391,29 @@ export const skills: { area: Bilingual; items: Bilingual }[] = [
   },
 ]
 
+// A school's courses, linked to the program's own page where there is one.
+// The links are ours: the Obsidian notes don't have them.
+export interface Course {
+  name: Bilingual
+  href?: string
+}
+
 export const education: {
   school: string
-  course: Bilingual
+  courses: Course[]
   dates?: Bilingual
 }[] = [
   {
     school: 'Tera',
-    course: {
-      pt: 'MBA em Liderança e Estratégia de Produtos Digitais',
-      en: 'MBA in Digital Product Leadership and Strategy',
-    },
+    courses: [
+      {
+        name: {
+          pt: 'MBA em Liderança e Estratégia de Produtos Digitais',
+          en: 'MBA in Digital Product Leadership and Strategy',
+        },
+        href: 'https://somostera.com/mba-lideranca-estrategia-produtos-digitais',
+      },
+    ],
     dates: {
       pt: 'fevereiro de 2025 – novembro de 2025',
       en: 'February 2025 – November 2025',
@@ -409,32 +421,84 @@ export const education: {
   },
   {
     school: 'TheStarter · Cursos Avançados de UX Design',
-    course: {
-      pt: 'Psicologia e Gamificação aplicada a UX Design',
-      en: 'Psychology and Gamification Applied to UX Design',
-    },
+    courses: [
+      {
+        name: {
+          pt: 'Psicologia e Gamificação aplicada a UX Design',
+          en: 'Psychology and Gamification Applied to UX Design',
+        },
+        href: 'https://www.thestarter.io/psicologia-aplicada-a-ux-design',
+      },
+    ],
     dates: { pt: 'abril de 2026 – maio de 2026', en: 'April 2026 – May 2026' },
   },
   {
     school: 'Tera',
-    course: {
-      pt: 'Digital Product Leadership, Product Analytics, Liderança e Estratégia de Negócios',
-      en: 'Digital Product Leadership, Product Analytics, Leadership and Business Strategy',
-    },
+    courses: [
+      {
+        name: {
+          pt: 'Digital Product Leadership',
+          en: 'Digital Product Leadership',
+        },
+        href: 'https://somostera.com/formacoes/digital-product-leadership',
+      },
+      {
+        name: { pt: 'Product Analytics', en: 'Product Analytics' },
+        href: 'https://somostera.com/formacoes/product-analytics',
+      },
+      {
+        name: {
+          pt: 'Liderança e Estratégia de Negócios',
+          en: 'Leadership and Business Strategy',
+        },
+        href: 'https://somostera.com/formacoes/lideranca-e-estrategia-de-produtos-digitais',
+      },
+    ],
   },
   {
     school: 'Product Arena',
-    course: {
-      pt: 'Pensamento Crítico e Analítico, Growth, Métricas, Plataforma para PMs, AI + NoCode, Product Management',
-      en: 'Critical and Analytical Thinking, Growth, Metrics, Platform for PMs, AI + NoCode, Product Management',
-    },
+    courses: [
+      {
+        name: {
+          pt: 'Pensamento Crítico e Analítico',
+          en: 'Critical and Analytical Thinking',
+        },
+        href: 'https://productarena.io/curso/pensamento-critico-para-lideres-e-pms',
+      },
+      {
+        name: { pt: 'Growth', en: 'Growth' },
+        href: 'https://productarena.io/curso/growth-marketing',
+      },
+      {
+        name: { pt: 'Métricas', en: 'Metrics' },
+        href: 'https://productarena.io/curso/metricas-produto',
+      },
+      {
+        name: { pt: 'Plataforma para PMs', en: 'Platform for PMs' },
+        href: 'https://productarena.io/curso/plataforma-para-pms-primeiro-curso-do-brasil',
+      },
+      {
+        name: { pt: 'AI + NoCode', en: 'AI + NoCode' },
+        // The course has since been renamed IA e Automações na Prática.
+        href: 'https://productarena.io/curso/ai-automacoes-na-pratica',
+      },
+      {
+        name: { pt: 'Product Ops', en: 'Product Ops' },
+        href: 'https://productarena.io/curso/product-ops-primeiro-curso-do-brasil',
+      },
+    ],
   },
   {
     school: 'Pontifícia Universidade Católica do Rio de Janeiro',
-    course: {
-      pt: 'Bacharelado, Desenho Industrial · Programação Visual',
-      en: 'BA, Industrial Design (Visual Communication)',
-    },
+    courses: [
+      {
+        name: {
+          pt: 'Bacharelado, Desenho Industrial · Programação Visual',
+          en: 'BA, Industrial Design (Visual Communication)',
+        },
+        href: 'https://www.puc-rio.br/ensinopesq/ccg/design.html',
+      },
+    ],
     dates: {
       pt: 'agosto de 2002 – julho de 2007',
       en: 'August 2002 – July 2007',

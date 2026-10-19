@@ -43,4 +43,4 @@ Deployed to **Vercel** with `pnpm run build` as the build command and `cleanUrls
 
 Some pages copy content whose source of truth lives outside this repo. When updating the site, check these against their source and re-sync if they've drifted:
 
-- `/work` (`src/lib/work.ts`) copies the CV from two Obsidian notes: [curriculo](https://www.carlosbronze.com/obsidian/curriculo) (PT) and [resume](https://www.carlosbronze.com/obsidian/resume) (EN). The raw Markdown is at `https://publish-01.obsidian.md/access/ef8b426f3cdf2412af216be97af493a1/{curriculo,resume}.md`. Update the "Last synced" date at the top of the file after each sync.
+- `/work` (`src/lib/work.ts`) copies the CV from two Obsidian notes (the course links under education are ours, not the notes'): [curriculo](https://www.carlosbronze.com/obsidian/curriculo) (PT) and [resume](https://www.carlosbronze.com/obsidian/resume) (EN). The raw Markdown is at `https://publish-01.obsidian.md/access/ef8b426f3cdf2412af216be97af493a1/{curriculo,resume}.md`. Update the "Last synced" date at the top of the file after each sync.

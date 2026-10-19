@@ -156,7 +156,33 @@ const bullets =
           <li>
             <p class="font-serif text-lg leading-snug">{e.school}</p>
             <p class="text-muted-foreground leading-normal">
-              <T {...e.course} />
+              {e.courses.map((c, i) => (
+                <>
+                  {i > 0 && ', '}
+                  {c.href ? (
+                    <a
+                      href={c.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="group hover:text-foreground inline-flex items-baseline transition-colors"
+                      data-foley-press="tap"
+                      data-foley-hover="tick">
+                      {/* Only the name is underlined, not the arrow; inline-flex drops the
+                          JSX whitespace that would extend the underline. */}
+                      <span class="decoration-foreground/30 group-hover:decoration-brand underline underline-offset-4 transition-colors">
+                        <T {...c.name} />
+                      </span>
+                      <span
+                        class="group-hover:text-brand ml-1 inline-block transition-[color,transform] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        aria-hidden="true">
+                        ↗
+                      </span>
+                    </a>
+                  ) : (
+                    <T {...c.name} />
+                  )}
+                </>
+              ))}
             </p>
             {e.dates && (
               <p class="text-muted-foreground mt-0.5 font-mono text-xs">
