@@ -7,20 +7,24 @@
 // de Açúcar. The sun takes it from 6h to 18h, stretched by `twilight` hours
 // at both ends so it lingers low at dawn and dusk. The moon takes twelve
 // hours too, but when depends on its phase (see moonRise).
+//
+// The moon's arc peaks lower, at `moonTop`, as the real one is tilted from
+// the sun's: a new moon passes below the sun instead of covering it like an
+// eclipse. The gap at noon (50) is more than both radii (22 + 15).
 export const twilight = 1
-export const arc = { left: 130, right: 570, horizon: 200, top: -30 }
+export const arc = { left: 130, right: 570, horizon: 200, top: -30, moonTop: 20 }
 
 // t runs from 0 (rising) to 1 (setting).
-export function pointOnArc(t: number) {
+export function pointOnArc(t: number, top = arc.top) {
   return {
     x: arc.left + (arc.right - arc.left) * t,
-    y: arc.horizon - (arc.horizon - arc.top) * Math.sin(Math.PI * t),
+    y: arc.horizon - (arc.horizon - top) * Math.sin(Math.PI * t),
   }
 }
 
-export function arcPath(steps = 48) {
+export function arcPath(top = arc.top, steps = 48) {
   return Array.from({ length: steps + 1 }, (_, i) => {
-    const { x, y } = pointOnArc(i / steps)
+    const { x, y } = pointOnArc(i / steps, top)
     return `${i ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`
   }).join(' ')
 }

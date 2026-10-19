@@ -45,15 +45,20 @@ const moreStars = stars.slice(8)
   aria-hidden="true"
   data-sky
   data-daylight={daylight ? '' : undefined}>
-  <!-- The path, for the debug panel -->
+  <!-- The paths, for the debug panel: the sun's, then the moon's. -->
   <g data-sky-path visibility="hidden">
-    <path
-      d={arcPath()}
-      fill="none"
-      stroke="var(--outline)"
-      stroke-width="1"
-      stroke-dasharray="3 4"
-      vector-effect="non-scaling-stroke"></path>
+    {
+      [arc.top, arc.moonTop].map(top => (
+        <path
+          d={arcPath(top)}
+          fill="none"
+          stroke="var(--outline)"
+          stroke-width="1"
+          stroke-dasharray="3 4"
+          vector-effect="non-scaling-stroke"
+        />
+      ))
+    }
     {
       marks.map(m => (
         <>
@@ -205,7 +210,7 @@ const moreStars = stars.slice(8)
 </style>
 
 <script>
-  import { groundAt, hourInRio, litMoonPath, moonPhase, moonRise, nightness, pointOnArc, skyAt } from './sky'
+  import { arc, groundAt, hourInRio, litMoonPath, moonPhase, moonRise, nightness, pointOnArc, skyAt } from './sky'
 
   type Control = { hour?: number | null; phase?: number | null; path?: boolean }
 
@@ -250,16 +255,16 @@ const moreStars = stars.slice(8)
       const phase = state.phase ?? moonPhase()
       const rise = moonRise(phase)
       const positions = skyAt(hour, phase)
-      for (const [body, t] of [
-        [sun, positions.sun],
-        [moon, positions.moon],
+      for (const [body, t, top] of [
+        [sun, positions.sun, arc.top],
+        [moon, positions.moon, arc.moonTop],
       ] as const) {
         // A body that's down keeps its last spot while it fades out.
         if (t === null) {
           body.style.opacity = '0'
           continue
         }
-        const { x, y } = pointOnArc(t)
+        const { x, y } = pointOnArc(t, top)
         body.setAttribute('transform', `translate(${x} ${y})`)
         body.style.opacity = '1'
       }
