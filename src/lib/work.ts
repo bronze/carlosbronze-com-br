@@ -21,8 +21,8 @@ export const summary: Bilingual = {
 
 export const about: Bilingual[] = [
   {
-    pt: 'Sou Senior Product Manager e há quase 20 anos construo **produtos digitais e marcas**, de agência a startup. Trabalho remoto do Rio de Janeiro para uma startup americana. Conecto **estratégia, dados e prioridades de negócio** para escolher onde investir: a interseção entre **o que encanta o usuário** e **o que realmente move o resultado**.',
-    en: "I'm a Senior Product Manager and for almost 20 years I've been building **digital products and brands**, from agencies to startups. I work fully remote from Rio de Janeiro for a US-based startup (GMT-3, strong overlap with US and European business hours). I connect **strategy, data and business priorities** to choose where to invest: the overlap between **what delights users** and **what actually moves the business**.",
+    pt: 'Sou Senior Product Manager e há quase 20 anos construo **produtos digitais e marcas**, de agência a startup. Minha origem em estratégia de marca molda como construo produto: a história que um produto conta muda o que as pessoas fazem com ele. Trabalho remoto do Rio de Janeiro para uma startup americana. Conecto **estratégia, dados e prioridades de negócio** para escolher onde investir: a interseção entre **o que encanta o usuário** e **o que realmente move o resultado**.',
+    en: "I'm a Senior Product Manager and for almost 20 years I've been building **digital products and brands**, from agencies to startups. My background in brand strategy shapes how I build: the story a product tells changes what people do with it. I work fully remote from Rio de Janeiro for a US-based startup (GMT-3, strong overlap with US and European business hours). I connect **strategy, data and business priorities** to choose where to invest: the overlap between **what delights users** and **what actually moves the business**.",
   },
 ]
 
