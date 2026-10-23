@@ -26,6 +26,7 @@ interface Props {
   type?: 'website' | 'article' | 'profile'
   jsonLd?: JsonLd[]
   noindex?: boolean
+  analytics?: boolean
 }
 
 const {
@@ -42,6 +43,7 @@ const {
   type,
   jsonLd,
   noindex,
+  analytics,
 } = Astro.props
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 const { prev, next } = neighbours(path)
@@ -56,7 +58,8 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
   description={description ?? (path === '/' ? undefined : intro?.pt)}
   type={type}
   jsonLd={jsonLd}
-  noindex={noindex}>
+  noindex={noindex}
+  analytics={analytics}>
   <a
     href="#main"
     class="bg-foreground text-background sr-only z-50 rounded px-3 py-2 font-mono text-xs focus:not-sr-only focus:fixed focus:top-4 focus:left-4">

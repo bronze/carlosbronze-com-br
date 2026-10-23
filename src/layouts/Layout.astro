@@ -21,6 +21,9 @@ interface Props {
   jsonLd?: JsonLd[]
   // Keeps the page out of search results (the 404).
   noindex?: boolean
+  // Off on the 404: scanners probing made-up URLs land there, run the page
+  // like a browser, and would count as visitors (Vercel files them all as /404).
+  analytics?: boolean
 }
 
 const {
@@ -30,6 +33,7 @@ const {
   type = 'website',
   jsonLd = [],
   noindex = false,
+  analytics = true,
 } = Astro.props
 const full = (t: string) => `${t} · ${SITE_NAME}`
 // Home's tab says what the person does; other pages say where you are.
@@ -88,7 +92,7 @@ const graph = JSON.stringify({
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
     <script is:inline type="application/ld+json" set:html={graph} />
-    <SpeedInsights />
+    {analytics && <SpeedInsights />}
     <ClientRouter />
     <script is:inline>
       // Language and theme live on <html>. The router copies the next page's
@@ -146,18 +150,28 @@ const graph = JSON.stringify({
         applySound(event.newDocument)
       })
     </script>
-    <Analytics />
+    {analytics && <Analytics />}
+    <!-- PostHog stays on the 404: it loads late and drops known bots, so it
+         records the URLs real people hit there. -->
     <PostHog />
-    <script
-      defer
-      src="https://cloud.umami.is/script.js"
-      data-website-id="b01a5d15-0458-4258-81f5-705de4b35142"
-      is:inline></script>
-    <!-- 100% privacy-first analytics -->
-    <script
-      async
-      src="https://scripts.simpleanalyticscdn.com/latest.js"
-      is:inline></script>
+    <!-- Umami, then Simple Analytics (100% privacy-first analytics) -->
+    {
+      analytics && (
+        <>
+          <script
+            defer
+            src="https://cloud.umami.is/script.js"
+            data-website-id="b01a5d15-0458-4258-81f5-705de4b35142"
+            is:inline
+          />
+          <script
+            async
+            src="https://scripts.simpleanalyticscdn.com/latest.js"
+            is:inline
+          />
+        </>
+      )
+    }
   </head>
   <body class="flex min-h-dvh flex-col">
     <slot />

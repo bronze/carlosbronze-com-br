@@ -6,6 +6,7 @@ import { ariaLabel, home, sections } from '@/lib/site'
 
 <PageLayout
   noindex
+  analytics={false}
   title={{ pt: 'Página não encontrada', en: 'Page not found' }}
   eyebrow={{ pt: 'Erro 404', en: 'Error 404' }}
   heading={{ pt: 'Por aqui não tem nada.', en: 'Nothing over here.' }}
@@ -26,3 +27,12 @@ import { ariaLabel, home, sections } from '@/lib/site'
     </ul>
   </nav>
 </PageLayout>
+
+<script is:inline>
+  // The broken URL and where the link to it was, for finding and fixing it.
+  // Inline so it runs on every visit, including a client-side navigation here.
+  window.posthog?.capture('page_not_found', {
+    path: location.pathname + location.search,
+    referrer: document.referrer || null,
+  })
+</script>
