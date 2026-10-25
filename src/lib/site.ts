@@ -44,7 +44,7 @@ export const sections: Section[] = [
     label: { pt: 'Trabalho', en: 'Work' },
     blurb: {
       pt: 'Onde trabalhei e o que fiz',
-      en: 'Where I worked and what I did',
+      en: "Where I've worked and what I've done",
     },
   },
 ]
