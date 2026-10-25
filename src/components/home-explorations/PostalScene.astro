@@ -88,8 +88,12 @@ const streaks = Array.from({ length: 150 }, (_, i) => ({
 }))
 ---
 
+<!-- On a phone the scene sits beside the name, its ground on the baseline of
+     "Bronze.": the name ends 238px down at every phone width, and the scene
+     is 48vw wide by 247/460 of that tall (25.77vw), so its top is the one
+     minus the other, less a few px for the descender room. -->
 <svg
-  class="scene pointer-events-none absolute top-24 right-4 -z-10 block sm:fixed sm:top-auto sm:right-0 sm:bottom-0 print:hidden w-[48vw] sm:w-[min(55vw,680px)]"
+  class="scene pointer-events-none absolute top-[calc(234px-25.77vw)] right-4 -z-10 block sm:fixed sm:top-auto sm:right-0 sm:bottom-0 print:hidden w-[48vw] sm:w-[min(55vw,680px)]"
   viewBox="120 -70 460 247"
   aria-hidden="true"
   data-sky
