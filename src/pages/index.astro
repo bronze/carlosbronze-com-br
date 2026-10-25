@@ -1,6 +1,7 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro'
 import SectionLink from '@/components/site/SectionLink.astro'
+import RioClock from '@/components/site/RioClock.astro'
 import PostalScene from '@/components/home-explorations/PostalScene.astro'
 import SkyDebug from '@/components/home-explorations/SkyDebug.astro'
 import { ariaLabel, sections } from '@/lib/site'
@@ -16,6 +17,7 @@ import { ariaLabel, sections } from '@/lib/site'
     en: 'I connect strategy, metrics and creativity to build products that move the business.',
   }}
   pager={false}>
+  <RioClock slot="eyebrow" />
   <!-- Same copy as `intro`, with a forced break in EN. -->
   <Fragment slot="intro">
     <span data-lang-pt>Conecto estratégia, métricas e criatividade para construir produtos que movem o negócio.</span><span data-lang-en>I connect strategy, metrics and creativity<br /> to build products that move the business.</span>

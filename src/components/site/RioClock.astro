@@ -1,0 +1,79 @@
+---
+// The time in Rio and how far it is from the visitor's, e.g. "14:32 · 4h
+// ahead of you", for under the home's eyebrow. Filled in by the script: the
+// site is static, so the server can't know either clock. The line keeps its
+// height while empty, so the heading doesn't jump when it fills.
+---
+
+<p
+  class="text-muted-foreground mb-5 min-h-[1lh] font-mono text-[13px] tabular-nums"
+  data-rio-clock>
+</p>
+
+<script>
+  const clock = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'America/Sao_Paulo',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hourCycle: 'h23',
+  })
+
+  // Rio's wall clock, read as if it were UTC: the gap to the real UTC time is
+  // Rio's offset. Brazil dropped daylight saving in 2019, but this doesn't
+  // assume it.
+  function rioNow(date: Date) {
+    const parts = clock.formatToParts(date)
+    const part = (type: string) => Number(parts.find(p => p.type === type)!.value)
+    const wall = Date.UTC(part('year'), part('month') - 1, part('day'), part('hour'), part('minute'), part('second'))
+    const offset = Math.round((wall - date.getTime()) / 60_000)
+    const time = `${String(part('hour')).padStart(2, '0')}:${String(part('minute')).padStart(2, '0')}`
+    return { time, offset }
+  }
+
+  // 270 minutes reads "4h30", 240 reads "4h".
+  function span(minutes: number) {
+    const h = Math.floor(minutes / 60)
+    const m = minutes % 60
+    return m ? `${h}h${String(m).padStart(2, '0')}` : `${h}h`
+  }
+
+  function line(date: Date) {
+    const { time, offset } = rioNow(date)
+    // Minutes Rio is ahead of the visitor (negative: behind).
+    const gap = offset + date.getTimezoneOffset()
+    const rel =
+      gap === 0
+        ? { pt: 'mesmo horário que você', en: 'same time as you' }
+        : gap > 0
+          ? { pt: `${span(gap)} à sua frente`, en: `${span(gap)} ahead of you` }
+          : { pt: `${span(-gap)} atrás de você`, en: `${span(-gap)} behind you` }
+    return { pt: `${time} · ${rel.pt}`, en: `${time} · ${rel.en}` }
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    const el = document.querySelector<HTMLElement>('[data-rio-clock]')
+    if (!el) return
+    const pt = document.createElement('span')
+    const en = document.createElement('span')
+    pt.dataset.langPt = ''
+    en.dataset.langEn = ''
+    el.replaceChildren(pt, en)
+
+    let timer: ReturnType<typeof setTimeout>
+    function render() {
+      const now = new Date()
+      const text = line(now)
+      pt.textContent = text.pt
+      en.textContent = text.en
+      // Tick on the minute, not a minute after load.
+      timer = setTimeout(render, 60_000 - (now.getTime() % 60_000) + 50)
+    }
+
+    document.addEventListener('astro:before-swap', () => clearTimeout(timer), { once: true })
+    render()
+  })
+</script>

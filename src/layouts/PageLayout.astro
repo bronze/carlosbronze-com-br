@@ -82,8 +82,12 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
         'reveal [&>:has(+[data-pager])]:mb-0 [&>:last-child]:mb-0',
         !hero && 'mx-auto max-w-[720px]',
       ]}>
+      <!-- A slotted line under the eyebrow (Home's clock) takes over its gap. -->
       <p
-        class="text-muted-foreground mb-5 font-mono text-[13px] tracking-[0.08em] uppercase">
+        class:list={[
+          'text-muted-foreground font-mono text-[13px] tracking-[0.08em] uppercase',
+          Astro.slots.has('eyebrow') ? 'mb-1' : 'mb-5',
+        ]}>
         {
           back ? (
             // On a sub-page the eyebrow doubles as the way back up.
@@ -107,6 +111,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
           )
         }
       </p>
+      <slot name="eyebrow" />
       <h1
         id="page-title"
         class:list={[
