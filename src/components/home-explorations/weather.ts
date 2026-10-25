@@ -1,12 +1,16 @@
 // Rio's weather right now, from Open-Meteo (free, no key, open to the
 // browser), for the clock line's icon, the clouds and rain over Pão de Açúcar,
 // and what the sun says when tapped. The site is static, so the visitor's
-// browser asks; one request serves the whole page, and the answer is kept for
-// 15 minutes. Anything that goes wrong gives null, and the page stays as it
-// was before weather: no icon, a clear sky.
+// browser asks; one request serves the whole page, and the answer is kept in
+// the browser, fresh for 15 minutes. A returning visitor starts from the last
+// answer (up to 3 hours old) while a new one comes in, so the sky doesn't
+// change its mind on load. Anything that goes wrong gives null, and the page
+// stays as it was before weather: no icon, a plain sun or moon.
 //
 // ?tempo=rain (or clear, partly, cloudy, fog, storm) forces the sky, for
 // testing, even offline.
+
+import { hourInRio, nightness } from './sky'
 
 // The darksky.net set, give or take: clear and partly cloudy come in a day
 // and a night version, picked by the hour in Rio.
@@ -69,6 +73,7 @@ const url =
   '&timezone=America/Sao_Paulo&forecast_days=1'
 const key = 'weather'
 const fresh = 15 * 60 * 1000
+const usable = 3 * 60 * 60 * 1000
 
 type Reading = {
   current: { temperature_2m: number; weather_code: number; cloud_cover: number; is_day: number }
@@ -82,22 +87,36 @@ type Reading = {
   }
 }
 
-async function fetchReading(): Promise<Reading | null> {
+// The last answer and how old it is, if it's young enough to use.
+function kept(): { age: number; reading: Reading } | null {
   try {
-    const kept = JSON.parse(sessionStorage.getItem(key) ?? 'null')
-    if (kept && Date.now() - kept.at < fresh) return kept.reading
-  } catch {}
-  try {
-    const response = await fetch(url, { signal: AbortSignal.timeout(5000) })
-    if (!response.ok) return null
-    const reading: Reading = await response.json()
-    try {
-      sessionStorage.setItem(key, JSON.stringify({ at: Date.now(), reading }))
-    } catch {}
-    return reading
+    const saved = JSON.parse(localStorage.getItem(key) ?? 'null')
+    const age = Date.now() - saved?.at
+    return age < usable ? { age, reading: saved.reading } : null
   } catch {
     return null
   }
+}
+
+async function fetchReading(): Promise<Reading | null> {
+  const last = kept()
+  if (last && last.age < fresh) return last.reading
+  try {
+    const response = await fetch(url, { signal: AbortSignal.timeout(5000) })
+    if (!response.ok) return last?.reading ?? null
+    const reading: Reading = await response.json()
+    try {
+      localStorage.setItem(key, JSON.stringify({ at: Date.now(), reading }))
+    } catch {}
+    return reading
+  } catch {
+    return last?.reading ?? null
+  }
+}
+
+function forcedSky() {
+  const param = new URLSearchParams(location.search).get('tempo') as Sky | null
+  return param && skies.includes(param) ? param : null
 }
 
 function toWeather(reading: Reading | null, force: Sky | null): Weather | null {
@@ -130,11 +149,17 @@ export function forceSky(sky: Sky, base: Weather | null): Weather {
 let pending: { at: number; promise: Promise<Weather | null> } | null = null
 export function getWeather(): Promise<Weather | null> {
   if (!pending || Date.now() - pending.at > fresh) {
-    const param = new URLSearchParams(location.search).get('tempo') as Sky | null
-    const force = param && skies.includes(param) ? param : null
+    const force = forcedSky()
     pending = { at: Date.now(), promise: fetchReading().then(reading => toWeather(reading, force)) }
   }
   return pending.promise
+}
+
+// The last answer, at once, to draw before the new one comes in. It may be
+// from earlier in the day, so whether it's day comes from the hour now.
+export function lastKnown(): Weather | null {
+  const weather = toWeather(kept()?.reading ?? null, forcedSky())
+  return weather && { ...weather, isDay: nightness(hourInRio()) < 0.5 }
 }
 
 // How many of the scene's clouds are out, and whether they hide the sun and

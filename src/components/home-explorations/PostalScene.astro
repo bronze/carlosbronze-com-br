@@ -314,8 +314,8 @@ const streaks = Array.from({ length: 150 }, (_, i) => ({
     opacity: 0;
     transition: opacity 1s ease;
   }
-  [data-sky='clear'] .rays,
-  [data-sky='partly'] .rays {
+  [data-weather-now='clear'] .rays,
+  [data-weather-now='partly'] .rays {
     opacity: 1;
   }
   .bolt {
@@ -353,7 +353,7 @@ const streaks = Array.from({ length: 150 }, (_, i) => ({
     .streak {
       animation: fall 1.2s linear infinite;
     }
-    [data-sky='clear'] .rays {
+    [data-weather-now='clear'] .rays {
       animation: breathe 2.4s ease-in-out infinite alternate;
     }
   }
@@ -405,7 +405,7 @@ const streaks = Array.from({ length: 150 }, (_, i) => ({
 
 <script>
   import { arc, groundAt, hourInRio, litMoonPath, moonPhase, moonRise, nightness, pointOnArc, skyAt } from './sky'
-  import { cloudsFor, forceSky, getWeather, type Sky, type Weather } from './weather'
+  import { cloudsFor, forceSky, getWeather, lastKnown, type Sky, type Weather } from './weather'
 
   type Control = { hour?: number | null; phase?: number | null; path?: boolean; sky?: Sky | null }
 
@@ -439,9 +439,10 @@ const streaks = Array.from({ length: 150 }, (_, i) => ({
     const fog = svg.querySelector<SVGElement>('[data-fog]')!
     const rainLayer = document.querySelector<SVGElement>('[data-rain]')!
     const flash = document.querySelector<HTMLElement>('[data-flash]')!
-    // Rio's weather, once it arrives; until then (or if it never does) the
-    // sky is clear.
-    let live: Weather | null = null
+    // Rio's weather: the last one seen, until the new one arrives. With
+    // neither, the sun or moon is plain (no rays, no clouds), which fits any
+    // weather, so what comes in only adds to it.
+    let live: Weather | null = lastKnown()
 
     // null means "now"; the debug panel can pin either.
     const pinned = Number.parseFloat(new URLSearchParams(location.search).get('hora') ?? '')
@@ -468,8 +469,9 @@ const streaks = Array.from({ length: 150 }, (_, i) => ({
       clouds.forEach((cloud, i) => (cloud.style.opacity = i < count ? '1' : '0'))
       fog.style.opacity = weather?.sky === 'fog' ? '1' : '0'
       svg.toggleAttribute('data-overcast', overcast)
-      // No reading yet draws a clear sky.
-      svg.dataset.sky = weather?.sky ?? 'clear'
+      // Not data-sky, which marks the scene for the other scripts.
+      if (weather) svg.dataset.weatherNow = weather.sky
+      else delete svg.dataset.weatherNow
       rainLayer.dataset.rain = String(rain)
       if (storm !== storming) {
         storming = storm

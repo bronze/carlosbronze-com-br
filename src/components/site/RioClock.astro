@@ -62,7 +62,7 @@ const icon = 'hidden size-[1.35em] -my-1'
 </p>
 
 <script>
-  import { getWeather, skyLabel, type Weather } from '@/components/home-explorations/weather'
+  import { getWeather, lastKnown, skyLabel, type Weather } from '@/components/home-explorations/weather'
 
   const clock = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'America/Sao_Paulo',
@@ -167,6 +167,8 @@ const icon = 'hidden size-[1.35em] -my-1'
       { once: true },
     )
     render()
+    // The last weather seen, until the new one comes in.
+    show(lastKnown())
     weather()
   })
 </script>
