@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content'
+import { defineCollection } from 'astro:content'
+import { z } from 'astro/zod'
 import { glob } from 'astro/loaders'
 
 // One folder per project, one file per language:
@@ -22,9 +23,9 @@ const projects = defineCollection({
     // Intro under the headline.
     summary: z.string(),
     // Live project, linked as "ver no ar ↗".
-    url: z.string().url(),
+    url: z.url(),
     // Source code, linked as "código ↗". Optional.
-    repo: z.string().url().optional(),
+    repo: z.url().optional(),
   }),
 })
 

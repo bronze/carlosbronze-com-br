@@ -20,32 +20,30 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  experimental: {
-    fonts: [
-      {
-        provider: fontProviders.fontsource(),
-        name: 'Geist',
-        cssVariable: '--font-geist',
-        weights: [400, 500, 600, 700],
-        subsets: ['latin'],
-      },
-      {
-        provider: fontProviders.fontsource(),
-        name: 'Geist Mono',
-        cssVariable: '--font-geist-mono',
-        weights: [400, 500, 600, 700],
-        subsets: ['latin'],
-      },
-      {
-        provider: fontProviders.fontsource(),
-        name: 'Newsreader',
-        cssVariable: '--font-newsreader',
-        weights: [400, 500],
-        styles: ['normal', 'italic'],
-        subsets: ['latin'],
-      },
-    ],
-  },
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Geist',
+      cssVariable: '--font-geist',
+      weights: [400, 500, 600, 700],
+      subsets: ['latin'],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Geist Mono',
+      cssVariable: '--font-geist-mono',
+      weights: [400, 500, 600, 700],
+      subsets: ['latin'],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Newsreader',
+      cssVariable: '--font-newsreader',
+      weights: [400, 500],
+      styles: ['normal', 'italic'],
+      subsets: ['latin'],
+    },
+  ],
 
   integrations: [
     react(),
