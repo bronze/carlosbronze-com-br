@@ -81,13 +81,11 @@ const focus = [
     en: 'I’m Carlos Bronze, a senior product manager based in Rio de Janeiro. I work where strategy, creativity and product meet: understanding what grows the business, choosing the metrics that tell that story, and designing experiences that make those numbers move.',
   }}
   continueIntro>
-  {
-    story.map(p => (
-      <p class={paragraph}>
-        <T {...p} />
-      </p>
-    ))
-  }
+  {story.map(p => (
+    <p class={paragraph}>
+      <T {...p} />
+    </p>
+  ))}
 
   <section aria-labelledby="focus-title" class="mt-10 mb-11">
     <h2
@@ -95,20 +93,17 @@ const focus = [
       class="text-muted-foreground mb-5 font-mono text-xs tracking-[0.06em] uppercase">
       <T pt="Onde eu foco" en="Where I focus" />
     </h2>
-    <div
-      class="grid grid-cols-[repeat(auto-fit,minmax(148px,1fr))] gap-x-[22px] gap-y-6">
-      {
-        focus.map(f => (
-          <div>
-            <h3 class="mb-1.5 font-serif text-lg leading-snug">
-              <T {...f.title} />
-            </h3>
-            <p class="text-muted-foreground text-sm leading-normal">
-              <T {...f.body} />
-            </p>
-          </div>
-        ))
-      }
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(148px,1fr))] gap-x-[22px] gap-y-6">
+      {focus.map(f => (
+        <div>
+          <h3 class="mb-1.5 font-serif text-lg leading-snug">
+            <T {...f.title} />
+          </h3>
+          <p class="text-muted-foreground text-sm leading-normal">
+            <T {...f.body} />
+          </p>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -122,28 +117,41 @@ const focus = [
   <!-- Has inline links, so it can't use <T>; the data-lang-* spans follow the same toggle. -->
   <p class={paragraph}>
     <span data-lang-pt>
-      Fora do trabalho, treino <a href={links.krav} {...external} class={link}
-        >Krav Maga</a
-      >, assisto muito <a href={links.critrole} {...external} class={link}
-        >Critical Role</a
-      >, leio bastante (sou muito fã do
-      <a href={links.sanderson} {...external} class={link}>Brandon Sanderson</a
-      >) e ando maratonando <a href={links.rory} {...external} class={link}
-        >vídeos do Rory Sutherland</a
-      > no YouTube.
+      Fora do trabalho, treino{' '}
+      <a href={links.krav} {...external} class={link}>
+        Krav Maga
+      </a>
+      , assisto muito{' '}
+      <a href={links.critrole} {...external} class={link}>
+        Critical Role
+      </a>
+      , leio bastante (sou muito fã do
+      <a href={links.sanderson} {...external} class={link}>
+        Brandon Sanderson
+      </a>
+      ) e ando maratonando{' '}
+      <a href={links.rory} {...external} class={link}>
+        vídeos do Rory Sutherland
+      </a>{' '}
+      no YouTube.
     </span>
     <span data-lang-en>
-      Outside work, I train <a
-        href={links.krav}
-        {...external}
-        class={link}>Krav Maga</a
-      >, watch a lot of <a href={links.critrole} {...external} class={link}
-        >Critical Role</a
-      >, read a bunch (big
-      <a href={links.sanderson} {...external} class={link}>Brandon Sanderson</a> fan),
-      and have been binging <a href={links.rory} {...external} class={link}
-        >Rory Sutherland videos</a
-      >
+      Outside work, I train{' '}
+      <a href={links.krav} {...external} class={link}>
+        Krav Maga
+      </a>
+      , watch a lot of{' '}
+      <a href={links.critrole} {...external} class={link}>
+        Critical Role
+      </a>
+      , read a bunch (big
+      <a href={links.sanderson} {...external} class={link}>
+        Brandon Sanderson
+      </a>{' '}
+      fan), and have been binging{' '}
+      <a href={links.rory} {...external} class={link}>
+        Rory Sutherland videos
+      </a>
       on YouTube.
     </span>
   </p>
@@ -151,18 +159,18 @@ const focus = [
   <!-- Points at /work, which has both languages; click tracking is wired by SiteHeader's [data-track] handler. -->
   <p class={paragraph}>
     <span data-lang-pt>
-      Quer a versão completa? Meu <a
-        href="/work"
-        class={link}
-        data-track="resume_clicked">currículo</a
-      > está aqui.
+      Quer a versão completa? Meu{' '}
+      <a href="/work" class={link} data-track="resume_clicked">
+        currículo
+      </a>{' '}
+      está aqui.
     </span>
     <span data-lang-en>
-      Want the full version? My <a
-        href="/work"
-        class={link}
-        data-track="resume_clicked">resume</a
-      > is here.
+      Want the full version? My{' '}
+      <a href="/work" class={link} data-track="resume_clicked">
+        resume
+      </a>{' '}
+      is here.
     </span>
   </p>
 </PageLayout>

@@ -14,8 +14,7 @@
   class="border-border bg-background text-muted-foreground pop fixed z-40 w-max max-w-64 rounded-md border px-3 py-2 font-mono text-xs leading-relaxed print:hidden"
   role="status"
   hidden
-  data-sky-info>
-</div>
+  data-sky-info></div>
 
 <style>
   @media (prefers-reduced-motion: no-preference) {
@@ -45,10 +44,16 @@
     const label = skyLabel[w.sky]
     return [
       { pt: `${label.pt} · ${w.temp}°`, en: `${label.en} · ${w.temp}°` },
-      { pt: `nascer ${w.sunrise} · pôr ${w.sunset}`, en: `sunrise ${w.sunrise} · sunset ${w.sunset}` },
+      {
+        pt: `nascer ${w.sunrise} · pôr ${w.sunset}`,
+        en: `sunrise ${w.sunrise} · sunset ${w.sunset}`,
+      },
       { pt: `máx ${w.high}° · mín ${w.low}°`, en: `high ${w.high}° · low ${w.low}°` },
       uv
-        ? { pt: `chance de chuva ${w.rainChance}% · UV ${w.uv}`, en: `${w.rainChance}% chance of rain · UV ${w.uv}` }
+        ? {
+            pt: `chance de chuva ${w.rainChance}% · UV ${w.uv}`,
+            en: `${w.rainChance}% chance of rain · UV ${w.uv}`,
+          }
         : { pt: `chance de chuva ${w.rainChance}%`, en: `${w.rainChance}% chance of rain` },
     ]
   }
@@ -68,7 +73,10 @@
     const full = phase < 0.465 || phase > 0.965
     const next = Math.round((((full ? 0.5 : 1) - phase + 1) % 1) * month)
     const when = full ? inDays(next, 'cheia', 'full') : inDays(next, 'nova', 'new')
-    const moon = { pt: name.pt.startsWith('quarto') ? name.pt : `lua ${name.pt}`, en: `${name.en} moon` }
+    const moon = {
+      pt: name.pt.startsWith('quarto') ? name.pt : `lua ${name.pt}`,
+      en: `${name.en} moon`,
+    }
     return { pt: `${moon.pt} · ${when.pt}`, en: `${moon.en} · ${when.en}` }
   }
 
@@ -118,7 +126,8 @@
         if (!shown(body)) continue
         const r = bodies[body].getBoundingClientRect()
         const pad = Math.max(0, (44 - r.width) / 2)
-        if (x >= r.left - pad && x <= r.right + pad && y >= r.top - pad && y <= r.bottom + pad) return body
+        if (x >= r.left - pad && x <= r.right + pad && y >= r.top - pad && y <= r.bottom + pad)
+          return body
       }
       return null
     }
@@ -127,7 +136,9 @@
       // The moon says what the sun does, less the UV, then its phase; before
       // the weather comes in, just its phase.
       const lines =
-        body === 'sun' ? sunLines(weather!) : [...(weather ? sunLines(weather, false) : []), moonLine(phase)]
+        body === 'sun'
+          ? sunLines(weather!)
+          : [...(weather ? sunLines(weather, false) : []), moonLine(phase)]
       card.replaceChildren(...lines.map((line, i) => paragraph(line, i === 0)))
       card.hidden = false
       // Below the body, centred on it, kept on screen; above it if there's
@@ -162,7 +173,8 @@
       if (event.pointerType !== 'mouse') return
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        const over = hit(event.clientX, event.clientY) && !(event.target as Element).closest('a, button')
+        const over =
+          hit(event.clientX, event.clientY) && !(event.target as Element).closest('a, button')
         document.body.style.cursor = over ? 'pointer' : ''
       })
     }

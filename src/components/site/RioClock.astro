@@ -18,9 +18,7 @@ import CloudStorm from '@tabler/icons/outline/cloud-storm.svg'
 const icon = 'hidden size-[1.35em] -my-1'
 ---
 
-<p
-  class="text-muted-foreground/75 mb-6 min-h-lh font-mono text-xs tabular-nums"
-  data-rio-clock>
+<p class="text-muted-foreground/75 mb-6 min-h-lh font-mono text-xs tabular-nums" data-rio-clock>
   <span class="hidden" data-weather>
     <span class="inline-flex items-center gap-1 align-top" aria-hidden="true">
       <Sun class={icon} data-icon="clear-day" />
@@ -58,11 +56,17 @@ const icon = 'hidden size-[1.35em] -my-1'
     </span>
     <span class="sr-only" data-weather-label></span>
     <span aria-hidden="true"> · </span>
-  </span><span data-clock></span>
+  </span>
+  <span data-clock></span>
 </p>
 
 <script>
-  import { getWeather, lastKnown, skyLabel, type Weather } from '@/components/home-explorations/weather'
+  import {
+    getWeather,
+    lastKnown,
+    skyLabel,
+    type Weather,
+  } from '@/components/home-explorations/weather'
 
   const clock = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'America/Sao_Paulo',
@@ -81,7 +85,14 @@ const icon = 'hidden size-[1.35em] -my-1'
   function rioNow(date: Date) {
     const parts = clock.formatToParts(date)
     const part = (type: string) => Number(parts.find(p => p.type === type)!.value)
-    const wall = Date.UTC(part('year'), part('month') - 1, part('day'), part('hour'), part('minute'), part('second'))
+    const wall = Date.UTC(
+      part('year'),
+      part('month') - 1,
+      part('day'),
+      part('hour'),
+      part('minute'),
+      part('second'),
+    )
     const offset = Math.round((wall - date.getTime()) / 60_000)
     const time = `${String(part('hour')).padStart(2, '0')}:${String(part('minute')).padStart(2, '0')}`
     return { time, offset }
@@ -144,7 +155,10 @@ const icon = 'hidden size-[1.35em] -my-1'
     function show(current: Weather | null) {
       if (!current) return
       // Clear and partly cloudy have a day and a night icon.
-      const name = current.sky === 'clear' || current.sky === 'partly' ? `${current.sky}-${current.isDay ? 'day' : 'night'}` : current.sky
+      const name =
+        current.sky === 'clear' || current.sky === 'partly'
+          ? `${current.sky}-${current.isDay ? 'day' : 'night'}`
+          : current.sky
       for (const icon of icons) icon.classList.toggle('hidden', icon.dataset.icon !== name)
       box.querySelector('[data-temp]')!.textContent = `${current.temp}°`
       const words = said(current)

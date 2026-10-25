@@ -51,11 +51,7 @@ const { class: className, ...rest } = Astro.props
   .project-body :global(a) {
     color: var(--foreground);
     text-decoration: underline;
-    text-decoration-color: color-mix(
-      in oklab,
-      var(--foreground) 30%,
-      transparent
-    );
+    text-decoration-color: color-mix(in oklab, var(--foreground) 30%, transparent);
     text-underline-offset: 4px;
     transition: text-decoration-color 150ms;
   }

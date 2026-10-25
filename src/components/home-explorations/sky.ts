@@ -140,4 +140,3 @@ export function groundAt(hour: number, dark: boolean) {
   // change restyles the page, rain and all).
   return `oklch(${l.toFixed(3)} ${c.toFixed(3)} ${h.toFixed(0)})`
 }
-

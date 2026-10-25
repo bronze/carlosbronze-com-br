@@ -27,37 +27,73 @@ const button =
     <label class="block">
       <span class="mb-1 flex justify-between">
         <T pt="hora no Rio" en="time in Rio" />
-        <output class="text-foreground" data-out="hour">--:--</output>
+        <output class="text-foreground" data-out="hour">
+          --:--
+        </output>
       </span>
-      <input type="range" min="0" max="24" step="0.25" value="12" class="w-full accent-current" data-in="hour" />
+      <input
+        type="range"
+        min="0"
+        max="24"
+        step="0.25"
+        value="12"
+        class="w-full accent-current"
+        data-in="hour"
+      />
     </label>
     <div class="flex gap-2">
-      <button type="button" class={button} data-act="now" aria-pressed="true"><T pt="agora" en="now" /></button>
-      <button type="button" class={button} data-act="play" aria-pressed="false"><T pt="▶ dia em 24s" en="▶ day in 24s" /></button>
-      <button type="button" class={button} data-act="path" aria-pressed="false"><T pt="trajetória" en="path" /></button>
+      <button type="button" class={button} data-act="now" aria-pressed="true">
+        <T pt="agora" en="now" />
+      </button>
+      <button type="button" class={button} data-act="play" aria-pressed="false">
+        <T pt="▶ dia em 24s" en="▶ day in 24s" />
+      </button>
+      <button type="button" class={button} data-act="path" aria-pressed="false">
+        <T pt="trajetória" en="path" />
+      </button>
     </div>
     <label class="block">
       <span class="mb-1 flex justify-between">
         <T pt="fase da lua" en="moon phase" />
-        <output class="text-foreground" data-out="phase">–</output>
+        <output class="text-foreground" data-out="phase">
+          –
+        </output>
       </span>
-      <input type="range" min="0" max="1" step="0.01" value="0.5" class="w-full accent-current" data-in="phase" />
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.5"
+        class="w-full accent-current"
+        data-in="phase"
+      />
     </label>
     <p class="flex justify-between">
       <T pt="a lua nasce às" en="moon rises at" />
-      <output class="text-foreground" data-out="moonrise">--:--</output>
+      <output class="text-foreground" data-out="moonrise">
+        --:--
+      </output>
     </p>
     <div class="flex gap-2">
-      <button type="button" class={button} data-act="today" aria-pressed="true"><T pt="hoje" en="today" /></button>
+      <button type="button" class={button} data-act="today" aria-pressed="true">
+        <T pt="hoje" en="today" />
+      </button>
     </div>
     <label class="block">
-      <span class="mb-1 block"><T pt="tempo" en="weather" /></span>
+      <span class="mb-1 block">
+        <T pt="tempo" en="weather" />
+      </span>
       <!-- Sized down from the forms plugin's defaults, to the panel's text. -->
       <select
         class="border-border bg-background text-foreground focus:border-foreground w-full rounded border bg-[position:right_0.25rem_center] py-1 pr-7 pl-2 text-xs focus:ring-0"
         data-in="sky">
         <option value="">ao vivo / live</option>
-        {skies.map(sky => <option value={sky}>{skyLabel[sky].pt} / {skyLabel[sky].en}</option>)}
+        {skies.map(sky => (
+          <option value={sky}>
+            {skyLabel[sky].pt} / {skyLabel[sky].en}
+          </option>
+        ))}
       </select>
     </label>
   </div>
@@ -86,7 +122,8 @@ const button =
     const path = $<HTMLButtonElement>('[data-act="path"]')
     const today = $<HTMLButtonElement>('[data-act="today"]')
 
-    const send = (detail: object) => document.dispatchEvent(new CustomEvent('sky:control', { detail }))
+    const send = (detail: object) =>
+      document.dispatchEvent(new CustomEvent('sky:control', { detail }))
     const pressed = (b: HTMLButtonElement, on: boolean) => (b.ariaPressed = String(on))
     let frame = 0
 

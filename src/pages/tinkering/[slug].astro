@@ -21,8 +21,7 @@ export async function getStaticPaths() {
   return slugs.map(slug => {
     const pt = entries.find(e => e.id === `${slug}/pt`)
     const en = entries.find(e => e.id === `${slug}/en`)
-    if (!pt || !en)
-      throw new Error(`Project "${slug}" needs both pt.md and en.md`)
+    if (!pt || !en) throw new Error(`Project "${slug}" needs both pt.md and en.md`)
     return { params: { slug }, props: { pt, en } }
   })
 }
@@ -57,44 +56,34 @@ const jsonLd = [
   continueIntro
   pager={false}>
   <p class="mb-8 flex flex-wrap gap-x-6 text-lg leading-[1.75]">
-    {
-      [
-        { href: pt.data.url, label: { pt: 'ver no ar', en: 'see it live' } },
-        pt.data.repo && {
-          href: pt.data.repo,
-          label: { pt: 'código', en: 'source code' },
-        },
-      ]
-        .filter(l => !!l)
-        .map(l => (
-          <a
-            href={l.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-foreground hover:decoration-brand underline decoration-current/30 underline-offset-4 transition-colors"
-            data-foley-press="tap"
-            data-foley-hover="tick">
-            <T {...l.label} />
-            <span aria-hidden="true">↗</span>
-          </a>
-        ))
-    }
+    {[
+      { href: pt.data.url, label: { pt: 'ver no ar', en: 'see it live' } },
+      pt.data.repo && {
+        href: pt.data.repo,
+        label: { pt: 'código', en: 'source code' },
+      },
+    ]
+      .filter(l => !!l)
+      .map(l => (
+        <a
+          href={l.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-foreground hover:decoration-brand underline decoration-current/30 underline-offset-4 transition-colors"
+          data-foley-press="tap"
+          data-foley-hover="tick">
+          <T {...l.label} />
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))}
   </p>
 
   <!-- One per language for the alt text; both point at the same file. -->
   <div class="mb-12" data-lang-pt>
-    <Shot
-      name={slug}
-      alt={`Captura de tela do projeto no ar: ${pt.data.title}`}
-      eager
-    />
+    <Shot name={slug} alt={`Captura de tela do projeto no ar: ${pt.data.title}`} eager />
   </div>
   <div class="mb-12" data-lang-en>
-    <Shot
-      name={slug}
-      alt={`Screenshot of the live project: ${en.data.title}`}
-      eager
-    />
+    <Shot name={slug} alt={`Screenshot of the live project: ${en.data.title}`} eager />
   </div>
 
   <ProjectBody data-lang-pt>

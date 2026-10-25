@@ -68,9 +68,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
 
   <SiteHeader />
 
-  <main
-    id="main"
-    class="mx-auto w-full max-w-5xl flex-1 px-4 pt-6 pb-16 sm:px-6 sm:pt-12">
+  <main id="main" class="mx-auto w-full max-w-5xl flex-1 px-4 pt-6 pb-16 sm:px-6 sm:pt-12">
     <!-- Home uses the full column; inner pages read in a narrower centred one.
          Flat, like alliethu.com: the page's content sits right next to the
          heading, and every block spaces itself with its own margin-bottom.
@@ -88,28 +86,26 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
           'text-muted-foreground font-mono text-xs tracking-[0.06em] uppercase',
           Astro.slots.has('eyebrow') ? 'mb-1' : 'mb-6',
         ]}>
-        {
-          back ? (
-            // On a sub-page the eyebrow doubles as the way back up.
-            <a
-              href={back.href}
-              class="group hover:text-foreground transition-colors"
-              data-foley-press="tap"
-              data-foley-hover="tick">
-              <span
-                class="inline-block transition-transform group-hover:-translate-x-1"
-                aria-hidden="true">
-                ←
-              </span>{' '}
-              <span class="sr-only">
-                <T pt="Voltar para" en="Back to" />{' '}
-              </span>
-              <T {...back.label} />
-            </a>
-          ) : (
-            <T {...eyebrow} />
-          )
-        }
+        {back ? (
+          // On a sub-page the eyebrow doubles as the way back up.
+          <a
+            href={back.href}
+            class="group hover:text-foreground transition-colors"
+            data-foley-press="tap"
+            data-foley-hover="tick">
+            <span
+              class="inline-block transition-transform group-hover:-translate-x-1"
+              aria-hidden="true">
+              ←
+            </span>{' '}
+            <span class="sr-only">
+              <T pt="Voltar para" en="Back to" />{' '}
+            </span>
+            <T {...back.label} />
+          </a>
+        ) : (
+          <T {...eyebrow} />
+        )}
       </p>
       <slot name="eyebrow" />
       <h1
@@ -122,57 +118,50 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
         ]}>
         <T {...heading} />
       </h1>
-      {
-        subheading && (
-          <p class="text-muted-foreground mb-4 font-mono text-sm">
-            <T {...subheading} />
-          </p>
-        )
-      }
-      {
-        intro && (
-          <p
-            class:list={[
-              'text-foreground/80 text-pretty',
-              hero
-                ? 'mb-14 max-w-[32ch] text-base leading-relaxed sm:text-lg'
-                : 'text-lg leading-[1.75]',
-              !hero && (continueIntro ? 'mb-5' : 'mb-11'),
-            ]}>
-            {Astro.slots.has('intro') ? <slot name="intro" /> : <T {...intro} />}
-          </p>
-        )
-      }
+      {subheading && (
+        <p class="text-muted-foreground mb-4 font-mono text-sm">
+          <T {...subheading} />
+        </p>
+      )}
+      {intro && (
+        <p
+          class:list={[
+            'text-foreground/80 text-pretty',
+            hero
+              ? 'mb-14 max-w-[32ch] text-base leading-relaxed sm:text-lg'
+              : 'text-lg leading-[1.75]',
+            !hero && (continueIntro ? 'mb-5' : 'mb-11'),
+          ]}>
+          {Astro.slots.has('intro') ? <slot name="intro" /> : <T {...intro} />}
+        </p>
+      )}
 
       <slot />
 
-      {
-        pager && (
-          // Small screens only: on desktop the header nav is always in view,
-          // on a phone it has scrolled away by the time you reach the end.
-          <nav
-            {...ariaLabel({ pt: 'Explorar seções', en: 'Explore sections' })}
-            data-pager
-            class="mt-11 min-[821px]:hidden">
-            <SectionLink
-              section={prev}
-              direction="prev"
-              srPrefix={{ pt: 'Anterior:', en: 'Previous:' }}
-              class="border-border min-h-16 border-t py-3.5"
-            />
-            <SectionLink
-              section={next}
-              srPrefix={{ pt: 'Próxima:', en: 'Next:' }}
-              class="border-border min-h-16 border-t py-3.5"
-            />
-          </nav>
-        )
-      }
+      {pager && (
+        // Small screens only: on desktop the header nav is always in view,
+        // on a phone it has scrolled away by the time you reach the end.
+        <nav
+          {...ariaLabel({ pt: 'Explorar seções', en: 'Explore sections' })}
+          data-pager
+          class="mt-11 min-[821px]:hidden">
+          <SectionLink
+            section={prev}
+            direction="prev"
+            srPrefix={{ pt: 'Anterior:', en: 'Previous:' }}
+            class="border-border min-h-16 border-t py-3.5"
+          />
+          <SectionLink
+            section={next}
+            srPrefix={{ pt: 'Próxima:', en: 'Next:' }}
+            class="border-border min-h-16 border-t py-3.5"
+          />
+        </nav>
+      )}
     </section>
   </main>
 
-  <footer
-    class="text-muted-foreground flex flex-col items-center gap-1 px-4 pb-8 text-center font-mono text-xs">
+  <footer class="text-muted-foreground flex flex-col items-center gap-1 px-4 pb-8 text-center font-mono text-xs">
     <p>
       © {new Date().getFullYear()}
       {
@@ -182,7 +171,9 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
           { label: 'github', href: profiles.github, track: 'github_clicked' },
         ].map(l => (
           <>
-            <span class="mx-2 opacity-50" aria-hidden="true">·</span>
+            <span class="mx-2 opacity-50" aria-hidden="true">
+              ·
+            </span>
             <a
               href={l.href}
               target="_blank"

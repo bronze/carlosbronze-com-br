@@ -61,20 +61,19 @@ const projects = [
 ]
 
 // `live` marks a link to a running site instead of a repo.
-const quick: { name: string; nameEn?: string; href: string; live?: boolean }[] =
-  [
-    {
-      name: 'Mapa das academias de Krav Maga · Mapbox',
-      nameEn: 'Krav Maga gym map · Mapbox',
-      href: 'https://mapa-kravmaga.carlosbronze.com/',
-      live: true,
-    },
-    {
-      name: 'Tera Workshop · Mapbox',
-      href: 'https://tera-workshop-dados.carlosbronze.com/',
-      live: true,
-    },
-  ]
+const quick: { name: string; nameEn?: string; href: string; live?: boolean }[] = [
+  {
+    name: 'Mapa das academias de Krav Maga · Mapbox',
+    nameEn: 'Krav Maga gym map · Mapbox',
+    href: 'https://mapa-kravmaga.carlosbronze.com/',
+    live: true,
+  },
+  {
+    name: 'Tera Workshop · Mapbox',
+    href: 'https://tera-workshop-dados.carlosbronze.com/',
+    live: true,
+  },
+]
 
 const credit = {
   allie: 'https://alliethu.com/',
@@ -95,55 +94,53 @@ const link =
     en: "Projects that started with an itch, a question, or an idea I couldn't shake.",
   }}>
   <ul class="mb-16 space-y-10">
-    {
-      projects.map(p => (
-        <li>
-          <a
-            href={p.href}
-            {...(p.href.startsWith('http') && {
-              target: '_blank',
-              rel: 'noopener noreferrer',
-            })}
-            class="group grid gap-x-6 gap-y-4 sm:grid-cols-[13rem_minmax(0,1fr)] sm:items-start"
-            data-foley-press="tap"
-            data-foley-hover="tick">
-            {(() => {
-              // The project as it is now, from src/assets/projects.
-              const img = projectImage(p.href.split('/').pop()!)
-              return (
-                img && (
-                  <Image
-                    src={img}
-                    alt=""
-                    widths={[416, 720, 1440]}
-                    sizes="(min-width: 640px) 208px, 100vw"
-                    class="border-border aspect-[16/10] w-full rounded-md border object-cover object-top transition-opacity group-hover:opacity-85"
-                  />
-                )
+    {projects.map(p => (
+      <li>
+        <a
+          href={p.href}
+          {...(p.href.startsWith('http') && {
+            target: '_blank',
+            rel: 'noopener noreferrer',
+          })}
+          class="group grid gap-x-6 gap-y-4 sm:grid-cols-[13rem_minmax(0,1fr)] sm:items-start"
+          data-foley-press="tap"
+          data-foley-hover="tick">
+          {(() => {
+            // The project as it is now, from src/assets/projects.
+            const img = projectImage(p.href.split('/').pop()!)
+            return (
+              img && (
+                <Image
+                  src={img}
+                  alt=""
+                  widths={[416, 720, 1440]}
+                  sizes="(min-width: 640px) 208px, 100vw"
+                  class="border-border aspect-[16/10] w-full rounded-md border object-cover object-top transition-opacity group-hover:opacity-85"
+                />
               )
-            })()}
-            <div>
-              <h2 class="mb-2 font-serif text-2xl">
-                {typeof p.name === 'string' ? p.name : <T {...p.name} />}{' '}
-                <span
-                  class:list={[
-                    'text-muted-foreground group-hover:text-brand inline-block text-base transition-[color,transform]',
-                    p.href.startsWith('http')
-                      ? 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
-                      : 'group-hover:translate-x-1',
-                  ]}
-                  aria-hidden="true">
-                  {p.href.startsWith('http') ? '↗' : '→'}
-                </span>
-              </h2>
-              <p class="text-muted-foreground text-base leading-[1.6]">
-                <T {...p.body} />
-              </p>
-            </div>
-          </a>
-        </li>
-      ))
-    }
+            )
+          })()}
+          <div>
+            <h2 class="mb-2 font-serif text-2xl">
+              {typeof p.name === 'string' ? p.name : <T {...p.name} />}{' '}
+              <span
+                class:list={[
+                  'text-muted-foreground group-hover:text-brand inline-block text-base transition-[color,transform]',
+                  p.href.startsWith('http')
+                    ? 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+                    : 'group-hover:translate-x-1',
+                ]}
+                aria-hidden="true">
+                {p.href.startsWith('http') ? '↗' : '→'}
+              </span>
+            </h2>
+            <p class="text-muted-foreground text-base leading-[1.6]">
+              <T {...p.body} />
+            </p>
+          </div>
+        </a>
+      </li>
+    ))}
   </ul>
 
   <section aria-labelledby="quick-title" class="mb-16">
@@ -153,33 +150,31 @@ const link =
       <T pt="Rapidinhas" en="Quick ones" />
     </h2>
     <ul class="border-border divide-border divide-y border-y">
-      {
-        quick.map(q => (
-          <li>
-            <a
-              href={q.href}
-              {...(q.href.startsWith('http') && {
-                target: '_blank',
-                rel: 'noopener noreferrer',
-              })}
-              class="group flex items-baseline justify-between py-3"
-              data-foley-press="tap"
-              data-foley-hover="tick">
-              <span class="group-hover:decoration-brand group-hover:underline group-hover:underline-offset-4">
-                {q.nameEn ? <T pt={q.name} en={q.nameEn} /> : q.name}
+      {quick.map(q => (
+        <li>
+          <a
+            href={q.href}
+            {...(q.href.startsWith('http') && {
+              target: '_blank',
+              rel: 'noopener noreferrer',
+            })}
+            class="group flex items-baseline justify-between py-3"
+            data-foley-press="tap"
+            data-foley-hover="tick">
+            <span class="group-hover:decoration-brand group-hover:underline group-hover:underline-offset-4">
+              {q.nameEn ? <T pt={q.name} en={q.nameEn} /> : q.name}
+            </span>
+            <span class="text-muted-foreground font-mono text-xs">
+              {q.live ? <T pt="ver no ar" en="see it live" /> : 'repo'}{' '}
+              <span
+                class="group-hover:text-brand inline-block transition-[color,transform] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                aria-hidden="true">
+                ↗
               </span>
-              <span class="text-muted-foreground font-mono text-xs">
-                {q.live ? <T pt="ver no ar" en="see it live" /> : 'repo'}{' '}
-                <span
-                  class="group-hover:text-brand inline-block transition-[color,transform] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden="true">
-                  ↗
-                </span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
+            </span>
+          </a>
+        </li>
+      ))}
     </ul>
   </section>
 
@@ -193,19 +188,27 @@ const link =
     <p class="text-foreground/80 text-base leading-[1.6]">
       <span data-lang-pt>
         Este site é uma homenagem descarada ao
-        <a href={credit.allie} {...external} class={link}>site da Allie Thu</a>.
-        A estrutura, o ritmo e as animações vêm de lá; o conteúdo, os erros e as
-        escolhas são meus. Como diz o
-        <a href={credit.kleon} {...external} class={link}>Austin Kleon</a>:
-        copie, mas dê o crédito. Obrigado, Allie.
+        <a href={credit.allie} {...external} class={link}>
+          site da Allie Thu
+        </a>
+        . A estrutura, o ritmo e as animações vêm de lá; o conteúdo, os erros e as escolhas são
+        meus. Como diz o
+        <a href={credit.kleon} {...external} class={link}>
+          Austin Kleon
+        </a>
+        : copie, mas dê o crédito. Obrigado, Allie.
       </span>
       <span data-lang-en>
         This site is a shameless homage to
-        <a href={credit.allie} {...external} class={link}>Allie Thu’s site</a>.
-        The structure, rhythm and animations come from there; the content, the
-        mistakes and the choices are mine. As
-        <a href={credit.kleon} {...external} class={link}>Austin Kleon</a> says: steal
-        like an artist, and credit your sources. Thanks, Allie.
+        <a href={credit.allie} {...external} class={link}>
+          Allie Thu’s site
+        </a>
+        . The structure, rhythm and animations come from there; the content, the mistakes and the
+        choices are mine. As
+        <a href={credit.kleon} {...external} class={link}>
+          Austin Kleon
+        </a>{' '}
+        says: steal like an artist, and credit your sources. Thanks, Allie.
       </span>
     </p>
   </section>

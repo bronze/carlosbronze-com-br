@@ -97,12 +97,9 @@ const groups: { id: string; heading: Bilingual; items: Item[] }[] = [
   },
 ]
 
-const linkClass =
-  'group flex items-baseline justify-between gap-4 py-3 text-[17px]'
+const linkClass = 'group flex items-baseline justify-between gap-4 py-3 text-[17px]'
 const external = (href: string) =>
-  href.startsWith('http')
-    ? { target: '_blank', rel: 'noopener noreferrer' }
-    : {}
+  href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 ---
 
 <PageLayout
@@ -111,66 +108,64 @@ const external = (href: string) =>
     pt: 'De onde vêm as ideias que uso pra pensar produto, estratégia e comportamento: minhas notas, os podcasts que acompanho e o que ando lendo.',
     en: "Where the ideas I use to think about product, strategy and behavior come from: my own notes, the podcasts I follow and what I've been reading.",
   }}>
-  {
-    groups.map(g => (
-      <section aria-labelledby={`${g.id}-title`} class="mb-14">
-        <h2
-          id={`${g.id}-title`}
-          class="text-muted-foreground mb-4 font-mono text-xs tracking-[0.06em] uppercase">
-          <T {...g.heading} />
-        </h2>
-        <ul class="border-border divide-border divide-y border-y">
-          {g.items.map(item => {
-            const hrefs: { href: string; lang?: string }[] =
-              typeof item.href === 'string'
-                ? [{ href: item.href }]
-                : [
-                    { href: item.href.pt, lang: 'data-lang-pt' },
-                    { href: item.href.en, lang: 'data-lang-en' },
-                  ]
-            return (
-              <li>
-                {hrefs.map(({ href, lang }) => (
-                  <a
-                    href={href}
-                    {...external(href)}
-                    {...(lang && { [lang]: '' })}
-                    class={linkClass}
-                    data-foley-press="tap"
-                    data-foley-hover="tick"
-                    data-track={item.track}>
-                    <span>
-                      <span class="group-hover:decoration-brand group-hover:underline group-hover:underline-offset-4">
-                        {item.name}
-                      </span>{' '}
-                      <span
-                        class:list={[
-                          'text-muted-foreground group-hover:text-brand inline-block text-base transition-[color,transform]',
-                          href.startsWith('http')
-                            ? 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
-                            : 'group-hover:translate-x-1',
-                        ]}
-                        aria-hidden="true">
-                        {href.startsWith('http') ? '↗' : '→'}
-                      </span>
-                      {item.langs && (
-                        <span class="text-muted-foreground ml-2 font-mono text-xs">
-                          {item.langs.join(' · ')}
-                        </span>
-                      )}
+  {groups.map(g => (
+    <section aria-labelledby={`${g.id}-title`} class="mb-14">
+      <h2
+        id={`${g.id}-title`}
+        class="text-muted-foreground mb-4 font-mono text-xs tracking-[0.06em] uppercase">
+        <T {...g.heading} />
+      </h2>
+      <ul class="border-border divide-border divide-y border-y">
+        {g.items.map(item => {
+          const hrefs: { href: string; lang?: string }[] =
+            typeof item.href === 'string'
+              ? [{ href: item.href }]
+              : [
+                  { href: item.href.pt, lang: 'data-lang-pt' },
+                  { href: item.href.en, lang: 'data-lang-en' },
+                ]
+          return (
+            <li>
+              {hrefs.map(({ href, lang }) => (
+                <a
+                  href={href}
+                  {...external(href)}
+                  {...(lang && { [lang]: '' })}
+                  class={linkClass}
+                  data-foley-press="tap"
+                  data-foley-hover="tick"
+                  data-track={item.track}>
+                  <span>
+                    <span class="group-hover:decoration-brand group-hover:underline group-hover:underline-offset-4">
+                      {item.name}
+                    </span>{' '}
+                    <span
+                      class:list={[
+                        'text-muted-foreground group-hover:text-brand inline-block text-base transition-[color,transform]',
+                        href.startsWith('http')
+                          ? 'group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+                          : 'group-hover:translate-x-1',
+                      ]}
+                      aria-hidden="true">
+                      {href.startsWith('http') ? '↗' : '→'}
                     </span>
-                    {item.tag && (
-                      <span class="text-muted-foreground font-mono text-xs">
-                        <T {...item.tag} />
+                    {item.langs && (
+                      <span class="text-muted-foreground ml-2 font-mono text-xs">
+                        {item.langs.join(' · ')}
                       </span>
                     )}
-                  </a>
-                ))}
-              </li>
-            )
-          })}
-        </ul>
-      </section>
-    ))
-  }
+                  </span>
+                  {item.tag && (
+                    <span class="text-muted-foreground font-mono text-xs">
+                      <T {...item.tag} />
+                    </span>
+                  )}
+                </a>
+              ))}
+            </li>
+          )
+        })}
+      </ul>
+    </section>
+  ))}
 </PageLayout>

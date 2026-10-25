@@ -9,15 +9,13 @@ const { items } = Astro.props
 ---
 
 <ol class="steps">
-  {
-    items.map(({ title, text }, i) => (
-      <li>
-        <span class="num">{String(i + 1).padStart(2, '0')}</span>
-        <span class="title">{title}</span>
-        {text && <span class="text">{text}</span>}
-      </li>
-    ))
-  }
+  {items.map(({ title, text }, i) => (
+    <li>
+      <span class="num">{String(i + 1).padStart(2, '0')}</span>
+      <span class="title">{title}</span>
+      {text && <span class="text">{text}</span>}
+    </li>
+  ))}
 </ol>
 
 <style>

@@ -27,17 +27,21 @@ interface Props {
   pager={false}
   noindex>
   <Fragment slot="intro">
-    <span data-lang-pt>Conecto estratégia, métricas e criatividade para construir produtos que movem o negócio.</span><span data-lang-en>I connect strategy, metrics and creativity<br /> to build products that move the business.</span>
+    <span data-lang-pt>
+      Conecto estratégia, métricas e criatividade para construir produtos que movem o negócio.
+    </span>
+    <span data-lang-en>
+      I connect strategy, metrics and creativity
+      <br /> to build products that move the business.
+    </span>
   </Fragment>
   <nav {...ariaLabel({ pt: 'Seções', en: 'Sections' })}>
     <ul class="grid max-w-3xl gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
-      {
-        sections.map(s => (
-          <li>
-            <SectionLink section={s} />
-          </li>
-        ))
-      }
+      {sections.map(s => (
+        <li>
+          <SectionLink section={s} />
+        </li>
+      ))}
     </ul>
   </nav>
   <slot />

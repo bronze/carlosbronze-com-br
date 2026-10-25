@@ -142,7 +142,11 @@ function toWeather(reading: Reading | null, force: Sky | null): Weather | null {
 
 // A reading with its sky swapped for another, for the dev panel.
 export function forceSky(sky: Sky, base: Weather | null): Weather {
-  return { ...(base ?? toWeather(null, sky)!), ...fromCode(forced[sky].code), cover: forced[sky].cover }
+  return {
+    ...(base ?? toWeather(null, sky)!),
+    ...fromCode(forced[sky].code),
+    cover: forced[sky].cover,
+  }
 }
 
 // One request per page, however many parts ask.

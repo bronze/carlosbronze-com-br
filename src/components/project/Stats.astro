@@ -10,22 +10,20 @@ const { items } = Astro.props
 ---
 
 <dl class="stats">
-  {
-    items.map(({ label, before, after }) => (
-      <div class="stat">
-        <dt>{label}</dt>
-        <dd>
-          {before && (
-            <span class="before">
-              {before}
-              {' → '}
-            </span>
-          )}
-          <span class="after">{after}</span>
-        </dd>
-      </div>
-    ))
-  }
+  {items.map(({ label, before, after }) => (
+    <div class="stat">
+      <dt>{label}</dt>
+      <dd>
+        {before && (
+          <span class="before">
+            {before}
+            {' → '}
+          </span>
+        )}
+        <span class="after">{after}</span>
+      </dd>
+    </div>
+  ))}
 </dl>
 
 <style>

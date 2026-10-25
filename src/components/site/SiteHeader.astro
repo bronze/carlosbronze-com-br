@@ -24,24 +24,16 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
     id="site-navigation"
     {...ariaLabel({ pt: 'Navegação principal', en: 'Main navigation' })}
     class="col-span-2 flex flex-wrap gap-x-5 gap-y-1 font-mono text-[13px] sm:col-span-1 sm:justify-end">
-    {
-      sections.map(s => (
-        <a
-          href={s.href}
-          aria-current={
-            path === s.href
-              ? 'page'
-              : path.startsWith(s.href + '/')
-                ? 'true'
-                : undefined
-          }
-          class="text-muted-foreground hover:text-foreground [&[aria-current]]:text-foreground lowercase transition-colors [&[aria-current]]:underline [&[aria-current]]:decoration-brand [&[aria-current]]:decoration-1 [&[aria-current]]:underline-offset-[6px]"
-          data-foley-press="tap"
-          data-foley-hover="tick">
-          <T {...s.label} />
-        </a>
-      ))
-    }
+    {sections.map(s => (
+      <a
+        href={s.href}
+        aria-current={path === s.href ? 'page' : path.startsWith(s.href + '/') ? 'true' : undefined}
+        class="text-muted-foreground hover:text-foreground [&[aria-current]]:text-foreground lowercase transition-colors [&[aria-current]]:underline [&[aria-current]]:decoration-brand [&[aria-current]]:decoration-1 [&[aria-current]]:underline-offset-[6px]"
+        data-foley-press="tap"
+        data-foley-hover="tick">
+        <T {...s.label} />
+      </a>
+    ))}
   </nav>
 
   <!-- The label starts with the visible text, so voice control finds the
@@ -52,9 +44,15 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
     class="text-muted-foreground col-start-2 row-start-1 flex items-center gap-1 justify-self-end font-mono text-xs sm:col-start-3"
     {...ariaLabel({ pt: 'PT / EN, read in English', en: 'PT / EN, ler em português' })}
     data-foley-toggle>
-    <span class="lang-label" data-for="pt" aria-hidden="true">PT</span>
-    <span class="opacity-30" aria-hidden="true">/</span>
-    <span class="lang-label" data-for="en" aria-hidden="true">EN</span>
+    <span class="lang-label" data-for="pt" aria-hidden="true">
+      PT
+    </span>
+    <span class="opacity-30" aria-hidden="true">
+      /
+    </span>
+    <span class="lang-label" data-for="en" aria-hidden="true">
+      EN
+    </span>
   </button>
 </header>
 
@@ -76,16 +74,10 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 
   function applyAriaLabels(lang: string) {
     document.querySelectorAll<HTMLElement>('[data-label-pt]').forEach(el => {
-      el.setAttribute(
-        'aria-label',
-        (lang === 'en' ? el.dataset.labelEn : el.dataset.labelPt)!,
-      )
+      el.setAttribute('aria-label', (lang === 'en' ? el.dataset.labelEn : el.dataset.labelPt)!)
     })
     const title = document.querySelector<HTMLElement>('title[data-title-en]')
-    if (title)
-      document.title = (
-        lang === 'en' ? title.dataset.titleEn : title.dataset.titlePt
-      )!
+    if (title) document.title = (lang === 'en' ? title.dataset.titleEn : title.dataset.titlePt)!
   }
 
   // The header is re-rendered on every navigation, so it's wired up again on

@@ -45,32 +45,126 @@ const singles = modes.filter(m => 'single' in m).map(m => m.value)
 // Semantic tokens: what components use. `light`/`dark` say which primitive
 // step each one points at.
 const roles = [
-  { token: '--background', light: 'base-0', dark: 'base-950', use: { pt: 'Fundo da página', en: 'Page background' } },
-  { token: '--foreground', light: 'base-950', dark: 'base-50', use: { pt: 'Texto principal', en: 'Main text' } },
-  { token: '--muted-foreground', light: 'base-600', dark: 'base-400/300', use: { pt: 'Texto secundário, rótulos', en: 'Secondary text, labels' } },
-  { token: '--muted', light: 'base-100', dark: 'base-800', use: { pt: 'Fundo de código', en: 'Code background' } },
-  { token: '--border', light: 'base-200', dark: 'branco 10%', use: { pt: 'Linhas e divisórias', en: 'Rules and dividers' } },
-  { token: '--brand', light: 'brand-600', dark: 'brand-400', use: { pt: 'Destaque: setas, sublinhados, citações', en: 'Accent: arrows, underlines, quotes' } },
+  {
+    token: '--background',
+    light: 'base-0',
+    dark: 'base-950',
+    use: { pt: 'Fundo da página', en: 'Page background' },
+  },
+  {
+    token: '--foreground',
+    light: 'base-950',
+    dark: 'base-50',
+    use: { pt: 'Texto principal', en: 'Main text' },
+  },
+  {
+    token: '--muted-foreground',
+    light: 'base-600',
+    dark: 'base-400/300',
+    use: { pt: 'Texto secundário, rótulos', en: 'Secondary text, labels' },
+  },
+  {
+    token: '--muted',
+    light: 'base-100',
+    dark: 'base-800',
+    use: { pt: 'Fundo de código', en: 'Code background' },
+  },
+  {
+    token: '--border',
+    light: 'base-200',
+    dark: 'branco 10%',
+    use: { pt: 'Linhas e divisórias', en: 'Rules and dividers' },
+  },
+  {
+    token: '--brand',
+    light: 'brand-600',
+    dark: 'brand-400',
+    use: { pt: 'Destaque: setas, sublinhados, citações', en: 'Accent: arrows, underlines, quotes' },
+  },
 ]
 
 // Text/background pairs that must stay readable. WCAG 2 contrast.
 const pairs = [
-  { fg: '--foreground', bg: '--background', label: { pt: 'Texto sobre fundo', en: 'Text on background' } },
-  { fg: '--muted-foreground', bg: '--background', label: { pt: 'Texto secundário sobre fundo', en: 'Secondary text on background' } },
-  { fg: '--brand', bg: '--background', label: { pt: 'Destaque sobre fundo', en: 'Accent on background' } },
-  { fg: '--foreground', bg: '--muted', label: { pt: 'Código sobre seu fundo', en: 'Code on its background' } },
+  {
+    fg: '--foreground',
+    bg: '--background',
+    label: { pt: 'Texto sobre fundo', en: 'Text on background' },
+  },
+  {
+    fg: '--muted-foreground',
+    bg: '--background',
+    label: { pt: 'Texto secundário sobre fundo', en: 'Secondary text on background' },
+  },
+  {
+    fg: '--brand',
+    bg: '--background',
+    label: { pt: 'Destaque sobre fundo', en: 'Accent on background' },
+  },
+  {
+    fg: '--foreground',
+    bg: '--muted',
+    label: { pt: 'Código sobre seu fundo', en: 'Code on its background' },
+  },
 ]
 
 const type = [
-  { name: { pt: 'Display', en: 'Display' }, spec: 'Newsreader · 60→96px · 0.92', cls: 'font-serif text-6xl leading-[0.92]', sample: 'Carlos Bronze.' },
-  { name: { pt: 'Título de página', en: 'Page title' }, spec: 'Newsreader · 32→46px · 1.15', cls: 'font-serif text-[clamp(32px,4vw,46px)] leading-[1.15]', sample: { pt: 'Criatividade em função de resultado.', en: 'Creativity in service of results.' } },
-  { name: { pt: 'Número', en: 'Number' }, spec: 'Newsreader · 40px · 1', cls: 'font-serif text-[2.5rem] leading-none font-medium', sample: '100' },
-  { name: { pt: 'Título de seção', en: 'Section title' }, spec: 'Newsreader · 24px · 1.2', cls: 'font-serif text-2xl leading-[1.2] font-medium', sample: { pt: 'O que aprendi', en: 'What I learned' } },
-  { name: { pt: 'Citação', en: 'Quote' }, spec: 'Newsreader · 20px · 1.4', cls: 'font-serif text-xl leading-[1.4]', sample: { pt: 'Alguns materiais não envelhecem.', en: 'Some material never gets old.' } },
-  { name: { pt: 'Texto longo', en: 'Long text' }, spec: 'Geist · 18px · 1.75', cls: 'text-lg leading-[1.75] text-foreground/80', sample: { pt: 'Parágrafos de páginas como Sobre e os projetos.', en: 'Paragraphs on pages like About and the projects.' } },
-  { name: { pt: 'Texto', en: 'Text' }, spec: 'Geist · 16px · 1.6', cls: 'text-base leading-[1.6] text-muted-foreground', sample: { pt: 'Descrições curtas e listas.', en: 'Short descriptions and lists.' } },
-  { name: { pt: 'Navegação', en: 'Navigation' }, spec: 'Geist Mono · 14px', cls: 'font-mono text-sm lowercase', sample: { pt: 'sobre  aprendendo  fazendo', en: 'about  learning  tinkering' } },
-  { name: { pt: 'Rótulo', en: 'Label' }, spec: 'Geist Mono · 12px · caixa alta · 0.06em', cls: 'font-mono text-xs tracking-[0.06em] uppercase text-muted-foreground', sample: { pt: 'Fazendo', en: 'Tinkering' } },
+  {
+    name: { pt: 'Display', en: 'Display' },
+    spec: 'Newsreader · 60→96px · 0.92',
+    cls: 'font-serif text-6xl leading-[0.92]',
+    sample: 'Carlos Bronze.',
+  },
+  {
+    name: { pt: 'Título de página', en: 'Page title' },
+    spec: 'Newsreader · 32→46px · 1.15',
+    cls: 'font-serif text-[clamp(32px,4vw,46px)] leading-[1.15]',
+    sample: { pt: 'Criatividade em função de resultado.', en: 'Creativity in service of results.' },
+  },
+  {
+    name: { pt: 'Número', en: 'Number' },
+    spec: 'Newsreader · 40px · 1',
+    cls: 'font-serif text-[2.5rem] leading-none font-medium',
+    sample: '100',
+  },
+  {
+    name: { pt: 'Título de seção', en: 'Section title' },
+    spec: 'Newsreader · 24px · 1.2',
+    cls: 'font-serif text-2xl leading-[1.2] font-medium',
+    sample: { pt: 'O que aprendi', en: 'What I learned' },
+  },
+  {
+    name: { pt: 'Citação', en: 'Quote' },
+    spec: 'Newsreader · 20px · 1.4',
+    cls: 'font-serif text-xl leading-[1.4]',
+    sample: { pt: 'Alguns materiais não envelhecem.', en: 'Some material never gets old.' },
+  },
+  {
+    name: { pt: 'Texto longo', en: 'Long text' },
+    spec: 'Geist · 18px · 1.75',
+    cls: 'text-lg leading-[1.75] text-foreground/80',
+    sample: {
+      pt: 'Parágrafos de páginas como Sobre e os projetos.',
+      en: 'Paragraphs on pages like About and the projects.',
+    },
+  },
+  {
+    name: { pt: 'Texto', en: 'Text' },
+    spec: 'Geist · 16px · 1.6',
+    cls: 'text-base leading-[1.6] text-muted-foreground',
+    sample: { pt: 'Descrições curtas e listas.', en: 'Short descriptions and lists.' },
+  },
+  {
+    name: { pt: 'Navegação', en: 'Navigation' },
+    spec: 'Geist Mono · 14px',
+    cls: 'font-mono text-sm lowercase',
+    sample: { pt: 'sobre  aprendendo  fazendo', en: 'about  learning  tinkering' },
+  },
+  {
+    name: { pt: 'Rótulo', en: 'Label' },
+    spec: 'Geist Mono · 12px · caixa alta · 0.06em',
+    cls: 'font-mono text-xs tracking-[0.06em] uppercase text-muted-foreground',
+    sample: { pt: 'Fazendo', en: 'Tinkering' },
+  },
 ]
 
 // px. `scale` is the target; the rest are in use today and up for review.
@@ -104,41 +198,41 @@ const h3 = `${label} mt-10 mb-4`
     <p id="palette-title" class:list={[label, 'w-full']}>
       <T pt="Paleta em teste" en="Palette on trial" />
     </p>
-    {
-      [
-          { name: 'greys', legend: { pt: 'Tons', en: 'Tones' }, options: greys },
-          { name: 'accent', legend: { pt: 'Destaque', en: 'Accent' }, options: accents },
-          { name: 'mode', legend: { pt: 'Modo', en: 'Mode' }, options: modes },
-        ].map(group => (
-          <fieldset class="flex w-full flex-wrap items-center gap-2 disabled:opacity-40" data-group={group.name}>
-            <legend class="sr-only">
-              <T {...group.legend} />
-            </legend>
-            <span class="text-muted-foreground mr-1 font-mono text-xs" aria-hidden="true">
-              <T {...group.legend} />
-            </span>
-            {group.options.map((o, i) => (
-              <>
-              {'single' in o && o.single && !('single' in group.options[i - 1]) && (
-                <span class="text-muted-foreground ml-2 font-mono text-xs">
-                  <T pt="modo único:" en="single mode:" />
-                </span>
-              )}
-              <label class={pill}>
-                <input
-                  type="radio"
-                  name={group.name}
-                  value={o.value}
-                  checked={'live' in o && o.live}
-                  class="sr-only"
-                />
-                <T {...o.label} />
-              </label>
-              </>
-            ))}
-          </fieldset>
-        ))
-    }
+    {[
+      { name: 'greys', legend: { pt: 'Tons', en: 'Tones' }, options: greys },
+      { name: 'accent', legend: { pt: 'Destaque', en: 'Accent' }, options: accents },
+      { name: 'mode', legend: { pt: 'Modo', en: 'Mode' }, options: modes },
+    ].map(group => (
+      <fieldset
+        class="flex w-full flex-wrap items-center gap-2 disabled:opacity-40"
+        data-group={group.name}>
+        <legend class="sr-only">
+          <T {...group.legend} />
+        </legend>
+        <span class="text-muted-foreground mr-1 font-mono text-xs" aria-hidden="true">
+          <T {...group.legend} />
+        </span>
+        {group.options.map((o, i) => (
+          <>
+            {'single' in o && o.single && !('single' in group.options[i - 1]) && (
+              <span class="text-muted-foreground ml-2 font-mono text-xs">
+                <T pt="modo único:" en="single mode:" />
+              </span>
+            )}
+            <label class={pill}>
+              <input
+                type="radio"
+                name={group.name}
+                value={o.value}
+                checked={'live' in o && o.live}
+                class="sr-only"
+              />
+              <T {...o.label} />
+            </label>
+          </>
+        ))}
+      </fieldset>
+    ))}
   </form>
 
   <p class="text-muted-foreground mb-16 text-base leading-[1.6]">
@@ -150,7 +244,9 @@ const h3 = `${label} mt-10 mb-4`
 
   <!-- Color -->
   <section aria-labelledby="color-title" class="mb-16">
-    <h2 id="color-title" class:list={[h2, 'mb-3']}><T pt="Cor" en="Color" /></h2>
+    <h2 id="color-title" class:list={[h2, 'mb-3']}>
+      <T pt="Cor" en="Color" />
+    </h2>
     <p class={lead}>
       <T
         pt="Duas camadas. As escalas guardam os valores em OKLCH, onde a luminosidade é perceptual: o mesmo número parece igualmente claro em qualquer matiz. Os papéis apontam para um degrau da escala, e os componentes só usam os papéis. Trocar de paleta é trocar a escala."
@@ -158,63 +254,74 @@ const h3 = `${label} mt-10 mb-4`
       />
     </p>
 
-    <h3 class={h3}><T pt="Cinzas" en="Greys" /></h3>
+    <h3 class={h3}>
+      <T pt="Cinzas" en="Greys" />
+    </h3>
     <ul class="grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-6">
-      {
-        steps.map(s => (
-          <li>
-            <div
-              class="border-border mb-1.5 h-12 rounded-md border"
-              style={`background: var(--color-base-${s})`}
-            />
-            <p class="font-mono text-xs">{s}</p>
-            <p class="text-muted-foreground font-mono text-[10px] leading-tight" data-value={`--color-base-${s}`} />
-          </li>
-        ))
-      }
+      {steps.map(s => (
+        <li>
+          <div
+            class="border-border mb-1.5 h-12 rounded-md border"
+            style={`background: var(--color-base-${s})`}
+          />
+          <p class="font-mono text-xs">{s}</p>
+          <p
+            class="text-muted-foreground font-mono text-[10px] leading-tight"
+            data-value={`--color-base-${s}`}
+          />
+        </li>
+      ))}
     </ul>
 
-    <h3 class={h3}><T pt="Destaque" en="Accent" /></h3>
+    <h3 class={h3}>
+      <T pt="Destaque" en="Accent" />
+    </h3>
     <p class="text-muted-foreground text-base leading-[1.6]" data-when-no-accent>
-      <T pt="Sem destaque nesta paleta: o papel --brand usa a cor do texto." en="No accent in this palette: the --brand role uses the text color." />
+      <T
+        pt="Sem destaque nesta paleta: o papel --brand usa a cor do texto."
+        en="No accent in this palette: the --brand role uses the text color."
+      />
     </p>
     <ul class="grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-6" data-when-accent hidden>
-      {
-        brandSteps.map(s => (
-          <li>
-            <div
-              class="border-border mb-1.5 h-12 rounded-md border"
-              style={`background: var(--color-brand-${s})`}
-            />
-            <p class="font-mono text-xs">{s}</p>
-            <p class="text-muted-foreground font-mono text-[10px] leading-tight" data-value={`--color-brand-${s}`} />
-          </li>
-        ))
-      }
+      {brandSteps.map(s => (
+        <li>
+          <div
+            class="border-border mb-1.5 h-12 rounded-md border"
+            style={`background: var(--color-brand-${s})`}
+          />
+          <p class="font-mono text-xs">{s}</p>
+          <p
+            class="text-muted-foreground font-mono text-[10px] leading-tight"
+            data-value={`--color-brand-${s}`}
+          />
+        </li>
+      ))}
     </ul>
 
-    <h3 class={h3}><T pt="Papéis" en="Roles" /></h3>
+    <h3 class={h3}>
+      <T pt="Papéis" en="Roles" />
+    </h3>
     <dl class="divide-border border-border divide-y border-y">
-      {
-        roles.map(r => (
-          <div class="grid grid-cols-[2.5rem_1fr] items-center gap-x-4 py-3 sm:grid-cols-[2.5rem_11rem_1fr]">
-            <div
-              class="border-border row-span-2 size-10 rounded-md border sm:row-span-1"
-              style={`background: var(${r.token})`}
-            />
-            <dt class="font-mono text-sm">{r.token}</dt>
-            <dd class="text-muted-foreground text-sm leading-[1.5]">
-              <T {...r.use} />
-              <span class="block font-mono text-xs">
-                {r.light} · <T pt="escuro" en="dark" /> {r.dark}
-              </span>
-            </dd>
-          </div>
-        ))
-      }
+      {roles.map(r => (
+        <div class="grid grid-cols-[2.5rem_1fr] items-center gap-x-4 py-3 sm:grid-cols-[2.5rem_11rem_1fr]">
+          <div
+            class="border-border row-span-2 size-10 rounded-md border sm:row-span-1"
+            style={`background: var(${r.token})`}
+          />
+          <dt class="font-mono text-sm">{r.token}</dt>
+          <dd class="text-muted-foreground text-sm leading-[1.5]">
+            <T {...r.use} />
+            <span class="block font-mono text-xs">
+              {r.light} · <T pt="escuro" en="dark" /> {r.dark}
+            </span>
+          </dd>
+        </div>
+      ))}
     </dl>
 
-    <h3 class={h3}><T pt="Contraste" en="Contrast" /></h3>
+    <h3 class={h3}>
+      <T pt="Contraste" en="Contrast" />
+    </h3>
     <p class="text-muted-foreground mb-4 text-base leading-[1.6]">
       <T
         pt="Calculado na hora, para a paleta e o modo escolhidos. Texto precisa de pelo menos 4,5:1 (AA)."
@@ -222,27 +329,29 @@ const h3 = `${label} mt-10 mb-4`
       />
     </p>
     <ul class="grid gap-3 sm:grid-cols-2">
-      {
-        pairs.map(p => (
-          <li
-            class="border-border rounded-md border p-4"
-            style={`background: var(${p.bg}); color: var(${p.fg})`}
-            data-contrast-fg={p.fg}
-            data-contrast-bg={p.bg}>
-            <p class="mb-2 font-serif text-xl leading-tight">Aa</p>
-            <p class="mb-1 text-sm"><T {...p.label} /></p>
-            <p class="font-mono text-xs" data-contrast-result>
-              …
-            </p>
-          </li>
-        ))
-      }
+      {pairs.map(p => (
+        <li
+          class="border-border rounded-md border p-4"
+          style={`background: var(${p.bg}); color: var(${p.fg})`}
+          data-contrast-fg={p.fg}
+          data-contrast-bg={p.bg}>
+          <p class="mb-2 font-serif text-xl leading-tight">Aa</p>
+          <p class="mb-1 text-sm">
+            <T {...p.label} />
+          </p>
+          <p class="font-mono text-xs" data-contrast-result>
+            …
+          </p>
+        </li>
+      ))}
     </ul>
   </section>
 
   <!-- Type -->
   <section aria-labelledby="type-title" class="mb-16">
-    <h2 id="type-title" class:list={[h2, 'mb-3']}><T pt="Tipografia" en="Type" /></h2>
+    <h2 id="type-title" class:list={[h2, 'mb-3']}>
+      <T pt="Tipografia" en="Type" />
+    </h2>
     <p class={lead}>
       <T
         pt="Três famílias, cada uma com um papel: Newsreader (serifa) para títulos e números, Geist para leitura, Geist Mono para navegação e rótulos. Uma escala feita à mão, em px e rem, nunca em em."
@@ -250,19 +359,19 @@ const h3 = `${label} mt-10 mb-4`
       />
     </p>
     <ul class="divide-border border-border mb-4 divide-y border-y">
-      {
-        type.map(t => (
-          <li class="py-5">
-            <p class="mb-3 flex flex-wrap items-baseline justify-between gap-x-4">
-              <span class={label}><T {...t.name} /></span>
-              <span class="text-muted-foreground font-mono text-xs">{t.spec}</span>
-            </p>
-            <p class:list={[t.cls, 'break-words']}>
-              {typeof t.sample === 'string' ? t.sample : <T {...t.sample} />}
-            </p>
-          </li>
-        ))
-      }
+      {type.map(t => (
+        <li class="py-5">
+          <p class="mb-3 flex flex-wrap items-baseline justify-between gap-x-4">
+            <span class={label}>
+              <T {...t.name} />
+            </span>
+            <span class="text-muted-foreground font-mono text-xs">{t.spec}</span>
+          </p>
+          <p class:list={[t.cls, 'break-words']}>
+            {typeof t.sample === 'string' ? t.sample : <T {...t.sample} />}
+          </p>
+        </li>
+      ))}
     </ul>
     <p class="text-muted-foreground text-base leading-[1.6]">
       <T
@@ -274,7 +383,9 @@ const h3 = `${label} mt-10 mb-4`
 
   <!-- Spacing -->
   <section aria-labelledby="space-title" class="mb-16">
-    <h2 id="space-title" class:list={[h2, 'mb-3']}><T pt="Espaço" en="Spacing" /></h2>
+    <h2 id="space-title" class:list={[h2, 'mb-3']}>
+      <T pt="Espaço" en="Spacing" />
+    </h2>
     <p class={lead}>
       <T
         pt="Começar com espaço demais e tirar até ficar bom. A escala aperta embaixo e abre em cima, para que nenhum degrau fique a menos de uns 25% do vizinho."
@@ -282,24 +393,30 @@ const h3 = `${label} mt-10 mb-4`
       />
     </p>
     <ul class="mb-6 space-y-2">
-      {
-        space.map(px => (
-          <li class="grid grid-cols-[3rem_1fr] items-center gap-4">
-            <span class="text-muted-foreground font-mono text-xs">{px}</span>
-            <span class="bg-brand block h-3 rounded-sm" style={`width: ${px * 4}px; max-width: 100%`} />
-          </li>
-        ))
-      }
+      {space.map(px => (
+        <li class="grid grid-cols-[3rem_1fr] items-center gap-4">
+          <span class="text-muted-foreground font-mono text-xs">{px}</span>
+          <span
+            class="bg-brand block h-3 rounded-sm"
+            style={`width: ${px * 4}px; max-width: 100%`}
+          />
+        </li>
+      ))}
     </ul>
     <p class="text-muted-foreground text-base leading-[1.6]">
-      <T pt="Fora da escala, em uso hoje e a revisar:" en="Off the scale, in use today and up for review:" />
+      <T
+        pt="Fora da escala, em uso hoje e a revisar:"
+        en="Off the scale, in use today and up for review:"
+      />
       <span class="text-foreground font-mono text-sm"> {offScale.join(' · ')}</span>
     </p>
   </section>
 
   <!-- Components -->
   <section aria-labelledby="components-title" class="mb-16">
-    <h2 id="components-title" class:list={[h2, 'mb-3']}><T pt="Componentes" en="Components" /></h2>
+    <h2 id="components-title" class:list={[h2, 'mb-3']}>
+      <T pt="Componentes" en="Components" />
+    </h2>
     <p class={lead}>
       <T
         pt="Os mesmos componentes das páginas de projeto, para quebrar parágrafos sem inventar estilos novos."
@@ -345,14 +462,18 @@ const h3 = `${label} mt-10 mb-4`
       ]}
     />
 
-    <h3 class={h3}><T pt="Texto de projeto" en="Project text" /></h3>
+    <h3 class={h3}>
+      <T pt="Texto de projeto" en="Project text" />
+    </h3>
     <ProjectBody data-lang-pt>
       <h2>O que aprendi</h2>
       <p>
         Parágrafo com um <a href="#type-title">link</a> e um trecho de
         <code>código</code>.
       </p>
-      <blockquote><p>Antes de pensar na interface, vale pensar no formato do dado.</p></blockquote>
+      <blockquote>
+        <p>Antes de pensar na interface, vale pensar no formato do dado.</p>
+      </blockquote>
     </ProjectBody>
     <ProjectBody data-lang-en>
       <h2>What I learned</h2>
@@ -360,10 +481,14 @@ const h3 = `${label} mt-10 mb-4`
         A paragraph with a <a href="#type-title">link</a> and some
         <code>code</code>.
       </p>
-      <blockquote><p>Before thinking about the interface, think about the shape of the data.</p></blockquote>
+      <blockquote>
+        <p>Before thinking about the interface, think about the shape of the data.</p>
+      </blockquote>
     </ProjectBody>
 
-    <h3 class={h3}><T pt="Link de seção" en="Section link" /></h3>
+    <h3 class={h3}>
+      <T pt="Link de seção" en="Section link" />
+    </h3>
     <SectionLink section={sections[0]} direction="next" />
   </section>
 
@@ -373,19 +498,32 @@ const h3 = `${label} mt-10 mb-4`
       <T pt="Princípios" en="Principles" />
     </h2>
     <ul class="space-y-4 text-lg leading-[1.75]">
-      {
-        [
-          { pt: 'Hierarquia vem de cor e peso, não só de tamanho. Texto secundário é mais claro, não menor.', en: 'Hierarchy comes from color and weight, not just size. Secondary text is lighter, not smaller.' },
-          { pt: 'Cinzas não precisam ser cinza. Um pouco de matiz dá temperatura sem chamar atenção.', en: "Greys don't have to be grey. A touch of hue adds warmth without drawing attention." },
-          { pt: 'Defina os tons de antemão. Nada de clarear ou escurecer na hora.', en: 'Define your shades up front. No lightening or darkening on the fly.' },
-          { pt: 'Linhas de 45 a 75 caracteres. Por isso o texto fica em 720px, mesmo com tela sobrando.', en: "Lines of 45 to 75 characters. That's why text stays at 720px, even with screen to spare." },
-          { pt: 'Não depender só da cor. Link ativo também é sublinhado, e o contraste tem texto, não só um selo verde.', en: "Don't rely on color alone. The active link is also underlined, and contrast is spelled out, not just a green badge." },
-        ].map(p => (
-          <li class="text-foreground/80 border-brand border-l-2 pl-4 text-pretty">
-            <T {...p} />
-          </li>
-        ))
-      }
+      {[
+        {
+          pt: 'Hierarquia vem de cor e peso, não só de tamanho. Texto secundário é mais claro, não menor.',
+          en: 'Hierarchy comes from color and weight, not just size. Secondary text is lighter, not smaller.',
+        },
+        {
+          pt: 'Cinzas não precisam ser cinza. Um pouco de matiz dá temperatura sem chamar atenção.',
+          en: "Greys don't have to be grey. A touch of hue adds warmth without drawing attention.",
+        },
+        {
+          pt: 'Defina os tons de antemão. Nada de clarear ou escurecer na hora.',
+          en: 'Define your shades up front. No lightening or darkening on the fly.',
+        },
+        {
+          pt: 'Linhas de 45 a 75 caracteres. Por isso o texto fica em 720px, mesmo com tela sobrando.',
+          en: "Lines of 45 to 75 characters. That's why text stays at 720px, even with screen to spare.",
+        },
+        {
+          pt: 'Não depender só da cor. Link ativo também é sublinhado, e o contraste tem texto, não só um selo verde.',
+          en: "Don't rely on color alone. The active link is also underlined, and contrast is spelled out, not just a green badge.",
+        },
+      ].map(p => (
+        <li class="text-foreground/80 border-brand border-l-2 pl-4 text-pretty">
+          <T {...p} />
+        </li>
+      ))}
     </ul>
   </section>
 </PageLayout>
@@ -432,24 +570,33 @@ const h3 = `${label} mt-10 mb-4`
     function render() {
       const css = getComputedStyle(root)
       document.querySelectorAll<HTMLElement>('[data-value]').forEach(el => {
-        el.textContent = css.getPropertyValue(el.dataset.value!).trim().replace(/^var\(--color-(\w+)-(\d+)\)$/, '$1 $2')
+        el.textContent = css
+          .getPropertyValue(el.dataset.value!)
+          .trim()
+          .replace(/^var\(--color-(\w+)-(\d+)\)$/, '$1 $2')
       })
       const hasAccent = root.dataset.accent !== 'nenhum'
-      document.querySelectorAll<HTMLElement>('[data-when-accent]').forEach(el => (el.hidden = !hasAccent))
-      document.querySelectorAll<HTMLElement>('[data-when-no-accent]').forEach(el => (el.hidden = hasAccent))
+      document
+        .querySelectorAll<HTMLElement>('[data-when-accent]')
+        .forEach(el => (el.hidden = !hasAccent))
+      document
+        .querySelectorAll<HTMLElement>('[data-when-no-accent]')
+        .forEach(el => (el.hidden = hasAccent))
 
       const en = root.dataset.lang === 'en'
       document.querySelectorAll<HTMLElement>('[data-contrast-fg]').forEach(el => {
         const ratio = contrast(resolve(el.dataset.contrastFg!), resolve(el.dataset.contrastBg!))
         const grade = ratio >= 7 ? 'AAA' : ratio >= 4.5 ? 'AA' : en ? 'below AA' : 'abaixo de AA'
         const n = ratio.toFixed(1)
-        el.querySelector('[data-contrast-result]')!.textContent = `${en ? n : n.replace('.', ',')}:1 · ${grade}`
+        el.querySelector('[data-contrast-result]')!.textContent =
+          `${en ? n : n.replace('.', ',')}:1 · ${grade}`
       })
     }
 
     const singles = form.dataset.singles!.split(' ')
     // Read the radios directly: FormData skips the ones in a disabled fieldset.
-    const checked = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)!.value
+    const checked = (name: string) =>
+      form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)!.value
 
     function apply() {
       const accent = checked('accent')
@@ -491,7 +638,8 @@ const h3 = `${label} mt-10 mb-4`
       mode: singleParam ?? (root.classList.contains('dark') ? 'escuro' : 'claro'),
     }
     for (const [name, value] of Object.entries(preset)) {
-      const input = value && form.querySelector<HTMLInputElement>(`input[name="${name}"][value="${value}"]`)
+      const input =
+        value && form.querySelector<HTMLInputElement>(`input[name="${name}"][value="${value}"]`)
       if (input) input.checked = true
     }
 

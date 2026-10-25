@@ -10,23 +10,21 @@ const { items } = Astro.props
 ---
 
 <dl class="rows">
-  {
-    items.map(({ title, text, href }) => (
-      <div class="row">
-        <dt>{title}</dt>
-        <dd>
-          {href ? (
-            <a href={href} target="_blank" rel="noopener noreferrer">
-              {text}
-              <span aria-hidden="true"> ↗</span>
-            </a>
-          ) : (
-            text
-          )}
-        </dd>
-      </div>
-    ))
-  }
+  {items.map(({ title, text, href }) => (
+    <div class="row">
+      <dt>{title}</dt>
+      <dd>
+        {href ? (
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            {text}
+            <span aria-hidden="true"> ↗</span>
+          </a>
+        ) : (
+          text
+        )}
+      </dd>
+    </div>
+  ))}
 </dl>
 
 <style>
@@ -57,11 +55,7 @@ const { items } = Astro.props
   a {
     color: var(--foreground);
     text-decoration: underline;
-    text-decoration-color: color-mix(
-      in oklab,
-      var(--foreground) 30%,
-      transparent
-    );
+    text-decoration-color: color-mix(in oklab, var(--foreground) 30%, transparent);
     text-underline-offset: 4px;
   }
   a:hover {

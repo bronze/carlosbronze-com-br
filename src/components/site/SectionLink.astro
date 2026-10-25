@@ -19,34 +19,29 @@ const { section, direction = 'next', srPrefix, class: className } = Astro.props
   data-foley-press="tap"
   data-foley-hover="tick">
   <span class="text-foreground font-mono text-sm">
-    {
-      srPrefix && (
-        <span class="sr-only">
-          <T {...srPrefix} />{' '}
-        </span>
-      )
-    }
-    {
-      direction === 'prev' && (
-        <span
-          class="group-hover:text-brand inline-block transition-[color,transform] group-hover:-translate-x-1"
-          aria-hidden="true">
-          ←
-        </span>
-      )
-    }
-    <span class="lowercase group-hover:decoration-brand group-hover:underline group-hover:underline-offset-4"
-      ><T {...section.label} /></span
-    ><span class="sr-only">.</span>
-    {
-      direction === 'next' && (
-        <span
-          class="group-hover:text-brand inline-block transition-[color,transform] group-hover:translate-x-1"
-          aria-hidden="true">
-          →
-        </span>
-      )
-    }
+    {srPrefix && (
+      <span class="sr-only">
+        <T {...srPrefix} />{' '}
+      </span>
+    )}
+    {direction === 'prev' && (
+      <span
+        class="group-hover:text-brand inline-block transition-[color,transform] group-hover:-translate-x-1"
+        aria-hidden="true">
+        ←
+      </span>
+    )}
+    <span class="lowercase group-hover:decoration-brand group-hover:underline group-hover:underline-offset-4">
+      <T {...section.label} />
+    </span>
+    <span class="sr-only">.</span>
+    {direction === 'next' && (
+      <span
+        class="group-hover:text-brand inline-block transition-[color,transform] group-hover:translate-x-1"
+        aria-hidden="true">
+        →
+      </span>
+    )}
   </span>
   <span class="text-muted-foreground mt-1 block text-sm">
     <T {...section.blurb} />

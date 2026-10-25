@@ -33,24 +33,22 @@ if (!src) throw new Error(`No screenshot "${name}" in src/assets/projects`)
     loading={eager ? 'eager' : 'lazy'}
     class="border-border w-full rounded-lg border"
   />
-  {
-    caption && (
-      <figcaption class="text-muted-foreground mt-2.5 font-mono text-xs">
-        {caption}
-        {source && (
-          <>
-            {' '}
-            <a
-              href={source}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hover:text-foreground underline decoration-current/30 underline-offset-4 transition-colors">
-              {sourceLabel}
-              <span aria-hidden="true"> ↗</span>
-            </a>
-          </>
-        )}
-      </figcaption>
-    )
-  }
+  {caption && (
+    <figcaption class="text-muted-foreground mt-2.5 font-mono text-xs">
+      {caption}
+      {source && (
+        <>
+          {' '}
+          <a
+            href={source}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-foreground underline decoration-current/30 underline-offset-4 transition-colors">
+            {sourceLabel}
+            <span aria-hidden="true"> ↗</span>
+          </a>
+        </>
+      )}
+    </figcaption>
+  )}
 </figure>

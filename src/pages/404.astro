@@ -17,13 +17,11 @@ import { ariaLabel, home, sections } from '@/lib/site'
   pager={false}>
   <nav {...ariaLabel({ pt: 'Seções', en: 'Sections' })}>
     <ul class="grid gap-y-6">
-      {
-        [home, ...sections].map(s => (
-          <li>
-            <SectionLink section={s} />
-          </li>
-        ))
-      }
+      {[home, ...sections].map(s => (
+        <li>
+          <SectionLink section={s} />
+        </li>
+      ))}
     </ul>
   </nav>
 </PageLayout>

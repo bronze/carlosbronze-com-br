@@ -5,8 +5,7 @@
 // their way down, then the whole thing fades out. Any key, click or tap ends
 // it early.
 
-const GLYPHS =
-  'ｦｱｳｴｵｶｷｹｺｻｼｽｾｿﾀﾂﾃﾅﾆﾇﾈﾊﾋﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾜ012345789Z:・."=*+-<>¦'
+const GLYPHS = 'ｦｱｳｴｵｶｷｹｺｻｼｽｾｿﾀﾂﾃﾅﾆﾇﾈﾊﾋﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾜ012345789Z:・."=*+-<>¦'
 const RUN_MS = 9000
 // Slow streams could take a while to clear the screen; don't wait for them all.
 const DRAIN_MS = 3500

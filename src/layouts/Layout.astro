@@ -60,19 +60,14 @@ const graph = JSON.stringify({
          the serif headline), so those files don't queue behind the rest. -->
     <Font cssVariable="--font-geist" preload={[{ weight: 400 }]} />
     <Font cssVariable="--font-geist-mono" preload={[{ weight: 400 }]} />
-    <Font
-      cssVariable="--font-newsreader"
-      preload={[{ weight: 500, style: 'normal' }]}
-    />
-    {
-      title ? (
-        <title data-title-pt={full(title.pt)} data-title-en={full(title.en)}>
+    <Font cssVariable="--font-newsreader" preload={[{ weight: 500, style: 'normal' }]} />
+    {title ? (
+      <title data-title-pt={full(title.pt)} data-title-en={full(title.en)}>
           {pageTitle}
         </title>
-      ) : (
-        <title>{pageTitle}</title>
-      )
-    }
+    ) : (
+      <title>{pageTitle}</title>
+    )}
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -130,10 +125,7 @@ const graph = JSON.stringify({
       const darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
       function applyTheme(doc) {
         const theme = saved('theme')
-        doc.documentElement.classList.toggle(
-          'dark',
-          theme ? theme === 'dark' : darkQuery.matches,
-        )
+        doc.documentElement.classList.toggle('dark', theme ? theme === 'dark' : darkQuery.matches)
       }
       // Interface sounds are on unless the footer toggle turned them off.
       function applySound(doc) {
@@ -155,23 +147,17 @@ const graph = JSON.stringify({
          records the URLs real people hit there. -->
     <PostHog />
     <!-- Umami, then Simple Analytics (100% privacy-first analytics) -->
-    {
-      analytics && (
-        <>
-          <script
-            defer
-            src="https://cloud.umami.is/script.js"
-            data-website-id="b01a5d15-0458-4258-81f5-705de4b35142"
-            is:inline
-          />
-          <script
-            async
-            src="https://scripts.simpleanalyticscdn.com/latest.js"
-            is:inline
-          />
-        </>
-      )
-    }
+    {analytics && (
+      <>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="b01a5d15-0458-4258-81f5-705de4b35142"
+          is:inline
+        />
+        <script async src="https://scripts.simpleanalyticscdn.com/latest.js" is:inline />
+      </>
+    )}
   </head>
   <body class="flex min-h-dvh flex-col">
     <slot />
@@ -191,8 +177,7 @@ const graph = JSON.stringify({
       // ~270ms (INP). Build it while the browser is idle instead: the context
       // starts suspended, and the first tap only has to resume it.
       const warmUp = () => unlock()
-      if ('requestIdleCallback' in window)
-        requestIdleCallback(warmUp, { timeout: 3000 })
+      if ('requestIdleCallback' in window) requestIdleCallback(warmUp, { timeout: 3000 })
       else setTimeout(warmUp, 1500)
       // Each navigation brings new elements to wire up (bind skips ones it's seen).
       document.addEventListener('astro:page-load', () => bind())
