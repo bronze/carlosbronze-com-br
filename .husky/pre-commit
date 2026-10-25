@@ -1,0 +1,8 @@
+# Format what's being committed with the repo's Prettier (config in
+# package.json → lint-staged). Skipped, with a note, where pnpm isn't on the
+# PATH, e.g. a Windows Git client committing in the WSL checkout.
+if command -v pnpm >/dev/null 2>&1; then
+  pnpm exec lint-staged
+else
+  echo "pre-commit: pnpm not found, skipping Prettier" >&2
+fi
