@@ -4,6 +4,7 @@ import SectionLink from '@/components/site/SectionLink.astro'
 import RioClock from '@/components/site/RioClock.astro'
 import PostalScene from '@/components/home-explorations/PostalScene.astro'
 import SkyDebug from '@/components/home-explorations/SkyDebug.astro'
+import SkyInfo from '@/components/home-explorations/SkyInfo.astro'
 import { ariaLabel, sections } from '@/lib/site'
 ---
 
@@ -36,6 +37,8 @@ import { ariaLabel, sections } from '@/lib/site'
   <!-- Pão de Açúcar with the sky of the hour in Rio (exploration 4); the
        page ground follows the hour too. -->
   <PostalScene daylight />
+  <!-- Tap the sun or the moon. -->
+  <SkyInfo />
   <!-- The sky's dev panel, behind ?dev. -->
   <SkyDebug flag="dev" />
 </PageLayout>

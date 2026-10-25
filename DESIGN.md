@@ -147,12 +147,15 @@ Patterns:
 - **Borders:** 1px `--border`, used sparingly: rules between rows, above and below `Stats`. No cards with shadows.
 - **Text selection:** inverted, `--foreground` behind `--background` text, in both modes.
 - **Radius:** small (`rounded-md`) on swatches and boxes, full on pills. Nothing in between.
+- **Weather icons:** Tabler outline, 1.35em, in the text colour, on the home's clock line. Tabler has no sun or moon behind a cloud, so those two are drawn on its 24px grid in `RioClock.astro`.
+- **The home sky** (`PostalScene.astro`) keeps its colours in scene tokens on base steps, like `--hill`. Clouds are the ground's colour with an `--outline` stroke, and fill grey (base-100 light, base-900 dark) when it's overcast. Rain is base-300 light, base-700 dark, over the whole page. Lightning is brand-500 light, base-50 dark, and flashes the page with a translucent white overlay.
 
 ## Motion
 
 - **Page enter:** each block in `main > .reveal` rises 14px and fades in over 0.8s, `cubic-bezier(.22,.61,.36,1)`, staggered 60/160/240/320/420ms.
 - **Between pages:** native cross-document view transitions. The header stays put and the old page fades out in 160ms.
 - **Hover:** colour and transform transitions only, at Tailwind's default 150ms.
+- **The home sky:** clouds drift 20 to 40 units (30 to 60px on a desktop) either way, 20 to 30 seconds a leg, each with its own reach, direction and phase, rain falls, and in a storm lightning strikes every 15 to 40 seconds (the first a few seconds in), flashing the page twice in under a second. Reduced motion: no lightning.
 - `prefers-reduced-motion: reduce` turns all of it off.
 
 ## Accessibility

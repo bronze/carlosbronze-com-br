@@ -1,0 +1,192 @@
+---
+// Tap the sun or the moon over Pão de Açúcar for a little more: the sun gives
+// today's weather in Rio (sunrise and sunset, high and low, chance of rain,
+// UV), the moon its phase. The scene sits behind the page and lets clicks
+// through, so this listens on the whole document and checks whether a click
+// landed on either one. It follows the scene through `sky:tick`, so the dev
+// panel's hour, phase and sky show here too.
+//
+// The card is extra: the clock line already says the weather in words, for
+// screen readers too.
+---
+
+<div
+  class="border-border bg-background text-muted-foreground pop fixed z-40 w-max max-w-64 rounded-md border px-3 py-2 font-mono text-xs leading-relaxed print:hidden"
+  role="status"
+  hidden
+  data-sky-info>
+</div>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .pop {
+      animation: pop 0.25s var(--ease-enter) both;
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+</style>
+
+<script>
+  import { phaseName } from './sky'
+  import { skyLabel, type Weather } from './weather'
+
+  type Body = 'sun' | 'moon'
+  type Line = { pt: string; en: string }
+
+  const month = 29.530588853
+
+  function sunLines(w: Weather): Line[] {
+    const label = skyLabel[w.sky]
+    return [
+      { pt: `${label.pt} · ${w.temp}°`, en: `${label.en} · ${w.temp}°` },
+      { pt: `nascer ${w.sunrise} · pôr ${w.sunset}`, en: `sunrise ${w.sunrise} · sunset ${w.sunset}` },
+      { pt: `máx ${w.high}° · mín ${w.low}°`, en: `high ${w.high}° · low ${w.low}°` },
+      { pt: `chance de chuva ${w.rainChance}% · UV ${w.uv}`, en: `${w.rainChance}% chance of rain · UV ${w.uv}` },
+    ]
+  }
+
+  // "in 3 days", "tomorrow", "today", in both languages.
+  function inDays(days: number, pt: string, en: string): Line {
+    if (days === 0) return { pt: `${pt} hoje`, en: `${en} today` }
+    if (days === 1) return { pt: `${pt} amanhã`, en: `${en} tomorrow` }
+    return { pt: `${pt} em ${days} dias`, en: `${en} in ${days} days` }
+  }
+
+  function moonLines(phase: number): Line[] {
+    const name = phaseName(phase)
+    const lit = Math.round(((1 - Math.cos(2 * Math.PI * phase)) / 2) * 100)
+    // The next full or new moon, skipping the one we're in (phaseName gives
+    // each about a day either side).
+    const full = phase < 0.465 || phase > 0.965
+    const next = Math.round((((full ? 0.5 : 1) - phase + 1) % 1) * month)
+    return [
+      { pt: name.pt.startsWith('quarto') ? name.pt : `lua ${name.pt}`, en: `${name.en} moon` },
+      { pt: `${lit}% iluminada`, en: `${lit}% lit` },
+      full ? inDays(next, 'cheia', 'full') : inDays(next, 'nova', 'new'),
+    ]
+  }
+
+  function paragraph(line: Line, first: boolean) {
+    const p = document.createElement('p')
+    if (first) p.className = 'text-foreground'
+    for (const [lang, text] of [
+      ['Pt', line.pt],
+      ['En', line.en],
+    ]) {
+      const span = document.createElement('span')
+      span.dataset[`lang${lang}`] = ''
+      span.textContent = text
+      p.append(span)
+    }
+    return p
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    const found = document.querySelector<HTMLElement>('[data-sky-info]')
+    const svg = document.querySelector<SVGSVGElement>('[data-sky]')
+    if (!found || !svg) return
+    const card = found
+    const bodies = {
+      sun: svg.querySelector<SVGElement>('[data-body="sun"]')!,
+      moon: svg.querySelector<SVGElement>('[data-body="moon"]')!,
+    }
+    let weather: Weather | null = null
+    let phase = 0
+    let open: Body | null = null
+
+    function onTick(event: Event) {
+      ;({ weather, phase } = (event as CustomEvent).detail)
+      if (open && !shown(open)) close()
+    }
+
+    // Above the horizon; the sun only says something once the weather has
+    // come in.
+    function shown(body: Body) {
+      return bodies[body].style.opacity === '1' && (body === 'moon' || weather !== null)
+    }
+
+    // The body under the pointer, if any, with the target grown to 44px for
+    // fingers.
+    function hit(x: number, y: number): Body | null {
+      for (const body of ['sun', 'moon'] as const) {
+        if (!shown(body)) continue
+        const r = bodies[body].getBoundingClientRect()
+        const pad = Math.max(0, (44 - r.width) / 2)
+        if (x >= r.left - pad && x <= r.right + pad && y >= r.top - pad && y <= r.bottom + pad) return body
+      }
+      return null
+    }
+
+    function show(body: Body) {
+      const lines = body === 'sun' ? sunLines(weather!) : moonLines(phase)
+      card.replaceChildren(...lines.map((line, i) => paragraph(line, i === 0)))
+      card.hidden = false
+      // Below the body, centred on it, kept on screen; above it if there's
+      // no room below.
+      const r = bodies[body].getBoundingClientRect()
+      const { width, height } = card.getBoundingClientRect()
+      const left = Math.min(Math.max(8, r.left + r.width / 2 - width / 2), innerWidth - width - 8)
+      const below = r.bottom + 8
+      const top = below + height > innerHeight - 8 ? r.top - height - 8 : below
+      card.style.left = `${left}px`
+      card.style.top = `${top}px`
+      open = body
+    }
+
+    function close() {
+      card.hidden = true
+      open = null
+    }
+
+    function onClick(event: MouseEvent) {
+      const target = event.target as Element
+      if (card.contains(target)) return
+      if (target.closest('a, button, input, select, summary, label')) return close()
+      const body = hit(event.clientX, event.clientY)
+      if (body && body !== open) show(body)
+      else close()
+    }
+
+    // A pointer cursor over the sun or moon, for a mouse.
+    let frame = 0
+    function onMove(event: PointerEvent) {
+      if (event.pointerType !== 'mouse') return
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const over = hit(event.clientX, event.clientY) && !(event.target as Element).closest('a, button')
+        document.body.style.cursor = over ? 'pointer' : ''
+      })
+    }
+
+    const onKey = (event: KeyboardEvent) => event.key === 'Escape' && close()
+    const onScroll = () => open && close()
+
+    document.addEventListener('sky:tick', onTick)
+    document.addEventListener('click', onClick)
+    document.addEventListener('pointermove', onMove)
+    document.addEventListener('keydown', onKey)
+    addEventListener('scroll', onScroll, { passive: true })
+    addEventListener('resize', onScroll)
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        cancelAnimationFrame(frame)
+        document.body.style.removeProperty('cursor')
+        document.removeEventListener('sky:tick', onTick)
+        document.removeEventListener('click', onClick)
+        document.removeEventListener('pointermove', onMove)
+        document.removeEventListener('keydown', onKey)
+        removeEventListener('scroll', onScroll)
+        removeEventListener('resize', onScroll)
+      },
+      { once: true },
+    )
+    // Ask the scene for its current state.
+    document.dispatchEvent(new CustomEvent('sky:control', { detail: {} }))
+  })
+</script>

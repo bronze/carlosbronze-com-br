@@ -8,6 +8,12 @@
 // 18h. The moon, in today's phase, takes the same arc for twelve hours, rising
 // when its phase says (so a crescent shares the afternoon with the sun). At
 // night there are always a few stars, and more when the moon is down.
+//
+// The weather is Rio's too (see weather.ts): the sun has rays when it's
+// clear or partly cloudy, clouds come out with the cloud cover (in front of
+// the sun and moon), rain streaks the whole page, a storm now and then
+// strikes lightning from a cloud and flashes the page, and stops the cable
+// car, and fog sits on the top of Pão de Açúcar. ?tempo=rain forces a sky.
 // ?hora=17.5 pins the time. SkyDebug drives it through `sky:control` events
 // and listens to `sky:tick`.
 import { arc, arcPath, arcPosition, pointOnArc, twilight } from './sky'
@@ -37,6 +43,49 @@ const stars = Array.from({ length: 30 }, (_, i) => ({
 }))
 const fewStars = stars.slice(0, 8)
 const moreStars = stars.slice(8)
+
+// The clouds, in the order they come out: the first ones keep clear of the
+// sun at its highest. They pass in front of the sun and moon, which stay
+// tappable behind them. Each is the clock line's cloud icon (Tabler's), scaled up and
+// placed by the middle of its flat bottom. Each holds a bolt, for when
+// lightning strikes from it.
+const cloudPath =
+  'M6.657 18c-2.572 0 -4.657 -2.007 -4.657 -4.483c0 -2.475 2.085 -4.482 4.657 -4.482c.393 -1.762 1.794 -3.2 3.675 -3.773c1.88 -.572 3.956 -.193 5.444 1c1.488 1.19 2.162 3.007 1.77 4.769h.99c1.913 0 3.464 1.56 3.464 3.486c0 1.927 -1.551 3.487 -3.465 3.487z'
+const cloudShape = (x: number, y: number, size: number) =>
+  `translate(${x} ${y}) scale(${size}) translate(-12 -18)`
+const clouds = [
+  { x: 505, y: 30, size: 1.9, drift: 22 },
+  { x: 195, y: 45, size: 1.7, drift: 27 },
+  { x: 285, y: -15, size: 2.5, drift: 30 },
+  { x: 430, y: -30, size: 2.2, drift: 24 },
+  { x: 365, y: 10, size: 2, drift: 28 },
+].map(c => ({
+  ...c,
+  // Each its own way: how far, which way first, and where in its swing.
+  reach: 20 + random() * 20,
+  reverse: random() < 0.5,
+  delay: random() * c.drift,
+}))
+
+// The sun's rays, like the clock line's icon: out when the sky is clear or
+// partly cloudy, breathing when it's clear.
+const rays = Array.from({ length: 8 }, (_, i) => {
+  const angle = (i * Math.PI) / 4
+  const [cos, sin] = [Math.cos(angle), Math.sin(angle)]
+  return `M${(29 * cos).toFixed(1)} ${(29 * sin).toFixed(1)} L${(37 * cos).toFixed(1)} ${(37 * sin).toFixed(1)}`
+}).join(' ')
+
+// Rain: short slanted streaks scattered over the whole page (placed in
+// percent of the window, drawn in pixels), each falling a little and fading,
+// out of step. A drizzle shows a third of them, a downpour all.
+const streaks = Array.from({ length: 150 }, (_, i) => ({
+  x: random() * 100,
+  y: random() * 100,
+  length: 7 + random() * 7,
+  tier: i % 3,
+  duration: 0.9 + random() * 0.7,
+  delay: random() * 1.6,
+}))
 ---
 
 <svg
@@ -112,13 +161,33 @@ const moreStars = stars.slice(8)
   <!-- Placed by the script below, then faded in, so nothing pops or jumps.
        The outer group holds the position; the inner one rises on load. -->
   <g class="fade" style="opacity: 0" data-body="sun">
-    <circle r="22" fill="var(--sun)" class="rise"></circle>
+    <g class="rise">
+      <path d={rays} class="rays"></path>
+      <circle r="22" fill="var(--sun)"></circle>
+    </g>
   </g>
   <g class="fade" style="opacity: 0" data-body="moon">
     <g class="rise">
       <circle r="15" fill="var(--moon-shadow)" stroke="var(--moon-edge)" stroke-width="1"></circle>
       <path fill="var(--moon-lit)" data-moon-lit></path>
     </g>
+  </g>
+  <g data-weather>
+    {
+      clouds.map(c => (
+        <g class="fade slow" style="opacity: 0" data-cloud>
+          <g class="drift" style={`--reach: ${c.reach.toFixed(1)}px; animation-duration: ${c.drift}s; animation-delay: -${c.delay.toFixed(1)}s; animation-direction: ${c.reverse ? 'alternate-reverse' : 'alternate'}`}>
+            <path
+              d={`M${c.x + 3} ${c.y + 1} l-7 16 h8 l-9 20 h7 l-10 24`}
+              class="bolt"
+              filter="url(#sky-glow)"
+              data-bolt
+            />
+            <path d={cloudPath} transform={cloudShape(c.x, c.y, c.size)} class="cloud" />
+          </g>
+        </g>
+      ))
+    }
   </g>
   <g class="hills">
     <!-- The cable car: its line from the top of Pão de Açúcar to the top of
@@ -149,11 +218,36 @@ const moreStars = stars.slice(8)
       </g>
     </g>
     <path fill="var(--hill)" d="M309.2 121.5 C309.8 118.9 310.7 112.3 312.7 106 C314.8 99.7 318.1 91.3 321.5 83.9 C325 76.6 329.9 67.9 333.5 61.8 C337 55.8 339.8 50.9 342.7 47.7 C345.7 44.5 348.3 43.3 351.1 42.4 C353.9 41.5 356.8 41.7 359.5 42.4 C362.3 43.1 364.8 44.2 367.5 46.8 C370.1 49.5 372.9 54 375.4 58.3 C377.9 62.6 380.3 67.7 382.5 72.9 C384.7 78 386.6 83.3 388.7 89.2 C390.7 95.1 393.8 105 394.9 108.2 L394.9 176.7 L309.2 176.7 Z"></path>
+    <!-- Fog: a cloud resting on the summit. -->
+    <path
+      d={cloudPath}
+      transform={cloudShape(352, 58, 3.3)}
+      class="cloud fade slow"
+      style="opacity: 0"
+      data-fog></path>
   </g>
 </svg>
+<svg class="rain pointer-events-none fixed inset-0 -z-10 size-full print:hidden" aria-hidden="true" data-rain>
+  {
+    streaks.map(r => (
+      <svg x={`${r.x.toFixed(1)}%`} y={`${r.y.toFixed(1)}%`} overflow="visible">
+        <path
+          d={`M0 0 l${(-r.length * 0.4).toFixed(1)} ${r.length.toFixed(1)}`}
+          class="streak"
+          data-tier={r.tier}
+          style={`animation-duration: ${r.duration.toFixed(2)}s; animation-delay: -${r.delay.toFixed(2)}s`}
+        />
+      </svg>
+    ))
+  }
+</svg>
+<!-- Lightning lights up the whole page, over the text too, for a moment. -->
+<div class="flash pointer-events-none fixed inset-0 z-30 opacity-0 print:hidden" aria-hidden="true" data-flash>
+</div>
 
 <style>
-  .scene {
+  .scene,
+  .rain {
     --sun: var(--color-brand-300);
     --moon-lit: var(--color-base-300);
     --moon-shadow: transparent;
@@ -161,14 +255,76 @@ const moreStars = stars.slice(8)
     --hill: var(--color-base-200);
     /* Pale, or on the light ground they read as specks of dust. */
     --star: var(--color-base-300);
+    /* Clouds are the ground's colour with an outline, like the cable: they
+       hide the stars behind them, and on the summit they read as a cap. An
+       overcast sky fills them grey. */
+    --cloud: var(--background);
+    --cloud-heavy: var(--color-base-100);
+    --rain: var(--color-base-300);
+    --bolt: var(--color-brand-500);
   }
-  :global(.dark) .scene {
+  :global(.dark) .scene,
+  :global(.dark) .rain {
     --sun: var(--color-brand-700);
     --moon-lit: var(--color-base-300);
     --moon-shadow: var(--color-base-800);
     --moon-edge: transparent;
     --hill: var(--color-base-800);
     --star: var(--color-base-300);
+    --cloud-heavy: var(--color-base-900);
+    --rain: var(--color-base-700);
+    /* Near white, as a real bolt looks against a dark sky. */
+    --bolt: var(--color-base-50);
+  }
+  .cloud {
+    fill: var(--cloud);
+    stroke: var(--outline);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    transition: fill 1s ease;
+  }
+  [data-overcast] .cloud {
+    fill: var(--cloud-heavy);
+  }
+  .flash {
+    background: oklch(1 0 0 / 0.6);
+  }
+  :global(.dark) .flash {
+    background: oklch(0.9 0 0 / 0.2);
+  }
+  .streak {
+    fill: none;
+    stroke: var(--rain);
+    stroke-width: 1;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  [data-rain='0'] .streak,
+  [data-rain='1'] .streak:not([data-tier='0']),
+  [data-rain='2'] .streak[data-tier='2'] {
+    display: none;
+  }
+  .rays {
+    fill: none;
+    stroke: var(--sun);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  [data-sky='clear'] .rays,
+  [data-sky='partly'] .rays {
+    opacity: 1;
+  }
+  .bolt {
+    fill: none;
+    stroke: var(--bolt);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    opacity: 0;
   }
   /* The scene has its own entrance, not the page's rise-in: the hills fade
      in, and the sun or moon fades in while rising a little. */
@@ -191,6 +347,44 @@ const moreStars = stars.slice(8)
     .twinkle {
       animation: twinkle 4s ease-in-out infinite;
     }
+    .drift {
+      animation: drift 25s ease-in-out infinite alternate;
+    }
+    .streak {
+      animation: fall 1.2s linear infinite;
+    }
+    [data-sky='clear'] .rays {
+      animation: breathe 2.4s ease-in-out infinite alternate;
+    }
+  }
+  @keyframes drift {
+    from {
+      transform: translateX(calc(var(--reach) * -1));
+    }
+    to {
+      transform: translateX(var(--reach));
+    }
+  }
+  @keyframes breathe {
+    from {
+      transform: scale(0.94);
+    }
+    to {
+      transform: scale(1.08);
+    }
+  }
+  @keyframes fall {
+    from {
+      opacity: 0;
+      transform: translate(2px, -6px);
+    }
+    40% {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: translate(-3px, 8px);
+    }
   }
   @keyframes sky-fade {
     from {
@@ -211,12 +405,14 @@ const moreStars = stars.slice(8)
 
 <script>
   import { arc, groundAt, hourInRio, litMoonPath, moonPhase, moonRise, nightness, pointOnArc, skyAt } from './sky'
+  import { cloudsFor, forceSky, getWeather, type Sky, type Weather } from './weather'
 
-  type Control = { hour?: number | null; phase?: number | null; path?: boolean }
+  type Control = { hour?: number | null; phase?: number | null; path?: boolean; sky?: Sky | null }
 
   document.addEventListener('astro:page-load', () => {
-    const svg = document.querySelector<SVGSVGElement>('[data-sky]')
-    if (!svg) return
+    const found = document.querySelector<SVGSVGElement>('[data-sky]')
+    if (!found) return
+    const svg = found
     const sun = svg.querySelector<SVGElement>('[data-body="sun"]')!
     const moon = svg.querySelector<SVGElement>('[data-body="moon"]')!
     const lit = svg.querySelector<SVGPathElement>('[data-moon-lit]')!
@@ -239,6 +435,13 @@ const moreStars = stars.slice(8)
     }
     const fewStars = svg.querySelector<SVGElement>('[data-stars="few"]')!
     const moreStars = svg.querySelector<SVGElement>('[data-stars="more"]')!
+    const clouds = [...svg.querySelectorAll<SVGElement>('[data-cloud]')]
+    const fog = svg.querySelector<SVGElement>('[data-fog]')!
+    const rainLayer = document.querySelector<SVGElement>('[data-rain]')!
+    const flash = document.querySelector<HTMLElement>('[data-flash]')!
+    // Rio's weather, once it arrives; until then (or if it never does) the
+    // sky is clear.
+    let live: Weather | null = null
 
     // null means "now"; the debug panel can pin either.
     const pinned = Number.parseFloat(new URLSearchParams(location.search).get('hora') ?? '')
@@ -246,6 +449,7 @@ const moreStars = stars.slice(8)
       hour: pinned >= 0 && pinned < 24 ? pinned : null,
       phase: null,
       path: false,
+      sky: null,
     }
 
     function render() {
@@ -255,6 +459,22 @@ const moreStars = stars.slice(8)
       const phase = state.phase ?? moonPhase()
       const rise = moonRise(phase)
       const positions = skyAt(hour, phase)
+      const forced = state.sky ? forceSky(state.sky, live) : live
+      // A pinned hour picks the day or night icon by itself.
+      const weather = forced && state.hour !== null ? { ...forced, isDay: nightness(hour) < 0.5 } : forced
+      const { count, overcast } = cloudsFor(weather)
+      const rain = weather?.rain ?? 0
+      const storm = weather?.sky === 'storm'
+      clouds.forEach((cloud, i) => (cloud.style.opacity = i < count ? '1' : '0'))
+      fog.style.opacity = weather?.sky === 'fog' ? '1' : '0'
+      svg.toggleAttribute('data-overcast', overcast)
+      // No reading yet draws a clear sky.
+      svg.dataset.sky = weather?.sky ?? 'clear'
+      rainLayer.dataset.rain = String(rain)
+      if (storm !== storming) {
+        storming = storm
+        thunder(true)
+      }
       for (const [body, t, top] of [
         [sun, positions.sun, arc.top],
         [moon, positions.moon, arc.moonTop],
@@ -276,13 +496,14 @@ const moreStars = stars.slice(8)
         root.style.setProperty('--background', ground)
       }
       const night = nightness(hour)
-      fewStars.style.opacity = String(night)
-      cabin.style.opacity = String(1 - night)
-      moreStars.style.opacity = String(positions.moon === null ? night : 0)
+      fewStars.style.opacity = String(overcast ? 0 : night)
+      // The cable car stops in a storm, as the real one does.
+      cabin.style.opacity = String(storm ? 0 : 1 - night)
+      moreStars.style.opacity = String(positions.moon === null && !overcast ? night : 0)
       path.setAttribute('visibility', state.path ? 'visible' : 'hidden')
       document.dispatchEvent(
         new CustomEvent('sky:tick', {
-          detail: { hour, phase, moonRise: rise, live: state.hour === null },
+          detail: { hour, phase, moonRise: rise, live: state.hour === null, sky: weather?.sky ?? null, weather },
         }),
       )
     }
@@ -292,8 +513,44 @@ const moreStars = stars.slice(8)
       render()
     }
 
+    // Lightning, now and then in a storm: a bolt from one of the clouds out,
+    // and the page flashes twice, quickly, the way a strike lights up a room.
+    // The first comes a few seconds in, so a visitor gets to see one; then
+    // every 15 to 40 seconds. None with reduced motion.
+    let storming = false
+    let strike: ReturnType<typeof setTimeout> | undefined
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
+    const between = (a: number, b: number) => a + Math.random() * (b - a)
+    const lightning = [
+      { opacity: 0 },
+      { opacity: 1, offset: 0.05 },
+      { opacity: 0.1, offset: 0.14 },
+      { opacity: 0.8, offset: 0.22 },
+      { opacity: 0 },
+    ]
+    function thunder(first: boolean) {
+      clearTimeout(strike)
+      if (!storming || reduced) return
+      strike = setTimeout(
+        () => {
+          const out = clouds.filter(cloud => cloud.style.opacity === '1')
+          const cloud = out[Math.floor(Math.random() * out.length)]
+          cloud?.querySelector('[data-bolt]')!.animate(lightning, { duration: 1100, easing: 'ease-out' })
+          flash.animate(lightning, { duration: 900, easing: 'ease-out' })
+          thunder(false)
+        },
+        first ? between(3000, 8000) : between(15000, 40000),
+      )
+    }
+
     document.addEventListener('sky:control', control)
-    const timer = setInterval(render, 60_000)
+    // Each tick asks for the weather too; getWeather only goes to the network
+    // once its answer is 15 minutes old.
+    async function update() {
+      live = await getWeather()
+      render()
+    }
+    const timer = setInterval(update, 60_000)
     // The theme toggle swaps the ground's range.
     const theme = new MutationObserver(render)
     theme.observe(root, { attributes: true, attributeFilter: ['class'] })
@@ -301,6 +558,7 @@ const moreStars = stars.slice(8)
       'astro:before-swap',
       () => {
         clearInterval(timer)
+        clearTimeout(strike)
         theme.disconnect()
         document.removeEventListener('sky:control', control)
         root.style.removeProperty('--background')
@@ -309,5 +567,6 @@ const moreStars = stars.slice(8)
       { once: true },
     )
     render()
+    update()
   })
 </script>

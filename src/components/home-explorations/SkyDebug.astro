@@ -1,15 +1,17 @@
 ---
 // A floating dev panel for exploration 4: scrub through the 24 hours, play a
-// whole day, show the sun's and moon's path, and try any moon phase. It talks
+// whole day, show the sun's and moon's path, and try any moon phase or sky
+// (weather). It talks
 // to PostalScene through `sky:control` and `sky:tick` events, so dropping
 // this component removes it without touching the scene. With `flag`, it
 // stays hidden unless the URL carries that parameter (e.g. ?dev).
 import T from '@/components/site/T.astro'
+import { skies, skyLabel } from './weather'
 
 const { flag } = Astro.props as { flag?: string }
 
 const button =
-  'border-border hover:text-foreground aria-pressed:text-foreground aria-pressed:border-foreground rounded border px-2 py-1 transition-colors'
+  'border-border hover:text-foreground aria-pressed:text-foreground aria-pressed:border-foreground rounded border px-2 py-1 whitespace-nowrap transition-colors'
 ---
 
 <details
@@ -48,6 +50,16 @@ const button =
     <div class="flex gap-2">
       <button type="button" class={button} data-act="today" aria-pressed="true"><T pt="hoje" en="today" /></button>
     </div>
+    <label class="block">
+      <span class="mb-1 block"><T pt="tempo" en="weather" /></span>
+      <!-- Sized down from the forms plugin's defaults, to the panel's text. -->
+      <select
+        class="border-border bg-background text-foreground focus:border-foreground w-full rounded border bg-[position:right_0.25rem_center] py-1 pr-7 pl-2 text-xs focus:ring-0"
+        data-in="sky">
+        <option value="">ao vivo / live</option>
+        {skies.map(sky => <option value={sky}>{skyLabel[sky].pt} / {skyLabel[sky].en}</option>)}
+      </select>
+    </label>
   </div>
 </details>
 
@@ -65,6 +77,7 @@ const button =
     const $ = <E extends Element>(selector: string) => panel.querySelector<E>(selector)!
     const hourIn = $<HTMLInputElement>('[data-in="hour"]')
     const phaseIn = $<HTMLInputElement>('[data-in="phase"]')
+    const skyIn = $<HTMLSelectElement>('[data-in="sky"]')
     const hourOut = $<HTMLOutputElement>('[data-out="hour"]')
     const phaseOut = $<HTMLOutputElement>('[data-out="phase"]')
     const riseOut = $<HTMLOutputElement>('[data-out="moonrise"]')
@@ -128,6 +141,7 @@ const button =
       pressed(path, on)
       send({ path: on })
     })
+    skyIn.addEventListener('change', () => send({ sky: skyIn.value || null }))
     today.addEventListener('click', () => {
       pressed(today, true)
       send({ phase: null })

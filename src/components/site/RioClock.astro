@@ -3,14 +3,67 @@
 // ahead of you", for under the home's eyebrow. Filled in by the script: the
 // site is static, so the server can't know either clock. The line keeps its
 // height while empty, so the heading doesn't jump when it fills.
+//
+// Before it, Rio's weather, as an icon and the temperature (see
+// weather.ts). All the icons are here, hidden; the script shows the one for
+// the sky. Most are Tabler's; Tabler has no sun or moon behind a cloud, so
+// those two are drawn on its grid, from its cloud.
+import Sun from '@tabler/icons/outline/sun.svg'
+import Moon from '@tabler/icons/outline/moon.svg'
+import Cloud from '@tabler/icons/outline/cloud.svg'
+import CloudFog from '@tabler/icons/outline/cloud-fog.svg'
+import CloudRain from '@tabler/icons/outline/cloud-rain.svg'
+import CloudStorm from '@tabler/icons/outline/cloud-storm.svg'
+
+const icon = 'hidden size-[1.35em] -my-1'
 ---
 
 <p
   class="text-muted-foreground/75 mb-6 min-h-[1lh] font-mono text-xs tabular-nums"
   data-rio-clock>
+  <span class="hidden" data-weather>
+    <span class="inline-flex items-center gap-1 align-top" aria-hidden="true">
+      <Sun class={icon} data-icon="clear-day" />
+      <Moon class={icon} data-icon="clear-night" />
+      <svg
+        class={icon}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        data-icon="partly-day">
+        <path d="M5.97 10.75a3.5 3.5 0 1 1 6.32 -2.95"></path>
+        <path d="M9 2v1m-7 6h1m1.05 -4.95l.7 .7m9.2 -.7l-.7 .7"></path>
+        <path d="M9 20a3.8 3.6 0 0 1 0 -7.4a4.2 3.8 0 0 1 9.2 1.7h.8a2.85 2.85 0 0 1 0 5.7z"></path>
+      </svg>
+      <svg
+        class={icon}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        data-icon="partly-night">
+        <path d="M9 3a4.5 4.5 0 0 0 0 9a2.8 4.5 0 0 1 0 -9z"></path>
+        <path d="M9 20a3.8 3.6 0 0 1 0 -7.4a4.2 3.8 0 0 1 9.2 1.7h.8a2.85 2.85 0 0 1 0 5.7z"></path>
+      </svg>
+      <Cloud class={icon} data-icon="cloudy" />
+      <CloudFog class={icon} data-icon="fog" />
+      <CloudRain class={icon} data-icon="rain" />
+      <CloudStorm class={icon} data-icon="storm" />
+      <span data-temp></span>
+    </span>
+    <span class="sr-only" data-weather-label></span>
+    <span aria-hidden="true"> · </span>
+  </span><span data-clock></span>
 </p>
 
 <script>
+  import { getWeather, skyLabel, type Weather } from '@/components/home-explorations/weather'
+
   const clock = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'America/Sao_Paulo',
     year: 'numeric',
@@ -54,6 +107,15 @@
     return { pt: `${time} · ${rel.pt}`, en: `${time} · ${rel.en}` }
   }
 
+  // Each language's words for the weather, for screen readers.
+  function said(weather: Weather) {
+    const label = skyLabel[weather.sky]
+    return {
+      pt: `${label.pt}, ${weather.temp} graus, `,
+      en: `${label.en}, ${weather.temp} degrees, `,
+    }
+  }
+
   document.addEventListener('astro:page-load', () => {
     const el = document.querySelector<HTMLElement>('[data-rio-clock]')
     if (!el) return
@@ -61,7 +123,7 @@
     const en = document.createElement('span')
     pt.dataset.langPt = ''
     en.dataset.langEn = ''
-    el.replaceChildren(pt, en)
+    el.querySelector('[data-clock]')!.replaceChildren(pt, en)
 
     let timer: ReturnType<typeof setTimeout>
     function render() {
@@ -73,7 +135,38 @@
       timer = setTimeout(render, 60_000 - (now.getTime() % 60_000) + 50)
     }
 
-    document.addEventListener('astro:before-swap', () => clearTimeout(timer), { once: true })
+    const box = el.querySelector<HTMLElement>('[data-weather]')!
+    const icons = box.querySelectorAll<SVGElement>('[data-icon]')
+    const label = { pt: document.createElement('span'), en: document.createElement('span') }
+    label.pt.dataset.langPt = ''
+    label.en.dataset.langEn = ''
+    box.querySelector('[data-weather-label]')!.replaceChildren(label.pt, label.en)
+    function show(current: Weather | null) {
+      if (!current) return
+      // Clear and partly cloudy have a day and a night icon.
+      const name = current.sky === 'clear' || current.sky === 'partly' ? `${current.sky}-${current.isDay ? 'day' : 'night'}` : current.sky
+      for (const icon of icons) icon.classList.toggle('hidden', icon.dataset.icon !== name)
+      box.querySelector('[data-temp]')!.textContent = `${current.temp}°`
+      const words = said(current)
+      label.pt.textContent = words.pt
+      label.en.textContent = words.en
+      box.classList.remove('hidden')
+    }
+    const weather = async () => show(await getWeather())
+    // After the first answer, the scene's minute ticks keep it current (the
+    // scene asks for fresh weather every 15 minutes) and bring the dev
+    // panel's sky here too.
+    const onTick = (event: Event) => show((event as CustomEvent).detail.weather)
+    document.addEventListener('sky:tick', onTick)
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        clearTimeout(timer)
+        document.removeEventListener('sky:tick', onTick)
+      },
+      { once: true },
+    )
     render()
+    weather()
   })
 </script>
