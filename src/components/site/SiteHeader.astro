@@ -94,13 +94,13 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
         localStorage.setItem('lang', lang)
       } catch {}
       haptics.trigger('selection')
-      ;(window as any).posthog?.capture('language_switched', { language: lang })
+      window.posthog?.capture('language_switched', { language: lang })
     })
 
     document.querySelectorAll<HTMLElement>('[data-track]').forEach(el =>
       el.addEventListener('click', () => {
         haptics.trigger('light')
-        ;(window as any).posthog?.capture(el.dataset.track!)
+        window.posthog?.capture(el.dataset.track!)
       }),
     )
   })

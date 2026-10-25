@@ -84,7 +84,7 @@ import { ariaLabel } from '@/lib/site'
       syncPressed()
       play('switch')
       haptics.trigger('selection')
-      ;(window as any).posthog?.capture('theme_switched', { theme })
+      window.posthog?.capture('theme_switched', { theme })
     })
 
     soundButton.addEventListener('click', () => {
@@ -98,7 +98,7 @@ import { ariaLabel } from '@/lib/site'
       // Muted, it can't confirm itself; unmuted, it plays to prove it.
       if (sound === 'on') play('on')
       haptics.trigger('selection')
-      ;(window as any).posthog?.capture('sound_switched', { sound })
+      window.posthog?.capture('sound_switched', { sound })
     })
   })
 </script>

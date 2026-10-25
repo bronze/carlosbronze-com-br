@@ -9,6 +9,7 @@ pnpm dev        # Start dev server at localhost:4321
 pnpm build      # Build for production (output: ./dist/)
 pnpm preview    # Preview production build locally
 pnpm check      # Type-check the code (astro check) and tsconfig.json itself
+pnpm lint       # ESLint: likely bugs, unused code, accessibility in templates
 ```
 
 Package manager: **pnpm** (not npm or yarn).
