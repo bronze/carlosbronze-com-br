@@ -156,7 +156,8 @@
   --secondary-foreground: var(--color-base-50);
   --secondary-accent: var(--color-fuchsia-400);
   --muted: var(--color-base-800);
-  --muted-foreground: var(--color-base-400);
+  /* Halfway to base-300: base-400 alone fades thin mono labels on dark. */
+  --muted-foreground: color-mix(in oklch, var(--color-base-400), var(--color-base-300));
   --accent: var(--color-base-700);
   --accent-foreground: var(--color-base-100);
   --info: var(--color-sky-300);

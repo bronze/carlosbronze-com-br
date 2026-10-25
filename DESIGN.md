@@ -39,7 +39,7 @@ Two layers, both in `src/styles/starwind.css`:
 | --- | --- | --- | --- |
 | `--background` | base-0 | base-950 | Page background |
 | `--foreground` | base-950 | base-50 | Main text |
-| `--muted-foreground` | base-600 | base-400 | Secondary text, labels |
+| `--muted-foreground` | base-600 | base-400/300 mix | Secondary text, labels. Dark sits halfway to base-300: base-400 alone fades thin mono labels |
 | `--muted` | base-100 | base-800 | Inline code background |
 | `--border` | base-200 | white 10% | Rules and dividers |
 | `--brand` | brand-600 | brand-400 | Hovered arrows, link underlines on hover, active nav underline, pull quote rule |
