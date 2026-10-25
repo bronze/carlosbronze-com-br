@@ -10,6 +10,15 @@
           "value": "GNU Terry Pratchett"
         }
       ]
+    },
+    {
+      "source": "/obsidian/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
     }
   ],
   "rewrites": [
