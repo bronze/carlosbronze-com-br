@@ -1,0 +1,18 @@
+{
+  // Format on save with this repo's Prettier (.prettierrc, .prettierignore),
+  // whatever the user settings say.
+  "prettier.enable": true,
+  "prettier.requireConfig": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[astro]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  // Markdown and MDX are in .prettierignore; don't let another formatter in.
+  "[markdown]": { "editor.formatOnSave": false },
+  "[mdx]": { "editor.formatOnSave": false }
+}
