@@ -15,7 +15,7 @@ const button =
 ---
 
 <details
-  class="bg-background/95 border-border text-muted-foreground fixed bottom-4 left-4 z-50 w-72 rounded-lg border font-mono text-xs shadow-sm backdrop-blur print:hidden"
+  class="bg-background/95 border-border text-muted-foreground fixed bottom-4 left-4 z-50 w-72 rounded-lg border font-mono text-xs shadow-sm backdrop-blur-sm print:hidden"
   data-sky-debug
   data-flag={flag}
   hidden={!!flag}
@@ -23,7 +23,7 @@ const button =
   <summary class="hover:text-foreground cursor-pointer px-3 py-2 select-none">
     <T pt="céu · modo dev" en="sky · dev mode" />
   </summary>
-  <div class="space-y-3 border-t border-inherit px-3 py-3">
+  <div class="space-y-3 border-t border-inherit p-3">
     <label class="block">
       <span class="mb-1 flex justify-between">
         <T pt="hora no Rio" en="time in Rio" />
@@ -86,7 +86,7 @@ const button =
       </span>
       <!-- Sized down from the forms plugin's defaults, to the panel's text. -->
       <select
-        class="border-border bg-background text-foreground focus:border-foreground w-full rounded border bg-[position:right_0.25rem_center] py-1 pr-7 pl-2 text-xs focus:ring-0"
+        class="border-border bg-background text-foreground focus:border-foreground w-full rounded-xs border bg-position-[right_0.25rem_center] py-1 pr-7 pl-2 text-xs focus:ring-0"
         data-in="sky">
         <option value="">ao vivo / live</option>
         {skies.map(sky => (

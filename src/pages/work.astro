@@ -58,7 +58,7 @@ const bullets =
     )
   })}
 
-  <section aria-labelledby="highlights-title" class="mt-10 mb-10">
+  <section aria-labelledby="highlights-title" class="my-10">
     <h2 id="highlights-title" class={sectionTitle}>
       <T pt="Trabalhos em destaque" en="Selected work" />
     </h2>
@@ -81,14 +81,14 @@ const bullets =
     </p>
   ))}
 
-  <section aria-labelledby="experience-title" class="mt-14 mb-14">
+  <section aria-labelledby="experience-title" class="my-14">
     <h2 id="experience-title" class={sectionTitle}>
       <T pt="Experiência" en="Experience" />
     </h2>
     <ol class="space-y-11">
       {experience.map(role => (
         <li>
-          <h3 class="font-serif text-2xl leading-snug">{role.company}</h3>
+          <h3 class="font-serif text-2xl/snug">{role.company}</h3>
           <p class="text-foreground mb-1">
             <T {...role.title} />
           </p>
@@ -121,7 +121,7 @@ const bullets =
     <dl class="grid gap-y-4">
       {skills.map(s => (
         <div>
-          <dt class="font-serif text-lg leading-snug">
+          <dt class="font-serif text-lg/snug">
             <T {...s.area} />
           </dt>
           <dd class="text-muted-foreground leading-normal">
@@ -139,7 +139,7 @@ const bullets =
     <ul class="grid gap-y-4">
       {education.map(e => (
         <li>
-          <p class="font-serif text-lg leading-snug">{e.school}</p>
+          <p class="font-serif text-lg/snug">{e.school}</p>
           <p class="text-muted-foreground leading-normal">
             {e.courses.map((c, i) => (
               <>
@@ -179,7 +179,7 @@ const bullets =
     </ul>
   </section>
 
-  <div class="mb-11 grid gap-x-10 gap-y-10 sm:grid-cols-2">
+  <div class="mb-11 grid gap-10 sm:grid-cols-2">
     <section aria-labelledby="certifications-title">
       <h2 id="certifications-title" class={sectionTitle}>
         <T pt="Certificações" en="Certifications" />

@@ -193,7 +193,7 @@ const h3 = `${label} mt-10 mb-4`
   <form
     id="palette"
     data-singles={singles.join(' ')}
-    class="bg-background/90 border-border sticky top-0 z-10 -mx-4 mb-6 flex flex-wrap gap-x-6 gap-y-3 border-b px-4 py-4 backdrop-blur"
+    class="bg-background/90 border-border sticky top-0 z-10 -mx-4 mb-6 flex flex-wrap gap-x-6 gap-y-3 border-b p-4 backdrop-blur-sm"
     aria-labelledby="palette-title">
     <p id="palette-title" class:list={[label, 'w-full']}>
       <T pt="Paleta em teste" en="Palette on trial" />
@@ -309,7 +309,7 @@ const h3 = `${label} mt-10 mb-4`
             style={`background: var(${r.token})`}
           />
           <dt class="font-mono text-sm">{r.token}</dt>
-          <dd class="text-muted-foreground text-sm leading-[1.5]">
+          <dd class="text-muted-foreground text-sm/normal">
             <T {...r.use} />
             <span class="block font-mono text-xs">
               {r.light} · <T pt="escuro" en="dark" /> {r.dark}
@@ -335,7 +335,7 @@ const h3 = `${label} mt-10 mb-4`
           style={`background: var(${p.bg}); color: var(${p.fg})`}
           data-contrast-fg={p.fg}
           data-contrast-bg={p.bg}>
-          <p class="mb-2 font-serif text-xl leading-tight">Aa</p>
+          <p class="mb-2 font-serif text-xl/tight">Aa</p>
           <p class="mb-1 text-sm">
             <T {...p.label} />
           </p>
@@ -367,7 +367,7 @@ const h3 = `${label} mt-10 mb-4`
             </span>
             <span class="text-muted-foreground font-mono text-xs">{t.spec}</span>
           </p>
-          <p class:list={[t.cls, 'break-words']}>
+          <p class:list={[t.cls, 'wrap-break-word']}>
             {typeof t.sample === 'string' ? t.sample : <T {...t.sample} />}
           </p>
         </li>

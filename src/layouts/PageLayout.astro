@@ -62,7 +62,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
   analytics={analytics}>
   <a
     href="#main"
-    class="bg-foreground text-background sr-only z-50 rounded px-3 py-2 font-mono text-xs focus:not-sr-only focus:fixed focus:top-4 focus:left-4">
+    class="bg-foreground text-background sr-only z-50 rounded-xs px-3 py-2 font-mono text-xs focus:not-sr-only focus:fixed focus:top-4 focus:left-4">
     <T pt="Pular para o conteúdo" en="Skip to content" />
   </a>
 
@@ -77,8 +77,8 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
     <section
       aria-labelledby="page-title"
       class:list={[
-        'reveal [&>:has(+[data-pager])]:mb-0 [&>:last-child]:mb-0',
-        !hero && 'mx-auto max-w-[720px]',
+        'reveal [&>:has(+[data-pager])]:mb-0 *:last:mb-0',
+        !hero && 'mx-auto max-w-180',
       ]}>
       <!-- A slotted line under the eyebrow (Home's clock) takes over its gap. -->
       <p
@@ -128,7 +128,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
           class:list={[
             'text-foreground/80 text-pretty',
             hero
-              ? 'mb-14 max-w-[32ch] text-base leading-relaxed sm:text-lg'
+              ? 'mb-14 max-w-[32ch] text-base/relaxed sm:text-lg/relaxed'
               : 'text-lg leading-[1.75]',
             !hero && (continueIntro ? 'mb-5' : 'mb-11'),
           ]}>
