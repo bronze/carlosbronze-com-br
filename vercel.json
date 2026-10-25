@@ -12,7 +12,7 @@
       ]
     },
     {
-      "source": "/obsidian/:path*",
+      "source": "/obsidian(/.*)?",
       "headers": [
         {
           "key": "X-Robots-Tag",
