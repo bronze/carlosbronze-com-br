@@ -7,3 +7,11 @@ dist/
 # Prose: Prettier would reflow the text and tables.
 *.md
 *.mdx
+
+# Added by the Starwind and shadcn CLIs, which overwrite them on update:
+# formatting them here would only make those updates noisier.
+src/components/starwind/
+src/components/starwind-pro/
+src/components/ui/
+src/components/ModeToggle.tsx
+src/lib/utils/starwind/
