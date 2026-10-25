@@ -1,0 +1,9 @@
+# Generated: never formatted by hand.
+pnpm-lock.yaml
+dist/
+.astro/
+.vercel/
+
+# Prose: Prettier would reflow the text and tables.
+*.md
+*.mdx
