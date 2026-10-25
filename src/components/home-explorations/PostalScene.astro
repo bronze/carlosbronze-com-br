@@ -303,7 +303,11 @@ const streaks = Array.from({ length: 150 }, (_, i) => ({
     stroke-linecap: round;
     vector-effect: non-scaling-stroke;
   }
-  [data-rain='0'] .streak,
+  /* Dry: the whole layer goes, so a page-wide SVG of 150 streaks isn't
+     restyled for nothing. */
+  .rain[data-rain='0'] {
+    display: none;
+  }
   [data-rain='1'] .streak:not([data-tier='0']),
   [data-rain='2'] .streak[data-tier='2'] {
     display: none;
@@ -459,11 +463,12 @@ const streaks = Array.from({ length: 150 }, (_, i) => ({
 
     function render() {
       const hour = state.hour ?? hourInRio()
-      // A pinned phase moves the moon too: it rises when that phase would,
-      // so at this hour it may be down.
+      // A pinned phase only changes the moon's shape: it keeps today's rise,
+      // so trying phases in the dev panel never takes it out of the sky.
       const phase = state.phase ?? moonPhase()
-      const rise = moonRise(phase)
-      const positions = skyAt(hour, phase)
+      const today = moonPhase()
+      const rise = moonRise(today)
+      const positions = skyAt(hour, today)
       const forced = state.sky ? forceSky(state.sky, live) : live
       // A pinned hour picks the day or night icon by itself.
       const weather = forced && state.hour !== null ? { ...forced, isDay: nightness(hour) < 0.5 } : forced
@@ -499,7 +504,7 @@ const streaks = Array.from({ length: 150 }, (_, i) => ({
       lit.setAttribute('transform', shape.mirror ? 'scale(-1 1)' : '')
       if (daylight) {
         const ground = groundAt(hour, root.classList.contains('dark'))
-        root.style.setProperty('--background', ground)
+        if (root.style.getPropertyValue('--background') !== ground) root.style.setProperty('--background', ground)
       }
       const night = nightness(hour)
       fewStars.style.opacity = String(overcast ? 0 : night)

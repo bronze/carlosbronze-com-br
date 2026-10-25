@@ -134,6 +134,10 @@ export function groundAt(hour: number, dark: boolean) {
   const day = sun === null ? 0 : Math.sin(Math.PI * sun) ** 0.6
   const { day: a, night: b } = ground[dark ? 'dark' : 'light']
   const [l, c, h] = b.map((n, i) => n + (a[i] - n) * day)
-  return `oklch(${l.toFixed(4)} ${c.toFixed(4)} ${h.toFixed(1)})`
+  // Three decimals: steps too small to see, and few enough that a whole day
+  // played in 24 seconds repaints the page a handful of times a second, not
+  // every frame (the ground is a custom property on the root, so every
+  // change restyles the page, rain and all).
+  return `oklch(${l.toFixed(3)} ${c.toFixed(3)} ${h.toFixed(0)})`
 }
 

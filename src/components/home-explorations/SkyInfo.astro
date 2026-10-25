@@ -1,7 +1,7 @@
 ---
 // Tap the sun or the moon over Pão de Açúcar for a little more: the sun gives
 // today's weather in Rio (sunrise and sunset, high and low, chance of rain,
-// UV), the moon its phase. The scene sits behind the page and lets clicks
+// UV), the moon the same less the UV, and its phase. The scene sits behind the page and lets clicks
 // through, so this listens on the whole document and checks whether a click
 // landed on either one. It follows the scene through `sky:tick`, so the dev
 // panel's hour, phase and sky show here too.
@@ -40,13 +40,16 @@
 
   const month = 29.530588853
 
-  function sunLines(w: Weather): Line[] {
+  // At night the UV is beside the point, so the moon leaves it out.
+  function sunLines(w: Weather, uv = true): Line[] {
     const label = skyLabel[w.sky]
     return [
       { pt: `${label.pt} · ${w.temp}°`, en: `${label.en} · ${w.temp}°` },
       { pt: `nascer ${w.sunrise} · pôr ${w.sunset}`, en: `sunrise ${w.sunrise} · sunset ${w.sunset}` },
       { pt: `máx ${w.high}° · mín ${w.low}°`, en: `high ${w.high}° · low ${w.low}°` },
-      { pt: `chance de chuva ${w.rainChance}% · UV ${w.uv}`, en: `${w.rainChance}% chance of rain · UV ${w.uv}` },
+      uv
+        ? { pt: `chance de chuva ${w.rainChance}% · UV ${w.uv}`, en: `${w.rainChance}% chance of rain · UV ${w.uv}` }
+        : { pt: `chance de chuva ${w.rainChance}%`, en: `${w.rainChance}% chance of rain` },
     ]
   }
 
@@ -57,18 +60,16 @@
     return { pt: `${pt} em ${days} dias`, en: `${en} in ${days} days` }
   }
 
-  function moonLines(phase: number): Line[] {
+  // "lua crescente · cheia em 3 dias".
+  function moonLine(phase: number): Line {
     const name = phaseName(phase)
-    const lit = Math.round(((1 - Math.cos(2 * Math.PI * phase)) / 2) * 100)
     // The next full or new moon, skipping the one we're in (phaseName gives
     // each about a day either side).
     const full = phase < 0.465 || phase > 0.965
     const next = Math.round((((full ? 0.5 : 1) - phase + 1) % 1) * month)
-    return [
-      { pt: name.pt.startsWith('quarto') ? name.pt : `lua ${name.pt}`, en: `${name.en} moon` },
-      { pt: `${lit}% iluminada`, en: `${lit}% lit` },
-      full ? inDays(next, 'cheia', 'full') : inDays(next, 'nova', 'new'),
-    ]
+    const when = full ? inDays(next, 'cheia', 'full') : inDays(next, 'nova', 'new')
+    const moon = { pt: name.pt.startsWith('quarto') ? name.pt : `lua ${name.pt}`, en: `${name.en} moon` }
+    return { pt: `${moon.pt} · ${when.pt}`, en: `${moon.en} · ${when.en}` }
   }
 
   function paragraph(line: Line, first: boolean) {
@@ -123,7 +124,10 @@
     }
 
     function show(body: Body) {
-      const lines = body === 'sun' ? sunLines(weather!) : moonLines(phase)
+      // The moon says what the sun does, less the UV, then its phase; before
+      // the weather comes in, just its phase.
+      const lines =
+        body === 'sun' ? sunLines(weather!) : [...(weather ? sunLines(weather, false) : []), moonLine(phase)]
       card.replaceChildren(...lines.map((line, i) => paragraph(line, i === 0)))
       card.hidden = false
       // Below the body, centred on it, kept on screen; above it if there's
