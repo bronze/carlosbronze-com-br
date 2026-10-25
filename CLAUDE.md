@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 pnpm dev        # Start dev server at localhost:4321
 pnpm build      # Build for production (output: ./dist/)
 pnpm preview    # Preview production build locally
-pnpm astro check  # Type-check the project
+pnpm check      # Type-check the code (astro check) and tsconfig.json itself
 ```
 
 Package manager: **pnpm** (not npm or yarn).
