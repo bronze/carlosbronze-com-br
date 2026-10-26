@@ -162,6 +162,7 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
   </main>
 
   <footer class="text-muted-foreground flex flex-col items-center gap-1 px-4 pb-8 text-center font-mono text-xs">
+    <FooterToggles />
     <p>
       © {new Date().getFullYear()}
       {
@@ -189,6 +190,5 @@ const title = path === '/' ? undefined : (titleProp ?? section?.label)
         ))
       }
     </p>
-    <FooterToggles />
   </footer>
 </Layout>
