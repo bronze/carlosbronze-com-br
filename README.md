@@ -67,4 +67,4 @@ The body follows PEARL as `##` sections: Problem, Epiphany (optional), Action, R
 
 Pushing to `master` deploys to Vercel. `vercel.json` sets clean URLs and proxies `/obsidian/*` to Obsidian Publish, which serves the notes at [www.carlosbronze.com/obsidian](https://www.carlosbronze.com/obsidian/).
 
-Analytics: Vercel Analytics and Speed Insights, PostHog, Umami and Simple Analytics.
+Analytics: Vercel Analytics and Speed Insights, PostHog and Umami.
