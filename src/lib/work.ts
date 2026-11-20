@@ -55,7 +55,7 @@ export const experience: Role[] = [
     place: at('Rio de Janeiro', remote),
     context: {
       pt: 'Startup americana de edtech com IA para o ensino fundamental e médio, em fase de product-market fit. Atuo como PM desde a fundação, com ownership de estratégia, roadmap e métricas.',
-      en: "US-based, AI-powered edtech startup for K–12 students, currently searching for product-market fit. I've been the PM since its founding, with ownership of strategy, roadmap, and metrics.",
+      en: "US-based, AI-powered edtech startup for K-12 students, currently searching for product-market fit. I've been the PM since its founding, with ownership of strategy, roadmap, and metrics.",
     },
     points: [
       {
@@ -90,7 +90,7 @@ export const experience: Role[] = [
     place: at('Rio de Janeiro', remote),
     context: {
       pt: 'Sistema de ensino com 4 produtos digitais usados por mais de 300 mil alunos e professores. Ao lado da diretoria de Produto, redefini a estratégia da área de Produtos Digitais: como os times se organizam, o que medem e onde investem.',
-      en: 'Brazilian K–12 education company with 4 digital products used by 300k+ students and teachers. Working alongside the Director of Product, I reshaped the Digital Products strategy: how teams are organized, what they measure, and where they invest.',
+      en: 'Brazilian K-12 education company with 4 digital products used by 300k+ students and teachers. Working alongside the Director of Product, I reshaped the Digital Products strategy: how teams are organized, what they measure, and where they invest.',
     },
     points: [
       {
