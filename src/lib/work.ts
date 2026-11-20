@@ -31,36 +31,6 @@ export const summary: Bilingual[] = [
   },
 ]
 
-export const highlights: Bilingual[] = [
-  {
-    pt: 'Na **MySparkle.ai**, como PM desde a fundação, defini a extensão de streak como north star e instrumentei 30+ eventos no PostHog antes do primeiro usuário, com a gamificação desenhada como mecanismo de hábito.',
-    en: 'At **MySparkle.ai**, as PM since the founding, set streak extension as the north star and instrumented 30+ events in PostHog before the first user, with gamification designed as a habit mechanism.',
-  },
-  {
-    pt: 'Na **Bernoulli Educação** (300 mil usuários), desenhei o novo modelo de squads por público e jornada do usuário, adotado pela diretoria e implementado com 70+ profissionais em menos de 6 meses.',
-    en: 'At **Bernoulli Educação** (300k+ users), designed the new squad model around audiences and user journeys, adopted by the Director of Product and rolled out to 70+ people in under 6 months.',
-  },
-  {
-    pt: 'Também na Bernoulli, liderei o redesenho da arquitetura de informação da plataforma, com base em dados de uso e pesquisas com usuários.',
-    en: "Also at Bernoulli, led the redesign of the platform's information architecture, using usage data and user research.",
-  },
-  {
-    pt: 'No lançamento do **Viber no Brasil**, liderei BI e growth: a base foi de 10MM para 17MM de usuários com investimento mínimo em mídia.',
-    en: "At **Viber's Brazil launch**, led BI and growth: the user base grew from 10M to 17M with minimal media spend.",
-  },
-]
-
-export const closing: Bilingual[] = [
-  {
-    pt: 'Sempre fui mão na massa, perto do time e do que de fato vai para produção. A IA não mudou isso, multiplicou: consigo validar uma ideia com uma versão funcional antes de pedir que o time invista nela, e assim decidimos com evidência, não com opinião.',
-    en: "I've always been hands-on, close to the team and to what actually ships. AI didn't change that, it multiplied it: I can validate an idea with a working version before asking the team to invest in it, so we decide on evidence, not opinion.",
-  },
-  {
-    pt: 'Dou o meu melhor ao lado de pessoas que gostam de questionar o problema antes de correr para a solução. Se você está pensando em estratégia de produto, gamificação ou métricas que realmente movem o negócio, quero saber no que você está trabalhando.',
-    en: "I'm at my best with people who like to question the problem before rushing to the solution. If you're thinking about product strategy, gamification, or metrics that actually move the business, I'd love to hear what you're working on.",
-  },
-]
-
 export interface Role {
   company: string
   title: Bilingual

@@ -5,11 +5,9 @@ import { personId } from '@/lib/seo'
 import type { Bilingual } from '@/lib/site'
 import {
   certifications,
-  closing,
   education,
   experience,
   headline,
-  highlights,
   languages,
   skills,
   summary,
@@ -66,29 +64,6 @@ const bullets =
       </p>
     )
   })}
-
-  <section aria-labelledby="highlights-title" class="my-10">
-    <h2 id="highlights-title" class={sectionTitle}>
-      <T pt="Trabalhos em destaque" en="Selected work" />
-    </h2>
-    <ul class:list={[bullets, 'text-lg']}>
-      {highlights.map(h => {
-        const r = rich(h)
-        return (
-          <li>
-            <span data-lang-pt set:html={r.pt} />
-            <span data-lang-en set:html={r.en} />
-          </li>
-        )
-      })}
-    </ul>
-  </section>
-
-  {closing.map(p => (
-    <p class={paragraph}>
-      <T {...p} />
-    </p>
-  ))}
 
   <section aria-labelledby="experience-title" class="my-14">
     <h2 id="experience-title" class={sectionTitle}>
