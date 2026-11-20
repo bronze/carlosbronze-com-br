@@ -7,9 +7,6 @@ import type { Bilingual } from './site'
 // Last synced 2026-11-20. When either note changes, update this file and the
 // date (see "Content synced from elsewhere" in CLAUDE.md).
 //
-// The notes' summary is three long paragraphs written for ATS; the page splits
-// the same facts into a short intro, an about paragraph and highlights.
-//
 // **double asterisks** mark bold, as in the notes; the page renders them.
 
 export const headline: Bilingual = {
@@ -17,15 +14,20 @@ export const headline: Bilingual = {
   en: 'Product strategy, gamification, growth & analytics',
 }
 
-export const summary: Bilingual = {
-  pt: 'Designer de formação e programador desde 1999, atuo em estratégia de produto, gamificação, growth e product analytics. Meu trabalho é chegar ao problema certo, com critérios de sucesso explícitos e decisões que o time consegue executar.',
-  en: 'A designer by training who has been coding since 1999, I focus on product strategy, gamification, growth, and product analytics. My job is to get to the right problem, with explicit success criteria and decisions the team can act on.',
-}
-
-export const about: Bilingual[] = [
+// The notes' three summary paragraphs, word for word: the first is the
+// page's intro, the other two follow it.
+export const summary: Bilingual[] = [
   {
-    pt: 'Sou **Product Manager** com quase 20 anos de experiência em produtos digitais, de agência a startup, em edtech, mensageria, mídia e bens de consumo. Hoje trabalho remoto do Rio de Janeiro numa startup americana de edtech com IA, com autonomia e ownership da estratégia de produto, do discovery ao roadmap. A missão atual é transformar **gamificação em hábito de estudo** e provar, com métricas, que o produto gera **engajamento e retenção**.',
-    en: "I'm a **Product Manager** with almost 20 years of experience in digital products, from agencies to startups, across edtech, messaging, media, and consumer goods. Today I work remotely from Rio de Janeiro (GMT-3, strong overlap with US and European business hours) at a US-based, AI-powered edtech startup, with autonomy and ownership of product strategy, from discovery to roadmap. My current mission is to turn **gamification into a study habit** and prove, with metrics, that the product drives **engagement and retention**.",
+    pt: 'Sou **Product Manager** com quase 20 anos de experiência em produtos digitais, de agência a startup, em edtech, mensageria, mídia e bens de consumo. Designer de formação e programador desde 1999, atuo em **estratégia de produto, gamificação, growth e product analytics**. Meu trabalho é transformar ambiguidade em **direção clara**: o problema certo, critérios de sucesso explícitos e decisões que o time consegue executar.',
+    en: '**Product Manager** with almost 20 years of experience in digital products, from agencies to startups, across edtech, messaging, media, and consumer goods. A designer by training who has been coding since 1999, I focus on **product strategy, gamification, growth, and product analytics**. My job is to turn ambiguity into **clear direction**: the right problem, explicit success criteria, and decisions the team can act on.',
+  },
+  {
+    pt: 'Ao longo da trajetória, participei da construção de produtos desde a fundação, com north star, KPIs e instrumentação definidos antes do primeiro usuário. Liderei BI e growth no lançamento de um app de mensagens no Brasil, desenhei o modelo de squads de uma plataforma educacional e conduzi o redesenho da sua arquitetura de informação. Também desenhei sistemas de gamificação para formação de hábito, estruturei a priorização de roadmap e backlog com experimentação e análise de dados, e construí business cases para decisões de investimento em produto.',
+    en: "Over the years, I've helped build products from the founding stage, with the north star metric, KPIs, and instrumentation in place before the first user. I led BI and growth for a messaging app launch in Brazil, designed the squad model for an education platform, and led the redesign of its information architecture. I've also designed gamification systems for habit formation, structured roadmap and backlog prioritization around experimentation and data analysis, and built business cases for product investment decisions.",
+  },
+  {
+    pt: 'Hoje trabalho remoto como Product Manager numa startup americana de edtech com IA, com autonomia e ownership da estratégia de produto, do discovery ao roadmap. Cada PRD sai acompanhado de um protótipo funcional que eu mesmo construo com IA. A missão atual é transformar gamificação em hábito de estudo e provar, com métricas, que o produto gera engajamento e retenção. Quero continuar em produtos onde estratégia, dados e comportamento do usuário guiam a tomada de decisão.',
+    en: 'Today I work remotely from Brazil (GMT-3, strong overlap with US and European business hours) as a Product Manager at a US-based, AI-powered edtech startup, where I have autonomy and ownership of product strategy, from discovery to roadmap. Every PRD ships with a working prototype I build myself with AI. My current mission is to turn gamification into a study habit and prove, with metrics, that the product drives engagement and retention. I want to keep working on products where strategy, data, and user behavior guide decision-making.',
   },
 ]
 

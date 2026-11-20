@@ -4,7 +4,6 @@ import T from '@/components/site/T.astro'
 import { personId } from '@/lib/seo'
 import type { Bilingual } from '@/lib/site'
 import {
-  about,
   certifications,
   closing,
   education,
@@ -25,6 +24,12 @@ const bold = (s: string) =>
     .replace(/>/g, '&gt;')
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-foreground font-medium">$1</strong>')
 const rich = (b: Bilingual) => ({ pt: bold(b.pt), en: bold(b.en) })
+const plain = (b: Bilingual) => ({
+  pt: b.pt.replace(/\*\*/g, ''),
+  en: b.en.replace(/\*\*/g, ''),
+})
+const [intro, ...about] = summary
+const introHtml = rich(intro)
 
 const paragraph = 'text-foreground/80 mb-5 text-lg leading-[1.75] text-pretty'
 const sectionTitle = 'text-muted-foreground mb-5 font-mono text-xs tracking-[0.06em] uppercase'
@@ -46,8 +51,12 @@ const bullets =
     en: 'I turn ambiguity into clear product direction.',
   }}
   subheading={headline}
-  intro={summary}
+  intro={plain(intro)}
   continueIntro>
+  <Fragment slot="intro">
+    <span data-lang-pt set:html={introHtml.pt} />
+    <span data-lang-en set:html={introHtml.en} />
+  </Fragment>
   {about.map(p => {
     const r = rich(p)
     return (
