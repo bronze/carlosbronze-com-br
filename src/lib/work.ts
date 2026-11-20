@@ -4,8 +4,11 @@ import type { Bilingual } from './site'
 // source of truth:
 //   PT: https://www.carlosbronze.com/obsidian/curriculo
 //   EN: https://www.carlosbronze.com/obsidian/resume
-// Last synced 2026-10-19. When either note changes, update this file and the
+// Last synced 2026-11-20. When either note changes, update this file and the
 // date (see "Content synced from elsewhere" in CLAUDE.md).
+//
+// The notes' summary is three long paragraphs written for ATS; the page splits
+// the same facts into a short intro, an about paragraph and highlights.
 //
 // **double asterisks** mark bold, as in the notes; the page renders them.
 
@@ -15,29 +18,29 @@ export const headline: Bilingual = {
 }
 
 export const summary: Bilingual = {
-  pt: 'Designer de formação, programo desde 1999, estrategista por ofício. Transformo ambiguidade em direção clara de produto: o problema certo, critérios de sucesso explícitos e decisões que os times conseguem executar.',
-  en: 'Designer by training, coding since 1999, strategist by trade. I turn ambiguity into clear product direction: the right problem, explicit success criteria, and decisions teams can act on.',
+  pt: 'Designer de formação e programador desde 1999, atuo em estratégia de produto, gamificação, growth e product analytics. Meu trabalho é chegar ao problema certo, com critérios de sucesso explícitos e decisões que o time consegue executar.',
+  en: 'A designer by training who has been coding since 1999, I focus on product strategy, gamification, growth, and product analytics. My job is to get to the right problem, with explicit success criteria and decisions the team can act on.',
 }
 
 export const about: Bilingual[] = [
   {
-    pt: 'Sou Senior Product Manager e há quase 20 anos construo **produtos digitais e marcas**, de agência a startup. Da estratégia de marca trago o olhar para percepção: como um produto se apresenta muda como as pessoas o usam, e isso aparece na métrica. Trabalho remoto do Rio de Janeiro para uma startup americana. Conecto **estratégia, dados e prioridades de negócio** para escolher onde investir: a interseção entre **o que encanta o usuário** e **o que realmente move o resultado**.',
-    en: "I'm a Senior Product Manager and for almost 20 years I've been building **digital products and brands**, from agencies to startups. From brand strategy I bring a focus on perception: how a product presents itself changes how people use it, and it shows in the metrics. I work fully remote from Rio de Janeiro for a US-based startup (GMT-3, strong overlap with US and European business hours). I connect **strategy, data and business priorities** to choose where to invest: the overlap between **what delights users** and **what actually moves the business**.",
+    pt: 'Sou **Product Manager** com quase 20 anos de experiência em produtos digitais, de agência a startup, em edtech, mensageria, mídia e bens de consumo. Hoje trabalho remoto do Rio de Janeiro numa startup americana de edtech com IA, com autonomia e ownership da estratégia de produto, do discovery ao roadmap. A missão atual é transformar **gamificação em hábito de estudo** e provar, com métricas, que o produto gera **engajamento e retenção**.',
+    en: "I'm a **Product Manager** with almost 20 years of experience in digital products, from agencies to startups, across edtech, messaging, media, and consumer goods. Today I work remotely from Rio de Janeiro (GMT-3, strong overlap with US and European business hours) at a US-based, AI-powered edtech startup, with autonomy and ownership of product strategy, from discovery to roadmap. My current mission is to turn **gamification into a study habit** and prove, with metrics, that the product drives **engagement and retention**.",
   },
 ]
 
 export const highlights: Bilingual[] = [
   {
-    pt: 'Na **MySparkle.ai**, como PM desde a fundação, defino a tese de produto de uma edtech com IA: gamificação como mecanismo de hábito e métricas prontas antes do primeiro usuário.',
-    en: 'At **MySparkle.ai**, as PM since the founding, I own the product thesis of an AI-powered edtech: gamification as a habit mechanism and metrics in place before the first user.',
+    pt: 'Na **MySparkle.ai**, como PM desde a fundação, defini a extensão de streak como north star e instrumentei 30+ eventos no PostHog antes do primeiro usuário, com a gamificação desenhada como mecanismo de hábito.',
+    en: 'At **MySparkle.ai**, as PM since the founding, set streak extension as the north star and instrumented 30+ events in PostHog before the first user, with gamification designed as a habit mechanism.',
   },
   {
-    pt: 'Na **Bernoulli Educação** (300 mil usuários), desenhei o novo modelo de squads por jornada do usuário, adotado pela diretoria e implementado com 70+ profissionais em menos de 6 meses.',
-    en: 'At **Bernoulli Educação** (300k users), designed the new squad model around user journeys, adopted by the Director of Product and rolled out to 70+ people in under 6 months.',
+    pt: 'Na **Bernoulli Educação** (300 mil usuários), desenhei o novo modelo de squads por público e jornada do usuário, adotado pela diretoria e implementado com 70+ profissionais em menos de 6 meses.',
+    en: 'At **Bernoulli Educação** (300k+ users), designed the new squad model around audiences and user journeys, adopted by the Director of Product and rolled out to 70+ people in under 6 months.',
   },
   {
-    pt: 'Também na Bernoulli, liderei o redesenho da arquitetura de informação, ancorando navegação e fluxos nos objetivos estratégicos, e não na estrutura legada.',
-    en: 'Also at Bernoulli, led the information architecture redesign, anchoring navigation and user flows on strategic objectives instead of legacy structure.',
+    pt: 'Também na Bernoulli, liderei o redesenho da arquitetura de informação da plataforma, com base em dados de uso e pesquisas com usuários.',
+    en: "Also at Bernoulli, led the redesign of the platform's information architecture, using usage data and user research.",
   },
   {
     pt: 'No lançamento do **Viber no Brasil**, liderei BI e growth: a base foi de 10MM para 17MM de usuários com investimento mínimo em mídia.',
@@ -75,33 +78,33 @@ const at = (city: string, mode: Bilingual): Bilingual => ({
 export const experience: Role[] = [
   {
     company: 'MySparkle.ai',
-    title: { pt: 'Senior Product Manager', en: 'Senior Product Manager' },
+    title: { pt: 'Product Manager', en: 'Product Manager' },
     dates: { pt: 'maio de 2025 – hoje', en: 'May 2025 – present' },
     place: at('Rio de Janeiro', remote),
     context: {
-      pt: 'Startup americana de edtech com IA para o ensino fundamental e médio, construída do zero e em busca de product-market fit. Como PM desde a fundação, defino a tese de produto: que problema resolver, para quem, e como saber se estamos certos.',
-      en: 'US-based AI-powered edtech startup for K–12 students, built from zero and searching for product-market fit. As PM since the founding, I own the product thesis: which problem to solve, for whom, and how we know we are right.',
+      pt: 'Startup americana de edtech com IA para o ensino fundamental e médio, em fase de product-market fit. Atuo como PM desde a fundação, com ownership de estratégia, roadmap e métricas.',
+      en: "US-based, AI-powered edtech startup for K–12 students, currently searching for product-market fit. I've been the PM since its founding, with ownership of strategy, roadmap, and metrics.",
     },
     points: [
       {
-        pt: 'Em produto de aprendizado, o valor só aparece com uso recorrente: desenhei a gamificação como mecanismo de hábito (streaks, freeze, celebração de conquistas), com base em ciência de formação de hábitos, e defini antes do lançamento os critérios de sucesso e o desenho de coortes para validá-la.',
-        en: 'In a learning product, value only shows up with recurring use: designed gamification as a habit mechanism (streaks, freeze, milestone celebrations), grounded in habit formation science, and defined the success criteria and cohort design to validate it before launch.',
+        pt: 'Conduzo o discovery com entrevistas com usuários e priorizo roadmap e backlog com um modelo de experimentação em camadas (input, output, outcome, impacto), que conecta cada iniciativa a uma métrica.',
+        en: 'Run discovery through user interviews and prioritize the roadmap and backlog with a layered experimentation model (input, output, outcome, impact) that ties every initiative to a metric.',
       },
       {
-        pt: 'Antes dos primeiros usuários, a pergunta é como saber se estamos certos: defini extensão de streak como north star e instrumentei 30+ eventos em onboarding, aprendizado e engajamento, para que cada usuário do piloto já gere evidência.',
-        en: 'Before the first users, the question is how we will know we are right: set streak extension as the north star and instrumented 30+ events across onboarding, learning and engagement, so every pilot user generates evidence from day one.',
+        pt: 'Defini a extensão de streak como north star e instrumentei 30+ eventos de onboarding, aprendizado e engajamento no PostHog, o que permite analisar coortes desde o piloto.',
+        en: 'Set streak extension as the north star metric and instrumented 30+ onboarding, learning, and engagement events in PostHog, enabling cohort analysis from the pilot onward.',
       },
       {
-        pt: 'Muitas hipóteses, time pequeno e pouco dado: introduzi no time um modelo de experimentação em camadas (input, output, outcome, impacto) que conecta cada iniciativa a uma métrica e prioriza o que entra no roadmap.',
-        en: 'Many hypotheses, a small team and little data: introduced a layered experimentation model (input, output, outcome, impact) that ties every initiative to a metric and prioritizes what makes the roadmap.',
+        pt: 'Desenhei a gamificação como mecanismo de hábito (streaks, freeze, celebração de conquistas), com base em ciência comportamental e com critérios de sucesso definidos antes do lançamento.',
+        en: 'Designed gamification as a habit mechanism (streaks, freeze, milestone celebrations), grounded in behavioral science, with success criteria defined before launch.',
       },
       {
-        pt: 'Especificação sozinha gerava dúvidas e idas e vindas com o desenvolvimento: passei a entregar todo PRD com um protótipo funcional em HTML construído com IA, que o time usa como referência direta de implementação.',
-        en: 'Specs alone created questions and back-and-forth with engineering: started shipping every PRD with a working HTML prototype built with AI, which the team uses as a direct implementation reference.',
+        pt: 'Entrego cada PRD com um protótipo funcional em HTML construído com IA, que o time de engenharia usa como referência de implementação e que reduziu as dúvidas no desenvolvimento.',
+        en: 'Ship every PRD with a working HTML prototype built with AI, giving engineering a concrete implementation reference and reducing questions during development.',
       },
       {
-        pt: 'Valores claros, sem linguagem própria: co-escrevi os princípios de marca e as diretrizes de linguagem, transformando a narrativa do produto em critérios de design e comunicação.',
-        en: 'Clear values, no voice of its own: co-authored the brand principles and copy guidelines, turning the product narrative into design and communication criteria.',
+        pt: 'Co-escrevi os princípios de marca e as diretrizes de linguagem, que servem de critério para o design e a comunicação do produto.',
+        en: 'Co-authored the brand principles and copy guidelines that guide product design and communication.',
       },
     ],
   },
@@ -114,25 +117,25 @@ export const experience: Role[] = [
     },
     place: at('Rio de Janeiro', remote),
     context: {
-      pt: 'Sistema de ensino com plataforma digital usada por mais de 300 mil alunos e professores. Lado a lado com a diretoria de Produto, redefini a estratégia da área de Produtos Digitais: como os times se organizam, o que medem e onde investem.',
-      en: 'Education system with a digital platform used by 300k+ students and teachers. Working side by side with the Director of Product, I reshaped the strategy of the Digital Products area: how teams are organized, what they measure and where they invest.',
+      pt: 'Sistema de ensino com 4 produtos digitais usados por mais de 300 mil alunos e professores. Ao lado da diretoria de Produto, redefini a estratégia da área de Produtos Digitais: como os times se organizam, o que medem e onde investem.',
+      en: 'Brazilian K–12 education company with 4 digital products used by 300k+ students and teachers. Working alongside the Director of Product, I reshaped the Digital Products strategy: how teams are organized, what they measure, and where they invest.',
     },
     points: [
       {
-        pt: 'Times organizados por tecnologia (legado, 3D, plataforma principal), longe do que gerava valor: desenhei o novo modelo de squads por público e jornada do usuário, com o roadmap de evolução dos times para 5 anos. Modelo adotado pela diretoria e implementado com 70+ profissionais em menos de 6 meses.',
-        en: 'Teams were organized by technology (legacy, 3D, core platform), far from where value was created: designed the new squad model around audiences and user journeys, with a 5-year team evolution roadmap. Adopted by the Director of Product and rolled out to 70+ people in under 6 months.',
+        pt: 'Desenhei um novo modelo de squads, organizado por público e jornada do usuário, com roadmap de evolução dos times para 5 anos. A diretoria adotou o modelo, implementado com 70+ profissionais em menos de 6 meses.',
+        en: 'Designed a new squad model, organized by audience and user journey, with a 5-year team evolution roadmap. The Director of Product adopted it, and it was rolled out to 70+ people in under 6 months.',
       },
       {
-        pt: 'Decisões de produto sem dados confiáveis, com mensuração diferente em cada um dos 4 produtos: padronizei e ampliei a instrumentação (GA4, GTM), dei aos PMs a primeira visão granular do comportamento do usuário e propus à diretoria o próximo passo: uma ferramenta de product analytics e uma métrica de negócio sob responsabilidade de cada squad.',
-        en: 'Product decisions lacked reliable data, with different measurement in each of the 4 products: standardized and expanded instrumentation (GA4, GTM), gave PMs their first granular view of user behavior, and proposed the next step to leadership: a product analytics platform and a business metric owned by each squad.',
+        pt: 'Padronizei e ampliei a instrumentação (GA4, GTM) de 4 produtos digitais, dando aos PMs a primeira visão granular do comportamento do usuário para tomada de decisão. Com essa base, propus à diretoria uma ferramenta de product analytics e uma métrica de negócio sob ownership de cada squad.',
+        en: 'Standardized and expanded instrumentation (GA4, GTM) across 4 digital products, giving PMs their first granular view of user behavior for decision-making. Building on that, proposed a product analytics platform to leadership, along with a business metric owned by each squad.',
       },
       {
-        pt: 'Navegação herdada da estrutura legada: liderei o redesenho da arquitetura de informação, ancorando navegação, hierarquia de conteúdo e fluxos de usuário nos objetivos estratégicos.',
-        en: 'Navigation was inherited from legacy structure: led the redesign of the information architecture, anchoring navigation, content hierarchy and user flows on strategic objectives.',
+        pt: 'Liderei o redesenho da arquitetura de informação da plataforma usada por 300 mil alunos e professores, com base em dados de uso e pesquisas com usuários, alinhando navegação, hierarquia de conteúdo e fluxos de usuário aos objetivos estratégicos.',
+        en: "Led the information architecture redesign for the platform's 300k+ students and teachers, using usage data and user research to align navigation, content hierarchy, and user flows with strategic objectives.",
       },
       {
-        pt: 'Design e engenharia sem base comum de interface: construí o caso de negócio de um Design System (ROI, escala, consistência) e alinhei os times em torno de componentes reutilizáveis.',
-        en: 'Design and engineering had no shared interface foundation: built the business case for a Design System (ROI, scale, consistency) and aligned teams around reusable components.',
+        pt: 'Construí o business case de um Design System para a plataforma principal (ROI, escala, consistência), com pesquisa de mercado e avaliação de fornecedores.',
+        en: 'Built the business case for a core-platform Design System (ROI, scale, consistency), backed by market research and vendor evaluation.',
       },
     ],
   },
@@ -153,12 +156,12 @@ export const experience: Role[] = [
     },
     points: [
       {
-        pt: 'Entregas digitais que precisavam escalar sem retrabalho: estruturei templates de email marketing e sites corporativos e de eventos como sistemas reutilizáveis, com foco em performance e consistência de marca.',
-        en: 'Digital deliverables had to scale without rework: structured email marketing templates and corporate and event websites as reusable systems, focused on performance and brand consistency.',
+        pt: 'Estruturei templates de email marketing e sites corporativos e de eventos como sistemas reutilizáveis, com foco em performance e consistência de marca.',
+        en: 'Built email marketing templates and corporate and event websites as reusable systems, with a focus on performance and brand consistency.',
       },
       {
-        pt: 'Design e tecnologia falando línguas diferentes: atuei como ponte técnica, traduzindo diretrizes de design e conceitos criativos em experiências web funcionais.',
-        en: 'Design and technology spoke different languages: acted as the technical bridge, translating design guidelines and creative concepts into functional web experiences.',
+        pt: 'Atuei como ponte técnica entre design e desenvolvimento, traduzindo diretrizes de design e conceitos criativos em experiências web funcionais.',
+        en: 'Acted as the technical bridge between design and development, translating design guidelines and creative concepts into functional web experiences.',
       },
     ],
   },
@@ -174,17 +177,17 @@ export const experience: Role[] = [
     },
     place: at('Rio de Janeiro', remote),
     context: {
-      pt: 'Estúdio de design editorial. Levei para a web relatórios e pesquisas de organizações como Fundação Tide Setúbal, Transparência Internacional e Brasil de Tuhu (mapeamento nacional de educação musical).',
-      en: 'Editorial design studio. Brought reports and research to the web for organizations such as Fundação Tide Setúbal, Transparency International and Brasil de Tuhu (national survey of music education).',
+      pt: 'Estúdio de design editorial. Atuei com clientes como Fundação Tide Setúbal, Transparência Internacional e Brasil de Tuhu (mapeamento nacional de educação musical).',
+      en: 'Editorial design studio. Worked with clients such as Fundação Tide Setúbal, Transparency International and Brasil de Tuhu (national survey of music education).',
     },
     points: [
       {
-        pt: 'Relatórios densos em dados, pensados para o impresso, precisavam ser lidos na web: transformei pesquisas e relatórios em web reports com visualização de dados, do desenho da experiência ao código.',
-        en: 'Data-heavy reports designed for print had to be read on the web: turned research and reports into web reports with data visualization, from experience design to code.',
+        pt: 'Levei relatórios e pesquisas pensados para o impresso para a web, em web reports com visualização de dados, do desenho da experiência ao código.',
+        en: 'Turned print-first reports and research into web reports with data visualization, from experience design to code.',
       },
       {
-        pt: 'Estúdio sem referência técnica interna: fui o ponto focal de tecnologia, garantindo performance e consistência de marca em cada entrega.',
-        en: 'The studio had no in-house technical lead: served as the technology focal point, ensuring performance and brand consistency in every delivery.',
+        pt: 'Fui o responsável técnico do estúdio, garantindo performance e consistência de marca em cada entrega.',
+        en: "Served as the studio's technical lead, ensuring performance and brand consistency in every project.",
       },
     ],
   },
@@ -200,17 +203,17 @@ export const experience: Role[] = [
     },
     place: at('São Paulo', onSite),
     context: {
-      pt: 'Lançamento das operações do Viber no Brasil, em disputa direta com o WhatsApp pelo usuário brasileiro.',
-      en: "Launch of Viber's operations in Brazil, competing head to head with WhatsApp for Brazilian users.",
+      pt: 'Atuei no lançamento das operações do Viber no Brasil, em disputa direta com o WhatsApp pelo usuário brasileiro.',
+      en: "Worked on Viber's launch in Brazil, competing head-to-head with WhatsApp for Brazilian users.",
     },
     points: [
       {
-        pt: 'Crescer sem depender de mídia paga: liderei BI e estratégia de growth do lançamento, usando dados de uso e penetração regional para decidir onde e como investir. Resultado: base de usuários de 10MM para 17MM com investimento mínimo em mídia.',
-        en: 'Growing without relying on paid media: led BI and growth strategy for the launch, using usage and regional penetration data to decide where and how to invest. Result: user base grew from 10M to 17M with minimal media investment.',
+        pt: 'Liderei BI e estratégia de growth do lançamento, usando dados de uso por região para decidir onde e como investir. Base de usuários de 10MM para 17MM com investimento mínimo em mídia.',
+        en: 'Led BI and growth strategy for the launch, using regional usage data to decide where and how to invest. The user base grew from 10M to 17M with minimal media spend.',
       },
       {
-        pt: 'Sem visão de quem usava o produto e onde: criei as metodologias e relatórios de perfis de uso, penetração regional e tendências que orientaram campanhas, PR e posicionamento.',
-        en: 'No view of who used the product and where: created the methodologies and reports on usage profiles, regional penetration and trends that guided campaigns, PR and positioning.',
+        pt: 'Criei as metodologias e relatórios de perfis de uso, penetração regional e tendências que orientaram campanhas, PR e posicionamento.',
+        en: 'Created the methodologies and reports on usage profiles, regional penetration, and trends that guided campaigns, PR, and positioning.',
       },
     ],
   },
@@ -226,13 +229,13 @@ export const experience: Role[] = [
     },
     place: at('São Paulo', onSite),
     context: {
-      pt: 'Programa de fidelidade Santander Esfera, com foco em retenção de clientes e uso do cartão.',
-      en: 'Santander Esfera loyalty program, focused on customer retention and card usage.',
+      pt: 'Empresa de big data e marketing orientado por dados. Atuei no programa de fidelidade Santander Esfera, com foco em retenção de clientes e uso do cartão.',
+      en: 'Big data and data-driven marketing company. Worked on the Santander Esfera loyalty program, focused on customer retention and card usage.',
     },
     points: [
       {
-        pt: 'Dados de CRM, transações e parceiros sem visão única do cliente: integrei as fontes em uma visão unificada que orientou a estratégia multicanal de ciclo de vida (email, web, social, mobile, parceiros) e o playbook de aquisição e retenção.',
-        en: 'CRM, transaction and partner data had no single customer view: integrated the sources into a unified view that guided the multichannel lifecycle strategy (email, web, social, mobile, partners) and the acquisition and retention playbook.',
+        pt: 'Integrei dados de CRM, transações e parceiros em uma visão única do cliente, base da estratégia multicanal de ciclo de vida (email, web, social, mobile, parceiros) e do playbook de aquisição e retenção.',
+        en: 'Integrated CRM, transaction, and partner data into a single customer view, which became the basis for the multichannel lifecycle strategy (email, web, social, mobile, partners) and the acquisition and retention playbook.',
       },
     ],
   },
@@ -245,13 +248,13 @@ export const experience: Role[] = [
     },
     place: at('Rio de Janeiro', remote),
     context: {
-      pt: 'Startup de pesquisa de consumo que acompanhava comunidades online privadas por até seis meses, para marcas como Danone, Casas Bahia e Ponto Frio.',
-      en: 'Consumer research startup that followed private online communities for up to six months, for brands such as Danone, Casas Bahia and Ponto Frio.',
+      pt: 'Startup de pesquisa de consumo baseada em comunidades online privadas. Atuei desde a fundação, atendendo marcas como Danone, Casas Bahia e Ponto Frio.',
+      en: 'Consumer research startup built on private online communities. Worked there from its founding, serving brands such as Danone, Casas Bahia, and Ponto Frio.',
     },
     points: [
       {
-        pt: 'Pesquisa tradicional não capturava o comportamento do consumidor ao longo do tempo: construí do zero a plataforma de comunidades que viabilizou o modelo, da marca e do site ao código e à operação.',
-        en: 'Traditional research could not capture consumer behavior over time: built from zero the community platform that made the model possible, from brand and website to code and operations.',
+        pt: 'Construí do zero a plataforma de comunidades que sustentava o modelo de pesquisa, cuidando de marca, site, código e operação.',
+        en: 'Built the community platform behind the research model from scratch, covering brand, website, code, and operations.',
       },
     ],
   },
@@ -267,13 +270,13 @@ export const experience: Role[] = [
     },
     place: at('Rio de Janeiro', onSite),
     context: {
-      pt: 'Campanha ao governo do estado do Rio de Janeiro.',
-      en: 'Campaign for the Rio de Janeiro state government.',
+      pt: 'Agência digital. Atuei em uma campanha eleitoral ao governo do Rio de Janeiro.',
+      en: "Digital agency. Worked on a Rio de Janeiro governor's race.",
     },
     points: [
       {
-        pt: 'Demandas sociais dispersas nas redes: transformei análises de site e redes sociais em sinais que orientaram mensagens e estratégia da campanha, com planejamento digital de objetivos claros.',
-        en: 'Social demands scattered across the web: turned website and social media analysis into signals that shaped campaign messaging and strategy, with a digital plan built on clear objectives.',
+        pt: 'Transformei análises de site e redes sociais em sinais que orientaram as mensagens e a estratégia digital da campanha.',
+        en: "Turned website and social media analysis into signals that shaped the campaign's messaging and digital strategy.",
       },
     ],
   },
@@ -285,11 +288,14 @@ export const experience: Role[] = [
       en: 'December 2009 – May 2010',
     },
     place: at('Rio de Janeiro', onSite),
-    context: { pt: 'Site do canal GNT.', en: 'GNT channel website.' },
+    context: {
+      pt: 'Programadora de canais de TV por assinatura do Grupo Globo. Atuei no site do canal GNT.',
+      en: "Grupo Globo's pay-TV channel network. Worked on the GNT channel website.",
+    },
     points: [
       {
-        pt: 'Pauta editorial sem dados de interesse do público: usei as buscas internas do site para revelar interesses e lacunas de conteúdo, e análises de performance para orientar crescimento de audiência e planejamento editorial.',
-        en: "Editorial planning had no data on audience interest: used the site's internal search to surface interests and content gaps, and performance analysis to guide audience growth and editorial planning.",
+        pt: 'Transformei o relatório mensal das buscas internas do site em insights para a equipe editorial, categorizando os termos buscados e criando visualizações que revelavam interesses do público e lacunas de conteúdo.',
+        en: 'Turned the monthly site search report into insights for the editorial team, tagging search terms and building visualizations that revealed audience interests and content gaps.',
       },
     ],
   },
@@ -305,21 +311,21 @@ export const experience: Role[] = [
     },
     place: at('Rio de Janeiro', onSite),
     context: {
-      pt: 'Estruturação do departamento digital recém-criado da agência, onde introduzi o Google Analytics na mensuração, com clientes como Kraft Foods (Club Social, Trakinas), SCJohnson, Gafisa e Hopi Hari.',
-      en: "Building the agency's newly created digital department, where I introduced Google Analytics for measurement, with clients such as Kraft Foods (Club Social, Trakinas), SCJohnson, Gafisa and Hopi Hari.",
+      pt: 'Agência de publicidade. Atuei no departamento digital recém-criado, com clientes como Kraft Foods (Club Social, Trakinas), SCJohnson, Gafisa e Hopi Hari.',
+      en: 'Advertising agency. Worked in its newly created digital department, with clients such as Kraft Foods (Club Social, Trakinas), SCJohnson, Gafisa, and Hopi Hari.',
     },
     points: [
       {
-        pt: 'Trakinas vinha de cinco anos crescendo um dígito e foi reposicionado para falar com crianças e mães, voltando a crescer dois dígitos. Nas crianças, conduzi a frente digital do Trakinas 3.0, um jogo online transmídia em que as crianças desbloqueavam níveis ao longo do ano com pistas na TV, em revistas e banners, aprovando o trabalho da W3Haus, produtora do jogo. A primeira versão passou de 2 milhões de visitantes.',
-        en: "Trakinas had spent five years growing in single digits and was repositioned to speak to both kids and mothers, returning to double-digit growth. For kids, led the digital front of Trakinas 3.0, a transmedia online game where kids unlocked levels throughout the year with clues on TV, in magazines and banners, approving the work of W3Haus, the game's production studio. The first version passed 2 million visitors.",
+        pt: 'Conduzi a frente digital do Trakinas 3.0, um jogo online transmídia em que as crianças desbloqueavam níveis ao longo do ano com pistas na TV, em revistas e em banners. A primeira versão passou de 2 milhões de visitantes, dentro do reposicionamento que levou a marca de crescimento de um dígito para dois.',
+        en: 'Led the digital front of Trakinas 3.0, a transmedia online game where kids unlocked levels throughout the year using clues from TV, magazines, and banners. The first version surpassed 2 million visitors, as part of the repositioning that took the brand from single-digit to double-digit growth.',
       },
       {
-        pt: 'Nas mães, concebi do zero o Mãe com Filhos: em vez de um blog de leitura passiva, uma régua de engajamento em que cada seção pedia um pouco mais da visitante, de enquetes até o envio das próprias histórias.',
-        en: 'For mothers, conceived Mãe com Filhos from scratch: instead of a passive-reading blog, an engagement ladder where each section asked a little more of visitors, from polls to submitting their own stories.',
+        pt: 'Concebi do zero o Mãe com Filhos: em vez de um blog de leitura passiva, uma régua de engajamento em que cada seção pedia um pouco mais da visitante, de enquetes até o envio das próprias histórias.',
+        en: 'Conceived Mãe com Filhos from scratch: instead of a passive-reading blog, an engagement ladder where each section asked a little more of visitors, from polls to submitting their own stories.',
       },
       {
-        pt: 'No Club Social #inconfundível, primeiro projeto do mundo a usar influenciadores como criadores de conteúdo no Twitter, inventei e coloquei no ar um banner que se atualizava sozinho a cada 30 minutos com o tweet mais recente do influenciador em destaque, da solução técnica à operação.',
-        en: "On Club Social #inconfundível, the first project in the world to use influencers as content creators on Twitter, invented and shipped a self-updating banner that refreshed every 30 minutes with the featured influencer's latest tweet, from the technical solution to operations.",
+        pt: 'No Club Social #inconfundível, primeiro projeto do mundo a usar influenciadores como criadores de conteúdo no Twitter, criei um banner que se atualizava sozinho a cada 30 minutos com o tweet mais recente do influenciador em destaque, da solução técnica à operação.',
+        en: "On Club Social #inconfundível, the first project in the world to use influencers as content creators on Twitter, built a self-updating banner that pulled the featured influencer's latest tweet every 30 minutes, handling everything from the technical build to day-to-day operation.",
       },
     ],
   },
@@ -332,8 +338,8 @@ export const experience: Role[] = [
     },
     place: at('Rio de Janeiro', onSite),
     context: {
-      pt: "Planejamento estratégico para Oi, GNT e Bob's.",
-      en: "Strategic planning for Oi, GNT and Bob's.",
+      pt: "Agência de publicidade. Atuei no planejamento estratégico de Oi, GNT e Bob's.",
+      en: "Advertising agency. Worked on strategic planning for Oi, GNT, and Bob's.",
     },
     points: [
       {
