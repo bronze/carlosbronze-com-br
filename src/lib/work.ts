@@ -4,7 +4,7 @@ import type { Bilingual } from './site'
 // source of truth:
 //   PT: https://www.carlosbronze.com/obsidian/curriculo
 //   EN: https://www.carlosbronze.com/obsidian/resume
-// Last synced 2026-11-20. When either note changes, update this file and the
+// Last synced 2026-11-23. When either note changes, update this file and the
 // date (see "Content synced from elsewhere" in CLAUDE.md).
 //
 // **double asterisks** mark bold, as in the notes; the page renders them.
@@ -18,16 +18,16 @@ export const headline: Bilingual = {
 // page's intro, the other two follow it.
 export const summary: Bilingual[] = [
   {
-    pt: 'Sou **Product Manager** com quase 20 anos de experiência em produtos digitais, de agência a startup, em edtech, mensageria, mídia e bens de consumo. Designer de formação e programador desde 1999, atuo em **estratégia de produto, gamificação, growth e product analytics**. Meu trabalho é transformar ambiguidade em **direção clara**: o problema certo, critérios de sucesso explícitos e decisões que o time consegue executar.',
-    en: '**Product Manager** with almost 20 years of experience in digital products, from agencies to startups, across edtech, messaging, media, and consumer goods. A designer by training who has been coding since 1999, I focus on **product strategy, gamification, growth, and product analytics**. My job is to turn ambiguity into **clear direction**: the right problem, explicit success criteria, and decisions the team can act on.',
+    pt: 'Sou **Product Manager** com quase 20 anos de experiência em produtos digitais, de agência a startup, em edtech, mensageria, mídia e bens de consumo. Designer de formação e programador desde 1999, atuo em **estratégia de produto, gamificação, growth e product analytics** na interseção entre design, programação e negócio. Essa formação híbrida me dá visão sistêmica do produto e facilita a colaboração com times multidisciplinares de design e engenharia.',
+    en: '**Product Manager** with almost 20 years of experience in digital products, from agencies to startups, across edtech, messaging, media, and consumer goods. A designer by training who has been coding since 1999, I focus on **product strategy, gamification, growth, and product analytics**. I work at the intersection of design, code, and business. This hybrid background gives me an end-to-end view of the product and makes collaboration with cross-functional design and engineering teams easier.',
   },
   {
     pt: 'Ao longo da trajetória, participei da construção de produtos desde a fundação, com north star, KPIs e instrumentação definidos antes do primeiro usuário. Liderei BI e growth no lançamento de um app de mensagens no Brasil, desenhei o modelo de squads de uma plataforma educacional e conduzi o redesenho da sua arquitetura de informação. Também desenhei sistemas de gamificação para formação de hábito, estruturei a priorização de roadmap e backlog com experimentação e análise de dados, e construí business cases para decisões de investimento em produto.',
     en: "Over the years, I've helped build products from the founding stage, with the north star metric, KPIs, and instrumentation in place before the first user. I led BI and growth for a messaging app launch in Brazil, designed the squad model for an education platform, and led the redesign of its information architecture. I've also designed gamification systems for habit formation, structured roadmap and backlog prioritization around experimentation and data analysis, and built business cases for product investment decisions.",
   },
   {
-    pt: 'Hoje trabalho remoto como Product Manager numa startup americana de edtech com IA, com autonomia e ownership da estratégia de produto, do discovery ao roadmap. Cada PRD sai acompanhado de um protótipo funcional que eu mesmo construo com IA. A missão atual é transformar gamificação em hábito de estudo e provar, com métricas, que o produto gera engajamento e retenção. Quero continuar em produtos onde estratégia, dados e comportamento do usuário guiam a tomada de decisão.',
-    en: 'Today I work remotely from Brazil (GMT-3, strong overlap with US and European business hours) as a Product Manager at a US-based, AI-powered edtech startup, where I have autonomy and ownership of product strategy, from discovery to roadmap. Every PRD ships with a working prototype I build myself with AI. My current mission is to turn gamification into a study habit and prove, with metrics, that the product drives engagement and retention. I want to keep working on products where strategy, data, and user behavior guide decision-making.',
+    pt: 'Hoje sou Product Manager numa startup americana de edtech com IA, com autonomia e ownership da estratégia de produto, do discovery ao roadmap. Cada especificação de produto que entrego à engenharia vai acompanhada de um protótipo funcional que eu mesmo construo com IA. A missão atual é transformar gamificação em hábito de estudo e provar, com métricas, que o produto gera engajamento e retenção. Quero continuar em produtos onde estratégia, dados e comportamento do usuário guiam a tomada de decisão.',
+    en: 'Today I work remotely from Brazil (GMT-3, strong overlap with US and European business hours) as a Product Manager at a US-based, AI-powered edtech startup, where I have autonomy and ownership of product strategy, from discovery to roadmap. Every product spec I hand to engineering ships with a working prototype I build myself with AI. My current mission is to turn gamification into a study habit and prove, with metrics, that the product drives engagement and retention. I want to keep working on products where strategy, data, and user behavior guide decision-making.',
   },
 ]
 
@@ -106,34 +106,42 @@ export const experience: Role[] = [
         en: "Led the information architecture redesign for the platform's 300k+ students and teachers, using usage data and user research to align navigation, content hierarchy, and user flows with strategic objectives.",
       },
       {
-        pt: 'Construí o business case de um Design System para a plataforma principal (ROI, escala, consistência), com pesquisa de mercado e avaliação de fornecedores.',
-        en: 'Built the business case for a core-platform Design System (ROI, scale, consistency), backed by market research and vendor evaluation.',
+        pt: 'Construí o business case de um Design System white label para a plataforma principal, comparando time interno com consultoria e avaliando propostas de 3 consultorias. Recomendei à diretoria a opção de 49 componentes em 3 meses, 75% mais barata que a alternativa mais cara.',
+        en: 'Built the business case for a white-label Design System for the core platform, comparing an in-house team with outsourcing and evaluating proposals from 3 consultancies. Recommended to leadership the option with 49 components in 3 months, 75% cheaper than the most expensive alternative.',
       },
     ],
   },
   {
     company: 'Bird',
     title: {
-      pt: 'Especialista em Marketing Digital',
-      en: 'Digital Marketing Specialist',
+      pt: 'Especialista em Produtos Digitais',
+      en: 'Digital Product Specialist',
     },
     dates: {
-      pt: 'outubro de 2021 – outubro de 2023',
-      en: 'October 2021 – October 2023',
+      pt: 'outubro de 2021 – julho de 2023',
+      en: 'October 2021 – July 2023',
     },
     place: at('Rio de Janeiro', remote),
     context: {
-      pt: 'Agência digital. Atuei na interseção entre marketing, design e tecnologia.',
-      en: 'Digital agency. Worked at the intersection of marketing, design and technology.',
+      pt: 'Agência de marketing digital com atendimento direto a marcas como Ipiranga e Gold Alimentos. Atuei do planejamento ao código e à operação de sites, hotsites de eventos e email marketing.',
+      en: 'Digital marketing agency serving brands such as Ipiranga and Gold Alimentos directly. Worked from planning to code and operations on websites, event microsites, and email marketing.',
     },
     points: [
       {
-        pt: 'Estruturei templates de email marketing e sites corporativos e de eventos como sistemas reutilizáveis, com foco em performance e consistência de marca.',
-        en: 'Built email marketing templates and corporate and event websites as reusable systems, with a focus on performance and brand consistency.',
+        pt: 'Conduzi de ponta a ponta o site da Gold Alimentos: planejei a arquitetura de informação, direcionei o trabalho de design, desenvolvi e publiquei o site e implementei o analytics.',
+        en: 'Owned the Gold Alimentos website end to end: planned the information architecture, directed the design work, built and launched the site, and implemented analytics.',
       },
       {
-        pt: 'Atuei como ponte técnica entre design e desenvolvimento, traduzindo diretrizes de design e conceitos criativos em experiências web funcionais.',
-        en: 'Acted as the technical bridge between design and development, translating design guidelines and creative concepts into functional web experiences.',
+        pt: 'Desenvolvi hotsites de eventos para a Ipiranga, entre eles o da Convenção Ipiranga 2022. Prototipei formatos de interação e som para a rádio do evento e entreguei programação, interface, animações e áudio otimizado para a web.',
+        en: 'Built event microsites for Ipiranga, including the one for the Ipiranga 2022 Convention. Prototyped interaction and sound formats for the event radio and delivered the code, interface, animations, and web-optimized audio.',
+      },
+      {
+        pt: 'Desenhei do zero o fluxo de produção de email marketing da agência, da hospedagem e do versionamento das imagens aos templates reaproveitáveis, o que sustentou mais de 100 emails enviados, em média 2 por semana.',
+        en: "Designed the agency's email marketing production workflow from scratch, from image hosting and versioning to reusable templates, supporting 100+ emails sent, about 2 per week.",
+      },
+      {
+        pt: 'Priorizei legibilidade e compatibilidade com o maior número de clientes de email e dispositivos, depois de prototipar e avaliar uma versão responsiva.',
+        en: 'Prioritized readability and compatibility across as many email clients and devices as possible, after prototyping and evaluating a responsive version.',
       },
     ],
   },
@@ -144,22 +152,26 @@ export const experience: Role[] = [
       en: 'Product Designer and Developer',
     },
     dates: {
-      pt: 'janeiro de 2015 – outubro de 2020',
-      en: 'January 2015 – October 2020',
+      pt: 'janeiro de 2015 – outubro de 2021',
+      en: 'January 2015 – October 2021',
     },
     place: at('Rio de Janeiro', remote),
     context: {
-      pt: 'Estúdio de design editorial. Atuei com clientes como Fundação Tide Setúbal, Transparência Internacional e Brasil de Tuhu (mapeamento nacional de educação musical).',
-      en: 'Editorial design studio. Worked with clients such as Fundação Tide Setúbal, Transparency International and Brasil de Tuhu (national survey of music education).',
+      pt: 'Estúdio de design editorial com clientes do terceiro setor e da cultura, como Fundação Tide Setúbal, Transparência Internacional Brasil e Baluarte Cultura. Atuei nos projetos digitais do estúdio.',
+      en: "Editorial design studio serving nonprofit and cultural clients such as Fundação Tide Setúbal, Transparency International Brazil, and Baluarte Cultura. Worked on the studio's digital projects.",
     },
     points: [
       {
-        pt: 'Levei relatórios e pesquisas pensados para o impresso para a web, em web reports com visualização de dados, do desenho da experiência ao código.',
-        en: 'Turned print-first reports and research into web reports with data visualization, from experience design to code.',
+        pt: 'Levei relatórios e pesquisas pensados para o impresso para a web, do design de experiência à programação e à publicação, validando a viabilidade técnica de cada proposta de design.',
+        en: 'Took print-first reports and research to the web, from experience design to code and launch, validating the technical feasibility of each design proposal.',
       },
       {
-        pt: 'Fui o responsável técnico do estúdio, garantindo performance e consistência de marca em cada entrega.',
-        en: "Served as the studio's technical lead, ensuring performance and brand consistency in every project.",
+        pt: 'Desenhei e desenvolvi os relatórios anuais online da Fundação Tide Setúbal (2017 e 2018), adaptando a linha gráfica do impresso à navegação e à organização de conteúdo da web, com artigos, vídeos e downloads.',
+        en: 'Designed and built the online annual reports for Fundação Tide Setúbal (2017 and 2018), adapting the print visual identity to web navigation and content structure, with articles, videos, and downloads.',
+      },
+      {
+        pt: 'Propus e desenvolvi a versão interativa do mapeamento nacional de educação musical do Brasil de Tuhu, com visualização de dados animada para apresentar a pesquisa com 240 projetos.',
+        en: "Proposed and built the interactive version of Brasil de Tuhu's national survey of music education, with animated data visualization presenting research on 240 projects.",
       },
     ],
   },
